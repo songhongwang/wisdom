@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.model.Data;
@@ -77,23 +77,20 @@ public class MomentsFragment extends BaseFragment implements MessagePicturesLayo
                 .setLoader(new ImageWatcher.Loader() {
                     @Override
                     public void load(Context context, String url, final ImageWatcher.LoadCallback lc) {
-                        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+                        Glide.with(context).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                lc.onResourceReady(resource);
+                            }
+
                             @Override
                             public void onLoadStarted(Drawable placeholder) {
                                 lc.onLoadStarted(placeholder);
                             }
 
                             @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                lc.onResourceReady(resource);
-
-                            }
-
-                            @Override
-                            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                                super.onLoadFailed(e, errorDrawable);
+                            public void onLoadFailed(Drawable errorDrawable) {
                                 lc.onLoadFailed(errorDrawable);
-
                             }
                         });
 
