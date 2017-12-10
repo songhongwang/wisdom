@@ -12,11 +12,23 @@ import com.cbt.main.R;
 /**
  * Created by vigorous on 16/1/4.
  */
-public class MarketFragment extends Fragment {
+public class MarketFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab4, container, false);
+        mRootView = view;
+        super.onCreateView(inflater, container, savedInstanceState);
         return view;
+    }
+
+    @Override
+    public void initUI() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+
     }
 }

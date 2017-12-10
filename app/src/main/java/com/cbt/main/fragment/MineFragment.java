@@ -12,11 +12,24 @@ import com.cbt.main.R;
 /**
  * Created by caobotao on 16/1/4.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab2, container, false);
+        mRootView = view;
+        super.onCreateView(inflater, container, savedInstanceState);
+
         return view;
+    }
+
+    @Override
+    public void initUI() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+
     }
 }
