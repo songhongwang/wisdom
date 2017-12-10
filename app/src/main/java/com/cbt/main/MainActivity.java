@@ -1,6 +1,5 @@
 package com.cbt.main;
 
-import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -170,16 +168,19 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         //根据点击的Tab设置对应的ImageButton为绿色
         switch (i) {
             case 0:
-                mImgIndex.setImageResource(R.mipmap.tab_weixin_pressed);
+                mImgIndex.setImageResource(R.mipmap.tab_icon_home_pre);
                 break;
             case 1:
-                mImgMine.setImageResource(R.mipmap.tab_find_frd_pressed);
+                mImgMine.setImageResource(R.mipmap.tab_icon_farm_pre);
                 break;
             case 2:
-                mImgExpert.setImageResource(R.mipmap.tab_address_pressed);
+                mImgExpert.setImageResource(R.mipmap.tab_icon_expert_pre);
                 break;
             case 3:
-                mImgMarket.setImageResource(R.mipmap.tab_settings_pressed);
+                mImgMarket.setImageResource(R.mipmap.tab_icon_market_pre);
+                break;
+            case 4:
+                mImgMore.setImageResource(R.mipmap.tab_icon_more_pre);
                 break;
         }
         //设置当前点击的Tab所对应的页面
@@ -188,10 +189,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
     //将四个ImageButton设置为灰色
     private void resetImgs() {
-        mImgIndex.setImageResource(R.mipmap.tab_weixin_normal);
-        mImgMine.setImageResource(R.mipmap.tab_find_frd_normal);
-        mImgExpert.setImageResource(R.mipmap.tab_address_normal);
-        mImgMarket.setImageResource(R.mipmap.tab_settings_normal);
-        mImgMore.setImageResource(R.mipmap.tab_settings_normal);
+        mImgIndex.setImageResource(R.mipmap.tab_icon_home);
+        mImgMine.setImageResource(R.mipmap.tab_icon_farm);
+        mImgExpert.setImageResource(R.mipmap.tab_icon_expert);
+        mImgMarket.setImageResource(R.mipmap.tab_icon_market);
+        mImgMore.setImageResource(R.mipmap.tab_icon_more);
     }
 }
