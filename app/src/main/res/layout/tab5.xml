@@ -12,16 +12,15 @@
         android:layout_height="fill_parent">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
+                android:minHeight="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white">
 
                 <ImageView
@@ -29,14 +28,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:src="@drawable/more_icon_farm"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/login_default_icon"/>
 
                 <TextView
+                    android:id="@+id/tv_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_toRightOf="@id/iv_crops"
-                    android:text="作物:"/>
+                    android:text="鱼鱼鱼"/>
+                <TextView
+                    android:id="@+id/tv_user_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/tv_user_name"
+                    android:layout_toRightOf="@id/iv_crops"
+                    android:text="鱼鱼鱼"/>
 
 
                 <ImageView
@@ -44,30 +54,32 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="15dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/icon_more"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
-                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/iv_expert"
+                    android:id="@+id/iv_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:src="@drawable/more_icon_farm"/>
+                    android:src="@drawable/more_icon_setting"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/iv_expert"
-                    android:text="专家:"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_setting"
+                    android:text="设置"
+                    android:textSize="14sp"/>
 
 
                 <ImageView
