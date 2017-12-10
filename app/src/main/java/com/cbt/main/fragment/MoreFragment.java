@@ -17,22 +17,22 @@ import butterknife.ButterKnife;
  * Created by caobotao on 16/1/4.
  * 更多页面
  */
-public class MoreFragment extends Fragment {
+public class MoreFragment extends BaseFragment {
 
-    private View mRootView;
-
-    ImageView mIvBack;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab5, container, false);
         mRootView = view;
-        initUI();
+        super.onCreateView(inflater, container, savedInstanceState);
         return view;
     }
 
-    private void initUI() {
-        mIvBack = (ImageView) mRootView.findViewById(R.id.iv_back);
+    public void initUI() {
         mIvBack.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void lazyLoad() {
     }
 }

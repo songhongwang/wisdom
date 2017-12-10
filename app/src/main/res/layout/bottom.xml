@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="首页"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的农庄"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="专家咨询"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="市场信息"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
@@ -122,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="更多"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
