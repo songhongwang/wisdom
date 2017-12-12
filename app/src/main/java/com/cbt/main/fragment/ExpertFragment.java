@@ -40,17 +40,17 @@ public class ExpertFragment extends BaseFragment {
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
-
         setTabsValue();
+
     }
 
     private void setTabsValue() {
         if (isAdded()) {
             DisplayMetrics dm = getResources().getDisplayMetrics();
             // 设置Tab是自动填充满屏幕的
-            mPagerSlidingTabStrip.setShouldExpand(false);
+            mPagerSlidingTabStrip.setShouldExpand(true);
             // 设置Tab的分割线是透明的
-//            mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.transparent));
+            mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.transparent));
             // 设置Tab底部线的高度
             mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, dm));
             // 设置Tab Indicator的高度
@@ -60,12 +60,11 @@ public class ExpertFragment extends BaseFragment {
             // 设置Tab标题文字的大小
             mPagerSlidingTabStrip.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, dm));
             //选中tab是否加粗
-//            mPagerSlidingTabStrip.setTextIsBold(true);
+//            mPagerSlidingTabStrip.setTextSize(12);
             // 设置Tab Indicator的颜色
-            mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.yellow));
+            mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.green));
             // 设置选中Tab文字的颜色 (这是我自定义的一个方法)
 //            mPagerSlidingTabStrip.setSelectedTextColor(getResources().getColor(R.color.c_333333));
-//            mPagerSlidingTabStrip.setTextColorResource(R.color.c_666666);
             // 取消点击Tab时的背景色
             mPagerSlidingTabStrip.setTabBackground(0);
 

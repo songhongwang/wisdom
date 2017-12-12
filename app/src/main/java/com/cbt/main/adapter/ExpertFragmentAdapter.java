@@ -23,8 +23,8 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initTitlesData() {
-        mDataList.add("  推荐  ");
-        mDataList.add("广场舞");
+        mDataList.add("        灾情        ");
+        mDataList.add("        农情        ");
     }
 
     @Override
