@@ -1,5 +1,10 @@
 package com.cbt.main;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,18 +17,27 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
 import com.cbt.main.fragment.MineFragment;
 import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
+import com.cbt.main.moments.ImageWatcher;
+import com.cbt.main.utils.Utils;
+import com.cbt.main.view.MessagePicturesLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements OnClickListener {
+public class MainActivity extends FragmentActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
     //声明ViewPager
     private ViewPager mViewPager;
     //适配器
@@ -46,10 +60,23 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private ImageButton mImgMore;
 
     private Toolbar mToolbar;
+    private ImageWatcher vImageWatcher; // 朋友圈滑动图片工具
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        boolean isTranslucentStatus = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+            isTranslucentStatus = true;
+        }
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
+
         setContentView(R.layout.activity_main);
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -60,6 +87,37 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         initViews();//初始化控件
         initEvents();//初始化事件
         initDatas();//初始化数据
+        initOther(isTranslucentStatus); // 其他页面用的数据
+    }
+
+    private void initOther(boolean isTranslucentStatus) {
+        vImageWatcher = ImageWatcher.Helper.with(this) // 一般来讲， ImageWatcher 需要占据全屏的位置
+                .setTranslucentStatus(!isTranslucentStatus ? Utils.calcStatusBarHeight(this) : 0) // 如果是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
+                .setErrorImageRes(R.mipmap.error_picture) // 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
+                .setOnPictureLongPressListener(this) // 长按图片的回调，你可以显示一个框继续提供一些复制，发送等功能
+                .setLoader(new ImageWatcher.Loader() {
+                    @Override
+                    public void load(Context context, String url, final ImageWatcher.LoadCallback lc) {
+                        Glide.with(context).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                lc.onResourceReady(resource);
+                            }
+
+                            @Override
+                            public void onLoadStarted(Drawable placeholder) {
+                                lc.onLoadStarted(placeholder);
+                            }
+
+                            @Override
+                            public void onLoadFailed(Drawable errorDrawable) {
+                                lc.onLoadFailed(errorDrawable);
+                            }
+                        });
+
+                    }
+                })
+                .create();
     }
 
     private void initDatas() {
@@ -194,5 +252,21 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         mImgExpert.setImageResource(R.mipmap.tab_icon_expert);
         mImgMarket.setImageResource(R.mipmap.tab_icon_market);
         mImgMore.setImageResource(R.mipmap.tab_icon_more);
+    }
+
+
+    @Override
+    public void onPictureLongPress(ImageView v, String url, int pos) {
+        Toast.makeText(MainActivity.this, "长按" + pos + " " + url, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onThumbPictureClick(ImageView i, List<ImageView> imageGroupList, List<String> urlList) {
+        vImageWatcher.show(i, imageGroupList, urlList);
+    }
+
+    @Override
+    public MessagePicturesLayout.Callback getWatcherCallBack() {
+        return this;
     }
 }
