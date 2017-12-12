@@ -1,7 +1,9 @@
 package com.cbt.main.utils;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.WindowManager;
 
 
 public class Utils {
@@ -22,5 +24,11 @@ public class Utils {
             e.printStackTrace();
         }
         return statusHeight;
+    }
+
+    public static float getScreenWidth(FragmentActivity activity) {
+        WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        // 获取屏幕密度（方法1）
+        return wm.getDefaultDisplay().getWidth(); // 屏幕宽度（像素，如：800p）
     }
 }

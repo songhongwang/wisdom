@@ -18,8 +18,18 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
     public ExpertFragmentAdapter(FragmentManager fm) {
         super(fm);
-        mDataList.add("aaa");
-        mDataList.add("aaa3");
+        initTitlesData();
+
+    }
+
+    private void initTitlesData() {
+        mDataList.add("  推荐  ");
+        mDataList.add("广场舞");
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mDataList.get(position);
     }
 
     @Override
