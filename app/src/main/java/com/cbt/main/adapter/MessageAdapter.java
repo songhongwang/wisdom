@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.model.Data;
-import com.cbt.main.view.MessagePicturesLayout;
+import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

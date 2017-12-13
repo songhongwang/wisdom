@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.astuetz.PagerSlidingTabStrip;
+import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.R;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.utils.Utils;

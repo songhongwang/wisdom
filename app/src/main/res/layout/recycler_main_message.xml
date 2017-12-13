@@ -39,7 +39,7 @@
         android:textColor="#000"
         android:textSize="15sp"/>
 
-    <com.cbt.main.view.MessagePicturesLayout
+    <com.cbt.main.view.piaoquan.MessagePicturesLayout
         android:id="@+id/l_pictures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

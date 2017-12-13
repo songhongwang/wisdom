@@ -7,6 +7,7 @@
     <color name="green">#ff38b059</color>
     <color name="half_white">#40ffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
 
 
     <color name="abc_input_method_navigation_guard">@android:color/black</color>

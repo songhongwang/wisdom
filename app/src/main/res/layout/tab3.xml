@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:background="@color/white">
 
-        <com.astuetz.PagerSlidingTabStrip
+        <com.cbt.main.view.pagertab.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"

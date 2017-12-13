@@ -1,6 +1,6 @@
 package com.cbt.main.callback;
 
-import com.cbt.main.view.MessagePicturesLayout;
+import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 /**
  * Created by vigorous on 17/12/12.

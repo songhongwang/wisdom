@@ -32,7 +32,7 @@ import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
 import com.cbt.main.moments.ImageWatcher;
 import com.cbt.main.utils.Utils;
-import com.cbt.main.view.MessagePicturesLayout;
+import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
 import java.util.List;

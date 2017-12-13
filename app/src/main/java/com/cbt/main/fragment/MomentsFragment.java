@@ -12,8 +12,8 @@ import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
-import com.cbt.main.view.MessagePicturesLayout;
-import com.cbt.main.view.SpaceItemDecoration;
+import com.cbt.main.view.piaoquan.MessagePicturesLayout;
+import com.cbt.main.view.piaoquan.SpaceItemDecoration;
 
 /**
  * Created by vigorous on 17/12/10.

@@ -2,13 +2,11 @@ package com.cbt.main;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,8 +22,8 @@ import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.model.Data;
 import com.cbt.main.moments.ImageWatcher;
 import com.cbt.main.utils.Utils;
-import com.cbt.main.view.MessagePicturesLayout;
-import com.cbt.main.view.SpaceItemDecoration;
+import com.cbt.main.view.piaoquan.MessagePicturesLayout;
+import com.cbt.main.view.piaoquan.SpaceItemDecoration;
 
 import java.util.List;
 

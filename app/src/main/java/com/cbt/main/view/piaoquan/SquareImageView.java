@@ -1,4 +1,4 @@
-package com.cbt.main.view;
+package com.cbt.main.view.piaoquan;
 
 import android.content.Context;
 import android.util.AttributeSet;
