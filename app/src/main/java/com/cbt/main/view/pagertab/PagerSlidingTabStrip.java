@@ -46,6 +46,8 @@ import java.util.Locale;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
+	private int selectTabTextColor;
+
 	public interface IconTabProvider {
 		public int getPageIconResId(int position);
 	}
@@ -270,7 +272,13 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				TextView tab = (TextView) v;
 				tab.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
 				tab.setTypeface(tabTypeface, tabTypefaceStyle);
-				tab.setTextColor(tabTextColor);
+
+
+				if(pager.getCurrentItem() == i){
+					tab.setTextColor(selectTabTextColor);
+				}else{
+					tab.setTextColor(tabTextColor);
+				}
 
 				// setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
 				// pre-ICS-build
@@ -384,6 +392,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			if (delegatePageListener != null) {
 				delegatePageListener.onPageSelected(position);
 			}
+			updateTabStyles();
 		}
 
 	}
@@ -499,6 +508,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	public void setTextColorResource(int resId) {
 		this.tabTextColor = getResources().getColor(resId);
+		updateTabStyles();
+	}
+
+	public void setSelectedTabColor(int resId){
+		this.selectTabTextColor = getResources().getColor(resId);
 		updateTabStyles();
 	}
 

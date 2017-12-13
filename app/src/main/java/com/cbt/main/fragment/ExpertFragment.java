@@ -68,6 +68,8 @@ public class ExpertFragment extends BaseFragment {
             // 取消点击Tab时的背景色
             mPagerSlidingTabStrip.setTabBackground(0);
 
+            mPagerSlidingTabStrip.setSelectedTabColor(R.color.green);
+
             mPagerSlidingTabStrip.setScrollOffset((int) (Utils.getScreenWidth(getActivity()) * 0.5f));
         }
     }
