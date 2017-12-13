@@ -14,18 +14,17 @@ import java.util.List;
  * 朋友圈adapter
  */
 
-public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
+public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
-    public ExpertFragmentAdapter(FragmentManager fm) {
+    public MarketFragmentAdapter(FragmentManager fm) {
         super(fm);
         initTitlesData();
 
     }
 
     private void initTitlesData() {
-        mDataList.add("        灾情        ");
-        mDataList.add("        农情        ");
-        mDataList.add("        XXX        ");
+        mDataList.add("        AAA        ");
+        mDataList.add("        BBB        ");
     }
 
     @Override

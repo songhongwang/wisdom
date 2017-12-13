@@ -6,10 +6,28 @@
               android:orientation="vertical">
     <include layout="@layout/top"/>
 
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <com.cbt.main.view.pagertab.PagerSlidingTabStrip
+            android:id="@+id/tabs_t2"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dip"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager_moments_t2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="A"
-        android:textSize="30sp"/>
+        android:layout_gravity="center"
+        android:background="#ffebebeb"/>
 </LinearLayout>

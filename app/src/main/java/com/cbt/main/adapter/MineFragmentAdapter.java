@@ -14,9 +14,9 @@ import java.util.List;
  * 朋友圈adapter
  */
 
-public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
+public class MineFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
-    public ExpertFragmentAdapter(FragmentManager fm) {
+    public MineFragmentAdapter(FragmentManager fm) {
         super(fm);
         initTitlesData();
 
@@ -25,7 +25,6 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     private void initTitlesData() {
         mDataList.add("        灾情        ");
         mDataList.add("        农情        ");
-        mDataList.add("        XXX        ");
     }
 
     @Override

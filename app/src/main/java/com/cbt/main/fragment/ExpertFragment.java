@@ -33,12 +33,12 @@ public class ExpertFragment extends BaseFragment {
 
     @Override
     public void initUI() {
-        mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments);
+        mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t3);
         mViewPager.setOffscreenPageLimit(1);
         ExpertFragmentAdapter adapter = new ExpertFragmentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
-        mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs);
+        mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t3);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         setTabsValue();
 
