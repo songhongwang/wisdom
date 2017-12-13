@@ -23,9 +23,9 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initTitlesData() {
-        mDataList.add("        灾情        ");
-        mDataList.add("        农情        ");
-        mDataList.add("        XXX        ");
+        mDataList.add("        最热        ");
+        mDataList.add("        最新        ");
+        mDataList.add("        我的        ");
     }
 
     @Override

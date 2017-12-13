@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cbt.main.fragment.MomentsFragment;
+import com.cbt.main.fragment.TopicFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initTitlesData() {
-        mDataList.add("        AAA        ");
-        mDataList.add("        BBB        ");
+        mDataList.add("        最新消息        ");
+        mDataList.add("        我的发布        ");
     }
 
     @Override
@@ -34,7 +35,7 @@ public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new MomentsFragment();
+        return new TopicFragment();
     }
 
     @Override
