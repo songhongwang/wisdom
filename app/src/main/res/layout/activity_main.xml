@@ -26,5 +26,9 @@
         android:layout_height="match_parent"
         android:layout_above="@id/ll_bottom_layout"/>
 
-
+    <com.cbt.main.view.pagertab.PagerSlidingTabStrip
+        android:id="@+id/tabs_main"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

@@ -12,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -32,6 +34,7 @@ import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
 import com.cbt.main.moments.ImageWatcher;
 import com.cbt.main.utils.Utils;
+import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
@@ -61,6 +64,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
 
     private Toolbar mToolbar;
     private ImageWatcher vImageWatcher; // 朋友圈滑动图片工具
+    private PagerSlidingTabStrip mPagerSlidingTabStrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,10 +145,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
                 return mFragments.size();
             }
 
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return "        " + position;
+            }
         };
         //不要忘记设置ViewPager的适配器
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
+        mPagerSlidingTabStrip.setViewPager(mViewPager);
+        setTabsValue();
+
         //设置ViewPager的切换监听
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -182,6 +193,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
     //初始化控件
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+        mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs_main);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mTabIndex = (LinearLayout) findViewById(R.id.id_tab_index);
@@ -196,7 +209,33 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
         mImgMarket = (ImageButton) findViewById(R.id.id_tab_market_img);
         mImgMore= (ImageButton) findViewById(R.id.id_tab_more_img);
     }
+    private void setTabsValue() {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        // 设置Tab是自动填充满屏幕的
+        mPagerSlidingTabStrip.setShouldExpand(true);
+        // 设置Tab的分割线是透明的
+        mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.transparent));
+        // 设置Tab底部线的高度
+        mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, dm));
+        // 设置Tab Indicator的高度
+        mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, dm));
+        // 设置Tab Indicator的宽度
+//            mPagerSlidingTabStrip.setindicatorLinePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, dm));
+        // 设置Tab标题文字的大小
+        mPagerSlidingTabStrip.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, dm));
+        //选中tab是否加粗
+//            mPagerSlidingTabStrip.setTextSize(12);
+        // 设置Tab Indicator的颜色
+        mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.green));
+        // 设置选中Tab文字的颜色 (这是我自定义的一个方法)
+//            mPagerSlidingTabStrip.setSelectedTextColor(getResources().getColor(R.color.c_333333));
+        // 取消点击Tab时的背景色
+        mPagerSlidingTabStrip.setTabBackground(0);
 
+        mPagerSlidingTabStrip.setSelectedTabColor(R.color.green);
+
+        mPagerSlidingTabStrip.setScrollOffset((int) (Utils.getScreenWidth(this) * 0.5f));
+    }
     @Override
     public void onClick(View v) {
         //先将四个ImageButton置为灰色
