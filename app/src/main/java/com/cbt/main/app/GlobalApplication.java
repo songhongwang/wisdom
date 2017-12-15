@@ -3,6 +3,8 @@ package com.cbt.main.app;
 import android.app.Application;
 import android.content.Context;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by vigorous on 17/12/10.
  */
@@ -16,5 +18,6 @@ public class GlobalApplication extends Application {
 
         mApp = this;
 
+        RongIM.init(this);
     }
 }
