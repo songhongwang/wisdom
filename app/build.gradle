@@ -17,6 +17,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //签名
+    signingConfigs {
+        debug {
+            // no debug config
+            keyAlias KEY_ALIAS
+            keyPassword STORE_PASSWORD
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+        }
+        release {
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+            v2SigningEnabled false
+        }
+    }
 }
 
 dependencies {
@@ -30,4 +48,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'jp.wasabeef:picasso-transformations:2.1.2'
     compile project(':IMKit')
+    compile files('src/main/libs/AMap_Location_V3.2.0_20161205.jar')
 }

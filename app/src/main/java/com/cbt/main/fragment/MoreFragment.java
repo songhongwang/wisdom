@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.cbt.main.R;
+import com.cbt.main.app.GlobalApplication;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by caobotao on 16/1/4.
+ * Created by vigorous on 16/1/4.
  * 更多页面
  */
 public class MoreFragment extends BaseFragment {
@@ -30,6 +32,8 @@ public class MoreFragment extends BaseFragment {
 
     public void initUI() {
         mIvBack.setVisibility(View.VISIBLE);
+        GlobalApplication.mApp.updateLocation();
+        Toast.makeText(getActivity(), "location" + GlobalApplication.mLocationData.addr, Toast.LENGTH_SHORT).show();
     }
 
     @Override
