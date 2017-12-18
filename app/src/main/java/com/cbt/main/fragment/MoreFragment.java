@@ -1,5 +1,6 @@
 package com.cbt.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 
 import butterknife.BindView;
@@ -34,6 +36,15 @@ public class MoreFragment extends BaseFragment {
         mIvBack.setVisibility(View.VISIBLE);
         GlobalApplication.mApp.updateLocation();
         Toast.makeText(getActivity(), "location" + GlobalApplication.mLocationData.addr, Toast.LENGTH_SHORT).show();
+
+
+        mRootView.findViewById(R.id.rl_clear_app).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

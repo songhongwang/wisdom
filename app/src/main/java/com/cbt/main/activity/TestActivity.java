@@ -1,4 +1,4 @@
-package com.cbt.main;
+package com.cbt.main.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.model.Data;
 import com.cbt.main.moments.ImageWatcher;

@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
     //签名
     signingConfigs {
@@ -43,6 +48,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'

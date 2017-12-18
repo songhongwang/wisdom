@@ -1,4 +1,4 @@
-package com.cbt.main;
+package com.cbt.main.activity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.cbt.main.R;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;

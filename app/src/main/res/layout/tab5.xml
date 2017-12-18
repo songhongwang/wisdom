@@ -59,6 +59,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_clear_app"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
