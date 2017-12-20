@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.ChatActivity;
 import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 
@@ -38,10 +39,18 @@ public class MoreFragment extends BaseFragment {
         Toast.makeText(getActivity(), "location" + GlobalApplication.mLocationData.addr, Toast.LENGTH_SHORT).show();
 
 
-        mRootView.findViewById(R.id.rl_clear_app).setOnClickListener(new View.OnClickListener() {
+        mRootView.findViewById(R.id.rl_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mRootView.findViewById(R.id.rl_chat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
             }
         });
