@@ -49,15 +49,7 @@ public class MoreFragment extends BaseFragment {
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), ConversationListActivity.class);
 //                startActivity(intent);
-                /**
-                 * 启动单聊界面。
-                 *
-                 * @param context      应用上下文。
-                 * @param targetUserId 要与之聊天的用户 Id。
-                 * @param title        聊天的标题，开发者需要在聊天界面通过 intent.getData().getQueryParameter("title")
-                 *                     获取该值, 再手动设置为聊天界面的标题。
-                 */
-                RongIM.getInstance().startPrivateChat(getActivity(), "9527", "标题");
+                RongIM.getInstance().startPrivateChat(getActivity(), "18600211553", "红旺");
             }
         });
     }

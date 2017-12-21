@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,13 +34,24 @@ import com.cbt.main.fragment.MarketFragment;
 import com.cbt.main.fragment.MineFragment;
 import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
+import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.moments.ImageWatcher;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
+import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.utils.net.RongYunTokenUtil;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
     //声明ViewPager
@@ -93,6 +105,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
         initEvents();//初始化事件
         initDatas();//初始化数据
         initOther(isTranslucentStatus); // 其他页面用的数据
+        initRongYunSdk();
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -308,5 +321,50 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
     @Override
     public MessagePicturesLayout.Callback getWatcherCallBack() {
         return this;
+    }
+
+
+    private void initRongYunSdk() {
+        Map<String, String> headers = RongYunTokenUtil.getHeaderMap();
+
+        String uid = "18600211554";
+        String uname = "vigorous2";
+        String logo = "http://www.baidu.com/logo.png";
+
+        ApiClient.getInstance().getRongYunService().getToken(uid, uname, logo,headers).enqueue(new Callback<RtokenRsp>() {
+            @Override
+            public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
+                if(response != null){
+                    if(response.body() != null){
+                        connectRongYunserver(response.body().getToken());
+                    }else{
+                        ToastUtils.show(MainActivity.this, "rong sdk token lost");
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<RtokenRsp> call, Throwable t) {
+                ToastUtils.show(MainActivity.this, "rong sdk token load fail");
+            }
+        });
+    }
+
+    private void connectRongYunserver(String token) {
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                ToastUtils.show(MainActivity.this, "rong sdk server load ncorrect");
+            }
+            @Override
+            public void onSuccess(String userid) {
+                Log.d("LoginActivity", "--onSuccess" + userid);
+//                startActivity(new Intent(ChatActivity.this, MainActivity.class));
+//                finish();
+            }
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                ToastUtils.show(MainActivity.this, "rong sdk server load fail");
+            }
+        });
     }
 }
