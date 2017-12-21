@@ -16,6 +16,12 @@ import com.cbt.main.adapter.MineFragmentAdapter;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
+
 /**
  * Created by caobotao on 16/1/4.
  */
@@ -45,6 +51,26 @@ public class MineFragment extends BaseFragment {
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         setTabsValue();
 
+        mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startConversationList();
+            }
+        });
+    }
+
+    private void startConversationList() {
+
+        RongIM.getInstance().startSubConversationList(getActivity(), Conversation.ConversationType.PRIVATE);
+
+//        Map<String, Boolean> map = new HashMap<>();
+//        map.put(Conversation.ConversationType.PRIVATE.getName(), true); // 会话列表需要显示私聊会话, 第二个参数 true 代表私聊会话需要聚合显示
+//        map.put(Conversation.ConversationType.GROUP.getName(), false);  // 会话列表需要显示群组会话, 第二个参数 false 代表群组会话不需要聚合显示
+
+//        RongIM.getInstance().startConversationList(getActivity()); // 所有聊天 包括系统服务，公众号，群组
+//        RongIM.getInstance().startConversationList(getActivity(), map); // 同上
+//        RongIM.getInstance().startConversation(getActivity(), Conversation.ConversationType.PRIVATE, "18600211553", "hahah"); // 打开指定聊天
     }
 
     private void setTabsValue() {

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -53,7 +54,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends FragmentActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
+public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
     //声明ViewPager
     private ViewPager mViewPager;
     //适配器
@@ -80,19 +81,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCCreate(@Nullable Bundle savedInstanceState) {
         boolean isTranslucentStatus = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = this.getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setNavigationBarColor(Color.TRANSPARENT);
             isTranslucentStatus = true;
         }
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
-        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         //透明状态栏
@@ -106,6 +100,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
         initDatas();//初始化数据
         initOther(isTranslucentStatus); // 其他页面用的数据
         initRongYunSdk();
+    }
+
+    @Override
+    public void initUI() {
+
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -329,7 +328,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener, I
 
         String uid = "18600211554";
         String uname = "vigorous2";
-        String logo = "http://www.baidu.com/logo.png";
+        String logo = "https://www.baidu.com/img/bd_logo1.png";
 
         ApiClient.getInstance().getRongYunService().getToken(uid, uname, logo,headers).enqueue(new Callback<RtokenRsp>() {
             @Override

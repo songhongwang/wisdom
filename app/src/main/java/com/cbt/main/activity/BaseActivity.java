@@ -45,13 +45,15 @@ public abstract class BaseActivity extends FragmentActivity {
         onCCreate(savedInstanceState);
         ButterKnife.bind(this);
         mActivity = this;
-        mIvBack.setVisibility(View.VISIBLE);
-        mIvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mActivity.finish();
-            }
-        });
+        if(mIvBack != null){
+            mIvBack.setVisibility(View.VISIBLE);
+            mIvBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mActivity.finish();
+                }
+            });
+        }
         initUI();
     }
 

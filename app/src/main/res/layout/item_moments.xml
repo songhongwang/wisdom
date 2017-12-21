@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,29 +29,68 @@
         android:textColor="#777"
         android:textSize="13sp"/>
 
-    <TextView
-        android:id="@+id/t_content"
+    <LinearLayout
+        android:id="@+id/ll_content_and_pictures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/i_avatar"
-        android:layout_marginTop="10dip"
-        android:textColor="#000"
-        android:textSize="15sp"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/t_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:textColor="#000"
+            android:textSize="15sp"/>
 
-    <com.cbt.main.view.piaoquan.MessagePicturesLayout
-        android:id="@+id/l_pictures"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/t_content"
-        android:layout_marginTop="10dip"/>
+        <com.cbt.main.view.piaoquan.MessagePicturesLayout
+            android:id="@+id/l_pictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"/>
+    </LinearLayout>
+
 
     <View
+        android:id="@+id/v_content_line"
         android:layout_width="match_parent"
-        android:layout_height="0.5dip"
-        android:layout_below="@+id/l_pictures"
+        android:layout_height="1dip"
+        android:layout_below="@id/ll_content_and_pictures"
         android:layout_marginLeft="3dip"
         android:layout_marginRight="3dip"
         android:layout_marginTop="10dip"
         android:background="#E1E1E1"/>
 
+
+    <TextView
+        android:id="@+id/tv_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/v_content_line"
+        android:layout_marginTop="10dip"
+        android:text="回答"
+        android:textColor="@color/green"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_reply_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/v_content_line"
+        android:layout_toLeftOf="@id/tv_reply"
+        android:layout_marginTop="10dip"
+        android:text="8  |"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:layout_below="@id/tv_reply"
+        android:layout_marginLeft="3dip"
+        android:layout_marginRight="3dip"
+        android:layout_marginTop="10dip"
+        android:background="#E1E1E1"/>
 </RelativeLayout>

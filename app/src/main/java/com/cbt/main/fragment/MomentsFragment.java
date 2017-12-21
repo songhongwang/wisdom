@@ -38,7 +38,7 @@ public class MomentsFragment extends BaseFragment {
     public void initUI() {
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(14).setSpaceColor(0xFFECECEC));
+        vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(5).setSpaceColor(0xFFECECEC));
 
         MessagePicturesLayout.Callback callback = null;
         if(getActivity() instanceof IWatcherImage){

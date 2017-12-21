@@ -43,15 +43,6 @@ public class MoreFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-
-        mRootView.findViewById(R.id.rl_chat).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), ConversationListActivity.class);
-//                startActivity(intent);
-                RongIM.getInstance().startPrivateChat(getActivity(), "18600211553", "红旺");
-            }
-        });
     }
 
     @Override

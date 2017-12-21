@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
@@ -46,7 +47,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent;
+        TextView tNickname, tTime, tContent, tvReply;
         MessagePicturesLayout lPictures;
 
         Data mData;
@@ -58,6 +59,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             tTime = (TextView) itemView.findViewById(R.id.t_time);
             tContent = (TextView) itemView.findViewById(R.id.t_content);
             lPictures = (MessagePicturesLayout) itemView.findViewById(R.id.l_pictures);
+            tvReply = (TextView) itemView.findViewById(R.id.tv_reply);
             lPictures.setCallback(mCallback);
         }
 
@@ -71,6 +73,12 @@ public class MessageAdapter extends RecyclerView.Adapter {
             tTime.setText(mData.getCreateTime());
             tContent.setText(mData.getContent());
             lPictures.set(mData.getPictureThumbList(), mData.getPictureList());
+            tvReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RongIM.getInstance().startPrivateChat(mContext, "18600211553", "vigorous");
+                }
+            });
         }
     }
 
