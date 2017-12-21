@@ -13,6 +13,7 @@ import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.RongYunTokenUtil;
 
+import java.net.URLEncoder;
 import java.util.Map;
 
 import io.rong.imkit.RongContext;
@@ -94,7 +95,22 @@ public class ChatActivity extends BaseActivity {
 
         Map<String, String> headers = RongYunTokenUtil.getHeaderMap();
 
-        ApiClient.getInstance().getRongYunService().getToken("18600211553", "vigorous", "https://www.baidu.com/img/bd_logo1.png",headers).enqueue(new Callback<RtokenRsp>() {
+        String uid = null;
+        String uname = null;
+        String logo = null;
+        try{
+//           uid = URLEncoder.encode("18600211553", "UTF-8");
+//           uname = URLEncoder.encode("vigorous", "UTF-8");
+//           logo = URLEncoder.encode("https://www.baidu.com/img/bd_logo1.png", "UTF-8");
+
+            uid = "18600211553";
+            uname = "vigorous";
+            logo = "http://www.baidu.com/logo.png";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        ApiClient.getInstance().getRongYunService().getToken(uid, uname, logo,headers).enqueue(new Callback<RtokenRsp>() {
             @Override
             public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
                 if(response != null){
