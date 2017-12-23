@@ -1,5 +1,6 @@
 package com.cbt.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -20,6 +21,8 @@ public class SettingActivity extends BaseActivity{
     View mVClearApp;
     @BindView(R.id.tv_cache_size)
     TextView mTvCacheSize;
+    @BindView(R.id.tv_quit)
+    TextView mTvQuit;
     ClearApp mClearApp;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,15 @@ public class SettingActivity extends BaseActivity{
             public void onClick(View view) {
                 mClearApp.clearAppCache();
                 mTvCacheSize.setText("0KB");
+            }
+        });
+        mTvQuit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         });
     }
