@@ -22,11 +22,11 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends FragmentActivity {
-    @BindView(R.id.tv_title)
+    @Nullable@BindView(R.id.tv_title)
     TextView mTvTitle;
-    @BindView(R.id.iv_back)
+    @Nullable@BindView(R.id.iv_back)
     ImageView mIvBack;
-    @BindView(R.id.iv_complete)
+    @Nullable@BindView(R.id.iv_complete)
     ImageView mIvFinish;
 
     private Activity mActivity;

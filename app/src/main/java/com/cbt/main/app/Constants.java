@@ -5,6 +5,6 @@ package com.cbt.main.app;
  */
 
 public class Constants {
-    public static final String KEY_RONG_YUN = "cpj2xarlc1ekn";
-    public static final String SECRET_RONG_YUN = "TlIiNihtiT";
+    public static final String KEY_RONG_YUN = "pgyu6atqp94hu";
+    public static final String SECRET_RONG_YUN = "coJJDK46ksqj";
 }

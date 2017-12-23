@@ -352,7 +352,12 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
-                ToastUtils.show(MainActivity.this, "rong sdk server load ncorrect");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.show(MainActivity.this, "rong sdk server load incorrect");
+                    }
+                });
             }
             @Override
             public void onSuccess(String userid) {
@@ -362,7 +367,12 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             }
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
-                ToastUtils.show(MainActivity.this, "rong sdk server load fail");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.show(MainActivity.this, "rong sdk server load fail");
+                    }
+                });
             }
         });
     }
