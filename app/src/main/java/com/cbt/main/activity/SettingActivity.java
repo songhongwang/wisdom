@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.appclear.ClearApp;
 
 import butterknife.BindView;
 
 /**
  * Created by vigorous on 17/12/18.
+ *
  */
 
 public class SettingActivity extends BaseActivity{
@@ -47,8 +49,10 @@ public class SettingActivity extends BaseActivity{
         mTvQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferencUtil.logout(SettingActivity.this);
+
                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

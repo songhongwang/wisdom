@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.User;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.view.ClearWriteEditText;
 
 /**
@@ -30,27 +32,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ClearWriteEditText mPhoneEdit, mPasswordEdit;
     private String phoneString;
     private String passwordString;
-    private String connectResultId;
-    private SharedPreferences sp;
-    private SharedPreferences.Editor editor;
-    private String loginToken;
 
 
 
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
-        sp = getSharedPreferences("config", MODE_PRIVATE);
-        editor = sp.edit();
-        initView();
+
+        User login = SharedPreferencUtil.getLogin(this);
+        if(login != null){
+            goToMain();
+        }
     }
 
     @Override
     public void initUI() {
-
-    }
-
-    private void initView() {
         mPhoneEdit = (ClearWriteEditText) findViewById(R.id.de_login_phone);
         mPasswordEdit = (ClearWriteEditText) findViewById(R.id.de_login_password);
         Button mConfirm = (Button) findViewById(R.id.de_login_sign);
@@ -79,10 +75,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             }
         });
-
-
-
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -110,8 +105,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     mPasswordEdit.setShakeAnimation();
                     return;
                 }
-                editor.putBoolean("exit", false);
-                editor.apply();
+                User user = new User();
+                user.setName(phoneString);
+                user.setPwd(passwordString);
+                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
 
                 goToMain();
                 break;

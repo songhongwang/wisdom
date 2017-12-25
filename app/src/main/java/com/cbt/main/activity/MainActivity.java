@@ -36,7 +36,9 @@ import com.cbt.main.fragment.MineFragment;
 import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
 import com.cbt.main.model.RtokenRsp;
+import com.cbt.main.model.User;
 import com.cbt.main.moments.ImageWatcher;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.utils.net.ApiClient;
@@ -323,14 +325,13 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     }
 
 
+    private int connectRongYunRetryCount = 0;
     private void initRongYunSdk() {
         Map<String, String> headers = RongYunTokenUtil.getHeaderMap();
 
-        String uid = "18600211554";
-        String uname = "vigorous2";
-        String logo = "https://www.baidu.com/img/bd_logo1.png";
+        User user = SharedPreferencUtil.getLogin(this);
 
-        ApiClient.getInstance().getRongYunService().getToken(uid, uname, logo,headers).enqueue(new Callback<RtokenRsp>() {
+        ApiClient.getInstance().getRongYunService().getToken(user.getId(), user.getName(), user.getAvatar(),headers).enqueue(new Callback<RtokenRsp>() {
             @Override
             public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
                 if(response != null){
@@ -356,6 +357,11 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                     @Override
                     public void run() {
                         ToastUtils.show(MainActivity.this, "rong sdk server load incorrect");
+                        if(connectRongYunRetryCount < 3){
+                            connectRongYunRetryCount ++;
+
+                            initRongYunSdk();
+                        }
                     }
                 });
             }

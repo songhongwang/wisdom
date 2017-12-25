@@ -5,6 +5,6 @@ package com.cbt.main.app;
  */
 
 public class Constants {
-    public static final String KEY_RONG_YUN = "pgyu6atqp94hu";
+    public static final String KEY_RONG_YUN = "pgyu6atqp94hu"; // 更新线上appkey 还需要更新IMLib依赖工程的AndroidManifest.xml文件中的appkey
     public static final String SECRET_RONG_YUN = "coJJDK46ksqj";
 }
