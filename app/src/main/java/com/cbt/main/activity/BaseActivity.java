@@ -13,9 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.event.EventLogout;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.rong.eventbus.EventBus;
 
 /**
  * Created by vigorous on 17/12/18.
@@ -60,4 +65,6 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract void onCCreate(@Nullable Bundle savedInstanceState);
 
     public abstract void initUI();
+
+
 }

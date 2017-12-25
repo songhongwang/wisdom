@@ -3,14 +3,17 @@ package com.cbt.main.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.EventLog;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.event.EventLogout;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.appclear.ClearApp;
 
 import butterknife.BindView;
+import io.rong.eventbus.EventBus;
 
 /**
  * Created by vigorous on 17/12/18.
@@ -50,6 +53,8 @@ public class SettingActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 SharedPreferencUtil.logout(SettingActivity.this);
+
+                EventBus.getDefault().post(new EventLogout());
 
                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

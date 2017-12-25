@@ -37,6 +37,7 @@ import com.cbt.main.fragment.IndexFragment;
 import com.cbt.main.fragment.MoreFragment;
 import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
+import com.cbt.main.model.event.EventLogout;
 import com.cbt.main.moments.ImageWatcher;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
@@ -46,10 +47,14 @@ import com.cbt.main.utils.net.RongYunTokenUtil;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import retrofit2.Call;
@@ -197,6 +202,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     }
 
     private void initEvents() {
+        EventBus.getDefault().register(this);
+
         //设置四个Tab的点击事件
         mTabIndex.setOnClickListener(this);
         mTabMine.setOnClickListener(this);
@@ -381,5 +388,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                 });
             }
         });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(EventLogout eventLogout) {
+        finish();
     }
 }
