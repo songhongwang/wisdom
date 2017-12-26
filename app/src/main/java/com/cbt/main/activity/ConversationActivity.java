@@ -11,6 +11,9 @@ import com.cbt.main.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.fragment.ConversationFragment;
+import io.rong.imlib.RongIMClient;
 
 /**
  * Created by vigorous on 17/12/19.
@@ -47,5 +50,12 @@ public class ConversationActivity extends FragmentActivity {
 
         mTitle = getIntent().getData().getQueryParameter("title");
         mTvTitle.setText(mTitle);
+
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
 }
