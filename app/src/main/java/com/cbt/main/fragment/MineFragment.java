@@ -52,12 +52,16 @@ public class MineFragment extends BaseFragment {
         setTabsValue();
 
         mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setImageResource(R.drawable.nav_icon_message);
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startConversationList();
             }
         });
+
+        mIvComplete.setVisibility(View.VISIBLE);
+        mIvComplete.setImageResource(R.drawable.nav_icon_release);
     }
 
     private void startConversationList() {

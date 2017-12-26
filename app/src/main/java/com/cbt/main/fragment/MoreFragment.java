@@ -14,6 +14,7 @@ import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by vigorous on 16/1/4.
@@ -32,6 +33,15 @@ public class MoreFragment extends BaseFragment {
 
     public void initUI() {
         mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setImageResource(R.drawable.nav_icon_message);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RongIM.getInstance().startSubConversationList(getActivity(), Conversation.ConversationType.PRIVATE);
+            }
+        });
+        mIvComplete.setVisibility(View.GONE);
+
         GlobalApplication.mApp.updateLocation();
         Toast.makeText(getActivity(), "location" + GlobalApplication.mLocationData.addr, Toast.LENGTH_SHORT).show();
 

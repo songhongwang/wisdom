@@ -14,6 +14,9 @@ import com.cbt.main.R;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.utils.Utils;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
+
 /**
  * Created by caobotao on 16/1/4.
  */
@@ -33,6 +36,19 @@ public class ExpertFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setImageResource(R.drawable.nav_icon_message);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RongIM.getInstance().startSubConversationList(getActivity(), Conversation.ConversationType.PRIVATE);
+
+            }
+        });
+
+        mIvComplete.setVisibility(View.VISIBLE);
+        mIvComplete.setImageResource(R.drawable.nav_icon_release);
+
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t3);
         mViewPager.setOffscreenPageLimit(1);
         ExpertFragmentAdapter adapter = new ExpertFragmentAdapter(getActivity().getSupportFragmentManager());

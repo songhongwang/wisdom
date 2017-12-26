@@ -35,6 +35,9 @@ public class MarketFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mIvComplete.setVisibility(View.VISIBLE);
+        mIvComplete.setImageResource(R.drawable.nav_icon_release);
+
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t4);
         mViewPager.setOffscreenPageLimit(1);
         MarketFragmentAdapter adapter = new MarketFragmentAdapter(getActivity().getSupportFragmentManager());

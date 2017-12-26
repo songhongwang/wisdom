@@ -16,7 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_back"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/nav_icon_back"
             android:visibility="gone"/>
 
         <TextView
@@ -35,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:src="@drawable/more_icon_farm"
+            android:src="@drawable/nav_icon_release"
             android:visibility="visible"/>
 
     </RelativeLayout>
