@@ -1,5 +1,6 @@
 package com.cbt.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.ReleaseActivity;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
 import com.cbt.main.utils.Utils;
@@ -62,6 +64,13 @@ public class MineFragment extends BaseFragment {
 
         mIvComplete.setVisibility(View.VISIBLE);
         mIvComplete.setImageResource(R.drawable.nav_icon_release);
+        mIvComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ReleaseActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void startConversationList() {

@@ -42,10 +42,6 @@ public class MoreFragment extends BaseFragment {
         });
         mIvComplete.setVisibility(View.GONE);
 
-        GlobalApplication.mApp.updateLocation();
-        Toast.makeText(getActivity(), "location" + GlobalApplication.mLocationData.addr, Toast.LENGTH_SHORT).show();
-
-
         mRootView.findViewById(R.id.rl_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

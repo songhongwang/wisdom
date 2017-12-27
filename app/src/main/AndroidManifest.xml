@@ -68,7 +68,8 @@
         android:name=".app.GlobalApplication"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -78,6 +79,7 @@
 
         <activity
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:name=".activity.MainActivity"/>
 
         <activity android:name=".activity.TestActivity"/>
@@ -89,7 +91,8 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"></service>
 
-        <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.SettingActivity"
+                  android:screenOrientation="portrait"/>
 
         <!--会话列表-->
         <activity
@@ -144,6 +147,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ReleaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.imagechoose.MultiImageSelectorActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.imagechoose.ShowActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cbt.main"

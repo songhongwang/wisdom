@@ -63,4 +63,5 @@ dependencies {
     compile files('src/main/libs/commons-codec-1.4.jar')
     compile files('src/main/libs/gson-2.2.4.jar')
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile project(':multi-image-selector')
 }
