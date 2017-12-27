@@ -20,6 +20,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets']
         }
     }
 
@@ -64,4 +65,5 @@ dependencies {
     compile files('src/main/libs/gson-2.2.4.jar')
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':multi-image-selector')
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
 }

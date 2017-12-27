@@ -49,9 +49,11 @@ public class LocationProviderGD {
 
                             GlobalApplication.mLocationData.city = location.getCity();
 
-                            GlobalApplication.mLocationData.addr = location.getProvince();
+                            GlobalApplication.mLocationData.province = location.getProvince();
                             GlobalApplication.mLocationData.lat = location.getLatitude();
                             GlobalApplication.mLocationData.lon = location.getLongitude();
+
+                            GlobalApplication.mLocationData.addr = location.getAddress();
 
                         } else {
                             GlobalApplication.mLocationData.errorcode = location.getErrorCode();

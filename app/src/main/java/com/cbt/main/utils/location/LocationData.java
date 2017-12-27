@@ -11,6 +11,7 @@ public class LocationData implements Serializable {
     public double lat;
     public double lon;
     public String city;
+    public String province;
     public String addr;
     public int errorcode;
 
