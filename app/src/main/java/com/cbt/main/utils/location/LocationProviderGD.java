@@ -53,8 +53,7 @@ public class LocationProviderGD {
                             GlobalApplication.mLocationData.lat = location.getLatitude();
                             GlobalApplication.mLocationData.lon = location.getLongitude();
 
-                            GlobalApplication.mLocationData.addr = location.getAddress();
-
+                            GlobalApplication.mLocationData.addr = location.getDistrict();
                         } else {
                             GlobalApplication.mLocationData.errorcode = location.getErrorCode();
                         }
