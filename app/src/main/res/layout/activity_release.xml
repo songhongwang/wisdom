@@ -13,8 +13,8 @@
         android:hint="请输入上报内容不超过140字"
         android:gravity="top|left"
         android:padding="10dp"
-        android:textSize="14sp"
-        android:lines="8"/>
+        android:textSize="15sp"
+        android:lines="6"/>
     <GridView
         android:id="@+id/mGridView"
         android:layout_width="match_parent"

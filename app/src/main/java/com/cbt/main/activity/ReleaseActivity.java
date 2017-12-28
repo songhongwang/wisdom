@@ -55,7 +55,8 @@ public class ReleaseActivity extends BaseActivity{
 
     @Override
     public void initUI() {
-        mTvTitle.setText("灾情上报");
+        String title = getIntent().getStringExtra("title");
+        mTvTitle.setText(title);
         mReleaseActAdapter = new ReleaseActAdapter(this, mDatas);
         mGridView.setAdapter(mReleaseActAdapter);
 

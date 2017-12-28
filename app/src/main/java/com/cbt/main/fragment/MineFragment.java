@@ -15,6 +15,7 @@ import com.cbt.main.R;
 import com.cbt.main.activity.ReleaseActivity;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
+import com.cbt.main.dialog.ReleaseDialog;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 
@@ -67,7 +68,8 @@ public class MineFragment extends BaseFragment {
         mIvComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ReleaseActivity.class);
+
+                Intent intent = new Intent(getActivity(), ReleaseDialog.class);
                 startActivity(intent);
             }
         });

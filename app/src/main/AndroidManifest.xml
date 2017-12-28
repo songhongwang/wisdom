@@ -151,10 +151,17 @@
             android:screenOrientation="portrait"/>
         <activity
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:name="me.nereo.imagechoose.MultiImageSelectorActivity" />
         <activity
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:name="me.nereo.imagechoose.ShowActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/NewDialog"
+            android:name=".dialog.ReleaseDialog" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cbt.main"
