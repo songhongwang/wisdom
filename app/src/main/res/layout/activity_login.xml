@@ -109,7 +109,6 @@
                 </FrameLayout>
             </RelativeLayout>
 
-
             <Button
                 android:id="@+id/de_login_sign"
                 android:textSize="18sp"
@@ -140,7 +139,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by RongCloud"
         android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

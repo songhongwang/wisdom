@@ -7,15 +7,24 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
 import com.cbt.main.utils.SharedPreferencUtil;
+import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.ClearWriteEditText;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by AMing on 16/1/15.
@@ -91,12 +100,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     return;
                 }
 
-//                if (!AMUtils.isMobile(phoneString)) {
-//                    NToast.shortToast(mContext, R.string.Illegal_phone_number);
-//                    mPhoneEdit.setShakeAnimation();
-//                    return;
-//                }
-
                 if (TextUtils.isEmpty(passwordString)) {
                     mPasswordEdit.setShakeAnimation();
                     return;
@@ -105,12 +108,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     mPasswordEdit.setShakeAnimation();
                     return;
                 }
-                User user = new User();
-                user.setName(phoneString);
-                user.setPwd(passwordString);
-                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
-
-                goToMain();
+               loginServer(phoneString, passwordString);
                 break;
             case R.id.de_login_register:
 //                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
@@ -119,6 +117,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                startActivityForResult(new Intent(this, ForgetPasswordActivity.class), 2);
                 break;
         }
+    }
+
+    private void loginServer(String phone, String pwd){
+        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<BaseModel<User>>() {
+            @Override
+            public void onResponse(Call<BaseModel<User>> call, Response<BaseModel<User>> response) {
+
+                User user = new User();
+                user.setTelphone(phoneString);
+                user.setPassword(passwordString);
+                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
+
+                goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<BaseModel<User>> call, Throwable t) {
+                ToastUtils.show(LoginActivity.this, "登录失败");
+            }
+        });
     }
 
 

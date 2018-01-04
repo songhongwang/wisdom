@@ -25,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
+import me.nereo.imagechoose.ShowActivity;
 
 /**
  * Created by vigorous on 17/12/27.
@@ -75,6 +76,9 @@ public class ReleaseActivity extends BaseActivity{
                     startActivityForResult(intent, REQUEST_IMAGE);
                 }else{
                     // 查看图片
+                    Intent showIntent =new Intent(ReleaseActivity.this, ShowActivity.class);
+                    showIntent.putExtra("path",s);
+                    startActivity(showIntent);
                 }
             }
         });

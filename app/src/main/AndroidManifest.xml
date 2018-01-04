@@ -156,6 +156,7 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:name="me.nereo.imagechoose.ShowActivity" />
         <activity
             android:configChanges="orientation|screenSize"

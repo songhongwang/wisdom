@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +29,12 @@ public class ShowActivity extends ActionBarActivity {
         Bitmap loacalBitmap = getLoacalBitmap(path);
         mScaleImageView.setImageBitmap(loacalBitmap);
 
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
