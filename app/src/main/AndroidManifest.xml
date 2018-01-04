@@ -161,6 +161,16 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activity.RegisterActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activity.ForgetPwdActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/NewDialog"
             android:name=".dialog.ReleaseDialog" />
         <provider

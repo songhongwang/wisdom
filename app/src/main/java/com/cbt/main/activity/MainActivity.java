@@ -217,7 +217,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mTabIndex = (LinearLayout) findViewById(R.id.id_tab_index);
         mTabMine = (LinearLayout) findViewById(R.id.id_tab_mine);
@@ -338,7 +338,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
         User user = SharedPreferencUtil.getLogin(this);
 
-        ApiClient.getInstance().getRongYunService().getToken(user.getId(), user.getName(), user.getAvatar(),headers).enqueue(new Callback<RtokenRsp>() {
+        ApiClient.getInstance().getRongYunService().getToken(user.getUid(), user.getUname(), user.getYinwenming(),headers).enqueue(new Callback<RtokenRsp>() {
             @Override
             public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
                 if(response != null){
