@@ -106,7 +106,12 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         initEvents();//初始化事件
         initDatas();//初始化数据
         initOther(isTranslucentStatus); // 其他页面用的数据
-        initRongYunSdk();
+        mImgIndex.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initRongYunSdk();
+             }
+        }, 500);
     }
 
     @Override

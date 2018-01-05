@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <FrameLayout
         android:id="@+id/de_frm_backgroud"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/de_img_backgroud"
@@ -30,14 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="91dip"
-            android:src="@drawable/ic_launcher" />
+            android:src="@mipmap/logo" />
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dip"
-            android:orientation="vertical">
+            android:layout_marginTop="72dip">
 
 
             <RelativeLayout
@@ -57,11 +58,13 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="请输入手机号码"
+                    android:drawableLeft="@drawable/login_icon_tel"
                     android:inputType="phone"
+                    android:drawablePadding="5dp"
                     android:maxLines="1"
                     android:maxLength="11"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_overlay" />
 
                 <FrameLayout
                     android:id="@+id/fr_username_delete"
@@ -82,6 +85,7 @@
                 android:layout_marginLeft="30dip"
                 android:layout_marginRight="30dip"
                 android:layout_marginTop="37dip"
+                android:layout_below="@id/liner1"
                 android:orientation="horizontal">
 
 
@@ -90,13 +94,15 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rc_ed_public_service_search_selector"
+                    android:drawableLeft="@drawable/login_icon_password"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:hint="请输入密码"
+                    android:drawablePadding="5dp"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_overlay" />
 
                 <FrameLayout
                     android:id="@+id/fr_pass_delete"
@@ -109,52 +115,50 @@
                 </FrameLayout>
             </RelativeLayout>
 
+
+            <TextView
+                android:id="@+id/de_login_forgot"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/liner2"
+                android:padding="15dp"
+                android:text="忘记密码" />
+
+
+            <TextView
+                android:id="@+id/de_login_register"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/liner2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="15dp"
+                android:layout_gravity="right"
+                android:text="注册新用户" />
+
+
             <Button
                 android:id="@+id/de_login_sign"
                 android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/de_login_forgot"
                 android:layout_marginLeft="30dip"
                 android:layout_marginRight="30dip"
                 android:layout_marginTop="34dip"
-                android:background="@drawable/rs_select_btn_blue"
+                android:background="@drawable/rect_corner50_blue"
                 android:text="登录"
                 android:textColor="#FFFFFF" />
 
-
-
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/de_login_forgot"
-        android:textSize="14sp"
-        android:textColor="#999999"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_alignParentBottom="true"
-        android:text="忘记密码" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="15dp"
-        android:textColor="#484848"
-        />
-
-    <TextView
-        android:id="@+id/de_login_register"
-        android:textSize="14sp"
-        android:textColor="#999999"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="注册新用户" />
 
 </RelativeLayout>

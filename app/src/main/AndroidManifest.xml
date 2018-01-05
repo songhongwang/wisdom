@@ -161,13 +161,7 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activity.RegisterActivity" />
-        <activity
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activity.ForgetPwdActivity" />
+            android:name=".activity.RegisterOrForgetActivity" />
         <activity
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"

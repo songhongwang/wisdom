@@ -1,13 +1,11 @@
 package com.cbt.main.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.model.BaseModel;
-import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
@@ -111,29 +108,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                loginServer(phoneString, passwordString);
                 break;
             case R.id.de_login_register:
-                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
+                startActivityForResult(new Intent(this, RegisterOrForgetActivity.class), 1);
                 break;
             case R.id.de_login_forgot:
-                startActivityForResult(new Intent(this, ForgetPwdActivity.class), 2);
+                startActivityForResult(new Intent(this, RegisterOrForgetActivity.class), 2);
                 break;
         }
     }
 
     private void loginServer(String phone, String pwd){
-        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<BaseModel<User>>() {
+        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<BaseModel<User>> call, Response<BaseModel<User>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
 
-                User user = new User();
-                user.setTelphone(phoneString);
-                user.setPassword(passwordString);
+//                User user = new User();
+//                user.setTelphone(phoneString);
+//                user.setPassword(passwordString);
+                User user = response.body();
                 SharedPreferencUtil.saveLogin(LoginActivity.this, user);
 
                 goToMain();
             }
 
             @Override
-            public void onFailure(Call<BaseModel<User>> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 ToastUtils.show(LoginActivity.this, "登录失败");
             }
         });

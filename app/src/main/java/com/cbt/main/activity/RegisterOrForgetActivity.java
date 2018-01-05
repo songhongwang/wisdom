@@ -17,7 +17,7 @@ import butterknife.BindView;
  * Company RongCloud
  */
 @SuppressWarnings("deprecation")
-public class RegisterActivity extends BaseActivity {
+public class RegisterOrForgetActivity extends BaseActivity {
     @BindView(R.id.et_phone)
     EditText mEtPhone;
     @BindView(R.id.et_code)
@@ -38,6 +38,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initUI() {
+        mIvFinish.setVisibility(View.GONE);
         final CountDownTimer countDownTimer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

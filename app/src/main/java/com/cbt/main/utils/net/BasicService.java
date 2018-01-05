@@ -18,6 +18,6 @@ public interface BasicService {
 //    String mVersion = "api.php?";
 
     @GET("login")
-    Call<BaseModel<User>> login(@Query("telphone") String telphone, @Query("password") String password);
+    Call<User> login(@Query("telphone") String telphone, @Query("password") String password);
 
 }
