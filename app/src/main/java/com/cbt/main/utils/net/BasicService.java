@@ -20,4 +20,13 @@ public interface BasicService {
     @GET("login")
     Call<User> login(@Query("telphone") String telphone, @Query("password") String password);
 
+    @GET("findcheckcode")
+    Call<BaseModel<Object>> getCode(@Query("telphone") String telphone);
+
+    @GET("adduser")
+    Call<BaseModel<Object>> regist(@Query("telphone") String telphone, @Query("password") String password, @Query("randoms") String code);
+
+    @GET("Forgotpassword")
+    Call<BaseModel<Object>> forgotPwd(@Query("telphone") String telphone, @Query("password") String password, @Query("randoms") String code);
+
 }

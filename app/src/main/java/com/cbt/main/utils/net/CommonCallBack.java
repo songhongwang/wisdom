@@ -22,8 +22,8 @@ public abstract class CommonCallBack<T> extends BaseCallBack<T> {
             if (body != null) {
                 if (body.getCode() == 0) {
                     onCResponse(call, body);
-                } else if (body.getCode() == 1) {
-                    onErrorMessage(body.getMsg());
+                } else {
+                    onErrorMessage(body.getMessage());
                 }
             } else {
                 onCFailure(call, new NullPointerException());

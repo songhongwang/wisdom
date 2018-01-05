@@ -108,10 +108,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                loginServer(phoneString, passwordString);
                 break;
             case R.id.de_login_register:
-                startActivityForResult(new Intent(this, RegisterOrForgetActivity.class), 1);
+                Intent intent = new Intent(this, RegisterOrForgetActivity.class);
+                intent.putExtra("title", "注册");
+                startActivityForResult(intent, 1);
                 break;
             case R.id.de_login_forgot:
-                startActivityForResult(new Intent(this, RegisterOrForgetActivity.class), 2);
+                Intent intent2 = new Intent(this, RegisterOrForgetActivity.class);
+                intent2.putExtra("title", "忘记密码");
+                startActivityForResult(intent2, 2);
                 break;
         }
     }
