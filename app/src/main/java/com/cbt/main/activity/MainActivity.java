@@ -172,7 +172,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
             @Override
             public CharSequence getPageTitle(int position) {
-                return "        " + position;
+                return "占位"; // 占位符作用
             }
         };
         //不要忘记设置ViewPager的适配器
@@ -249,7 +249,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         // 设置Tab Indicator的宽度
 //            mPagerSlidingTabStrip.setindicatorLinePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, dm));
         // 设置Tab标题文字的大小
-        mPagerSlidingTabStrip.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, dm));
+        mPagerSlidingTabStrip.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, dm));
+        mPagerSlidingTabStrip.setTextColor(android.R.color.white);
         //选中tab是否加粗
 //            mPagerSlidingTabStrip.setTextSize(12);
         // 设置Tab Indicator的颜色
@@ -261,7 +262,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
         mPagerSlidingTabStrip.setSelectedTabColor(R.color.green);
 
-        mPagerSlidingTabStrip.setScrollOffset((int) (Utils.getScreenWidth(this) * 0.5f));
+        mPagerSlidingTabStrip.setScrollOffset(0);
     }
     @Override
     public void onClick(View v) {
