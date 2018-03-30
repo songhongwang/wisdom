@@ -6,7 +6,7 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="green">#ff38b059</color>
-    <color name="half_white">#40ffffff</color>
+    <color name="half_white">#60555555</color>
     <color name="transparent">#00000000</color>
     <color name="background_tab_pressed">#6633B5E5</color>
 
