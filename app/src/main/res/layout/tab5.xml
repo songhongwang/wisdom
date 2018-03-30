@@ -90,38 +90,38 @@
                     android:layout_marginRight="15dp"
                     android:src="@drawable/icon_more"/>
             </RelativeLayout>
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/rl_chat"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:minHeight="50dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:background="@color/white">-->
+            <RelativeLayout
+                android:id="@+id/rl_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:background="@color/white">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_chat"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:src="@drawable/more_icon_setting"/>-->
+                <ImageView
+                    android:id="@+id/iv_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/more_icon_setting"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_toRightOf="@id/iv_chat"-->
-                    <!--android:text="聊天"-->
-                    <!--android:textSize="14sp"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_chat"
+                    android:text="聊天"
+                    android:textSize="14sp"/>
 
 
-                <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="15dp"-->
-                    <!--android:src="@drawable/icon_more"/>-->
-            <!--</RelativeLayout>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/icon_more"/>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
