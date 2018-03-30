@@ -50,6 +50,9 @@ public class SceneSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     public void start(){
         if (renderThread == null) {
             renderThread = new RenderThread(surfaceHolder, getContext());
+            // 部分手机初始化的时候获取不到宽高，这里重新设置一下
+            renderThread.setWidth(width);
+            renderThread.setHeight(height);
             renderThread.start();
         }else{
             renderThread.getRenderHandler().sendEmptyMessage(RenderThread.FLAG_DRAWING);
