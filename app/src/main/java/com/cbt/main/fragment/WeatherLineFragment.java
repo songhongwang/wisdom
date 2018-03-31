@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
-import com.cbt.main.model.WeatherDaysForecast;
+import com.cbt.main.model.WeatherModel;
 import com.cbt.main.utils.MyUtil;
 import com.cbt.main.view.LineChartViewDouble;
 import com.google.gson.Gson;
@@ -76,33 +76,33 @@ public class WeatherLineFragment extends BaseFragment {
         String jsonData = getJsonData(); // 本地假数据
 
         Gson gson = new Gson();
-        List<WeatherDaysForecast> weatherForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherDaysForecast>>() {
+        List<WeatherModel> weatherForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherModel>>() {
         }.getType());
 
       updateUI(weatherForecasts);
 
     }
 
-    private void updateUI(List<WeatherDaysForecast> weatherDaysForecasts){
+    private void updateUI(List<WeatherModel> weatherDaysForecasts){
         Calendar calendar = Calendar.getInstance();
         // 现在小时
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
 
         // 昨天天气信息（23：45开始到05：20以前的数据的日期和周）
-        WeatherDaysForecast weather;
+        WeatherModel weather;
         // 昨天天气信息
-        WeatherDaysForecast weather1;
+        WeatherModel weather1;
         // 今天天气信息
-        WeatherDaysForecast weather2;
+        WeatherModel weather2;
         // 明天天气信息
-        WeatherDaysForecast weather3;
+        WeatherModel weather3;
         // 后天天气信息
-        WeatherDaysForecast weather4;
+        WeatherModel weather4;
         // 第五天天天气信息
-        WeatherDaysForecast weather5;
+        WeatherModel weather5;
         // 第六天天气信息
-        WeatherDaysForecast weather6;
+        WeatherModel weather6;
 
         int hour1 = calendar.get(Calendar.HOUR_OF_DAY);
         int minute1 = calendar.get(Calendar.MINUTE);
@@ -226,10 +226,10 @@ public class WeatherLineFragment extends BaseFragment {
     /**
      * 设置多天天气预报
      */
-    private void setDaysForecast(WeatherDaysForecast weather, WeatherDaysForecast weather1,
-                                 WeatherDaysForecast weather2, WeatherDaysForecast weather3,
-                                 WeatherDaysForecast weather4, WeatherDaysForecast weather5,
-                                 WeatherDaysForecast weather6, int hour1, int minute1,
+    private void setDaysForecast(WeatherModel weather, WeatherModel weather1,
+                                 WeatherModel weather2, WeatherModel weather3,
+                                 WeatherModel weather4, WeatherModel weather5,
+                                 WeatherModel weather6, int hour1, int minute1,
                                  Calendar calendar) {
         // 日期和星期标题 【索引0：日期;索引1：星期】
         String[] day1;

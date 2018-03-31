@@ -13,13 +13,23 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.activity.WeatherForcastActivity;
 import com.cbt.main.adapter.IndexProductAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.engin.SceneSurfaceView;
+import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.IndexModel;
+import com.cbt.main.model.Weather7DaysForcast;
+import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.utils.net.CommonCallBack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by vigorous on 16/1/4.
@@ -67,6 +77,9 @@ public class IndexFragment extends BaseFragment {
         dataList.add("aaa");
         mIndexProductAdapter = new IndexProductAdapter(dataList, getActivity());
         mLv.setAdapter(mIndexProductAdapter);
+
+        getData();
+        getWeather();
     }
 
     @Override
@@ -74,5 +87,42 @@ public class IndexFragment extends BaseFragment {
 
     }
 
+    private void getData() {
+        String city = GlobalApplication.mLocationData.city;
+        String province = GlobalApplication.mLocationData.province;
+        String country = GlobalApplication.mLocationData.addr;
 
+
+        ApiClient.getInstance().getBasicService().getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
+            @Override
+            public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
+                ToastUtils.show(getContext(), response.body().nongli);
+
+            }
+
+            @Override
+            public void onFailure(Call<IndexModel> call, Throwable t) {
+
+            }
+        });
+    }
+    private void getWeather() {
+        String city = GlobalApplication.mLocationData.city;
+        String province = GlobalApplication.mLocationData.province;
+        String country = GlobalApplication.mLocationData.addr;
+
+
+        ApiClient.getInstance().getBasicService().getWeatherForcast(province, city, country).enqueue(new Callback<Weather7DaysForcast>() {
+            @Override
+            public void onResponse(Call<Weather7DaysForcast> call, Response<Weather7DaysForcast> response) {
+                ToastUtils.show(getContext(), response.body().getTodaytianqi());
+
+            }
+
+            @Override
+            public void onFailure(Call<Weather7DaysForcast> call, Throwable t) {
+
+            }
+        });
+    }
 }

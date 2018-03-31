@@ -15,8 +15,12 @@ import com.cbt.main.R;
 import com.cbt.main.activity.ReleaseActivity;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.dialog.ReleaseDialog;
+import com.cbt.main.model.IndexModel;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 
 import java.util.HashMap;
@@ -24,6 +28,9 @@ import java.util.Map;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by caobotao on 16/1/4.
@@ -73,6 +80,8 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+
+        getData();
     }
 
     private void startConversationList() {
@@ -120,5 +129,20 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
 
+    }
+
+    private void getData() {
+
+        ApiClient.getInstance().getBasicService().getMineFarmerTab1(1).enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
     }
 }

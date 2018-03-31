@@ -24,7 +24,7 @@ import java.io.Serializable;
  * @author 咖枯
  * @version 1.0 2015/09/18
  */
-public class WeatherDaysForecast implements Serializable {
+public class WeatherModel implements Serializable {
 
     private static final long serialVersionUID = -3415028129243262810L;
     /**

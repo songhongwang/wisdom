@@ -1,8 +1,10 @@
 package com.cbt.main.utils.net;
 
 import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
+import com.cbt.main.model.Weather7DaysForcast;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -33,7 +35,16 @@ public interface BasicService {
     Call<BaseModel<Object>> forgotPwd(@Query("telphone") String telphone);
 
     @GET("findIndexData")
-    Call<BaseModel<Object>> getIndex(@Query("provincename") String provincename,@Query("cityname") String cityname,@Query("countryname") String countryname);
+    Call<IndexModel> getIndex(@Query("provincename") String provincename, @Query("cityname") String cityname, @Query("countryname") String countryname);
+
+    @GET("find7Day")
+    Call<Weather7DaysForcast> getWeatherForcast(@Query("provincename") String provincename, @Query("cityname") String cityname, @Query("countryname") String countryname);
+
+    @GET("findfarminteract")
+    Call<Object> getMineFarmerTab1(@Query("page") int page);
+
+    @GET("findmyfarmfarming")
+    Call<Object> getMineFarmerTab2(@Query("page") int page);
 
 
 
