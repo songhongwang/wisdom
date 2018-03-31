@@ -5,15 +5,30 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.cbt.main.adapter.ExpertSearchAdapter;
+import com.cbt.main.adapter.IndexProductAdapter;
+import com.cbt.main.event.OnBackPressedEvent;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.R;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.utils.Utils;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 
@@ -24,6 +39,9 @@ public class ExpertFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
+
+    private ListView mLvSearch;
+    private ExpertSearchAdapter mExpertSearchAdapter;
 
     @Nullable
     @Override
@@ -36,6 +54,7 @@ public class ExpertFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        EventBus.getDefault().register(this);
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setImageResource(R.drawable.nav_icon_message);
         mIvBack.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +76,35 @@ public class ExpertFragment extends BaseFragment {
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t3);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         setTabsValue();
+
+
+
+        ((EditText)mRootView.findViewById(R.id.et_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if ((actionId == 0 || actionId == 3) && event != null) {
+                    ToastUtils.show(getActivity(), "搜索");
+                    mLvSearch.setVisibility(View.VISIBLE);
+                    return true;
+                }
+                return false;
+
+            }
+
+        });
+
+        mLvSearch = (ListView) mRootView.findViewById(R.id.listView);
+        List<String> dataList = new ArrayList<>();
+        dataList.add("aaa");
+        dataList.add("aaa");
+        dataList.add("aaa");
+        dataList.add("aaa");
+        dataList.add("aaa");
+        mExpertSearchAdapter = new ExpertSearchAdapter(dataList, getActivity());
+        mLvSearch.setAdapter(mExpertSearchAdapter);
+
 
     }
 
@@ -92,5 +140,14 @@ public class ExpertFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(OnBackPressedEvent onBackPressedEvent) {
+        if(mLvSearch.getVisibility() == View.VISIBLE){
+            mLvSearch.setVisibility(View.GONE);
+        }else{
+            getActivity().finish();
+        }
     }
 }

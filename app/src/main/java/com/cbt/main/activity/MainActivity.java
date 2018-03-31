@@ -30,6 +30,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.cbt.main.R;
 import com.cbt.main.callback.IWatcherImage;
+import com.cbt.main.event.OnBackPressedEvent;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
 import com.cbt.main.fragment.MineFragment;
@@ -395,6 +396,16 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if(mViewPager.getCurrentItem() != 2){
+            super.onBackPressed();
+        }else{
+            EventBus.getDefault().post(new OnBackPressedEvent());
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
