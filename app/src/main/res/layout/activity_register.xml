@@ -34,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv_phone"
                 android:minHeight="40dp"
+                android:maxLength="11"
+                android:lines="1"
                 android:textColor="@color/black"
                 android:background="@color/white"/>
         </RelativeLayout>
@@ -68,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv_code"
                 android:minHeight="40dp"
+                android:lines="1"
                 android:textColor="@color/black"
                 android:background="@color/white"/>
         </RelativeLayout>
@@ -111,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_pwd"
             android:minHeight="40dp"
+            android:lines="1"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:background="@color/white"/>
@@ -140,6 +144,7 @@
             android:layout_toRightOf="@id/iv_pwd2"
             android:inputType="textPassword"
             android:minHeight="40dp"
+            android:lines="1"
             android:textColor="@color/black"
             android:background="@color/white"/>
         </RelativeLayout>

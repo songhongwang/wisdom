@@ -29,4 +29,12 @@ public interface BasicService {
     @GET("Forgotpassword")
     Call<BaseModel<Object>> forgotPwd(@Query("telphone") String telphone, @Query("password") String password, @Query("randoms") String code);
 
+    @GET("Forgotcheckcode")
+    Call<BaseModel<Object>> forgotPwd(@Query("telphone") String telphone);
+
+    @GET("findIndexData")
+    Call<BaseModel<Object>> getIndex(@Query("provincename") String provincename,@Query("cityname") String cityname,@Query("countryname") String countryname);
+
+
+
 }

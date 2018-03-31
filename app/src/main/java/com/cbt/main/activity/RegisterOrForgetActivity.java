@@ -37,6 +37,25 @@ public class RegisterOrForgetActivity extends BaseActivity {
     @BindView(R.id.btn_register)
     Button mBtnRegister;
 
+    String mTitleStr;
+    final CountDownTimer countDownTimer = new CountDownTimer(60 * 1000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            mTvGetCode.setText(String.valueOf(millisUntilFinished / 1000) + "s");
+            mTvGetCode.setClickable(false);
+            mTvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_gray));
+        }
+
+        @Override
+        public void onFinish() {
+            mTvGetCode.setText("获取验证码");
+            mTvGetCode.setClickable(true);
+            mTvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_corner2_blue));
+        }
+    };
+
+
+
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
@@ -44,25 +63,18 @@ public class RegisterOrForgetActivity extends BaseActivity {
 
     @Override
     public void initUI() {
-        String title = getIntent().getStringExtra("title");
-        mTvTitle.setText(title);
+        mTitleStr = getIntent().getStringExtra("title");
+        mTvTitle.setText(mTitleStr);
 
         mIvFinish.setVisibility(View.GONE);
-        final CountDownTimer countDownTimer = new CountDownTimer(60 * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTvGetCode.setText(String.valueOf(millisUntilFinished / 1000) + "s");
-                mTvGetCode.setClickable(false);
-                mTvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rs_select_btn_gray));
-            }
 
-            @Override
-            public void onFinish() {
-                mTvGetCode.setText("获取验证码");
-                mTvGetCode.setClickable(true);
-                mTvGetCode.setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_corner2_blue));
-            }
-        };
+        if("注册".equals(mTitleStr)){
+            mBtnRegister.setText("注册");
+        }else{
+            mBtnRegister.setText("提交");
+        }
+
+
 
         mTvGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,37 +85,65 @@ public class RegisterOrForgetActivity extends BaseActivity {
                     return;
                 }
 
-                ApiClient.getInstance().getBasicService().getCode(phone).enqueue(new CommonCallBack<Object>() {
-                    @Override
-                    public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
-                        ToastUtils.show(RegisterOrForgetActivity.this, "验证码已发送");
+                if("注册".equals(mTitleStr)){
+                    netRegisterAuthCode(phone);
+                }else{
+                    netForgetAuthCode(phone);
+                }
 
-                        countDownTimer.start();
-                    }
-
-                    @Override
-                    public void onCFailure(Call<BaseModel<Object>> call, Throwable t) {
-                        ToastUtils.show(RegisterOrForgetActivity.this, "验证码发送失败");
-                    }
-
-                    @Override
-                    public void onErrorMessage(String errorMessage) {
-                        super.onErrorMessage(errorMessage);
-                        ToastUtils.show(RegisterOrForgetActivity.this, errorMessage);
-                    }
-                });
             }
         });
-
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkInput();
             }
         });
-
-
     }
+
+    private void netForgetAuthCode(String phone){
+        ApiClient.getInstance().getBasicService().forgotPwd(phone).enqueue(new CommonCallBack<Object>() {
+            @Override
+            public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
+                ToastUtils.show(RegisterOrForgetActivity.this, "验证码已发送");
+
+                countDownTimer.start();
+            }
+
+            @Override
+            public void onCFailure(Call<BaseModel<Object>> call, Throwable t) {
+                ToastUtils.show(RegisterOrForgetActivity.this, "验证码发送失败");
+            }
+
+            @Override
+            public void onErrorMessage(String errorMessage) {
+                super.onErrorMessage(errorMessage);
+                ToastUtils.show(RegisterOrForgetActivity.this, errorMessage);
+            }
+        });
+    }
+    private void netRegisterAuthCode(String phone){
+        ApiClient.getInstance().getBasicService().getCode(phone).enqueue(new CommonCallBack<Object>() {
+            @Override
+            public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
+                ToastUtils.show(RegisterOrForgetActivity.this, "验证码已发送");
+
+                countDownTimer.start();
+            }
+
+            @Override
+            public void onCFailure(Call<BaseModel<Object>> call, Throwable t) {
+                ToastUtils.show(RegisterOrForgetActivity.this, "验证码发送失败");
+            }
+
+            @Override
+            public void onErrorMessage(String errorMessage) {
+                super.onErrorMessage(errorMessage);
+                ToastUtils.show(RegisterOrForgetActivity.this, errorMessage);
+            }
+        });
+    }
+
 
     private void checkInput() {
         String phone = mEtPhone.getText().toString().trim();
