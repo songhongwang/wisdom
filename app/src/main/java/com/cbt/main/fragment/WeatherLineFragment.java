@@ -71,20 +71,85 @@ public class WeatherLineFragment extends BaseFragment {
     @Override
     public void initUI() {
         initView();
+
+
+        String jsonData = getJsonData(); // 本地假数据
+
+        Gson gson = new Gson();
+        List<WeatherDaysForecast> weatherForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherDaysForecast>>() {
+        }.getType());
+
+      updateUI(weatherForecasts);
+
+    }
+
+    private void updateUI(List<WeatherDaysForecast> weatherDaysForecasts){
         Calendar calendar = Calendar.getInstance();
         // 现在小时
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
 
-        String jsonData = getJsonData();
+        // 昨天天气信息（23：45开始到05：20以前的数据的日期和周）
+        WeatherDaysForecast weather;
+        // 昨天天气信息
+        WeatherDaysForecast weather1;
+        // 今天天气信息
+        WeatherDaysForecast weather2;
+        // 明天天气信息
+        WeatherDaysForecast weather3;
+        // 后天天气信息
+        WeatherDaysForecast weather4;
+        // 第五天天天气信息
+        WeatherDaysForecast weather5;
+        // 第六天天气信息
+        WeatherDaysForecast weather6;
 
-        Gson gson = new Gson();
-        List<WeatherDaysForecast> weatherDaysForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherDaysForecast>>() {
-        }.getType());
+        int hour1 = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute1 = calendar.get(Calendar.MINUTE);
+        //更新时间从23：45开始到05：20以前的数据，后移一天填充
+        if ((hour1 == 23 && minute1 >= 45) || (hour1 < 5) ||
+                ((hour1 == 5) && (minute1 < 20))) {
+            if (weatherDaysForecasts.size() >= 6) {
+                weather = weatherDaysForecasts.get(0);
+                weather1 = weatherDaysForecasts.get(1);
+                weather2 = weatherDaysForecasts.get(2);
+                weather3 = weatherDaysForecasts.get(3);
+                weather4 = weatherDaysForecasts.get(4);
+                weather5 = weatherDaysForecasts.get(5);
+                weather6 = weatherDaysForecasts.get(5);
+            } else {
+                weather = null;
+                weather1 = weatherDaysForecasts.get(0);
+                weather2 = weatherDaysForecasts.get(1);
+                weather3 = weatherDaysForecasts.get(2);
+                weather4 = weatherDaysForecasts.get(3);
+                weather5 = weatherDaysForecasts.get(4);
+                weather6 = weatherDaysForecasts.get(4);
 
+            }
+        } else {
+            if (weatherDaysForecasts.size() >= 6) {
+                weather = weatherDaysForecasts.get(0);
+                weather1 = weatherDaysForecasts.get(0);
+                weather2 = weatherDaysForecasts.get(1);
+                weather3 = weatherDaysForecasts.get(2);
+                weather4 = weatherDaysForecasts.get(3);
+                weather5 = weatherDaysForecasts.get(4);
+                weather6 = weatherDaysForecasts.get(5);
+            } else {
+                weather = null;
+                weather1 = null;
+                weather2 = weatherDaysForecasts.get(0);
+                weather3 = weatherDaysForecasts.get(1);
+                weather4 = weatherDaysForecasts.get(2);
+                weather5 = weatherDaysForecasts.get(3);
+                weather6 = weatherDaysForecasts.get(4);
+            }
+        }
 
-        setDaysForecast(weatherDaysForecasts.get(0),weatherDaysForecasts.get(1),weatherDaysForecasts.get(2),weatherDaysForecasts.get(3),weatherDaysForecasts.get(4),weatherDaysForecasts.get(5),weatherDaysForecasts.get(0),11,11,calendar);
-
+        // 设置多天天气预报
+        setDaysForecast(weather, weather1, weather2, weather3, weather4, weather5, weather6,
+                hour1, minute1, calendar);
     }
 
     private void initView() {
