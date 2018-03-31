@@ -1,5 +1,6 @@
 package com.cbt.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.WeatherForcastActivity;
 import com.cbt.main.adapter.IndexProductAdapter;
 import com.cbt.main.engin.SceneSurfaceView;
 
@@ -45,6 +47,13 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+        mRootView.findViewById(R.id.tv_weather).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), WeatherForcastActivity.class);
+                startActivity(intent);
             }
         });
 

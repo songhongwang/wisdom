@@ -14,8 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cbt.main.adapter.ExpertSearchAdapter;
-import com.cbt.main.adapter.IndexProductAdapter;
-import com.cbt.main.event.OnBackPressedEvent;
+import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.R;
