@@ -341,6 +341,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         Map<String, String> headers = RongYunTokenUtil.getHeaderMap();
 
         User user = SharedPreferencUtil.getLogin(this);
+        if(user == null){
+            ToastUtils.show(MainActivity.this, "rong sdk token load fail");
+            return;
+        }
 
         ApiClient.getInstance().getRongYunService().getToken(user.getUid(), user.getUname(), user.getYinwenming(),headers).enqueue(new Callback<RtokenRsp>() {
             @Override

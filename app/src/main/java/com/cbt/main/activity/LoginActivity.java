@@ -121,32 +121,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void loginServer(String phone, String pwd){
-//        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//
-////                User user = new User();
-////                user.setTelphone(phoneString);
-////                user.setPassword(passwordString);
-//                User user = response.body();
-//                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
-//
-//                goToMain();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                ToastUtils.show(LoginActivity.this, "登录失败");
-//            }
-//        });
+        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
 
-        User user = new User();
-        user.setTelphone(phoneString);
-        user.setPassword(passwordString);
-        user.setUid("11");
-        SharedPreferencUtil.saveLogin(LoginActivity.this, user);
+//                User user = new User();
+//                user.setTelphone(phoneString);
+//                user.setPassword(passwordString);
+                User user = response.body();
+                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
 
-        goToMain();
+                goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                ToastUtils.show(LoginActivity.this, "登录失败");
+            }
+        });
+
     }
 
 
