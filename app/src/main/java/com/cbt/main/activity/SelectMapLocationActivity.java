@@ -93,10 +93,12 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
         mIvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("location", centerLatLng.longitude + ","
-                        + centerLatLng.latitude);
-                setResult(11, intent);
+                if(centerLatLng != null){
+                    Intent intent = new Intent();
+                    intent.putExtra("location", centerLatLng.longitude + ","
+                            + centerLatLng.latitude);
+                    setResult(11, intent);
+                }
                 finish();
             }
         });
