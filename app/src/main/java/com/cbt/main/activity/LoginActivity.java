@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -137,6 +138,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 ToastUtils.show(LoginActivity.this, "登录失败");
+
+                Intent intent = new Intent(LoginActivity.this, PerfactAccountActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -47,5 +47,13 @@ public interface BasicService {
     Call<Object> getMineFarmerTab2(@Query("page") int page);
 
 
+    @GET("changefarm")
+    Call<Weather7DaysForcast> perfactAccount(
+            @Query("fname") String fname,
+            @Query("points") String points,
+            @Query("provincename") String provincename,
+            @Query("cityname") String cityname,
+            @Query("zuowulist") String zuowulist,
+            @Query("countryname") String countryname);
 
 }

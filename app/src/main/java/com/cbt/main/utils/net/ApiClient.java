@@ -64,7 +64,7 @@ public class ApiClient {
         return mRongYunService;
     }
 
-    public CommonParamIntercept getCommonInterceptor(Context context){
+    private CommonParamIntercept getCommonInterceptor(Context context){
         User login = SharedPreferencUtil.getLogin(context);
 
         if(login == null){
