@@ -2,9 +2,12 @@ package com.cbt.main.utils.net;
 
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.IndexModel;
+import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -45,6 +48,9 @@ public interface BasicService {
 
     @GET("findmyfarmfarming")
     Call<Object> getMineFarmerTab2(@Query("page") int page);
+
+    @GET("findIndexProduct")
+    Call<List<IndexProductModel>> getIndexProduct(@Query("hello") int hello);
 
 
     @GET("changefarm")

@@ -17,6 +17,7 @@ import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.engin.SceneSurfaceView;
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.IndexModel;
+import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
@@ -87,19 +88,9 @@ public class IndexFragment extends BaseFragment {
         mTvTempr= (TextView) mRootView.findViewById(R.id.tv_temper);
         mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
 
-
-
-        List<String> dataList = new ArrayList<>();
-        dataList.add("aaa");
-        dataList.add("aaa");
-        dataList.add("aaa");
-        dataList.add("aaa");
-        dataList.add("aaa");
-        mIndexProductAdapter = new IndexProductAdapter(dataList, getActivity());
-        mLv.setAdapter(mIndexProductAdapter);
-
         getData();
         getWeather();
+        getProductList();
     }
 
     @Override
@@ -153,6 +144,24 @@ public class IndexFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<Weather7DaysForcast> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getProductList(){
+        ApiClient.getInstance().getBasicService(getContext()).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
+            @Override
+            public void onResponse(Call<List<IndexProductModel>> call, Response<List<IndexProductModel>> response) {
+
+                List<IndexProductModel> dataList = response.body();
+                mIndexProductAdapter = new IndexProductAdapter(dataList, getActivity());
+                mLv.setAdapter(mIndexProductAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<IndexProductModel>> call, Throwable t) {
 
             }
         });

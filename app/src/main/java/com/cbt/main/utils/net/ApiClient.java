@@ -50,9 +50,7 @@ public class ApiClient {
             mOkHttpClient = HttpClientUtil.getDefaultHttpClient();
         }
 
-        if(mBasicService == null){
-            mBasicService = init(BasicService.class, Constants.getBaseUrl());
-        }
+        mBasicService = init(BasicService.class, Constants.getBaseUrl());
 
         return mBasicService;
     }
