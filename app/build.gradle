@@ -4,6 +4,15 @@ android {
     compileSdkVersion 22
     buildToolsVersion '25.0.0'
 
+    signingConfigs {
+        meteorology {
+            storeFile file("keystore/vigorous.keystore")
+            storePassword "123456"
+            keyAlias "wisdom"
+            keyPassword "123456"
+        }
+    }
+
     defaultConfig {
         applicationId "com.cbt.main"
         minSdkVersion 15
@@ -15,11 +24,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.meteorology
+        }
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.meteorology
         }
     }
+
     sourceSets {
         main {
-            jniLibs.srcDirs = ['libs']
+            jniLibs.srcDirs = ['src/main/libs']
             assets.srcDirs = ['src/main/assets']
         }
     }
@@ -66,4 +82,10 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':multi-image-selector')
     compile 'com.contrarywind:Android-PickerView:3.2.7'
+    compile files('src/main/libs/AMap3DMap_6.0.1_AMapSearch_5.7.0_AMapLocation_3.8.0_20180309.jar')
+    compile files('src/main/libs/Android_Map3D_SDK_V6.0.1_20180309.jar')
+    compile files('src/main/libs/android-support-v4.jar')
+    compile files('src/main/libs/AMap_Search_V5.7.0_20171229.jar')
+    compile files('src/main/libs/Amap_2DMap_V5.2.0_20170627.jar')
+    compile files('src/main/libs/AMap_Location_V3.8.0_20180201.jar')
 }

@@ -46,6 +46,8 @@ public class ApiClient {
         CommonParamIntercept commonInterceptor = getCommonInterceptor(context);
         if(commonInterceptor != null){
             mOkHttpClient = HttpClientUtil.getCommonQueryParamsHttpClient(commonInterceptor);
+        }else{
+            mOkHttpClient = HttpClientUtil.getDefaultHttpClient();
         }
 
         if(mBasicService == null){

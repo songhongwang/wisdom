@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.cbt.main.R;
 import com.cbt.main.activity.ConversationListActivity;
+import com.cbt.main.activity.SelectMapLocationActivity;
 import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 
@@ -46,6 +47,13 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        mRootView.findViewById(R.id.rl_nongzhuang).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SelectMapLocationActivity.class);
                 startActivity(intent);
             }
         });
