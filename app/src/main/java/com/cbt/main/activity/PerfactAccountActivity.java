@@ -3,10 +3,12 @@ package com.cbt.main.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.cbt.main.R;
 import com.cbt.main.adapter.PerfactAccountAdapter;
 import com.cbt.main.app.GlobalApplication;
@@ -45,7 +47,32 @@ public class PerfactAccountActivity extends BaseActivity{
     @Override
     public void initUI() {
 
-        mIvFinish.setImageResource(R.drawable.more_icon_release);
+        mIvFinish.setImageResource(R.drawable.icon_complete);
+        mIvFinish.setVisibility(View.VISIBLE);
+        mIvFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OptionsPickerView pvOptions = new  OptionsPickerView.Builder(PerfactAccountActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+                        //返回的分别是三个级别的选中位置
+//                        String tx = options1Items.get(options1).getPickerViewText()
+//                                + options2Items.get(options1).get(option2)
+//                                + options3Items.get(options1).get(option2).get(options3);
+                        Log.d("hahah", option2 + " " + options1);
+                    }
+                }).build();
+                List<String> one = new ArrayList<>();
+                one.add("水果类");
+                one.add("粮食类");
+                one.add("油料作物");
+                one.add("蔬菜类");
+                one.add("经济作物");
+
+                pvOptions.setPicker(one);
+                pvOptions.show();
+            }
+        });
 
         View headerView = View.inflate(this, R.layout.header_perfact_account, null);
         View footerView = View.inflate(this, R.layout.footer_perfact_account, null);
