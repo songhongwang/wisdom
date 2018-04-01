@@ -14,18 +14,18 @@ import java.util.zip.Inflater;
  * Created by vigorous on 17/12/27.
  */
 
-public abstract class AppBaseAdapter extends android.widget.BaseAdapter {
-    public List<String> mDataList = new ArrayList<>();
+public abstract class AppBaseAdapter<T> extends android.widget.BaseAdapter {
+    public List<T> mDataList = new ArrayList<>();
     public Context mContext;
     public LayoutInflater mInflater;
 
-    public AppBaseAdapter(List<String> dataList, Context context) {
+    public AppBaseAdapter(List<T> dataList, Context context) {
         mDataList = dataList;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public void resetData(List<String> list){
+    public void resetData(List<T> list){
         mDataList = list;
     }
 
@@ -35,7 +35,7 @@ public abstract class AppBaseAdapter extends android.widget.BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public T getItem(int i) {
         return mDataList.get(i);
     }
 

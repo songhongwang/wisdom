@@ -1,16 +1,22 @@
 package com.cbt.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.cbt.main.R;
+import com.cbt.main.adapter.PerfactAccountAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.Weather7DaysForcast;
+import com.cbt.main.model.ZuoWuModel;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,9 +31,10 @@ import retrofit2.Response;
 
 public class PerfactAccountActivity extends BaseActivity{
 
-    @BindView(R.id.et_farm_name) EditText mEtFramName;
-    @BindView(R.id.et_farm_zuowu) EditText mEtFramZuowu;
-    @BindView(R.id.btn_commit) Button mBtnCommit;
+    EditText mEtFramName;
+    EditText mEtFramAear;
+    @BindView(R.id.listview) ListView mLv;
+    private PerfactAccountAdapter<ZuoWuModel> mPerfactAccountAdapter;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
 
@@ -38,13 +45,36 @@ public class PerfactAccountActivity extends BaseActivity{
     @Override
     public void initUI() {
 
-        mBtnCommit.setOnClickListener(new View.OnClickListener() {
+        mIvFinish.setImageResource(R.drawable.more_icon_release);
+
+        View headerView = View.inflate(this, R.layout.header_perfact_account, null);
+        View footerView = View.inflate(this, R.layout.footer_perfact_account, null);
+        mEtFramName = (EditText) headerView.findViewById(R.id.et_farm_name);
+        mEtFramAear = (EditText) headerView.findViewById(R.id.et_farm_area);
+        headerView.findViewById(R.id.tv_get_farm_location).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               commit();
+                Intent intent = new Intent(PerfactAccountActivity.this, SelectMapLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+        footerView.findViewById(R.id.tv_add_new).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZuoWuModel zuoWuModel = new ZuoWuModel("", "");
+                mPerfactAccountAdapter.addItem(zuoWuModel);
             }
         });
 
+        mLv.addHeaderView(headerView);
+        mLv.addFooterView(footerView);
+
+
+        List<ZuoWuModel> dataList = new ArrayList<>();
+        dataList.add(new ZuoWuModel("", ""));
+
+        mPerfactAccountAdapter = new PerfactAccountAdapter<>(dataList, this);
+        mLv.setAdapter(mPerfactAccountAdapter);
     }
 
     private void commit(){

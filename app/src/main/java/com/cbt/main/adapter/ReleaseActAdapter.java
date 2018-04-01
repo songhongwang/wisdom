@@ -24,7 +24,7 @@ public class ReleaseActAdapter extends AppBaseAdapter {
         View itemView = mInflater.inflate(R.layout.item_release_activity, null, false);
         ImageView iv = (ImageView) itemView.findViewById(R.id.iv_img);
 
-        String s = mDataList.get(position);
+        String s = (String) mDataList.get(position);
         if(!s.equals("holder")){
             Glide.with(mContext).load(s).into(iv);
         }

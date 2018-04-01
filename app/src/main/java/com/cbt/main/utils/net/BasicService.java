@@ -51,9 +51,9 @@ public interface BasicService {
     Call<Weather7DaysForcast> perfactAccount(
             @Query("fname") String fname,
             @Query("points") String points,
+            @Query("zuowulist") String zuowulist,
             @Query("provincename") String provincename,
             @Query("cityname") String cityname,
-            @Query("zuowulist") String zuowulist,
             @Query("countryname") String countryname);
 
 }
