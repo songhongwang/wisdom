@@ -1,15 +1,14 @@
 package com.cbt.main.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.WindowManager;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amap.api.fence.GeoFence;
@@ -30,11 +29,8 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.cbt.main.R;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by vigorous on 18/4/1.
@@ -72,12 +68,38 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
     private TextView tv;
     private TextView tvResult;
 
+    private ImageView mIvBack;
+    private ImageView mIvFinish;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         setTitle("高德地图");
 
+
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mIvFinish = (ImageView) findViewById(R.id.iv_complete);
+        mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        mIvFinish.setImageResource(R.drawable.icon_complete);
+        mIvFinish.setVisibility(View.VISIBLE);
+        mIvFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("location", centerLatLng.longitude + ","
+                        + centerLatLng.latitude);
+                setResult(11, intent);
+                finish();
+            }
+        });
 
         tvResult = (TextView) findViewById(R.id.tvResult);
         tv = (TextView) findViewById(R.id.tv);
@@ -119,6 +141,8 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
         mAMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         mAMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+
+
     }
 
     /**
@@ -187,8 +211,7 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
         markerOption.icon(ICON_RED);
         centerLatLng = latLng;
         addCenterMarker(centerLatLng);
-        tv.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        tv.setText("选中的坐标：" + centerLatLng.longitude + ","
+        tv.setText("坐标：" + centerLatLng.longitude + ","
                 + centerLatLng.latitude);
     }
 
@@ -201,6 +224,9 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
             if (amapLocation != null && amapLocation.getErrorCode() == 0) {
                 //     tvResult.setVisibility(View.GONE);
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+
+                tv.setText("坐标：" + amapLocation.getLongitude() + ","
+                        + amapLocation.getLatitude());
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": "
                         + amapLocation.getErrorInfo();

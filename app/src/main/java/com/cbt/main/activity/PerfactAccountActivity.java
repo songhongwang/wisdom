@@ -55,7 +55,7 @@ public class PerfactAccountActivity extends BaseActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PerfactAccountActivity.this, SelectMapLocationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 10);
             }
         });
         footerView.findViewById(R.id.tv_add_new).setOnClickListener(new View.OnClickListener() {
@@ -99,5 +99,16 @@ public class PerfactAccountActivity extends BaseActivity{
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10){
+            if(resultCode == 11){
+                String location = data.getStringExtra("location");
+                ToastUtils.show(PerfactAccountActivity.this, location);
+            }
+        }
     }
 }
