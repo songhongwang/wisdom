@@ -1,8 +1,11 @@
 package com.cbt.main.utils.net;
 
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
 
+import com.cbt.main.model.User;
+import com.cbt.main.utils.SharedPreferencUtil;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,7 +21,6 @@ public class ApiClient {
     private OkHttpClient mOkHttpClient;
 
     private ApiClient() {
-        mOkHttpClient = HttpClientUtil.getDefaultHttpClient();
     }
 
     // static inner class implements singleInstance
@@ -39,7 +41,13 @@ public class ApiClient {
         return Holder.mApiClient;
     }
 
-    public BasicService getBasicService() {
+    public BasicService getBasicService(Context context) {
+        // 通用参数
+        CommonParamIntercept commonInterceptor = getCommonInterceptor(context);
+        if(commonInterceptor != null){
+            mOkHttpClient = HttpClientUtil.getCommonQueryParamsHttpClient(commonInterceptor);
+        }
+
         if(mBasicService == null){
             mBasicService = init(BasicService.class, Constants.getBaseUrl());
         }
@@ -52,5 +60,18 @@ public class ApiClient {
         }
 
         return mRongYunService;
+    }
+
+    public CommonParamIntercept getCommonInterceptor(Context context){
+        User login = SharedPreferencUtil.getLogin(context);
+
+        if(login == null){
+            return null;
+        }
+        CommonParamIntercept commonParamIntercept = new CommonParamIntercept
+                .Builder()
+                .addQueryParam("userid",  login.getUid())
+                .addQueryParam("username", login.getUname()).build();
+        return commonParamIntercept;
     }
 }

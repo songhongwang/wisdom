@@ -133,7 +133,7 @@ public class MineFragment extends BaseFragment {
 
     private void getData() {
 
-        ApiClient.getInstance().getBasicService().getMineFarmerTab1(1).enqueue(new Callback<Object>() {
+        ApiClient.getInstance().getBasicService(getContext()).getMineFarmerTab1(1).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
 

@@ -93,7 +93,7 @@ public class IndexFragment extends BaseFragment {
         String country = GlobalApplication.mLocationData.addr;
 
 
-        ApiClient.getInstance().getBasicService().getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
+        ApiClient.getInstance().getBasicService(getContext()).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
                 ToastUtils.show(getContext(), response.body().nongli);
@@ -112,7 +112,7 @@ public class IndexFragment extends BaseFragment {
         String country = GlobalApplication.mLocationData.addr;
 
 
-        ApiClient.getInstance().getBasicService().getWeatherForcast(province, city, country).enqueue(new Callback<Weather7DaysForcast>() {
+        ApiClient.getInstance().getBasicService(getContext()).getWeatherForcast(province, city, country).enqueue(new Callback<Weather7DaysForcast>() {
             @Override
             public void onResponse(Call<Weather7DaysForcast> call, Response<Weather7DaysForcast> response) {
                 ToastUtils.show(getContext(), response.body().getTodaytianqi());

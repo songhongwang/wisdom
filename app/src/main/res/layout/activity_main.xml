@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_green50"/>
+
     <LinearLayout
         android:id="@+id/ll_bottom_layout"
         android:layout_width="match_parent"

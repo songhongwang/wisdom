@@ -102,7 +102,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
     }
 
     private void netForgetAuthCode(String phone){
-        ApiClient.getInstance().getBasicService().forgotPwd(phone).enqueue(new CommonCallBack<Object>() {
+        ApiClient.getInstance().getBasicService(this).forgotPwd(phone).enqueue(new CommonCallBack<Object>() {
             @Override
             public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
                 ToastUtils.show(RegisterOrForgetActivity.this, "验证码已发送");
@@ -123,7 +123,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
         });
     }
     private void netRegisterAuthCode(String phone){
-        ApiClient.getInstance().getBasicService().getCode(phone).enqueue(new CommonCallBack<Object>() {
+        ApiClient.getInstance().getBasicService(this).getCode(phone).enqueue(new CommonCallBack<Object>() {
             @Override
             public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
                 ToastUtils.show(RegisterOrForgetActivity.this, "验证码已发送");
@@ -178,7 +178,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
 
     private void register(String phone, String pwd, String code){
 
-        ApiClient.getInstance().getBasicService().regist(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
+        ApiClient.getInstance().getBasicService(this).regist(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
             @Override
             public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
                 ToastUtils.show(RegisterOrForgetActivity.this, "注册成功");
@@ -198,7 +198,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
     }
 
     private void forgetPwd(String phone, String pwd, String code){
-        ApiClient.getInstance().getBasicService().forgotPwd(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
+        ApiClient.getInstance().getBasicService(this).forgotPwd(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
             @Override
             public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
                 ToastUtils.show(RegisterOrForgetActivity.this, "密码修改成功");

@@ -121,7 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void loginServer(String phone, String pwd){
-        ApiClient.getInstance().getBasicService().login(phone, pwd).enqueue(new Callback<User>() {
+        ApiClient.getInstance().getBasicService(this).login(phone, pwd).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
 
