@@ -1,5 +1,7 @@
 package com.cbt.main.model;
 
+import java.util.Calendar;
+
 /**
  * Created by vigorous on 18/4/1.
  */
@@ -16,6 +18,7 @@ public class WeatherModel2 {
     private String ybdate;
     private String ybday;
     private String ybiconindex;
+
     public void setYbzuigaowendu(String ybzuigaowendu) {
         this.ybzuigaowendu = ybzuigaowendu;
     }
@@ -86,4 +89,22 @@ public class WeatherModel2 {
         return ybiconindex;
     }
 
+
+    public static WeatherModel convert(WeatherModel2 self, int index){
+        Calendar calendar = Calendar.getInstance();
+        int dayOfMouth = calendar.get(Calendar.DAY_OF_MONTH) -1; // -1 代表昨天
+
+        WeatherModel good = new WeatherModel();
+        good.setDate((dayOfMouth + index) + "日" + self.getYbday());
+        good.setHigh("高温 " + self.getYbzuigaowendu());
+        good.setLow("低温 " + self.getYbzuidiwendu());
+        good.setTypeDay(self.getYbtianqi());
+        good.setTypeNight(self.getYbtianqi());
+        good.setWindDirectionDay(self.getYbfengxiang());
+        good.setWindPowerDay(self.getYbfengsu());
+        good.setWindDirectionNight(self.getYbfengxiang());
+        good.setWindPowerNight(self.getYbfengsu());
+
+        return good;
+    }
 }

@@ -1,10 +1,12 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vigorous on 18/4/1.
  */
 
-public class IndexModel {
+public class IndexModel implements Serializable{
 //    "nongli": "2018年04月01日(农历二月十六日)",
 //            "wendu": "11.3℃",
 //            "shidu": "63%",

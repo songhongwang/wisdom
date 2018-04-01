@@ -27,50 +27,25 @@ import java.io.Serializable;
 public class WeatherModel implements Serializable {
 
     private static final long serialVersionUID = -3415028129243262810L;
-    /**
-     * 日期
-     */
+    // 日期
     private String mDate;
-
-    /**
-     * 高温
-     */
+    // 高温
     private String mHigh;
-
-    /**
-     * 低温
-     */
+    // 低温
     private String mLow;
-
-    /**
-     * 白天天气类型
-     */
+    // 白天天气类型
     private String mTypeDay;
-
-    /**
-     * 晚上天气类型
-     */
+    // 晚上天气类型
     private String mTypeNight;
-
-    /**
-     * 白天风向
-     */
+    // 白天风向
     private String mWindDirectionDay;
-
-    /**
-     * 晚上风向
-     */
+    // 晚上风向
     private String mWindDirectionNight;
-
-    /**
-     * 白天风力
-     */
+    // 白天风力
     private String mWindPowerDay;
-
-    /**
-     * 晚上风力
-     */
+    // 晚上风力
     private String mWindPowerNight;
+
 
     public String getDate() {
         return mDate;

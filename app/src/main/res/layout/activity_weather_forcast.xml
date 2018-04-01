@@ -8,9 +8,6 @@
 
     <include layout="@layout/top2"/>
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,15 +15,17 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_tian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
             android:layout_marginLeft="15dp"
-            android:text="今天天气多云"
+            android:text="今天天气 多云"
             android:textColor="@color/white"
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/tv_qiya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -38,6 +37,7 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/tv_fengsu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -49,6 +49,7 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/tv_fabu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"

@@ -48,6 +48,7 @@ public class IndexFragment extends BaseFragment {
     private TextView mTvTempr;
     private TextView mTvFeng;
     private IndexProductAdapter mIndexProductAdapter;
+    private IndexModel mIndexModel;
 
     @Nullable
     @Override
@@ -71,6 +72,7 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), WeatherForcastActivity.class);
+                intent.putExtra("weather", mIndexModel);
                 startActivity(intent);
             }
         });
@@ -89,7 +91,6 @@ public class IndexFragment extends BaseFragment {
         mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
 
         getData();
-        getWeather();
         getProductList();
     }
 
@@ -107,43 +108,24 @@ public class IndexFragment extends BaseFragment {
         ApiClient.getInstance().getBasicService(getContext()).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
-                IndexModel indexModel = response.body();
-                ToastUtils.show(getContext(), indexModel.nongli);
+                mIndexModel = response.body();
+                ToastUtils.show(getContext(), mIndexModel.nongli);
 
-                mTvBigWendu.setText(indexModel.wendu);
-                mTvShiDu.setText(indexModel.shidu);
-                mTvQiYa.setText(indexModel.qiya);
-                mTvFengSu.setText(indexModel.fengxiang);
+                mTvBigWendu.setText(mIndexModel.wendu);
+                mTvShiDu.setText(mIndexModel.shidu);
+                mTvQiYa.setText(mIndexModel.qiya);
+                mTvFengSu.setText(mIndexModel.fengxiang);
 
-                mTvFaBu.setText(indexModel.ybshijian);
+                mTvFaBu.setText(mIndexModel.ybshijian);
 
-                mTvTodayWeather.setText(indexModel.ybtianqi);
-                mTvTempr.setText(indexModel.ybzuidiwendu + " - " + indexModel.ybzuigaowendu);
-                mTvFeng.setText(indexModel.ybfengxiang + indexModel.ybfengsu);
+                mTvTodayWeather.setText(mIndexModel.ybtianqi);
+                mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
+                mTvFeng.setText(mIndexModel.ybfengxiang + mIndexModel.ybfengsu);
 
             }
 
             @Override
             public void onFailure(Call<IndexModel> call, Throwable t) {
-
-            }
-        });
-    }
-    private void getWeather() {
-        String city = GlobalApplication.mLocationData.city;
-        String province = GlobalApplication.mLocationData.province;
-        String country = GlobalApplication.mLocationData.addr;
-
-
-        ApiClient.getInstance().getBasicService(getContext()).getWeatherForcast(province, city, country).enqueue(new Callback<Weather7DaysForcast>() {
-            @Override
-            public void onResponse(Call<Weather7DaysForcast> call, Response<Weather7DaysForcast> response) {
-                ToastUtils.show(getContext(), response.body().getTodaytianqi());
-
-            }
-
-            @Override
-            public void onFailure(Call<Weather7DaysForcast> call, Throwable t) {
 
             }
         });

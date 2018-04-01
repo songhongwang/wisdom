@@ -73,17 +73,18 @@ public class WeatherLineFragment extends BaseFragment {
         initView();
 
 
-        String jsonData = getJsonData(); // 本地假数据
-
-        Gson gson = new Gson();
-        List<WeatherModel> weatherForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherModel>>() {
-        }.getType());
-
-      updateUI(weatherForecasts);
+//        String jsonData = getJsonData(); // 本地假数据
+//
+//        Gson gson = new Gson();
+//        List<WeatherModel> weatherForecasts = gson.fromJson(jsonData, new TypeToken<List<WeatherModel>>() {
+//        }.getType());
+//
+//      updateUI(weatherForecasts);
 
     }
 
-    private void updateUI(List<WeatherModel> weatherDaysForecasts){
+
+    public void updateUI(List<WeatherModel> weatherDaysForecasts){
         Calendar calendar = Calendar.getInstance();
         // 现在小时
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
