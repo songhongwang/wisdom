@@ -37,8 +37,15 @@ import retrofit2.Response;
  */
 public class IndexFragment extends BaseFragment {
 
-    @Nullable@BindView(R.id.listView)
-    ListView mLv;
+    private ListView mLv;
+    private TextView mTvBigWendu;
+    private TextView mTvShiDu;
+    private TextView mTvQiYa;
+    private TextView mTvFengSu;
+    private TextView mTvFaBu;
+    private TextView mTvTodayWeather;
+    private TextView mTvTempr;
+    private TextView mTvFeng;
     private IndexProductAdapter mIndexProductAdapter;
 
     @Nullable
@@ -66,9 +73,22 @@ public class IndexFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        String province = GlobalApplication.mLocationData.province;
+        String country = GlobalApplication.mLocationData.addr;
+
+        mTvTitle.setText(province + country);
+
+        mTvBigWendu = (TextView) mRootView.findViewById(R.id.tv_big_wendu);
+        mTvShiDu = (TextView) mRootView.findViewById(R.id.tv_shidu);
+        mTvQiYa = (TextView) mRootView.findViewById(R.id.tv_qiya);
+        mTvFengSu = (TextView) mRootView.findViewById(R.id.tv_fengsu);
+        mTvFaBu = (TextView) mRootView.findViewById(R.id.tv_fabu);
+        mTvTodayWeather = (TextView) mRootView.findViewById(R.id.tv_today_weather);
+        mTvTempr= (TextView) mRootView.findViewById(R.id.tv_temper);
+        mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
 
 
-        mTvTitle.setText("北京市海淀区");
+
         List<String> dataList = new ArrayList<>();
         dataList.add("aaa");
         dataList.add("aaa");
@@ -96,7 +116,19 @@ public class IndexFragment extends BaseFragment {
         ApiClient.getInstance().getBasicService(getContext()).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
-                ToastUtils.show(getContext(), response.body().nongli);
+                IndexModel indexModel = response.body();
+                ToastUtils.show(getContext(), indexModel.nongli);
+
+                mTvBigWendu.setText(indexModel.wendu);
+                mTvShiDu.setText(indexModel.shidu);
+                mTvQiYa.setText(indexModel.qiya);
+                mTvFengSu.setText(indexModel.fengxiang);
+
+                mTvFaBu.setText(indexModel.ybshijian);
+
+                mTvTodayWeather.setText(indexModel.ybtianqi);
+                mTvTempr.setText(indexModel.ybzuidiwendu + " - " + indexModel.ybzuigaowendu);
+                mTvFeng.setText(indexModel.ybfengxiang + indexModel.ybfengsu);
 
             }
 
