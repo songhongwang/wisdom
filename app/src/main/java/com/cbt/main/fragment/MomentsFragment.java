@@ -13,12 +13,14 @@ import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
+import com.cbt.main.model.MomentMode;
 import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,14 @@ public class MomentsFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+
+    public static MomentsFragment getInstance(MomentMode mode){
+        MomentsFragment fragment = new MomentsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mode",MomentMode.zai_qing);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -66,13 +76,22 @@ public class MomentsFragment extends BaseFragment {
             @Override
             public void onBottom() {
                 super.onBottom();
-                if(!mIsLoading){
+                if(!mIsLoading && mHasMore){
                     getData();
                 }
             }
         });
 
         getData();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null){
+            MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
+            ToastUtils.show(getContext(), "mode --" + mode);
+        }
     }
 
     @Override

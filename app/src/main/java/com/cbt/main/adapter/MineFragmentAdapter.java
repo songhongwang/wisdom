@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cbt.main.fragment.MomentsFragment;
+import com.cbt.main.model.MomentMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class MineFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new MomentsFragment();
+
+        return MomentsFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing);
     }
 
     @Override
