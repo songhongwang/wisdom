@@ -133,9 +133,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
                     });
                 }
 
-                tvReplyCount.setText(mData.getReplyList().size());
+                tvReplyCount.setText(mData.getReplyList().size() + "");
             }else{
-                tvReplyCount.setText(0);
+                tvReplyCount.setText("0");
 
                 llReplyList.removeAllViews();
                 llReplyList.setVisibility(View.INVISIBLE);
