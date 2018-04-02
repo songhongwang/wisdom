@@ -85,10 +85,23 @@
         android:text="8  |"
         android:textSize="12sp"/>
 
+    <LinearLayout
+        android:id="@+id/ll_reply_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="10dp"
+        android:layout_below="@id/tv_reply_count"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:background="@color/background_common">
+
+    </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dip"
-        android:layout_below="@id/tv_reply"
+        android:layout_below="@id/ll_reply_list"
         android:layout_marginLeft="3dip"
         android:layout_marginRight="3dip"
         android:layout_marginTop="10dip"

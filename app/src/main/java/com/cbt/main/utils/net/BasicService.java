@@ -56,6 +56,10 @@ public interface BasicService {
     @GET("findfarminteract")
     Call<List<IndexFeedModel>> getIndexFeed(@Query("page") int page);
 
+    // 朋友圈 回复
+    @GET("replymyfarminteract")
+    Call<Object> replyFeed(@Query("iid") String iid,@Query("commentid") String commentId,@Query("content") String content );
+
 
     @GET("changefarm")
     Call<Weather7DaysForcast> perfactAccount(

@@ -6,12 +6,14 @@ import java.util.List;
 
 public class Data {
 
+    private String iid;
     private String avatar;
     private String nickname;
     private String createTime;
     private String content;
     private List<String> pictureList;
     private List<String> pictureThumbList;
+    private List<ReplyModel> replyList;
 
 //    public static List<Data> get() {
 //        List<Data> dataList = new ArrayList<>();
@@ -141,6 +143,14 @@ public class Data {
 //        return dataList;
 //    }
 
+    public String getIid() {
+        return iid;
+    }
+
+    public void setIid(String iid) {
+        this.iid = iid;
+    }
+
     public String getAvatar() {
         return avatar;
     }
@@ -187,5 +197,13 @@ public class Data {
 
     public void setPictureThumbList(List<String> pictureThumbList) {
         this.pictureThumbList = pictureThumbList;
+    }
+
+    public List<ReplyModel> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(List<ReplyModel> replyList) {
+        this.replyList = replyList;
     }
 }

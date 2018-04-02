@@ -27,6 +27,17 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="TransparentDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <!--天气折线相关-->
     <style name="wea_area_llyt">
         <item name="android:layout_width">match_parent</item>

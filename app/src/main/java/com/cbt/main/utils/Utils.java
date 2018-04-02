@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 
 public class Utils {
@@ -30,5 +31,26 @@ public class Utils {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         // 获取屏幕密度（方法1）
         return wm.getDefaultDisplay().getWidth(); // 屏幕宽度（像素，如：800p）
+    }
+
+    public static void hideInputMethod(Context service, View view) {
+        try {
+            InputMethodManager imm = (InputMethodManager) service.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static void showInputMethod(Context service, View view) {
+        try {
+            InputMethodManager imm = (InputMethodManager) service.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInputFromInputMethod(view.getWindowToken(), InputMethodManager.SHOW_FORCED);
+                // imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
+            }
+        } catch (Exception e) {
+        }
     }
 }

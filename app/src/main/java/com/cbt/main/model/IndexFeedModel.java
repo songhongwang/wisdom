@@ -28,7 +28,7 @@ public class IndexFeedModel {
     private String img8;
     private String img9;
     private List<String> imglist;
-    private List<String> interactivelist;
+    private List<ReplyModel> interactivelist;
     private String time;
     private String usericon;
     private String userid;
@@ -138,13 +138,12 @@ public class IndexFeedModel {
         return img9;
     }
 
-    public void setInteractivelist(List<String> interactivelist) {
-        if(interactivelist != null){
-            this.interactivelist = interactivelist;
-        }
-    }
-    public List<String> getInteractivelist() {
+    public List<ReplyModel> getInteractivelist() {
         return interactivelist;
+    }
+
+    public void setInteractivelist(List<ReplyModel> interactivelist) {
+        this.interactivelist = interactivelist;
     }
 
     public void setTime(String time) {
@@ -191,6 +190,8 @@ public class IndexFeedModel {
         data.setNickname(self.getUsername());
         data.setPictureList(self.getImglist());
         data.setPictureThumbList(self.getImglist());
+
+        data.setReplyList(self.getInteractivelist());
         return data;
     }
 }
