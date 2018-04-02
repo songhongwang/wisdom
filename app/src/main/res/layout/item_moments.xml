@@ -70,7 +70,7 @@
         android:layout_marginRight="15dp"
         android:layout_below="@id/v_content_line"
         android:layout_marginTop="10dip"
-        android:text="回答"
+        android:text=" | 回答"
         android:textColor="@color/green"
         android:textSize="12sp"/>
 
@@ -82,7 +82,7 @@
         android:layout_below="@id/v_content_line"
         android:layout_toLeftOf="@id/tv_reply"
         android:layout_marginTop="10dip"
-        android:text="8  |"
+        android:text="0"
         android:textSize="12sp"/>
 
     <LinearLayout

@@ -106,7 +106,7 @@ public class ReplyDialog extends Dialog {
         }, 100);
 
         if(!TextUtils.isEmpty(mReplyName)){
-            mEtContent.setText("回复：" + mReplyName);
+            mEtContent.setHint("回复：" + mReplyName);
         }
 
         super.show();

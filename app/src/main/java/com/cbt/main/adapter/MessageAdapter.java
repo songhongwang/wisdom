@@ -65,7 +65,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent, tvReply;
+        TextView tNickname, tTime, tContent, tvReply, tvReplyCount;
         LinearLayout llReplyList;
         MessagePicturesLayout lPictures;
 
@@ -80,6 +80,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             lPictures = (MessagePicturesLayout) itemView.findViewById(R.id.l_pictures);
             tvReply = (TextView) itemView.findViewById(R.id.tv_reply);
             llReplyList = (LinearLayout) itemView.findViewById(R.id.ll_reply_list);
+            tvReplyCount = (TextView) itemView.findViewById(R.id.tv_reply_count);
             lPictures.setCallback(mCallback);
         }
 
@@ -111,6 +112,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 llReplyList.setVisibility(View.VISIBLE);
                 for(final ReplyModel replyModel :mData.getReplyList()){
                     TextView textView = new TextView(mContext);
+                    textView.setPadding(5,5,5,5);
 
                     String tip = replyModel.getReplayusername() + ":" + replyModel.getContent();
                     SpannableString spannableString = new SpannableString(tip);
@@ -125,12 +127,16 @@ public class MessageAdapter extends RecyclerView.Adapter {
                         public void onClick(View view) {
                             replyDialog.setIid(mData.getIid());
                             replyDialog.setReplyId(replyModel.getReplayuserid());
-                            replyModel.setReplayusername(replyModel.getReplayusername());
+                            replyDialog.setReplyName(replyModel.getReplayusername());
                             replyDialog.show();
                         }
                     });
                 }
+
+                tvReplyCount.setText(mData.getReplyList().size());
             }else{
+                tvReplyCount.setText(0);
+
                 llReplyList.removeAllViews();
                 llReplyList.setVisibility(View.INVISIBLE);
             }
