@@ -108,6 +108,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 }
             });
 
+            llReplyList.removeAllViews();
+
             if(mData.getReplyList().size() > 0){
                 llReplyList.setVisibility(View.VISIBLE);
                 for(final ReplyModel replyModel :mData.getReplyList()){
@@ -137,7 +139,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
             }else{
                 tvReplyCount.setText("0");
 
-                llReplyList.removeAllViews();
                 llReplyList.setVisibility(View.INVISIBLE);
             }
 
