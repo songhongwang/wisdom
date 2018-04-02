@@ -1,6 +1,7 @@
 package com.cbt.main.view.piaoquan;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -12,7 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cbt.main.R;
+import com.cbt.main.utils.net.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,8 +122,19 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
                 iPicture.setVisibility(View.VISIBLE);
                 mVisiblePictureList.add(iPicture);
                 iPicture.setLayoutParams(lpChildImage);
-                iPicture.setBackgroundResource(R.drawable.default_picture);
-                Glide.with(getContext()).load(thumbList.get(i)).into(iPicture);
+                iPicture.setBackgroundResource(R.drawable.default_image_error);
+                Glide.with(getContext()).load(Constants.getBaseUrl() + thumbList.get(i)).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        iPicture.setImageResource(R.drawable.default_image_error);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                }).into(iPicture);
                 iPicture.setTranslationX((i % column) * (imageSize + mSpace));
                 iPicture.setTranslationY((i / column) * (imageSize + mSpace));
             } else {

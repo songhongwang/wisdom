@@ -59,7 +59,7 @@ public class TestActivity extends Activity implements MessagePicturesLayout.Call
         vRecycler.setLayoutManager(new LinearLayoutManager(this));
         vRecycler.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xFFECECEC));
         vRecycler.setAdapter(adapter = new MessageAdapter(this).setPictureClickCallback(this));
-        adapter.set(Data.get());
+//        adapter.set(Data.get());
 
         vImageWatcher = ImageWatcher.Helper.with(this) // 一般来讲， ImageWatcher 需要占据全屏的位置
                 .setTranslucentStatus(!isTranslucentStatus ? Utils.calcStatusBarHeight(this) : 0) // 如果是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确

@@ -88,4 +88,5 @@ dependencies {
     compile files('src/main/libs/AMap_Search_V5.7.0_20171229.jar')
     compile files('src/main/libs/Amap_2DMap_V5.2.0_20170627.jar')
     compile files('src/main/libs/AMap_Location_V3.8.0_20180201.jar')
+    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
 }

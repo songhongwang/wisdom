@@ -12,8 +12,19 @@ import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
+import com.cbt.main.model.IndexFeedModel;
+import com.cbt.main.utils.OnRcvScrollListener;
+import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by vigorous on 17/12/10.
@@ -24,6 +35,9 @@ public class MomentsFragment extends BaseFragment {
 
     private RecyclerView vRecycler;
     private MessageAdapter adapter;
+    private int mPage;
+    private boolean mIsLoading;
+    private boolean mHasMore = true;
 
     @Nullable
     @Override
@@ -45,9 +59,20 @@ public class MomentsFragment extends BaseFragment {
             callback = ((IWatcherImage) getActivity()).getWatcherCallBack();
         }
         vRecycler.setAdapter(adapter = new MessageAdapter(getActivity()).setPictureClickCallback(callback));
-        adapter.set(Data.get());
 
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
+
+        vRecycler.addOnScrollListener(new OnRcvScrollListener(){
+            @Override
+            public void onBottom() {
+                super.onBottom();
+                if(!mIsLoading){
+                    getData();
+                }
+            }
+        });
+
+        getData();
     }
 
     @Override
@@ -55,10 +80,36 @@ public class MomentsFragment extends BaseFragment {
 
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (!vImageWatcher.handleBackPressed()) {
-//            super.onBackPressed();
-//        }
-//    }
+    private void getData() {
+        mIsLoading = true;
+        ApiClient.getInstance().getBasicService(getContext()).getIndexFeed(mPage).enqueue(new Callback<List<IndexFeedModel>>() {
+            @Override
+            public void onResponse(Call<List<IndexFeedModel>> call, Response<List<IndexFeedModel>> response) {
+                List<IndexFeedModel> dataList = response.body();
+
+                mIsLoading = false;
+                mPage ++;
+
+                if(dataList.size() > 0){
+                    List<Data> goodList = new ArrayList<>();
+                    for(int i = 0; i< dataList.size(); i ++){
+                        goodList.add(IndexFeedModel.convert(dataList.get(i)));
+                    }
+                    adapter.set(goodList);
+                    adapter.notifyDataSetChanged();
+
+
+                    mHasMore =true;
+                }else{
+                    mHasMore = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<IndexFeedModel>> call, Throwable t) {
+
+                mIsLoading = false;
+            }
+        });
+    }
 }

@@ -42,7 +42,7 @@ public class TopicFragment extends BaseFragment {
         vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(1).setSpaceColor(0xFFECECEC));
 
         vRecycler.setAdapter(adapter = new TopicAdapter(getActivity()));
-        adapter.set(Data.get());
+//        adapter.set(Data.get());
 
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
     }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.model.Data;
+import com.cbt.main.utils.net.Constants;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.squareup.picasso.Picasso;
 
@@ -65,7 +66,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         void refresh(int pos) {
             mData = mDataList.get(pos);
-            Picasso.with(itemView.getContext()).load(mData.getAvatar()).placeholder(R.drawable.default_avatar)
+            Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
                     .transform(mCropCircleTransformation)
                     .into(iAvatar);
 
@@ -89,11 +90,12 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(mDataList.size() != 0)
         ((ViewHolder) holder).refresh(position % mDataList.size());
     }
 
     @Override
     public int getItemCount() {
-        return 99999;
+        return mDataList.size();
     }
 }

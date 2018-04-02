@@ -17,6 +17,7 @@ import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.dialog.ReleaseDialog;
+import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.IndexModel;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
@@ -24,6 +25,7 @@ import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.rong.imkit.RongIM;
@@ -132,17 +134,17 @@ public class MineFragment extends BaseFragment {
     }
 
     private void getData() {
-
-        ApiClient.getInstance().getBasicService(getContext()).getMineFarmerTab1(1).enqueue(new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-            }
-        });
+//        java.lang.IllegalStateException: Expected a string but was BEGIN_OBJECT at line 1 column 797 path $[1].interactivelist[0]
+//        ApiClient.getInstance().getBasicService(getContext()).getIndexFeed(0).enqueue(new Callback<List<IndexFeedModel>>() {
+//            @Override
+//            public void onResponse(Call<List<IndexFeedModel>> call, Response<List<IndexFeedModel>> response) {
+//                ToastUtils.show(getContext(), response.body().size() + " ");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<IndexFeedModel>> call, Throwable t) {
+//
+//            }
+//        });
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,9 @@ public class IndexFragment extends BaseFragment {
         String province = GlobalApplication.mLocationData.province;
         String country = GlobalApplication.mLocationData.addr;
 
-        mTvTitle.setText(province + country);
+        if(!TextUtils.isEmpty(province) && !TextUtils.isEmpty(country)){
+            mTvTitle.setText(province + country);
+        }
 
         mTvBigWendu = (TextView) mRootView.findViewById(R.id.tv_big_wendu);
         mTvShiDu = (TextView) mRootView.findViewById(R.id.tv_shidu);
@@ -90,8 +93,18 @@ public class IndexFragment extends BaseFragment {
         mTvTempr= (TextView) mRootView.findViewById(R.id.tv_temper);
         mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
 
-        getData();
-        getProductList();
+        mTvTitle.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        },200);
+        mTvTitle.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getProductList();
+            }
+        }, 400);
     }
 
     @Override
@@ -109,7 +122,6 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
                 mIndexModel = response.body();
-                ToastUtils.show(getContext(), mIndexModel.nongli);
 
                 mTvBigWendu.setText(mIndexModel.wendu);
                 mTvShiDu.setText(mIndexModel.shidu);

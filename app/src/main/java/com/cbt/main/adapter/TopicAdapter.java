@@ -57,6 +57,7 @@ public class TopicAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(mDataList.size() > 0)
         ((ViewHolder) holder).refresh(position % mDataList.size());
     }
 

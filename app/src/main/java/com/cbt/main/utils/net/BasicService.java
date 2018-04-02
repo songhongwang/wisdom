@@ -1,9 +1,9 @@
 package com.cbt.main.utils.net;
 
 import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.IndexProductModel;
-import com.cbt.main.model.RtokenRsp;
 import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
 
@@ -43,14 +43,18 @@ public interface BasicService {
     @GET("find7Day")
     Call<Weather7DaysForcast> getWeatherForcast(@Query("provincename") String provincename, @Query("cityname") String cityname, @Query("countryname") String countryname);
 
-    @GET("findfarminteract")
-    Call<Object> getMineFarmerTab1(@Query("page") int page);
+//    @GET("findfarminteract")
+//    Call<Object> getMineFarmerTab1(@Query("page") int page);
 
-    @GET("findmyfarmfarming")
-    Call<Object> getMineFarmerTab2(@Query("page") int page);
+//    @GET("findmyfarmfarming")
+//    Call<Object> getMineFarmerTab2(@Query("page") int page);
 
     @GET("findIndexProduct")
     Call<List<IndexProductModel>> getIndexProduct(@Query("hello") int hello);
+
+    // 朋友圈
+    @GET("findfarminteract")
+    Call<List<IndexFeedModel>> getIndexFeed(@Query("page") int page);
 
 
     @GET("changefarm")

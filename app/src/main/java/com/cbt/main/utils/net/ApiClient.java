@@ -8,6 +8,7 @@ import com.cbt.main.utils.SharedPreferencUtil;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.fastjson.FastJsonConverterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -31,7 +32,7 @@ public class ApiClient {
     private static <T> T init(Class<T> targetClass, String url) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(FastJsonConverterFactory.create())
                 .client(Holder.mApiClient.mOkHttpClient)
                 .build();
         return retrofit.create(targetClass);
