@@ -14,6 +14,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.cbt.main.R;
 import com.cbt.main.adapter.ReleaseActAdapter;
 import com.cbt.main.app.GlobalApplication;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.view.picker.JsonBean;
 import com.cbt.main.view.picker.JsonFileReader;
 import com.google.gson.Gson;
@@ -103,6 +104,13 @@ public class ReleaseActivity extends BaseActivity{
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
                 pvOptions.show();
+            }
+        });
+
+        mIvFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show(ReleaseActivity.this, "发布");
             }
         });
     }

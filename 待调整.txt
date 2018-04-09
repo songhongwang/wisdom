@@ -1,0 +1,11 @@
+1: 发布朋友圈页面
+ReleaseActivity.java
+
+
+2:首页产品跳转页面
+IndexProductAdapter.java
+
+
+3:我的农场页面（完善信息页面）
+PerfactAccountActivity.java
+commit() 方法提交信息

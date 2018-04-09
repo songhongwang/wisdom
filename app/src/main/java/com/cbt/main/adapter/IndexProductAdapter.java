@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.model.IndexProductModel;
+import com.cbt.main.utils.ToastUtils;
 
 import java.util.List;
 
@@ -25,7 +26,12 @@ public class IndexProductAdapter extends AppBaseAdapter {
         View itemView = mInflater.inflate(R.layout.item_index_product, null, false);
 
         IndexProductModel model = (IndexProductModel) mDataList.get(position);
-
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show(mContext, "产品详情");
+            }
+        });
 
         TextView tvProduct = (TextView) itemView.findViewById(R.id.tv_product);
         tvProduct.setText(model.getProductname());

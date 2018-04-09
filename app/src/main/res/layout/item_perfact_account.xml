@@ -34,6 +34,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rl_leixing"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1px"
@@ -47,6 +48,7 @@
                 android:textSize="14sp"/>
 
             <ImageView
+                android:id="@+id/iv_leixing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -54,12 +56,22 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/icon_more"/>
 
+            <TextView
+                android:id="@+id/tv_txt_leixing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_leixing"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/background_common"/>
         <RelativeLayout
+            android:id="@+id/rl_pinzhong"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1px"
@@ -73,12 +85,22 @@
                 android:textSize="14sp"/>
 
             <ImageView
+                android:id="@+id/iv_pinzhong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/icon_more"/>
+
+            <TextView
+                android:id="@+id/tv_txt_zhognlei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_pinzhong"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
 
         </RelativeLayout>
 

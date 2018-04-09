@@ -3,6 +3,7 @@ package com.cbt.main.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,13 +13,19 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.cbt.main.R;
 import com.cbt.main.adapter.PerfactAccountAdapter;
 import com.cbt.main.app.GlobalApplication;
+import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.model.ZuoWuModel;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +44,14 @@ public class PerfactAccountActivity extends BaseActivity{
     EditText mEtFramAear;
     @BindView(R.id.listview) ListView mLv;
     private PerfactAccountAdapter<ZuoWuModel> mPerfactAccountAdapter;
+    private String mLocation = "";
+    private Set<ZuoWuModel> mZuowuSet = new HashSet<>();
+    List<String> mOptionZuowuList = new ArrayList<>();
+    List<String> mOptionLeixingList = new ArrayList<>();
+
+    private ZuoWuModel mCurrentZuowu;
+    List<ZuoWuModel> dataList = new ArrayList<>();
+
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
 
@@ -52,25 +67,8 @@ public class PerfactAccountActivity extends BaseActivity{
         mIvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OptionsPickerView pvOptions = new  OptionsPickerView.Builder(PerfactAccountActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
-                        //返回的分别是三个级别的选中位置
-//                        String tx = options1Items.get(options1).getPickerViewText()
-//                                + options2Items.get(options1).get(option2)
-//                                + options3Items.get(options1).get(option2).get(options3);
-                        Log.d("hahah", option2 + " " + options1);
-                    }
-                }).build();
-                List<String> one = new ArrayList<>();
-                one.add("水果类");
-                one.add("粮食类");
-                one.add("油料作物");
-                one.add("蔬菜类");
-                one.add("经济作物");
-
-                pvOptions.setPicker(one);
-                pvOptions.show();
+                commit();
+                ToastUtils.show(PerfactAccountActivity.this, "完善信息");
             }
         });
 
@@ -96,24 +94,112 @@ public class PerfactAccountActivity extends BaseActivity{
         mLv.addHeaderView(headerView);
         mLv.addFooterView(footerView);
 
-
-        List<ZuoWuModel> dataList = new ArrayList<>();
-        dataList.add(new ZuoWuModel("", ""));
+        ZuoWuModel firstZuowu = new ZuoWuModel("", "");
+        dataList.add(firstZuowu);
+        mZuowuSet.add(firstZuowu);
 
         mPerfactAccountAdapter = new PerfactAccountAdapter<>(dataList, this);
         mLv.setAdapter(mPerfactAccountAdapter);
+        mPerfactAccountAdapter.setOperateListener(new PerfactAccountAdapter.OperateListener() {
+            @Override
+            public void onAdd(ZuoWuModel zuoWuModel) {
+                mZuowuSet.add(zuoWuModel);
+            }
+
+            @Override
+            public void onDel(ZuoWuModel zuoWuModel) {
+                mZuowuSet.remove(zuoWuModel);
+            }
+
+            @Override
+            public void onLeixin(ZuoWuModel zuoWuModel) {
+                mCurrentZuowu = zuoWuModel;
+                onLeixingDialog();
+            }
+
+            @Override
+            public void onPinzhong(ZuoWuModel zuoWuModel) {
+                mCurrentZuowu = zuoWuModel;
+                onPinzhongDialog();
+            }
+        });
     }
 
+    private void onPinzhongDialog(){
+        OptionsPickerView pvOptions = new  OptionsPickerView.Builder(PerfactAccountActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+                //返回的分别是三个级别的选中位置
+//                        String tx = options1Items.get(options1).getPickerViewText()
+//                                + options2Items.get(options1).get(option2)
+//                                + options3Items.get(options1).get(option2).get(options3);
+                Log.d("hahah", option2 + " " + options1);
+                mCurrentZuowu.pinzhong = options1 + "";
+                mPerfactAccountAdapter.notifyItem(mCurrentZuowu);
+                mCurrentZuowu.strPinzhong = mOptionZuowuList.get(options1);
+            }
+        }).build();
+        mOptionZuowuList.add("菠菜");
+        mOptionZuowuList.add("青菜");
+        mOptionZuowuList.add("油菜花");
+        mOptionZuowuList.add("萝卜");
+        mOptionZuowuList.add("白菜");
+
+        pvOptions.setPicker(mOptionZuowuList);
+        pvOptions.show();
+    }
+
+    private void onLeixingDialog(){
+        OptionsPickerView pvOptions = new  OptionsPickerView.Builder(PerfactAccountActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+                //返回的分别是三个级别的选中位置
+//                        String tx = options1Items.get(options1).getPickerViewText()
+//                                + options2Items.get(options1).get(option2)
+//                                + options3Items.get(options1).get(option2).get(options3);
+                Log.d("hahah", option2 + " " + options1);
+                mCurrentZuowu.leixin = options1 + "";
+                mCurrentZuowu.strLeixin = mOptionLeixingList.get(options1);
+                mPerfactAccountAdapter.notifyItem(mCurrentZuowu);
+            }
+        }).build();
+        mOptionLeixingList.add("水果类");
+        mOptionLeixingList.add("粮食类");
+        mOptionLeixingList.add("油料作物");
+        mOptionLeixingList.add("蔬菜类");
+        mOptionLeixingList.add("经济作物");
+
+        pvOptions.setPicker(mOptionLeixingList);
+        pvOptions.show();
+    }
+
+
+    // 完善用户信息 （农场位置 作物类型等）
     private void commit(){
+        String farmName = mEtFramName.getText().toString();
+        String farmAear = mEtFramAear.getText().toString();
+
 
         String city = GlobalApplication.mLocationData.city;
         String province = GlobalApplication.mLocationData.province;
         String country = GlobalApplication.mLocationData.addr;
 
+        User login = SharedPreferencUtil.getLogin(this);
+        if(login == null){
+            ToastUtils.show(PerfactAccountActivity.this, "请登录");
+            return;
+        }
 
-        String fName = "旺旺Farm";
-        String points = "43.25,116.22";
-        String zuowulist = "1,3;2,8";
+        String fName = login.getUname();
+        if(TextUtils.isEmpty(mLocation)){
+            ToastUtils.show(PerfactAccountActivity.this, "请选择位置");
+        }
+        String points = mLocation;
+        String zuowulist = "";
+        for(ZuoWuModel zuoWuModel : mZuowuSet){
+            zuowulist += zuoWuModel.leixin + "," + zuoWuModel.strPinzhong + ";";
+        }
+
         ApiClient.getInstance().getBasicService(this).perfactAccount(fName, points, zuowulist, city, province, country).enqueue(new Callback<Weather7DaysForcast>() {
             @Override
             public void onResponse(Call<Weather7DaysForcast> call, Response<Weather7DaysForcast> response) {
@@ -133,8 +219,8 @@ public class PerfactAccountActivity extends BaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){
             if(resultCode == 11){
-                String location = data.getStringExtra("location");
-                ToastUtils.show(PerfactAccountActivity.this, location);
+                mLocation = data.getStringExtra("location");
+                ToastUtils.show(PerfactAccountActivity.this, mLocation);
             }
         }
     }
