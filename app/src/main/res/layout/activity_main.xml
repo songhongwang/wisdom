@@ -4,18 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/top"/>
 
     <com.cbt.main.engin.SceneSurfaceView
         android:id="@+id/mSceneSurfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_green50"/>
+
     <LinearLayout
         android:id="@+id/ll_bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
 
         <include layout="@layout/bottom"/>
     </LinearLayout>
@@ -26,5 +35,9 @@
         android:layout_height="match_parent"
         android:layout_above="@id/ll_bottom_layout"/>
 
-
+    <com.cbt.main.view.pagertab.PagerSlidingTabStrip
+        android:id="@+id/tabs_main"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

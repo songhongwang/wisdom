@@ -38,7 +38,10 @@ public class Scene {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bg, new Rect(0, 0, bg.getWidth(), bg.getHeight()), new Rect(0, 0, width, height), paint);
+        if(bg != null){
+            canvas.drawBitmap(bg, new Rect(0, 0, bg.getWidth(), bg.getHeight()), new Rect(0, 0, width, height), paint);
+        }
+
         for (Actor actor : actors) {
             actor.draw(canvas,width,height);
         }
