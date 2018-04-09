@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,17 +36,24 @@ import me.nereo.imagechoose.ShowActivity;
 
 public class ReleaseActivity extends BaseActivity{
 
+    @BindView(R.id.et_content)
+    EditText mEtContent;
     @BindView(R.id.mGridView)
     GridView mGridView;
     @BindView(R.id.tv_location)
     TextView mTvLocation;
+    @BindView(R.id.tv_str_leixing)
+    TextView mTvStrLeixing;
     @BindView(R.id.rl_location)
     RelativeLayout mRlLocation;
+    @BindView(R.id.rl_leixing)
+    RelativeLayout mRlLeixing;
     private ReleaseActAdapter mReleaseActAdapter;
     private int REQUEST_IMAGE = 3;
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    List<String> mOptionLeixingList = new ArrayList<>();
 
 
     private List<String> mDatas = new ArrayList<>();
@@ -100,6 +108,7 @@ public class ReleaseActivity extends BaseActivity{
                                 + options2Items.get(options1).get(option2)
                                 + options3Items.get(options1).get(option2).get(options3);
                         Log.d("hahah", tx);
+                        ToastUtils.show(ReleaseActivity.this, tx);
                     }
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
@@ -107,10 +116,19 @@ public class ReleaseActivity extends BaseActivity{
             }
         });
 
+        mIvFinish.setImageResource(R.drawable.icon_complete);
+        mIvFinish.setVisibility(View.VISIBLE);
         mIvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ToastUtils.show(ReleaseActivity.this, "发布");
+                commit();
+            }
+        });
+        mRlLeixing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLeixingDialog();
             }
         });
     }
@@ -200,6 +218,28 @@ public class ReleaseActivity extends BaseActivity{
         }
     }
 
+    private void onLeixingDialog(){
+        OptionsPickerView pvOptions = new  OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+                //返回的分别是三个级别的选中位置
+//                        String tx = options1Items.get(options1).getPickerViewText()
+//                                + options2Items.get(options1).get(option2)
+//                                + options3Items.get(options1).get(option2).get(options3);
+                Log.d("hahah", " " + options1);
+                mTvStrLeixing.setText(mOptionLeixingList.get(options1));
+            }
+        }).build();
+        mOptionLeixingList.add("水果类");
+        mOptionLeixingList.add("粮食类");
+        mOptionLeixingList.add("油料作物");
+        mOptionLeixingList.add("蔬菜类");
+        mOptionLeixingList.add("经济作物");
+
+        pvOptions.setPicker(mOptionLeixingList);
+        pvOptions.show();
+    }
+
     public ArrayList<JsonBean> parseData(String result) {//Gson 解析
         ArrayList<JsonBean> detail = new ArrayList<>();
         try {
@@ -214,5 +254,15 @@ public class ReleaseActivity extends BaseActivity{
             // mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
         }
         return detail;
+    }
+
+    private void commit(){
+        String content = mEtContent.getText().toString();
+
+        for(String imagePath :mDatas){
+            // 图片地址
+        }
+
+
     }
 }

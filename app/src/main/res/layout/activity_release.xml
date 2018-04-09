@@ -6,6 +6,7 @@
               android:layout_height="match_parent">
     <include layout="@layout/top"/>
     <EditText
+        android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -52,12 +53,12 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_leixing"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@color/white">
         <TextView
-            android:id="@+id/tv_zhongyang_pinzhong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -66,12 +67,23 @@
             android:text="种养类型"
             android:drawableLeft="@drawable/icon_location"/>
         <ImageView
+            android:id="@+id/iv_leixing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:src="@drawable/icon_more"/>
+        <TextView
+            android:id="@+id/tv_str_leixing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_leixing"
+            android:drawablePadding="5dp"
+            android:text="种养类型"
+            android:drawableLeft="@drawable/icon_location"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
