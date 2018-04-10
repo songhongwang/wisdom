@@ -20,7 +20,7 @@ import java.util.List;
  * Created by vigorous on 18/4/10.
  */
 
-public class DisasterDetailActivity extends BaseActivity {
+public class DisasterDetailActivity extends BaseActivity2 {
     private DisasterActAdapter mDisasterActAdapter;
 
     MessagePicturesLayout lPictures;
