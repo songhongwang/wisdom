@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/layout_top"
@@ -11,11 +12,12 @@
     <ListView
         android:id="@+id/lv_disaster"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/layout_top"
         android:background="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         android:clipToPadding="false"
+        android:layout_marginBottom="40dp"
         android:divider="@color/background_common"
         android:dividerHeight="1px"
         android:drawSelectorOnTop="true"

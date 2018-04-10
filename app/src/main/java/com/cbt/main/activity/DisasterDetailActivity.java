@@ -3,12 +3,14 @@ package com.cbt.main.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.adapter.DisasterActAdapter;
-import com.cbt.main.adapter.ReleaseActAdapter;
+import com.cbt.main.utils.Utils;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
@@ -24,15 +26,19 @@ public class DisasterDetailActivity extends BaseActivity {
     MessagePicturesLayout lPictures;
     TextView mTvContent;
     ListView mListView;
+    EditText mEtInput;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_disaster);
+
     }
 
     @Override
     public void initUI() {
 
         mIvFinish.setVisibility(View.GONE);
+
+        mEtInput = (EditText) findViewById(R.id.rc_edit_text);
 
         mListView = (ListView) findViewById(R.id.lv_disaster);
         View headerView = View.inflate(this, R.layout.header_disaster_list, null);
