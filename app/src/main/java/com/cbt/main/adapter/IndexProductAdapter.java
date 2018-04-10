@@ -1,11 +1,14 @@
 package com.cbt.main.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.DisasterDetailActivity;
+import com.cbt.main.activity.WebActivity;
 import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.utils.ToastUtils;
 
@@ -22,7 +25,7 @@ public class IndexProductAdapter extends AppBaseAdapter {
     }
 
     @Override
-    public View getCView(int position, View view, ViewGroup viewGroup) {
+    public View getCView(final int position, View view, ViewGroup viewGroup) {
         View itemView = mInflater.inflate(R.layout.item_index_product, null, false);
 
         IndexProductModel model = (IndexProductModel) mDataList.get(position);
@@ -30,6 +33,13 @@ public class IndexProductAdapter extends AppBaseAdapter {
             @Override
             public void onClick(View view) {
                 ToastUtils.show(mContext, "产品详情");
+                if(position %2 == 0){
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    mContext.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(mContext, DisasterDetailActivity.class);
+                    mContext.startActivity(intent);
+                }
             }
         });
 
