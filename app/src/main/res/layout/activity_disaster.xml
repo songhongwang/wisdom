@@ -6,15 +6,26 @@
 
     <include
         android:id="@+id/layout_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         layout="@layout/top"/>
 
-    <!--结束加载提示-->
-    <TextView
-        android:id="@+id/text_Loading"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/lv_disaster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_top"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@color/background_common"
+        android:dividerHeight="1px"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+
+    <include
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_top"
-        android:text="灾情详情"/>
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_reply_disaster"/>
+
 </RelativeLayout>
