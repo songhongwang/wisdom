@@ -16,18 +16,28 @@ import com.cbt.main.R;
 import com.cbt.main.adapter.ReleaseActAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.picker.JsonBean;
 import com.cbt.main.view.picker.JsonFileReader;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
 import me.nereo.imagechoose.ShowActivity;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by vigorous on 17/12/27.
@@ -256,13 +266,33 @@ public class ReleaseActivity extends BaseActivity{
         return detail;
     }
 
-    private void commit(){
+    private void commit() {
         String content = mEtContent.getText().toString();
 
-        for(String imagePath :mDatas){
-            // 图片地址
-        }
+        final File img1 = new File(mDatas.get(0));
 
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("content", content)
+                .addFormDataPart("img1", img1.getName(), RequestBody.create(MediaType.parse("image/*"), img1))
+                .build();
+
+
+
+        ApiClient.getInstance().getBasicService(this).uploadFarmState(content, requestBody).enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
 
     }
+
+
+
 }
