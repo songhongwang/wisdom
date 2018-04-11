@@ -41,7 +41,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
     @SuppressLint("WrongViewCast")
     @Override
     public void initUI() {
-
+        mTvTitle.setText("专家咨询");
         mIvFinish.setVisibility(View.GONE);
 
         mTvToAnswer = (RelativeLayout) findViewById(R.id.rl_to_answer);
