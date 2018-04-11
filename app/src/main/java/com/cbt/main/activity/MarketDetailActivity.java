@@ -39,6 +39,7 @@ public class MarketDetailActivity extends BaseActivity2 {
 
     @Override
     public void initUI() {
+        mTvTitle.setText("市场详情");
 
         mIvFinish.setVisibility(View.GONE);
 

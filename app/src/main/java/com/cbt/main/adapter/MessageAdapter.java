@@ -97,7 +97,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             iAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RongIM.getInstance().startPrivateChat(mContext, "18600211553", "vigorous");
+                    RongIM.getInstance().startPrivateChat(mContext, mData.getIid(), mData.getNickname());
                 }
             });
             tvReply.setOnClickListener(new View.OnClickListener() {

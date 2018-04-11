@@ -37,7 +37,7 @@ public class IndexProductAdapter extends AppBaseAdapter {
                 if(position == 0){
                     Intent intent = new Intent(mContext, WebActivity.class);
                     mContext.startActivity(intent);
-                }if(position == 1) {
+                }else if(position == 1) {
                     Intent intent = new Intent(mContext, ExpertConsultActivity.class);
                     mContext.startActivity(intent);
                 }else{

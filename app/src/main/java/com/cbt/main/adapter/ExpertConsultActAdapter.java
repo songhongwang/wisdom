@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +20,8 @@ import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.rong.imkit.RongIM;
 
 /**
  * Created by vigorous on 17/12/27.
@@ -43,6 +46,7 @@ public class ExpertConsultActAdapter extends AppBaseAdapter implements ImageWatc
             holder.ivAvatar = (ImageView) convertView.findViewById(R.id.iv_img);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+            holder.rlChat = (RelativeLayout) convertView.findViewById(R.id.rl_to_chat);
             convertView.setTag(holder);
         } else {
             holder = (ItemHolder) convertView.getTag();
@@ -59,6 +63,13 @@ public class ExpertConsultActAdapter extends AppBaseAdapter implements ImageWatc
 
         holder.tvName.setText(position + "");
         holder.tvContent.setText("World");
+
+        holder.rlChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RongIM.getInstance().startPrivateChat(mContext, "18600211553", "vigorous");
+            }
+        });
 
         return  convertView;
     }
@@ -79,6 +90,7 @@ public class ExpertConsultActAdapter extends AppBaseAdapter implements ImageWatc
         ImageView ivAvatar;
         TextView tvName;
         TextView tvContent;
+        RelativeLayout rlChat;
     }
 
     private void initOther(boolean isTranslucentStatus) {
