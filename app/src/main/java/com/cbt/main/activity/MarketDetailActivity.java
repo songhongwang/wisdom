@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
-import com.cbt.main.adapter.DisasterActAdapter;
+import com.cbt.main.adapter.MarketDetailActAdapter;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
@@ -17,10 +17,11 @@ import java.util.List;
 
 /**
  * Created by vigorous on 18/4/10.
+ * 市场详情
  */
 
 public class MarketDetailActivity extends BaseActivity2 {
-    private DisasterActAdapter mDisasterActAdapter;
+    private MarketDetailActAdapter mMarketDetailActAdapter;
 
     MessagePicturesLayout lPictures;
     TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend;
@@ -47,8 +48,8 @@ public class MarketDetailActivity extends BaseActivity2 {
         View headerView = View.inflate(this, R.layout.header_market_detail_list, null);
         mListView.addHeaderView(headerView);
 
-        mDisasterActAdapter = new DisasterActAdapter(this,datas);
-        mListView.setAdapter(mDisasterActAdapter);
+        mMarketDetailActAdapter = new MarketDetailActAdapter(this,datas);
+        mListView.setAdapter(mMarketDetailActAdapter);
 
         lPictures = (MessagePicturesLayout) headerView.findViewById(R.id.l_pictures);
         mTvContentTitle = (TextView) headerView.findViewById(R.id.t_content_title);

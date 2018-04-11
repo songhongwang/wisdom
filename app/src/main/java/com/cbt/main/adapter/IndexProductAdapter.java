@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.ExpertConsultActivity;
 import com.cbt.main.activity.MarketDetailActivity;
 import com.cbt.main.activity.WebActivity;
 import com.cbt.main.model.IndexProductModel;
@@ -33,8 +34,11 @@ public class IndexProductAdapter extends AppBaseAdapter {
             @Override
             public void onClick(View view) {
                 ToastUtils.show(mContext, "产品详情");
-                if(position %2 == 0){
+                if(position == 0){
                     Intent intent = new Intent(mContext, WebActivity.class);
+                    mContext.startActivity(intent);
+                }if(position == 1) {
+                    Intent intent = new Intent(mContext, ExpertConsultActivity.class);
                     mContext.startActivity(intent);
                 }else{
                     Intent intent = new Intent(mContext, MarketDetailActivity.class);

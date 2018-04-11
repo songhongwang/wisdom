@@ -14,8 +14,8 @@ import java.util.List;
  * Created by vigorous on 17/12/27.
  */
 
-public class DisasterActAdapter extends AppBaseAdapter {
-    public DisasterActAdapter(Context context, List<String> dataList) {
+public class MarketDetailActAdapter extends AppBaseAdapter {
+    public MarketDetailActAdapter(Context context, List<String> dataList) {
         super(dataList, context);
     }
 

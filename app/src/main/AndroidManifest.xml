@@ -189,6 +189,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:name=".activity.MarketDetailActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:name=".activity.ExpertConsultActivity" />
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:name=".activity.ReplyActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cbt.main"

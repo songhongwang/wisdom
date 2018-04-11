@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by vigorous on 17/12/18.
+ * 区别BaseActivity在于没有设置状态栏
  */
 
 public abstract class BaseActivity2 extends FragmentActivity {

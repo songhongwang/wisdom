@@ -123,7 +123,11 @@ public class MessagePicturesLayout extends FrameLayout implements View.OnClickLi
                 mVisiblePictureList.add(iPicture);
                 iPicture.setLayoutParams(lpChildImage);
                 iPicture.setBackgroundResource(R.drawable.default_image_error);
-                Glide.with(getContext()).load(Constants.getBaseUrl() + thumbList.get(i)).listener(new RequestListener<Drawable>() {
+                String imageUrl = thumbList.get(i);
+                if(!imageUrl.contains("http")){
+                    imageUrl = Constants.getBaseUrl() + imageUrl;
+                }
+                Glide.with(getContext()).load(imageUrl).listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         iPicture.setImageResource(R.drawable.default_image_error);
