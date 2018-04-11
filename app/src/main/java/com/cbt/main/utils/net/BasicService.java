@@ -9,8 +9,13 @@ import com.cbt.main.model.Weather7DaysForcast;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -69,5 +74,8 @@ public interface BasicService {
             @Query("provincename") String provincename,
             @Query("cityname") String cityname,
             @Query("countryname") String countryname);
+
+    @POST("user/updateAvatar.do")
+    Call<Object> uploadFarmState(@Query("des") String description, @Body RequestBody imgs );
 
 }
