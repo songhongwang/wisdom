@@ -457,7 +457,15 @@ public class WeatherLineFragment extends BaseFragment {
                 temperature = temp.substring(3, 5);
             }
         }
-        return Integer.parseInt(temperature);
+
+        int result = 10; // 默认温度10°c
+        try{
+            result =Integer.parseInt(temperature);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     /**

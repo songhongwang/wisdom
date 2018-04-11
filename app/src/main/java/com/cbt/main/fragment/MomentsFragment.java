@@ -82,7 +82,7 @@ public class MomentsFragment extends BaseFragment {
             }
         });
 
-        getData();
+
     }
 
     @Override
@@ -96,7 +96,7 @@ public class MomentsFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        getData();
     }
 
     private void getData() {
