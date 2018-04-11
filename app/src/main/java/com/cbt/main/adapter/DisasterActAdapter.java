@@ -21,7 +21,7 @@ public class DisasterActAdapter extends AppBaseAdapter {
 
     @Override
     public View getCView(int position, View view, ViewGroup viewGroup) {
-        View itemView = mInflater.inflate(R.layout.item_disaster_activity, null, false);
+        View itemView = mInflater.inflate(R.layout.item_market_detail_activity, null, false);
         ImageView iv = (ImageView) itemView.findViewById(R.id.iv_img);
 
         String s = (String) mDataList.get(position);

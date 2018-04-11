@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cbt.main.R;
-import com.cbt.main.activity.DisasterDetailActivity;
+import com.cbt.main.activity.MarketDetailActivity;
 import com.cbt.main.activity.WebActivity;
 import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.utils.ToastUtils;
@@ -37,7 +37,7 @@ public class IndexProductAdapter extends AppBaseAdapter {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     mContext.startActivity(intent);
                 }else{
-                    Intent intent = new Intent(mContext, DisasterDetailActivity.class);
+                    Intent intent = new Intent(mContext, MarketDetailActivity.class);
                     mContext.startActivity(intent);
                 }
             }

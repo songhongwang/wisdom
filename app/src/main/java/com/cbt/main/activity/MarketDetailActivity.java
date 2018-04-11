@@ -3,7 +3,6 @@ package com.cbt.main.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.adapter.DisasterActAdapter;
 import com.cbt.main.utils.ToastUtils;
-import com.cbt.main.utils.Utils;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import java.util.List;
  * Created by vigorous on 18/4/10.
  */
 
-public class DisasterDetailActivity extends BaseActivity2 {
+public class MarketDetailActivity extends BaseActivity2 {
     private DisasterActAdapter mDisasterActAdapter;
 
     MessagePicturesLayout lPictures;
@@ -34,7 +32,7 @@ public class DisasterDetailActivity extends BaseActivity2 {
     List datas  = new ArrayList();
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.activity_disaster);
+        setContentView(R.layout.activity_market_detail);
 
     }
 
@@ -46,7 +44,7 @@ public class DisasterDetailActivity extends BaseActivity2 {
         mEtInput = (EditText) findViewById(R.id.rc_edit_text);
 
         mListView = (ListView) findViewById(R.id.lv_disaster);
-        View headerView = View.inflate(this, R.layout.header_disaster_list, null);
+        View headerView = View.inflate(this, R.layout.header_market_detail_list, null);
         mListView.addHeaderView(headerView);
 
         mDisasterActAdapter = new DisasterActAdapter(this,datas);
