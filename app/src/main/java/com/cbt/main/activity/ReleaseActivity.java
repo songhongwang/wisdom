@@ -131,7 +131,6 @@ public class ReleaseActivity extends BaseActivity{
         mIvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.show(ReleaseActivity.this, "发布");
                 commit();
             }
         });
@@ -271,23 +270,36 @@ public class ReleaseActivity extends BaseActivity{
 
         final File img1 = new File(mDatas.get(0));
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("content", content)
-                .addFormDataPart("img1", img1.getName(), RequestBody.create(MediaType.parse("image/*"), img1))
-                .build();
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM)
+                .addFormDataPart("content", content);
+
+        for(int i = 0; i< mDatas.size(); i++){
+            File file = new File(mDatas.get(i));
+            builder.addFormDataPart("img" + (i+1), img1.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+        MultipartBody requestBody = builder.build();
 
 
+        String city = GlobalApplication.mLocationData.city;
+        String province = GlobalApplication.mLocationData.province;
+        String country = GlobalApplication.mLocationData.addr;
 
-        ApiClient.getInstance().getBasicService(this).uploadFarmState(content, requestBody).enqueue(new Callback<Object>() {
+        ApiClient.getInstance().getBasicService(this).uploadFarmState(
+                province,
+                city,
+                country,
+                content,
+                requestBody).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-
+                ToastUtils.show(ReleaseActivity.this, "发布成功");
+                finish();
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                ToastUtils.show(ReleaseActivity.this, "失败");
             }
         });
 

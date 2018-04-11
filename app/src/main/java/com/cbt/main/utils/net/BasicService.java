@@ -75,7 +75,17 @@ public interface BasicService {
             @Query("cityname") String cityname,
             @Query("countryname") String countryname);
 
-    @POST("user/updateAvatar.do")
-    Call<Object> uploadFarmState(@Query("des") String description, @Body RequestBody imgs );
+//    provincename(省名称）
+//            cityname(市名称）
+//            countryname(县名称）
+//            content(内容）
+//            img1-img10(图片1-10）
+
+    @POST("publishmyfarminteract")
+    Call<Object> uploadFarmState(@Query("provincename") String provincename,
+                                 @Query("cityname") String cityname,
+                                 @Query("countryname") String countryname,
+                                 @Query("content") String content,
+                                 @Body RequestBody imgs );
 
 }
