@@ -184,6 +184,8 @@ public class IndexFeedModel {
 
     public static Data convert(IndexFeedModel self){
         Data data = new Data();
+        data.setIid(self.getIid());
+        data.setUid(self.getUserid());
         data.setAvatar(self.getUsericon());
         data.setContent(self.getContent());
         data.setCreateTime(self.getTime());

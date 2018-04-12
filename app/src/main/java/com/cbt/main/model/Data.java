@@ -1,12 +1,14 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Data {
+public class Data implements Serializable{
 
     private String iid;
+    private String uid;
     private String avatar;
     private String nickname;
     private String createTime;
@@ -142,6 +144,15 @@ public class Data {
 //        dataList.add(data6);
 //        return dataList;
 //    }
+
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getIid() {
         return iid;

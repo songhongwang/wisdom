@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.UserActivity;
 import com.cbt.main.dialog.ReleaseDialog;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.Data;
@@ -97,7 +98,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
             iAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RongIM.getInstance().startPrivateChat(mContext, mData.getIid(), mData.getNickname());
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("model", mData);
+                    mContext.startActivity(intent);
                 }
             });
             tvReply.setOnClickListener(new View.OnClickListener() {

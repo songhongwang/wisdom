@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.cbt.main.R;
 import com.cbt.main.callback.IWatcherImage;
+import com.cbt.main.engin.SceneSurfaceView;
 import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
@@ -60,6 +61,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
+    SceneSurfaceView mSceneSurfaceView;
     //声明ViewPager
     private ViewPager mViewPager;
     //适配器
@@ -217,6 +219,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
     //初始化控件
     private void initViews() {
+        mSceneSurfaceView = (SceneSurfaceView) findViewById(R.id.mSceneSurfaceView);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs_main);
 
@@ -396,6 +399,18 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                 });
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSceneSurfaceView.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSceneSurfaceView.start();
     }
 
     @Override

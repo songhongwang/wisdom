@@ -23,6 +23,7 @@ public class RenderThread extends Thread {
     private SurfaceHolder surfaceHolder;
     private RenderHandler renderHandler;
     private Scene scene;
+    private boolean mIsStop = false;
 
     public RenderThread(SurfaceHolder surfaceHolder, Context context) {
         this.context = context;
@@ -62,7 +63,6 @@ public class RenderThread extends Thread {
                     renderHandler.sendEmptyMessage(FLAG_DRAWING);
                     break;
                 case FLAG_SLEEPING:
-//                    Looper.myLooper().quit();
                     renderHandler.sendEmptyMessageDelayed(FLAG_SLEEPING, 500);
                     break;
             }
@@ -71,6 +71,9 @@ public class RenderThread extends Thread {
 
 
     private void draw() {
+        if(mIsStop){
+            return;
+        }
         Canvas canvas = surfaceHolder.lockCanvas();
         if (canvas != null) {
             scene.draw(canvas);
@@ -85,5 +88,10 @@ public class RenderThread extends Thread {
 
     public void setHeight(int height) {
         scene.setHeight(height);
+    }
+
+
+    public void setStop(boolean stop) {
+        mIsStop = stop;
     }
 }

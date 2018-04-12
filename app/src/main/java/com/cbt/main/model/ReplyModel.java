@@ -1,10 +1,12 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vigorous on 18/4/2.
  */
 
-public class ReplyModel {
+public class ReplyModel implements Serializable {
     private String commentname;
     private String content;
     private String replayuserid;

@@ -40,6 +40,7 @@ public class MomentsFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private View mVLoading;
 
     public static MomentsFragment getInstance(MomentMode mode){
         MomentsFragment fragment = new MomentsFragment();
@@ -60,6 +61,7 @@ public class MomentsFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mVLoading = mRootView.findViewById(R.id.rl_loading);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(5).setSpaceColor(0xFFECECEC));
@@ -93,6 +95,10 @@ public class MomentsFragment extends BaseFragment {
             ToastUtils.show(getContext(), "mode --" + mode);
         }
     }
+    // 更新页面
+    public void refresh(){
+        getData();
+    }
 
     @Override
     protected void lazyLoad() {
@@ -100,6 +106,9 @@ public class MomentsFragment extends BaseFragment {
     }
 
     private void getData() {
+        if(mVLoading != null){
+            mVLoading.setVisibility(View.VISIBLE);
+        }
         mIsLoading = true;
         ApiClient.getInstance().getBasicService(getContext()).getIndexFeed(mPage).enqueue(new Callback<List<IndexFeedModel>>() {
             @Override
@@ -122,10 +131,17 @@ public class MomentsFragment extends BaseFragment {
                 }else{
                     mHasMore = false;
                 }
+                if(mVLoading != null){
+                    mVLoading.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
             public void onFailure(Call<List<IndexFeedModel>> call, Throwable t) {
+                if(mVLoading != null) {
+                    mVLoading.setVisibility(View.GONE);
+                }
 
                 mIsLoading = false;
             }

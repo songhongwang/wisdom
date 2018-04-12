@@ -37,6 +37,7 @@ public class SettingActivity extends BaseActivity{
 
     @Override
     public void initUI() {
+        mIvFinish.setVisibility(View.GONE);
         mClearApp = new ClearApp(SettingActivity.this);
 
         String cacheSize = mClearApp.caculateCacheSize();
@@ -60,6 +61,22 @@ public class SettingActivity extends BaseActivity{
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+            }
+        });
+        findViewById(R.id.rl_user_type).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 修改用户类型
+                Intent intent = new Intent(SettingActivity.this, PerfactAccountActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.rl_user_pwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(SettingActivity.this, RegisterOrForgetActivity.class);
+                intent2.putExtra("title", "忘记密码");
+                startActivityForResult(intent2, 2);
             }
         });
     }
