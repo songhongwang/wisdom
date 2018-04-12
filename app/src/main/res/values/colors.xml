@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#ff0080ff</color>
+    <color name="colorPrimary">#ff38b059</color>
+    <color name="colorPrimaryDark">#ff38b059</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="green">#ff38b059</color>
+    <color name="half_white">#60555555</color>
+    <color name="transparent">#00000000</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="background_common">#e5e5e5</color>
+    <color name="green_common">#51a067</color>
+
+
+    <color name="abc_input_method_navigation_guard">@android:color/black</color>
+    <color name="abc_search_url_text_normal">#ff7fa87f</color>
+    <color name="abc_search_url_text_pressed">@android:color/black</color>
+    <color name="abc_search_url_text_selected">@android:color/black</color>
+    <color name="accent_material_dark">@color/material_deep_teal_200</color>
+    <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <color name="background_floating_material_dark">@color/material_grey_800</color>
+    <color name="background_floating_material_light">@android:color/white</color>
+    <color name="background_material_dark">@color/material_grey_850</color>
+    <color name="background_material_light">@color/material_grey_50</color>
+    <color name="black_overlay">#33000000</color>
+    <color name="blue">#ff0099cc</color>
+    <color name="blue_nav_bar">#ff0576c4</color>
+    <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
+    <color name="bright_foreground_disabled_material_light">#80000000</color>
+    <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
+    <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
+    <color name="bright_foreground_material_dark">@android:color/white</color>
+    <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="button_material_dark">#ff5a595b</color>
+    <color name="button_material_light">#ffd6d7d7</color>
+    <color name="cardview_dark_background">#ff424242</color>
+    <color name="cardview_light_background">#ffffffff</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
+    <color name="colorTabs">#fff2f7f3</color>
+    <color name="dark">#ff0c0c0c</color>
+    <color name="design_fab_shadow_end_color">@android:color/transparent</color>
+    <color name="design_fab_shadow_mid_color">#14000000</color>
+    <color name="design_fab_shadow_start_color">#44000000</color>
+    <color name="design_fab_stroke_end_inner_color">#0a000000</color>
+    <color name="design_fab_stroke_end_outer_color">#0f000000</color>
+    <color name="design_fab_stroke_top_inner_color">#1affffff</color>
+    <color name="design_fab_stroke_top_outer_color">#2effffff</color>
+    <color name="design_snackbar_background_color">#ff323232</color>
+    <color name="design_textinput_error_color_dark">#ffff6e6e</color>
+    <color name="design_textinput_error_color_light">#ffd50000</color>
+    <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
+    <color name="dim_foreground_disabled_material_light">#80323232</color>
+    <color name="dim_foreground_material_dark">#ffbebebe</color>
+    <color name="dim_foreground_material_light">#ff323232</color>
+    <color name="foreground_material_dark">@android:color/white</color>
+    <color name="foreground_material_light">@android:color/black</color>
+    <color name="global_bg">#ffeeeff3</color>
+    <color name="gray">#ffe8e8e8</color>
+    <color name="gray_blue">#996b8da8</color>
+    <color name="gray_text">#ff515151</color>
+    <color name="gray_text_second">#99515151</color>
+    <color name="gray_translucent">#77cccccc</color>
+    <color name="highlighted_text_material_dark">#6680cbc4</color>
+    <color name="highlighted_text_material_light">#66009688</color>
+    <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
+    <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <color name="light_blue">#ff66ccff</color>
+    <color name="material_blue_grey_800">#ff37474f</color>
+    <color name="material_blue_grey_900">#ff263238</color>
+    <color name="material_blue_grey_950">#ff21272b</color>
+    <color name="material_deep_teal_200">#ff80cbc4</color>
+    <color name="material_deep_teal_500">#ff009688</color>
+    <color name="material_grey_100">#fff5f5f5</color>
+    <color name="material_grey_300">#ffe0e0e0</color>
+    <color name="material_grey_50">#fffafafa</color>
+    <color name="material_grey_600">#ff757575</color>
+    <color name="material_grey_800">#ff424242</color>
+    <color name="material_grey_850">#ff303030</color>
+    <color name="material_grey_900">#ff212121</color>
+    <color name="orange">#fff6ba40</color>
+    <color name="panel">#ffcfcfcf</color>
+    <color name="popup_dialog_prompt_cancel_color">#ff999999</color>
+    <color name="popup_dialog_prompt_clear_color">#fff43530</color>
+    <color name="popup_dialog_prompt_ok_color">#ff0099ff</color>
+    <color name="popup_menu_background">#aa000000</color>
+    <color name="primary_dark_material_dark">@android:color/black</color>
+    <color name="primary_dark_material_light">@color/material_grey_600</color>
+    <color name="primary_material_dark">@color/material_grey_900</color>
+    <color name="primary_material_light">@color/material_grey_100</color>
+    <color name="primary_text_default_material_dark">#ffffffff</color>
+    <color name="primary_text_default_material_light">#de000000</color>
+    <color name="primary_text_disabled_material_dark">#4dffffff</color>
+    <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="rc_ad_file_list_no_select_file_text_state">#ff9fcdfd</color>
+    <color name="rc_ad_file_list_select_file_text_state">#ffffffff</color>
+    <color name="rc_conversation_list_divider_color">#ffdfdfdd</color>
+    <color name="rc_conversation_top_bg">#fff2faff</color>
+    <color name="rc_divider_color">#ffd9d9d9</color>
+    <color name="rc_divider_line">#ffababad</color>
+    <color name="rc_draft_color">#ffcb120f</color>
+    <color name="rc_emoji_grid_item_bg">#ffebebeb</color>
+    <color name="rc_extension_normal">#fff4f4f6</color>
+    <color name="rc_input_bg">#fff4f4f4</color>
+    <color name="rc_input_gap_color">#ffdbdbdd</color>
+    <color name="rc_location_text">#7f000000</color>
+    <color name="rc_main_theme">#ff0195ff</color>
+    <color name="rc_mentioned_color">#ffcc3333</color>
+    <color name="rc_message_user_name">#ff828282</color>
+    <color name="rc_normal_bg">#ffebebeb</color>
+    <color name="rc_notice_normal">#f0fffbd4</color>
+    <color name="rc_notice_text">#ff999999</color>
+    <color name="rc_notice_warning">#f0ffd0c4</color>
+    <color name="rc_notification_bg">#ffd3d3d3</color>
+    <color name="rc_picprev_toolbar_transparent">@color/rc_picsel_toolbar_transparent</color>
+    <color name="rc_picsel_catalog_shadow">#c0000000</color>
+    <color name="rc_picsel_grid_mask">#00000000</color>
+    <color name="rc_picsel_grid_mask_pressed">#80000000</color>
+    <color name="rc_picsel_toolbar">#ff393a3e</color>
+    <color name="rc_picsel_toolbar_send_disable">#ff3e7d2c</color>
+    <color name="rc_picsel_toolbar_send_normal">#ff45c018</color>
+    <color name="rc_picsel_toolbar_send_pressed">#ff3e7d2c</color>
+    <color name="rc_picsel_toolbar_send_text_disable">#ffaaaaaa</color>
+    <color name="rc_picsel_toolbar_send_text_normal">#ffffffff</color>
+    <color name="rc_picsel_toolbar_transparent">#f0393a3e</color>
+    <color name="rc_plugins_bg">#fff8f8f8</color>
+    <color name="rc_popup_dialog_list_divider_color">#ffdfdfdd</color>
+    <color name="rc_read_receipt_status">#ff96c4ec</color>
+    <color name="rc_text_color_primary">#ff353535</color>
+    <color name="rc_text_color_primary_inverse">@android:color/white</color>
+    <color name="rc_text_color_secondary">#ff999999</color>
+    <color name="rc_text_color_tertiary">#ffd7d7d7</color>
+    <color name="rc_text_voice">#ff737373</color>
+    <color name="rc_voice_cancel">#cc933432</color>
+    <color name="rc_voice_color">#ff0195ff</color>
+    <color name="rc_voice_color_left">#ff4385bf</color>
+    <color name="rc_voice_color_right">#ffa2a2a2</color>
+    <color name="rc_web_progress_bar">#ff9fcdfd</color>
+    <color name="ripple_material_dark">#33ffffff</color>
+    <color name="ripple_material_light">#1f000000</color>
+    <color name="secondary_text_default_material_dark">#b3ffffff</color>
+    <color name="secondary_text_default_material_light">#8a000000</color>
+    <color name="secondary_text_disabled_material_dark">#36ffffff</color>
+    <color name="secondary_text_disabled_material_light">#24000000</color>
+    <color name="switch_thumb_disabled_material_dark">#ff616161</color>
+    <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
+    <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
+    <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="translucent">#33ffffff</color>
+    <color name="warning_yellow">#ffffff00</color>
+    <color name="weather_color_blue">#ff2bd4f3</color>
+    <color name="weather_color_orange">#ffdeba64</color>
+    <color name="yellow">#ffc0b501</color>
+
+
+
+    <color name="white_trans10">#1affffff</color>
+    <!-- 白色:10 -->
+    <color name="white_trans20">#33ffffff</color>
+    <!-- 白色:20 -->
+    <color name="white_trans30">#4dffffff</color>
+    <!-- 白色:30 -->
+    <color name="white_trans40">#66ffffff</color>
+    <!-- 白色:40 -->
+    <color name="white_trans50">#80FFFFFF</color>
+    <!-- 白色:60 -->
+    <color name="white_trans60">#99FFFFFF</color>
+    <!-- 白色:60 -->
+    <color name="white_trans90">#e6ffffff</color>
+    <!-- 白色:90 -->
+    <!-- 白色 -->
+    <color name="black_trans10">#1a000000</color>
+    <!-- 黑色: 10 -->
+    <color name="black_trans15">#26000000</color>
+    <!-- 黑色: 15 -->
+    <color name="black_trans20">#33000000</color>
+    <!-- 黑色: 20 -->
+    <color name="black_trans25">#40000000</color>
+    <!-- 黑色: 25 -->
+    <color name="black_trans30">#4d000000</color>
+    <!-- 黑色: 30 -->
+    <color name="black_trans40">#66000000</color>
+    <!-- 黑色: 40 -->
+    <color name="black_trans50">#80000000</color>
+    <!-- 黑色: 50 -->
+    <color name="black_trans60">#99000000</color>
+    <!-- 黑色：60 -->
+    <color name="black_trans70">#b3000000</color>
+    <!-- 黑色：70 -->
+    <color name="black_trans80">#CC000000</color>
+    <!-- 黑色：80 -->
+    <color name="black_trans90">#E6000000</color>
+    <!-- 黑色：90 -->
+    <!-- 黑色 -->
+    <color name="red">#E6FF0000</color>
+    <!-- 红色 -->
+    <color name="gray_background_color">#F4F4F4</color>
+    <!-- 灰色1 -->
+    <color name="gray_divider_line">#DDDDDD</color>
+    <!-- 灰色2：分割线 -->
+    <color name="gray_record_operate_item">#D0D0D0</color>
+    <!-- 灰色3 -->
+    <color name="gray_seekbar">#C0C0C0</color>
+    <!-- 灰色4 -->
+    <color name="gray_tab">#989898</color>
+    <!-- 灰色4 -->
+    <color name="gray_nap_edit">#808080</color>
+    <!-- 灰色5 -->
+    <color name="black_text_normal_common">#4B4B4B</color>
+    <!-- 灰色6 -->
+    <color name="darkgray">#A9A9A9</color>
+    <!-- 灰色 -->
+    <color name="dark_gray">#989898</color>
+    <!-- 深灰色:取消按钮 -->
+    <color name="dark_gray_button_pressed">#808080</color>
+    <!-- 深灰色:取消按钮按下 -->
+    <color name="blue_green">#0CCDF6</color>
+    <!-- 蓝绿色:小睡 -->
+    <color name="blue_green50">#800CCDF6</color>
+    <!-- 蓝绿色:闹铃响起关闭按钮 50 -->
+    <color name="blue_green60">#9A0CCDF6</color>
+    <!-- 蓝绿色:闹铃响起关闭按钮 60 -->
+    <color name="dark_blue_focus">#403F51B5</color>
+    <!-- 深蓝色:文字焦点25 -->
+    <color name="dark_blue_invalidate">#993F51B5</color>
+    <!-- 深蓝色:确定按钮不可用60 -->
+    <color name="dark_blue">#3F51B5</color>
+    <!-- 深蓝色:确定按钮 -->
+    <color name="dark_blue_trans40">#663F51B5</color>
+    <!-- 深蓝色:40 -->
+    <color name="dark_blue_button_pressed">#303F9F</color>
+    <!-- 深蓝色:确定按钮按下 -->
+    <color name="blue_tog_btn">#397cbf</color>
+    <!-- 深蓝色:toggleBtn -->
+    <color name="blue_tog_btn_pressed">#286DD4</color>
+    <!-- 深蓝色:toggleBtn按下 -->
+    <color name="yellow_hot">#f9c000</color>
+    <!-- 暖黄色:白天气温 -->
+    <color name="blue_ice">#72abf8</color>
+    <!-- 冷蓝色:夜间气温 -->
+
+    <color name="progress_1">#448aff</color>
+    <color name="progress_2">#ff9800</color>
+    <color name="progress_3">#ff1744</color>
+
+    <color name="memory">#ff5252</color>
+
+    <color name="default_image_background">#FFDEDEDE</color>
+
+    <color name="colorTimer">#009688</color>
+    <color name="colorTimerDark">#00796B</color>
+
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+
+    <!--    <color name="base_bg">#ffeeeeee</color>
+        <color name="base_msg_color">#ff999999</color>-->
+    <color name="gplus_color_1">#427fed</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#3e802f</color>
+    <color name="gplus_color_4">#b23424</color>
+</resources>

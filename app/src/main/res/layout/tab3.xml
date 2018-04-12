@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ffebebeb"
+              android:orientation="vertical">
+
+    <include layout="@layout/top"/>
+    <LinearLayout
+        android:id="@+id/ll_search_bar"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_height="40dp"
+        android:paddingBottom="5dp"
+        android:background="?attr/colorPrimary">
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:drawablePadding="5dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:textSize="13sp"
+            android:textColorHint="@color/gray"
+            android:drawableLeft="@drawable/icon_search"
+            android:hint="搜索你想要知道的问题"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/ll_search_bar"
+        android:background="@color/white">
+
+        <com.cbt.main.view.pagertab.PagerSlidingTabStrip
+            android:id="@+id/tabs_t3"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dip"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager_moments_t3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_tabs"
+        android:layout_gravity="center"
+        android:background="#ffebebeb"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/ll_search_bar"
+        android:background="@android:color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@color/gray_text"
+        android:dividerHeight="1px"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+</RelativeLayout>
