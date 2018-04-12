@@ -59,6 +59,10 @@ public class SceneSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         }
     }
 
+    public void stop(){
+        renderThread.getRenderHandler().sendEmptyMessage(RenderThread.FLAG_SLEEPING);
+    }
+
     int width;
     int height;
     @Override

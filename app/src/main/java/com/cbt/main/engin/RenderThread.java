@@ -62,7 +62,9 @@ public class RenderThread extends Thread {
                     renderHandler.sendEmptyMessage(FLAG_DRAWING);
                     break;
                 case FLAG_SLEEPING:
-//                    Looper.myLooper().quit();
+                    if(Looper.myLooper() != null){
+                        Looper.myLooper().quit();
+                    }
                     renderHandler.sendEmptyMessageDelayed(FLAG_SLEEPING, 500);
                     break;
             }
