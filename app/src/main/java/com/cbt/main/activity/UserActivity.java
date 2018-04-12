@@ -1,5 +1,6 @@
 package com.cbt.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -44,13 +45,15 @@ public class UserActivity extends BaseActivity {
         findViewById(R.id.rl_ta_nongqing).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(UserActivity.this, MyAttentionActivity.class);
+                startActivity(intent);
             }
         });
         findViewById(R.id.rl_ta_zaiqing).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(UserActivity.this, MyAttentionActivity.class);
+                startActivity(intent);
             }
         });
         findViewById(R.id.btn_send_msg).setOnClickListener(new View.OnClickListener() {

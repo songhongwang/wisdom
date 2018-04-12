@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.cbt.main.R;
 import com.cbt.main.activity.ConversationListActivity;
+import com.cbt.main.activity.MyAttentionActivity;
+import com.cbt.main.activity.MyProfileActivity;
 import com.cbt.main.activity.PerfactAccountActivity;
 import com.cbt.main.activity.SelectMapLocationActivity;
 import com.cbt.main.activity.SettingActivity;
@@ -44,6 +46,13 @@ public class MoreFragment extends BaseFragment {
         });
         mIvComplete.setVisibility(View.GONE);
 
+        mRootView.findViewById(R.id.rl_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         mRootView.findViewById(R.id.rl_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +64,27 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PerfactAccountActivity.class);
+                startActivity(intent);
+            }
+        });
+        mRootView.findViewById(R.id.rl_fabu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
+                startActivity(intent);
+            }
+        });
+        mRootView.findViewById(R.id.rl_shoucang).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
+                startActivity(intent);
+            }
+        });
+        mRootView.findViewById(R.id.rl_guanzhu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
                 startActivity(intent);
             }
         });
