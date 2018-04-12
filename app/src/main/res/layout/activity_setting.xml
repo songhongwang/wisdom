@@ -19,11 +19,65 @@
 
 
             <RelativeLayout
-                android:id="@+id/rl_clear"
+                android:id="@+id/rl_user_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
                 android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="修改用户类型"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_more"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_user_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="修改密码"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_more"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
                 android:background="@color/white">
 
@@ -46,7 +100,33 @@
                     android:drawableRight="@drawable/icon_more"/>
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:background="@color/white">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="当前版本"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="v0.1.1"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_more"/>
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -54,20 +134,22 @@
         android:id="@+id/rl_quit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/rect_corner50_blue"
         android:minHeight="50dp">
 
         <TextView
             android:id="@+id/tv_quit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:gravity="center"
             android:layout_centerInParent="true"
-            android:background="@drawable/rs_select_btn_blue"
             android:text="退出登录"
             android:textColor="@color/white"
             android:textSize="14sp"/>
