@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.cbt.main.R;
 import com.cbt.main.activity.WeatherForcastActivity;
 import com.cbt.main.adapter.IndexProductAdapter;
@@ -23,6 +25,11 @@ import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.CommonCallBack;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
+import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +58,7 @@ public class IndexFragment extends BaseFragment {
     private TextView mTvFeng;
     private IndexProductAdapter mIndexProductAdapter;
     private IndexModel mIndexModel;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     @Nullable
     @Override
@@ -106,6 +114,19 @@ public class IndexFragment extends BaseFragment {
                 getProductList();
             }
         }, 400);
+
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.refreshLayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                getData();
+            }
+        });
     }
 
     @Override
@@ -134,11 +155,12 @@ public class IndexFragment extends BaseFragment {
                 mTvTodayWeather.setText(mIndexModel.ybtianqi);
                 mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
                 mTvFeng.setText(mIndexModel.ybfengxiang + mIndexModel.ybfengsu);
-
+                mTwinklingRefreshLayout.finishRefreshing();
             }
 
             @Override
             public void onFailure(Call<IndexModel> call, Throwable t) {
+                mTwinklingRefreshLayout.finishRefreshing();
 
             }
         });
