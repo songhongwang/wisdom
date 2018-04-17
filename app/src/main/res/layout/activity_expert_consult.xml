@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/layout_top"
+        layout="@layout/top_no_margintop"/>
+
+    <ListView
+        android:id="@+id/lv_disaster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:clipToPadding="false"
+        android:layout_marginBottom="40dp"
+        android:divider="@color/background_common"
+        android:dividerHeight="1px"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_reply_disaster"/>
+
+</RelativeLayout>
