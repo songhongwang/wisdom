@@ -110,7 +110,9 @@ public class TopicFragment extends BaseFragment {
                     mPage ++;
 
                     if(dataList.size() > 0){
-
+                        if(mPage ==0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(MarketinformationView.convert(dataList.get(i)));
                         }

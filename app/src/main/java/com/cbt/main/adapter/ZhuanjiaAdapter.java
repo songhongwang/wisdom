@@ -50,7 +50,11 @@ public class ZhuanjiaAdapter extends RecyclerView.Adapter {
         mCallback = callback;
         return this;
     }
-
+    public void setOnReplySuccessListener(ReplyDialog.OnReplySuccessListener onReplySuccessListener){
+        if(replyDialog != null){
+            replyDialog.setOnReplySuccessListener(onReplySuccessListener);
+        }
+    }
     public void set(List<Data> dataList) {
         mDataList.clear();
         if (dataList != null) {

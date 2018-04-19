@@ -13,6 +13,7 @@ import com.cbt.main.adapter.ZaiqingAdapter;
 import com.cbt.main.adapter.ZhuanjiaAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
+import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.MomentMode;
 import com.cbt.main.model.WentiModel;
@@ -86,6 +87,16 @@ public class ZhuanjiaFragment extends BaseFragment {
 
 
         });
+        adapter.setOnReplySuccessListener(new ReplyDialog.OnReplySuccessListener() {
+            @Override
+            public void onSuccess() {
+                if(mPage > 0){
+                    mPage = mPage -1;
+                }
+                getData();
+            }
+        });
+
         mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
         ProgressLayout headerView = new ProgressLayout(getActivity());
         mTwinklingRefreshLayout.setHeaderView(headerView);
@@ -131,7 +142,9 @@ public class ZhuanjiaFragment extends BaseFragment {
                     mPage ++;
 
                     if(dataList.size() > 0){
-
+                        if(mPage ==0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(WentiModel.convert(dataList.get(i)));
                         }

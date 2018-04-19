@@ -43,6 +43,7 @@ public class MomentsFragment extends BaseFragment {
 
     private RecyclerView vRecycler;
     private MessageAdapter adapter;
+    List<Data> goodList = new ArrayList<>();
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
@@ -151,9 +152,11 @@ public class MomentsFragment extends BaseFragment {
                 mPage ++;
 
                 if(dataList.size() > 0){
-                    List<Data> goodList = new ArrayList<>();
+                    if(mPage == 0){
+                        goodList.clear();
+                    }
                     for(int i = 0; i< dataList.size(); i ++){
-					goodList.add(AgriculturalModel.convert(dataList.get(i)));
+					    goodList.add(AgriculturalModel.convert(dataList.get(i)));
                     }
                     adapter.set(goodList);
                     adapter.notifyDataSetChanged();
