@@ -2,6 +2,7 @@ package com.cbt.main.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -57,6 +58,12 @@ public class IndexFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mIndexModel = null;
+    }
+
+    @Override
     public void initUI() {
         mLv = (ListView) mRootView.findViewById(R.id.listView) ;
         mRootView.findViewById(R.id.tv_product_more).setOnClickListener(new View.OnClickListener() {
@@ -89,18 +96,18 @@ public class IndexFragment extends BaseFragment {
         mTvTempr= (TextView) mRootView.findViewById(R.id.tv_temper);
         mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
 
-        mTvTitle.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getData();
-            }
-        },200);
-        mTvTitle.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getProductList();
-            }
-        }, 400);
+//        mTvTitle.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getData();
+//            }
+//        },200);
+//        mTvTitle.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getProductList();
+//            }
+//        }, 400);
 
         mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.refreshLayout);
         ProgressLayout headerView = new ProgressLayout(getActivity());
@@ -119,7 +126,15 @@ public class IndexFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        if(mIndexModel == null){
+            getData();
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getProductList();
+            }
+        }, 400);
     }
 
     private void getData() {
@@ -128,7 +143,7 @@ public class IndexFragment extends BaseFragment {
         String country = GlobalApplication.mLocationData.addr;
 
 
-        ApiClient.getInstance().getBasicService(getContext()).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
                 mIndexModel = response.body();
@@ -155,7 +170,7 @@ public class IndexFragment extends BaseFragment {
     }
 
     private void getProductList(){
-        ApiClient.getInstance().getBasicService(getContext()).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
             @Override
             public void onResponse(Call<List<IndexProductModel>> call, Response<List<IndexProductModel>> response) {
 

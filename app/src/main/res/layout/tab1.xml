@@ -94,6 +94,18 @@
                 android:text="2017年12月10日(农历十月初十)"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_yujing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/home_icon_inf"
+                android:drawablePadding="10dp"
+                android:text="暂无预警信息"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout

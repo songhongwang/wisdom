@@ -3,11 +3,15 @@ package com.cbt.main.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.activity.ConversationListActivity;
 import com.cbt.main.activity.MyAttentionActivity;
@@ -16,6 +20,9 @@ import com.cbt.main.activity.PerfactAccountActivity;
 import com.cbt.main.activity.SelectMapLocationActivity;
 import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
+import com.cbt.main.model.User;
+import com.cbt.main.utils.SharedPreferencUtil;
+import com.cbt.main.utils.net.Constants;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
@@ -45,6 +52,19 @@ public class MoreFragment extends BaseFragment {
             }
         });
         mIvComplete.setVisibility(View.GONE);
+
+        User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
+        if(login != null){
+            ((TextView)mRootView.findViewById(R.id.tv_user_name)).setText(login.getUname());
+            ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText(login.getUsname());
+
+            ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
+            if(!TextUtils.isEmpty(login.getIcon())){
+                Glide.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).into(ivAvatar);
+            }
+        }
+
+
 
         mRootView.findViewById(R.id.rl_profile).setOnClickListener(new View.OnClickListener() {
             @Override
