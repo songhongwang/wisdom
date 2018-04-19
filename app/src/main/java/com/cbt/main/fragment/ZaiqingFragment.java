@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.ZaiqingAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
@@ -21,6 +22,9 @@ import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class ZaiqingFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     public static ZaiqingFragment getInstance(MomentMode mode){
         ZaiqingFragment fragment = new ZaiqingFragment();
@@ -83,7 +88,21 @@ public class ZaiqingFragment extends BaseFragment {
             }
         });
 
-        getData();
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                mPage = 0;
+                getData();
+            }
+        });
+
     }
 
     @Override
@@ -97,12 +116,12 @@ public class ZaiqingFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        getData();
     }
 
     private void getData() {
         mIsLoading = true;
-        ApiClient.getInstance().getBasicService(getContext()).getZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
             @Override
             public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
                 List<ZaiqingModel> dataList = response.body();

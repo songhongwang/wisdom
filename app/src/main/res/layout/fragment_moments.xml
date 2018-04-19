@@ -10,12 +10,18 @@
         android:layout_height="0dip"
         android:background="@color/colorPrimary"/>
 
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/twinkRefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/v_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
     <RelativeLayout
         android:id="@+id/rl_loading"
         android:layout_width="100dp"

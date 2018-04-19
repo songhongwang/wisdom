@@ -3,8 +3,6 @@ package com.cbt.main.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,30 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.baoyz.widget.PullRefreshLayout;
 import com.cbt.main.R;
 import com.cbt.main.activity.WeatherForcastActivity;
 import com.cbt.main.adapter.IndexProductAdapter;
 import com.cbt.main.app.GlobalApplication;
-import com.cbt.main.engin.SceneSurfaceView;
-import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.IndexProductModel;
-import com.cbt.main.model.Weather7DaysForcast;
-import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
-import com.cbt.main.utils.net.CommonCallBack;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.SinaRefreshView;
-import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -118,6 +105,7 @@ public class IndexFragment extends BaseFragment {
         mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.refreshLayout);
         ProgressLayout headerView = new ProgressLayout(getActivity());
         mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
         mTwinklingRefreshLayout.setOverScrollBottomShow(false);
         mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override

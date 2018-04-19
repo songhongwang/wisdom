@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.cbt.main.R;
 import com.cbt.main.adapter.ZaiqingAdapter;
 import com.cbt.main.adapter.ZhuanjiaAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.MomentMode;
@@ -20,6 +21,9 @@ import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ public class ZhuanjiaFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     public static ZhuanjiaFragment getInstance(MomentMode mode){
         ZhuanjiaFragment fragment = new ZhuanjiaFragment();
@@ -81,8 +86,21 @@ public class ZhuanjiaFragment extends BaseFragment {
 
 
         });
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                mPage = 0;
+                getData();
+            }
+        });
 
-        getData();
     }
 
     @Override
@@ -96,7 +114,7 @@ public class ZhuanjiaFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        getData();
     }
 
     private void getData() {
@@ -104,7 +122,7 @@ public class ZhuanjiaFragment extends BaseFragment {
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuire)
         {
-            ApiClient.getInstance().getBasicService(getContext()).getExperthot(mPage).enqueue(new Callback<List<WentiModel>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getExperthot(mPage).enqueue(new Callback<List<WentiModel>>() {
                 @Override
                 public void onResponse(Call<List<WentiModel>> call, Response<List<WentiModel>> response) {
                     List<WentiModel> dataList = response.body();
@@ -136,7 +154,7 @@ public class ZhuanjiaFragment extends BaseFragment {
         }
         else if (mode == MomentMode.zj_zuire)
         {
-            ApiClient.getInstance().getBasicService(getContext()).getExpertnew(mPage).enqueue(new Callback<List<WentiModel>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getExpertnew(mPage).enqueue(new Callback<List<WentiModel>>() {
                 @Override
                 public void onResponse(Call<List<WentiModel>> call, Response<List<WentiModel>> response) {
                     List<WentiModel> dataList = response.body();
@@ -167,7 +185,7 @@ public class ZhuanjiaFragment extends BaseFragment {
         }
         else
         {
-            ApiClient.getInstance().getBasicService(getContext()).getExpertmine(mPage).enqueue(new Callback<List<WentiModel>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getExpertmine(mPage).enqueue(new Callback<List<WentiModel>>() {
                 @Override
                 public void onResponse(Call<List<WentiModel>> call, Response<List<WentiModel>> response) {
                     List<WentiModel> dataList = response.body();

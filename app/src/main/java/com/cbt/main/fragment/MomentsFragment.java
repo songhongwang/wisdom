@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 
 import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
+import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
@@ -20,6 +22,9 @@ import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,6 +47,8 @@ public class MomentsFragment extends BaseFragment {
     private boolean mIsLoading;
     private boolean mHasMore = true;
     private View mVLoading;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
+
 
     public static MomentsFragment getInstance(MomentMode mode){
         MomentsFragment fragment = new MomentsFragment();
@@ -85,6 +92,29 @@ public class MomentsFragment extends BaseFragment {
             }
         });
 
+        adapter.setOnReplySuccessListener(new ReplyDialog.OnReplySuccessListener() {
+            @Override
+            public void onSuccess() {
+                if(mPage > 0){
+                    mPage = mPage -1;
+                }
+                getData();
+            }
+        });
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                mPage = 0;
+                getData();
+            }
+        });
 
     }
 
@@ -111,7 +141,7 @@ public class MomentsFragment extends BaseFragment {
             mVLoading.setVisibility(View.VISIBLE);
         }
         mIsLoading = true;
-        ApiClient.getInstance().getBasicService(getContext()).getMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
             @Override
             public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
                 List<AgriculturalModel> dataList = response.body();
