@@ -38,8 +38,7 @@ import retrofit2.Response;
  * 首页
  */
 public class IndexFragment extends BaseFragment {
-
-    // test commit
+    
     private ListView mLv;
     private TextView mTvBigWendu;
     private TextView mTvShiDu;
