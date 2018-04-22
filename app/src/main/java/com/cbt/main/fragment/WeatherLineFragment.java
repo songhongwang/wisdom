@@ -267,9 +267,9 @@ public class WeatherLineFragment extends BaseFragment {
         }
 
         // 设置标题星期
-        mDaysForecastTvWeek1.setText(getString(R.string.yesterday));
-        mDaysForecastTvWeek2.setText(getString(R.string.today));
-        mDaysForecastTvWeek3.setText(getWeek(day3[1]));
+        mDaysForecastTvWeek1.setText(getString(R.string.today));
+        mDaysForecastTvWeek2.setText(getString(R.string.tomorrow));
+        mDaysForecastTvWeek3.setText(getString(R.string.the_day_of_tomorrow));
         mDaysForecastTvWeek4.setText(getWeek(day4[1]));
         mDaysForecastTvWeek5.setText(getWeek(day5[1]));
         mDaysForecastTvWeek6.setText(getWeek(day6[1]));
@@ -458,7 +458,7 @@ public class WeatherLineFragment extends BaseFragment {
             }
         }
 
-        int result = 10; // 默认温度10°c
+        int result = 0; // 默认温度0°c
         try{
             result =Integer.parseInt(temperature);
         }catch (Exception e){

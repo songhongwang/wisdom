@@ -1,5 +1,7 @@
 package com.cbt.main.model;
 
+import com.cbt.main.fragment.WeatherLineFragment;
+
 import java.util.Calendar;
 
 /**
@@ -96,8 +98,24 @@ public class WeatherModel2 {
 
         WeatherModel good = new WeatherModel();
         good.setDate((dayOfMouth + index) + "日" + self.getYbday());
-        good.setHigh("高温 " + self.getYbzuigaowendu());
-        good.setLow("低温 " + self.getYbzuidiwendu());
+
+
+        int heigth = 0;
+        int low = 0;
+        try{
+            if(self.getYbzuidiwendu().contains("℃")){
+                low = Integer.parseInt(self.getYbzuidiwendu().substring(0, self.getYbzuidiwendu().indexOf("℃")));
+            }
+
+            if(self.getYbzuigaowendu().contains("℃")){
+                heigth = Integer.parseInt(self.getYbzuigaowendu().substring(0, self.getYbzuigaowendu().indexOf("℃")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        good.setHigh("高温 " + Math.max(heigth, low) + "℃");
+        good.setLow("低温 " + Math.min(heigth, low) + "℃");
         good.setTypeDay(self.getYbtianqi());
         good.setTypeNight(self.getYbtianqi());
         good.setWindDirectionDay(self.getYbfengxiang());
