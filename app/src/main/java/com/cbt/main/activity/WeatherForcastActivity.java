@@ -51,6 +51,10 @@ public class WeatherForcastActivity extends BaseActivity {
         mIvFinish.setVisibility(View.GONE);
 
         mIndexModel = (IndexModel) getIntent().getSerializableExtra("weather");
+        if(mIndexModel == null){
+            ToastUtils.show(this, "天气预报数据未准备好");
+            finish();
+        }
         mTvQiYa.setText(mIndexModel.qiya);
         mTvFengSu.setText(mIndexModel.fengxiang);
         mTvFaBu.setText(mIndexModel.ybshijian);
