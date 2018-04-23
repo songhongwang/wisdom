@@ -63,6 +63,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void setOnReplySuccessListener(ReplyDialog.OnReplySuccessListener onReplySuccessListener){
+        if(replyDialog != null){
+            replyDialog.setOnReplySuccessListener(onReplySuccessListener);
+        }
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;

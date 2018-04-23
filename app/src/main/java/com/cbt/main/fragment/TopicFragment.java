@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.cbt.main.R;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.TopicAdapter;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.MarketinformationView;
@@ -20,6 +21,9 @@ import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ public class TopicFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     @Nullable
     @Override
@@ -72,7 +77,22 @@ public class TopicFragment extends BaseFragment {
 
 
         });
-        getData();
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                mPage = 0;
+                getData();
+            }
+        });
+
+
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
     }
 
@@ -81,7 +101,7 @@ public class TopicFragment extends BaseFragment {
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuixin)
         {
-            ApiClient.getInstance().getBasicService(getContext()).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
@@ -90,7 +110,9 @@ public class TopicFragment extends BaseFragment {
                     mPage ++;
 
                     if(dataList.size() > 0){
-
+                        if(mPage ==0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(MarketinformationView.convert(dataList.get(i)));
                         }
@@ -113,7 +135,7 @@ public class TopicFragment extends BaseFragment {
         }
         else if (mode == MomentMode.zj_wode)
         {
-            ApiClient.getInstance().getBasicService(getContext()).getmarketmypublish(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketmypublish(mPage).enqueue(new Callback<List<MarketinformationView>>() {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
@@ -178,7 +200,7 @@ public class TopicFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-
+        getData();
     }
 
 }

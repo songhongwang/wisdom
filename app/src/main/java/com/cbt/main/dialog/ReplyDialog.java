@@ -37,6 +37,7 @@ public class ReplyDialog extends Dialog {
     private String mIid;
     private String mReplyId;
     private String mReplyName;
+    private OnReplySuccessListener mOnReplySuccessListener;
 
     public ReplyDialog(@NonNull Context context) {
         super(context);
@@ -48,6 +49,10 @@ public class ReplyDialog extends Dialog {
         super(context, theme);
         mContext = context;
         init();
+    }
+
+    public void setOnReplySuccessListener(OnReplySuccessListener onReplySuccessListener) {
+        mOnReplySuccessListener = onReplySuccessListener;
     }
 
     public void setIid(String iid){
@@ -121,7 +126,9 @@ public class ReplyDialog extends Dialog {
             ApiClient.getInstance().getBasicService(mContext).replyZaiqing(mIid, mReplyId, content).enqueue(new Callback<Object>() {
                 @Override
                 public void onResponse(Call<Object> call, Response<Object> response) {
-
+                    if(mOnReplySuccessListener!=null){
+                        mOnReplySuccessListener.onSuccess();
+                    }
                 }
 
                 @Override
@@ -135,7 +142,9 @@ public class ReplyDialog extends Dialog {
             ApiClient.getInstance().getBasicService(mContext).replyFeed(mIid, mReplyId, content).enqueue(new Callback<Object>() {
                 @Override
                 public void onResponse(Call<Object> call, Response<Object> response) {
-
+                    if(mOnReplySuccessListener!=null){
+                        mOnReplySuccessListener.onSuccess();
+                    }
                 }
 
                 @Override
@@ -149,7 +158,9 @@ public class ReplyDialog extends Dialog {
             ApiClient.getInstance().getBasicService(mContext).replyShichang(mIid, mReplyId, content).enqueue(new Callback<Object>() {
                 @Override
                 public void onResponse(Call<Object> call, Response<Object> response) {
-
+                    if(mOnReplySuccessListener!=null){
+                        mOnReplySuccessListener.onSuccess();
+                    }
                 }
 
                 @Override
@@ -160,5 +171,9 @@ public class ReplyDialog extends Dialog {
         }
     }
 
+
+    public interface OnReplySuccessListener{
+        void onSuccess();
+    }
 
 }

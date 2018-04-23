@@ -51,6 +51,10 @@ public class WeatherForcastActivity extends BaseActivity {
         mIvFinish.setVisibility(View.GONE);
 
         mIndexModel = (IndexModel) getIntent().getSerializableExtra("weather");
+        if(mIndexModel == null){
+            ToastUtils.show(this, "天气预报数据未准备好");
+            finish();
+        }
         mTvQiYa.setText(mIndexModel.qiya);
         mTvFengSu.setText(mIndexModel.fengxiang);
         mTvFaBu.setText(mIndexModel.ybshijian);
@@ -78,7 +82,7 @@ public class WeatherForcastActivity extends BaseActivity {
 
                 List<WeatherModel> goodList = new ArrayList<>();
                 List<WeatherModel2> d7list = response.body().getD7list();
-                for(int i = 0; i< d7list.size() -1;i ++){
+                for(int i = 0; i< d7list.size();i ++){
 
                     WeatherModel good = WeatherModel2.convert(d7list.get(i), i);
                     goodList.add(good);
