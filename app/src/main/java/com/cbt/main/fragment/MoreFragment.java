@@ -15,7 +15,9 @@ import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.activity.ConversationListActivity;
 import com.cbt.main.activity.MyAttentionActivity;
+import com.cbt.main.activity.MyFabuActivity;
 import com.cbt.main.activity.MyProfileActivity;
+import com.cbt.main.activity.MyShoucangActivity;
 import com.cbt.main.activity.PerfactAccountActivity;
 import com.cbt.main.activity.SelectMapLocationActivity;
 import com.cbt.main.activity.SettingActivity;
@@ -90,27 +92,31 @@ public class MoreFragment extends BaseFragment {
         mRootView.findViewById(R.id.rl_fabu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
+                Intent intent = new Intent(getActivity(), MyFabuActivity.class);
                 startActivity(intent);
             }
         });
         mRootView.findViewById(R.id.rl_shoucang).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
+                Intent intent = new Intent(getActivity(), MyShoucangActivity.class);
                 startActivity(intent);
             }
         });
         mRootView.findViewById(R.id.rl_guanzhu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MyAttentionActivity.class);
-                startActivity(intent);
+                RongIM.getInstance().startSubConversationList(getActivity(), Conversation.ConversationType.PRIVATE);
             }
         });
+        getData();
     }
 
     @Override
     protected void lazyLoad() {
+    }
+
+    public void getData() {
+
     }
 }

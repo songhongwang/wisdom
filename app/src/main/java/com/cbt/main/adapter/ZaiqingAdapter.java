@@ -34,11 +34,13 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
     private final CropCircleTransformation mCropCircleTransformation;
     private MessagePicturesLayout.Callback mCallback;
     private Context mContext;
+    private int ismydo;
     ReplyDialog replyDialog ;
 
-    public ZaiqingAdapter(Context context) {
+    public ZaiqingAdapter(Context context,int ismy) {
          mCropCircleTransformation = new CropCircleTransformation();
          mContext = context;
+        ismydo = ismy;
         replyDialog = new ReplyDialog(mContext, R.style.TransparentDialog);
     }
 
@@ -79,6 +81,11 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
             llReplyList = (LinearLayout) itemView.findViewById(R.id.ll_reply_listzai);
             tvReplyCount = (TextView) itemView.findViewById(R.id.tv_reply_countzai);
             lPictures.setCallback(mCallback);
+            if (ismydo == 1)
+            {
+                iAvatar.setVisibility(View.INVISIBLE);
+                tNickname.setVisibility(View.INVISIBLE);
+            }
         }
 
         void refresh(final int pos) {
@@ -108,7 +115,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
 
             llReplyList.removeAllViews();
 
-            if(mData.getReplyList().size() > 0){
+            if(mData.getReplyList() != null && mData.getReplyList().size() > 0){
                 llReplyList.setVisibility(View.VISIBLE);
                 for(final ReplyModel replyModel :mData.getReplyList()){
                     TextView textView = new TextView(mContext);

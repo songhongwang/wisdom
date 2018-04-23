@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="活跃度"
+                    android:text=""
                     android:textSize="12sp"/>
 
                 <RelativeLayout
@@ -69,14 +69,18 @@
                         android:textSize="14sp"/>
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"
-                        android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/icon_more"
-                        android:text="hello"/>
+                    <EditText
+                        android:id="@+id/et_nicheng"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:lines="1"
+                        android:background="@color/white"
+                        android:hint="请输入您的昵称"
+                        android:textColorHint="#7c7c7c"
+                        android:textSize="14sp"/>
 
 
                 </RelativeLayout>
@@ -100,14 +104,17 @@
                         android:textSize="14sp"/>
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"
-                        android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/icon_more"
-                        android:text="hello"/>
+                    <EditText
+                        android:id="@+id/et_telphone"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:lines="1"
+                        android:background="@color/white"
+                        android:textColorHint="#7c7c7c"
+                        android:textSize="14sp"/>
 
                 </RelativeLayout>
 
@@ -183,6 +190,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_shengri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -194,34 +202,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_地区"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:minHeight="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:text="地区"
-                    android:textSize="14sp"/>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:drawablePadding="5dp"
-                    android:layout_centerVertical="true"
-                    android:drawableRight="@drawable/icon_more"
-                    android:text="hello"/>
-
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

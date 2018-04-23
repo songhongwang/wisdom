@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:hint="请输入上报内容不超过140字"
+        android:hint="请输入市场信息，内容不超过140字"
         android:gravity="top|left"
         android:padding="10dp"
         android:textSize="15sp"

@@ -201,7 +201,7 @@ public class ReleaseActivity extends BaseActivity{
              for (int i = 0; i < dataList.size(); i++) {
                  mOptionZaileiList.add(new TypeModel(dataList.get(i).getId(), dataList.get(i).getName()));
              }
-
+             mOptionZaileiList.add(new TypeModel("9999","其他"));
          }
 
          @Override

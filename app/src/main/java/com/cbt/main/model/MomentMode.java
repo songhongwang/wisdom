@@ -6,6 +6,6 @@ package com.cbt.main.model;
  */
 
 public enum MomentMode {
-    nong_qing, zai_qing, my_attention, zj_zuixin, zj_zuire, zj_wode
+    nong_qing, zai_qing, my_attention, zj_zuixin, zj_zuire, zj_wode,my_shoucang
 
 }

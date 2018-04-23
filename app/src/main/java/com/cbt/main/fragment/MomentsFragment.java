@@ -45,16 +45,17 @@ public class MomentsFragment extends BaseFragment {
     private MessageAdapter adapter;
     List<Data> goodList = new ArrayList<>();
     private int mPage;
+    private int ismydo;
     private boolean mIsLoading;
     private boolean mHasMore = true;
     private View mVLoading;
     private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
-
-    public static MomentsFragment getInstance(MomentMode mode){
+    public static MomentsFragment getInstance(MomentMode mode,int ismy){
         MomentsFragment fragment = new MomentsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("mode",MomentMode.nong_qing);
+        bundle.putSerializable("ismy",ismy);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -79,7 +80,7 @@ public class MomentsFragment extends BaseFragment {
         if(getActivity() instanceof IWatcherImage){
             callback = ((IWatcherImage) getActivity()).getWatcherCallBack();
         }
-        vRecycler.setAdapter(adapter = new MessageAdapter(getActivity()).setPictureClickCallback(callback));
+        vRecycler.setAdapter(adapter = new MessageAdapter(getActivity(),ismydo).setPictureClickCallback(callback));
 
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
 
@@ -94,28 +95,28 @@ public class MomentsFragment extends BaseFragment {
         });
 
         adapter.setOnReplySuccessListener(new ReplyDialog.OnReplySuccessListener() {
-            @Override
-            public void onSuccess() {
-                if(mPage > 0){
-                    mPage = mPage -1;
-                }
-                getData();
+        @Override
+        public void onSuccess() {
+            if(mPage > 0){
+                mPage = mPage -1;
             }
-        });
-        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
-        ProgressLayout headerView = new ProgressLayout(getActivity());
+            getData();
+        }
+    });
+    mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+    ProgressLayout headerView = new ProgressLayout(getActivity());
         mTwinklingRefreshLayout.setHeaderView(headerView);
         mTwinklingRefreshLayout.setOverScrollBottomShow(false);
         mTwinklingRefreshLayout.setEnableLoadmore(false);
         mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
-            @Override
-            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                super.onRefresh(refreshLayout);
-                refreshLayout.finishRefreshing();
-                mPage = 0;
-                getData();
-            }
-        });
+        @Override
+        public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+            super.onRefresh(refreshLayout);
+            refreshLayout.finishRefreshing();
+            mPage = 0;
+            getData();
+        }
+    });
 
     }
 
@@ -142,45 +143,123 @@ public class MomentsFragment extends BaseFragment {
             mVLoading.setVisibility(View.VISIBLE);
         }
         mIsLoading = true;
-        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
-            @Override
-            public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
-                List<AgriculturalModel> dataList = response.body();
+        ismydo = (int) getArguments().getSerializable("ismy");
+        if (ismydo == 1)
+        {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).myMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
+                @Override
+                public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
+                    List<AgriculturalModel> dataList = response.body();
 
 
-                mIsLoading = false;
-                mPage ++;
+                    mIsLoading = false;
+                    mPage ++;
 
-                if(dataList.size() > 0){
-                    if(mPage == 0){
-                        goodList.clear();
+                    if(dataList.size() > 0){
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
+                        for(int i = 0; i< dataList.size(); i ++){
+                            goodList.add(AgriculturalModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+
+                        mHasMore =true;
+                    }else{
+                        mHasMore = false;
                     }
-                    for(int i = 0; i< dataList.size(); i ++){
-					    goodList.add(AgriculturalModel.convert(dataList.get(i)));
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
                     }
-                    adapter.set(goodList);
-                    adapter.notifyDataSetChanged();
 
-
-                    mHasMore =true;
-                }else{
-                    mHasMore = false;
-                }
-                if(mVLoading != null){
-                    mVLoading.setVisibility(View.GONE);
                 }
 
-            }
+                @Override
+                public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
+                    if(mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
 
-            @Override
-public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
-                if(mVLoading != null) {
-                    mVLoading.setVisibility(View.GONE);
+                    mIsLoading = false;
+                }
+            });
+        }
+        else         if (ismydo == 2) {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).scMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
+                @Override
+                public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
+                    List<AgriculturalModel> dataList = response.body();
+
+
+                    mIsLoading = false;
+                    mPage++;
+                    if (dataList.size() > 0) {
+                        if (mPage == 0) {
+                            goodList.clear();
+                        }
+                        for (int i = 0; i < dataList.size(); i++) {
+                            goodList.add(AgriculturalModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
-                mIsLoading = false;
-            }
-        });
+                @Override
+                public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
+                    if (mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                    mIsLoading = false;
+                }
+            });
+
+        }
+        else
+        {
+           ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
+               @Override
+               public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
+                   List<AgriculturalModel> dataList = response.body();
+
+
+                   mIsLoading = false;
+                   mPage ++;
+
+                   if(dataList.size() > 0){
+                       if(mPage == 0){
+                           goodList.clear();
+                       }
+                       for(int i = 0; i< dataList.size(); i ++){
+                           goodList.add(AgriculturalModel.convert(dataList.get(i)));
+                       }
+                       adapter.set(goodList);
+                       adapter.notifyDataSetChanged();
+
+
+                       mHasMore =true;
+                   }else{
+                       mHasMore = false;
+                   }
+                   if(mVLoading != null){
+                       mVLoading.setVisibility(View.GONE);
+                   }
+
+               }
+
+               @Override
+               public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
+                   if(mVLoading != null) {
+                       mVLoading.setVisibility(View.GONE);
+                   }
+
+                   mIsLoading = false;
+               }
+           });
+        }
     }
 // test reset
 }

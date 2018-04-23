@@ -6,14 +6,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.cbt.main.R;
+import com.cbt.main.fragment.MineFragment;
 import com.cbt.main.fragment.MomentsFragment;
+import com.cbt.main.fragment.MyMineFragment;
 import com.cbt.main.model.MomentMode;
 
 /**
  * Created by vigorous on 18/4/12.
  */
 
-public class MyAttentionActivity extends BaseActivity {
+public class MyFabuActivity extends BaseActivity {
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_my_attention);
@@ -21,9 +23,10 @@ public class MyAttentionActivity extends BaseActivity {
 
     @Override
     public void initUI() {
+        mTvTitle.setText("我的发布");
         mIvFinish.setVisibility(View.GONE);
 
-        final MomentsFragment mMomentsFragment = MomentsFragment.getInstance(MomentMode.my_attention,1);
+        final MyMineFragment mMomentsFragment = MyMineFragment.getInstance(MomentMode.my_attention);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_container,mMomentsFragment);

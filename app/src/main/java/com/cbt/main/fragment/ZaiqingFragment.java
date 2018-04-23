@@ -46,12 +46,15 @@ public class ZaiqingFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private View mVLoading;
+    private int ismydo;
     private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
-    public static ZaiqingFragment getInstance(MomentMode mode){
+    public static ZaiqingFragment getInstance(MomentMode mode,int ismy){
         ZaiqingFragment fragment = new ZaiqingFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("mode",MomentMode.zai_qing);
+        bundle.putSerializable("ismy",ismy);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -67,6 +70,7 @@ public class ZaiqingFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mVLoading = mRootView.findViewById(R.id.rl_loading);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(5).setSpaceColor(0xFFECECEC));
@@ -75,7 +79,7 @@ public class ZaiqingFragment extends BaseFragment {
         if(getActivity() instanceof IWatcherImage){
             callback = ((IWatcherImage) getActivity()).getWatcherCallBack();
         }
-        vRecycler.setAdapter(adapter = new ZaiqingAdapter(getActivity()).setPictureClickCallback(callback));
+        vRecycler.setAdapter(adapter = new ZaiqingAdapter(getActivity(),ismydo).setPictureClickCallback(callback));
 
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
 
@@ -129,36 +133,128 @@ public class ZaiqingFragment extends BaseFragment {
     }
 
     private void getData() {
+        if(mVLoading != null){
+            mVLoading.setVisibility(View.VISIBLE);
+        }
         mIsLoading = true;
-        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
-            @Override
-            public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
-                List<ZaiqingModel> dataList = response.body();
+        ismydo = (int) getArguments().getSerializable("ismy");
+        if (ismydo == 1)
+        {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).myZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
+                @Override
+                public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
+                    List<ZaiqingModel> dataList = response.body();
 
-                mIsLoading = false;
-                mPage ++;
+                    mIsLoading = false;
+                    mPage++;
 
-                if(dataList.size() > 0){
-                    List<Data> goodList = new ArrayList<>();
-                    for(int i = 0; i< dataList.size(); i ++){
-                        goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                    if (dataList.size() > 0) {
+                        List<Data> goodList = new ArrayList<>();
+                        for (int i = 0; i < dataList.size(); i++) {
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+
+                        mHasMore = true;
+                    } else {
+                        mHasMore = false;
                     }
-                    adapter.set(goodList);
-                    adapter.notifyDataSetChanged();
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
+                    }
 
-
-                    mHasMore =true;
-                }else{
-                    mHasMore = false;
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                    if(mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                    mIsLoading = false;
+                }
+            });
+        }
+        else if (ismydo == 2)
+        {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).scZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
+                @Override
+                public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
+                    List<ZaiqingModel> dataList = response.body();
+
+                    mIsLoading = false;
+                    mPage++;
+
+                    if (dataList.size() > 0) {
+                        List<Data> goodList = new ArrayList<>();
+                        for (int i = 0; i < dataList.size(); i++) {
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+
+                        mHasMore = true;
+                    } else {
+                        mHasMore = false;
+                    }
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                    if(mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                    mIsLoading = false;
+                }
+            });
+        }
+        else {
+
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
+                @Override
+                public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
+                    List<ZaiqingModel> dataList = response.body();
+
+                    mIsLoading = false;
+                    mPage++;
+
+                    if (dataList.size() > 0) {
+                        List<Data> goodList = new ArrayList<>();
+                        for (int i = 0; i < dataList.size(); i++) {
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+
+                        mHasMore = true;
+                    } else {
+                        mHasMore = false;
+                    }
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                if(mVLoading != null) {
+                    mVLoading.setVisibility(View.GONE);
+                }
 
                 mIsLoading = false;
-            }
-        });
+                }
+            });
+        }
     }
 // test reset
 }

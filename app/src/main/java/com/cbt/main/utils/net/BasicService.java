@@ -2,6 +2,7 @@ package com.cbt.main.utils.net;
 
 import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.ClientFarm;
 import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.IndexModel;
@@ -40,6 +41,15 @@ public interface BasicService {
     @GET("findcheckcode")
     Call<BaseModel<Object>> getCode(@Query("telphone") String telphone);
 
+    @GET("Forgotcheckcode")
+    Call<BaseModel<Object>> wjgetCode(@Query("telphone") String telphone);
+
+    @GET("Changepassword")
+    Call<BaseModel<Object>> cgpassword(@Query("password") String password);
+
+    @GET("Forgotpassword")
+    Call<BaseModel<Object>> wjMmtijiao(@Query("password") String password);
+
     @GET("adduser")
     Call<BaseModel<Object>> regist(@Query("telphone") String telphone, @Query("password") String password, @Query("randoms") String code);
 
@@ -55,7 +65,7 @@ public interface BasicService {
     @GET("find7Day")
     Call<Weather7DaysForcast> getWeatherForcast(@Query("provincename") String provincename, @Query("cityname") String cityname, @Query("countryname") String countryname);
 
-@GET("findType")
+    @GET("findType")
     Call<List<Dictionaries>> findType(@Query("upid") String upid, @Query("type") int type);
 //    @GET("findfarminteract")
 //    Call<Object> getMineFarmerTab1(@Query("page") int page);
@@ -73,8 +83,20 @@ public interface BasicService {
     @GET("findZaiqingForFm")
     Call<List<ZaiqingModel>> getZaiqingForFm(@Query("page") int page);
 
+    @GET("findMySendZaiqing")
+    Call<List<ZaiqingModel>> myZaiqingForFm(@Query("page") int page);
+
+    @GET("findMyscZaiqing")
+    Call<List<ZaiqingModel>> scZaiqingForFm(@Query("page") int page);
+
     @GET("findmyfarmfarming")
     Call<List<AgriculturalModel>> getMyfarmfarming(@Query("page") int page);
+
+    @GET("moremypublishAgricultural")
+    Call<List<AgriculturalModel>> myMyfarmfarming(@Query("page") int page);
+
+    @GET("moremycollectfarming")
+    Call<List<AgriculturalModel>> scMyfarmfarming(@Query("page") int page);
 
     @GET("findexperthot")
     Call<List<WentiModel>> getExperthot(@Query("page") int page);
@@ -91,12 +113,30 @@ public interface BasicService {
     @GET("findexpertmine")
     Call<List<WentiModel>> getExpertmine(@Query("page") int page);
 
+    @GET("findMyscexpertmine")
+    Call<List<WentiModel>> scExpertmine(@Query("page") int page);
+
     @GET("findmarketnew")
     Call<List<MarketinformationView>> getmarketnew(@Query("page") int page);
 
     @GET("findmarketmypublish")
     Call<List<MarketinformationView>> getmarketmypublish(@Query("page") int page);
 
+    @GET("findMyscmarket")
+    Call<List<MarketinformationView>> scmarketmypublish(@Query("page") int page);
+
+
+    @GET("farmlandfarm")
+    Call<ClientFarm> farmlandfarm();
+
+    @GET("adduserdetail")
+    Call<User> adduserdetail(@Query("provincename") String provincename,
+                             @Query("cityname") String cityname,
+                             @Query("countryname") String countryname,
+                             @Query("sex") String leixingid,
+                             @Query("birthday") String zuowuid,
+                             @Query("disname") String zaizhongid,
+                             @Body RequestBody imgs);
     
 // 朋友圈 回复
     @GET("replymyfarmfarming")
@@ -113,14 +153,15 @@ public interface BasicService {
    
 
 
-    @GET("changefarm")
-    Call<Weather7DaysForcast> perfactAccount(
+    @GET("farmlandfarmUpdate")
+    Call<Object> perfactAccount(
             @Query("fname") String fname,
             @Query("points") String points,
             @Query("zuowulist") String zuowulist,
             @Query("provincename") String provincename,
             @Query("cityname") String cityname,
-            @Query("countryname") String countryname);
+            @Query("countryname") String countryname,
+            @Query("mianji") String mianji);
 
 //    provincename(省名称）
 //            cityname(市名称）

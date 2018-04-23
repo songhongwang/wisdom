@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.activity.ExpertConsultActivity;
 import com.cbt.main.activity.MarketDetailActivity;
+import com.cbt.main.activity.UserActivity;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.ReplyModel;
@@ -97,7 +98,9 @@ public class ZhuanjiaAdapter extends RecyclerView.Adapter {
             iAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RongIM.getInstance().startPrivateChat(mContext, "18600211553", "vigorous");
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("uid", mData.getUid());
+                    mContext.startActivity(intent);
                 }
             });
             tvReplyCount.setText(mData.getRplaycount());

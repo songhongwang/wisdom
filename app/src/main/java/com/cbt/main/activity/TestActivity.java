@@ -58,7 +58,7 @@ public class TestActivity extends Activity implements MessagePicturesLayout.Call
         vRecycler = (RecyclerView) findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(this));
         vRecycler.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xFFECECEC));
-        vRecycler.setAdapter(adapter = new MessageAdapter(this).setPictureClickCallback(this));
+        vRecycler.setAdapter(adapter = new MessageAdapter(this,1).setPictureClickCallback(this));
 //        adapter.set(Data.get());
 
         vImageWatcher = ImageWatcher.Helper.with(this) // 一般来讲， ImageWatcher 需要占据全屏的位置

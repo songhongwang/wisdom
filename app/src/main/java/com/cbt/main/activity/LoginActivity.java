@@ -40,16 +40,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String phoneString;
     private String passwordString;
 
-
-
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
 
         User login = SharedPreferencUtil.getLogin(this);
         if(login != null){
-            goToMain();
+            if (login.getState().equals("0"))
+            {
+                goToWanshan();
+            }
+            else
+            {
+                goToMain();
+            }
         }
+
     }
 
     @Override
@@ -131,16 +137,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                user.setPassword(passwordString);
                 User user = response.body();
                 SharedPreferencUtil.saveLogin(LoginActivity.this, user);
+                if (user.getState().equals("0"))
+                {
+                    goToWanshan();
+                }
+                else
+                {
+                    goToMain();
+                }
 
-                goToMain();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 ToastUtils.show(LoginActivity.this, "登录失败");
 
-                Intent intent = new Intent(LoginActivity.this, PerfactAccountActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(LoginActivity.this, PerfactAccountActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -181,6 +194,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void goToMain() {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
+    }
+
+    private void goToWanshan() {
+        startActivity(new Intent(LoginActivity.this, PerfactAccountActivity.class));
         finish();
     }
 }

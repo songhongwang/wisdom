@@ -46,6 +46,15 @@ public class TopicFragment extends BaseFragment {
     private boolean mHasMore = true;
     private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
+    public static TopicFragment getInstance(MomentMode mode){
+        TopicFragment fragment = new TopicFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mode",mode);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -101,7 +110,7 @@ public class TopicFragment extends BaseFragment {
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuixin)
         {
-            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+            ApiClient.getInstance().getBasicService(getContext()).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
@@ -136,6 +145,37 @@ public class TopicFragment extends BaseFragment {
         else if (mode == MomentMode.zj_wode)
         {
             ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketmypublish(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+                @Override
+                public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
+                    List<MarketinformationView> dataList = response.body();
+
+                    mIsLoading = false;
+                    mPage ++;
+
+                    if(dataList.size() > 0){
+                        for(int i = 0; i< dataList.size(); i ++){
+                            goodList.add(MarketinformationView.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+
+                        mHasMore =true;
+                    }else{
+                        mHasMore = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<MarketinformationView>> call, Throwable t) {
+
+                    mIsLoading = false;
+                }
+            });
+        }
+        else if (mode == MomentMode.my_shoucang)
+        {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).scmarketmypublish(mPage).enqueue(new Callback<List<MarketinformationView>>() {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();

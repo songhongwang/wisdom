@@ -42,11 +42,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private final CropCircleTransformation mCropCircleTransformation;
     private MessagePicturesLayout.Callback mCallback;
     private Context mContext;
+    private int ismydo;
     ReplyDialog replyDialog ;
 
-    public MessageAdapter(Context context) {
+    public MessageAdapter(Context context,int ismy) {
          mCropCircleTransformation = new CropCircleTransformation();
          mContext = context;
+        ismydo = ismy;
         replyDialog = new ReplyDialog(mContext, R.style.TransparentDialog);
     }
 
@@ -88,6 +90,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
             llReplyList = (LinearLayout) itemView.findViewById(R.id.ll_reply_list);
             tvReplyCount = (TextView) itemView.findViewById(R.id.tv_reply_count);
             lPictures.setCallback(mCallback);
+            if (ismydo == 1)
+            {
+                iAvatar.setVisibility(View.INVISIBLE);
+                tNickname.setVisibility(View.INVISIBLE);
+            }
         }
 
         void refresh(final int pos) {
@@ -118,7 +125,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
             llReplyList.removeAllViews();
 
-            if(mData.getReplyList().size() > 0){
+            if(mData.getReplyList() != null && mData.getReplyList().size() > 0){
                 llReplyList.setVisibility(View.VISIBLE);
                 for(final ReplyModel replyModel :mData.getReplyList()){
                     TextView textView = new TextView(mContext);

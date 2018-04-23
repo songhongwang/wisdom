@@ -6,6 +6,7 @@ package com.cbt.main.utils.net;
 
 public class Constants {
     private static String sBaseUrl = "http://114.215.25.185:2530/hnzhnq/";
+//    private static String sBaseUrl = "http://192.168.1.101:9999/hnzhnq/";
     private static String sRongBaseUrl = "http://api.cn.ronghub.com";
 
     public static String getBaseUrl() {

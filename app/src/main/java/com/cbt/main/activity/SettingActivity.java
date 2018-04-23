@@ -63,14 +63,14 @@ public class SettingActivity extends BaseActivity{
                 finish();
             }
         });
-        findViewById(R.id.rl_user_type).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 修改用户类型
-                Intent intent = new Intent(SettingActivity.this, PerfactAccountActivity.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.rl_user_type).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // 修改用户类型
+//                Intent intent = new Intent(SettingActivity.this, PerfactAccountActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         findViewById(R.id.rl_user_pwd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,4 +80,6 @@ public class SettingActivity extends BaseActivity{
             }
         });
     }
+
+
 }

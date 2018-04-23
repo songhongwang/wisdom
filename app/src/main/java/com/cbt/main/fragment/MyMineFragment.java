@@ -3,7 +3,6 @@ package com.cbt.main.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -12,40 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cbt.main.R;
-import com.cbt.main.activity.ReleaseActivity;
-import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
-import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.dialog.ReleaseDialog;
-import com.cbt.main.model.IndexFeedModel;
-import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.MomentMode;
-import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
-import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by caobotao on 16/1/4.
  */
-public class MineFragment extends BaseFragment {
+public class MyMineFragment extends BaseFragment {
 
 
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
 
-    public static MineFragment getInstance(MomentMode mode){
-        MineFragment fragment = new MineFragment();
+    public static MyMineFragment getInstance(MomentMode mode){
+        MyMineFragment fragment = new MyMineFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("mode",mode);
         fragment.setArguments(bundle);
@@ -59,7 +44,7 @@ public class MineFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab2, container, false);
+        View view = inflater.inflate(R.layout.my_fabu, container, false);
         mRootView = view;
         super.onCreateView(inflater, container, savedInstanceState);
         return view;
@@ -69,32 +54,12 @@ public class MineFragment extends BaseFragment {
     public void initUI() {
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
         mViewPager.setOffscreenPageLimit(1);
-        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),0);
+        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),1);
         mViewPager.setAdapter(adapter);
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t2);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         setTabsValue();
-
-        mIvBack.setVisibility(View.VISIBLE);
-        mIvBack.setImageResource(R.drawable.nav_icon_message);
-        mIvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startConversationList();
-            }
-        });
-
-        mIvComplete.setVisibility(View.VISIBLE);
-        mIvComplete.setImageResource(R.drawable.nav_icon_release);
-        mIvComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getActivity(), ReleaseDialog.class);
-                startActivity(intent);
-            }
-        });
 
         getData();
     }

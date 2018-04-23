@@ -1,242 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:overScrollMode="never"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp">
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
-                    android:textSize="19sp"/>
-
-            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
 
             <TextView
-                android:id="@+id/tv_big_wendu"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:text="请刷新"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="50sp"/>
+                android:textSize="19sp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_shidu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/home_icon_humidity"
-                    android:drawablePadding="10dp"
-                    android:text="17%"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/tv_qiya"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/home_icon_pressure"
-                    android:drawablePadding="10dp"
-                    android:text="1019hPa"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/tv_fengsu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/home_icon_wind"
-                    android:drawablePadding="10dp"
-                    android:text="17%"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_fabu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/home_icon_calendar"
-                android:drawablePadding="10dp"
-                android:text="2017年12月10日(农历十月初十)"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/tv_yujing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/home_icon_inf"
-                android:drawablePadding="10dp"
-                android:text="暂无预警信息"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_big_wendu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:text="2.0°C"
+            android:textColor="@color/white"
+            android:textSize="50sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="253dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_shidu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/home_icon_humidity"
+                android:drawablePadding="10dp"
+                android:text="17%"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="10dp"
-                    android:text="今日天气"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_qiya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/home_icon_pressure"
+                android:drawablePadding="10dp"
+                android:text="1019hPa"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
 
-                <TextView
-                    android:id="@+id/tv_today_weather"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="10dp"
-                    android:text="晴天"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_fengsu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/home_icon_wind"
+                android:drawablePadding="10dp"
+                android:text="17%"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+        </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_fabu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/home_icon_calendar"
+            android:drawablePadding="10dp"
+            android:text="2017年12月10日(农历十月初十)"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="253dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:text="今日天气"
+                android:drawablePadding="10dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_today_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="10dp"
+                android:text="晴天"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_temper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/home_icon_temperature"
+                android:drawablePadding="10dp"
+                android:text="10°c"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_temper"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/home_icon_wind"
+                android:drawablePadding="10dp"
+                android:text="17%"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:drawablePadding="10dp"
+                android:text="一周天气 >"
+                android:textColor="#107687"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/half_white"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp">
 
                 <TextView
-                    android:id="@+id/tv_temper"
+                    android:id="@+id/tv_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/home_icon_temperature"
-                    android:drawablePadding="10dp"
-                    android:text="10°c"
+                    android:layout_centerVertical="true"
+                    android:text="农气产品"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
 
                 <TextView
-                    android:id="@+id/tv_wind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_temper"
-                    android:drawableLeft="@drawable/home_icon_wind"
-                    android:drawablePadding="10dp"
-                    android:text="17%"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/tv_weather"
+                    android:id="@+id/tv_product_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:drawablePadding="10dp"
-                    android:text="一周天气 >"
-                    android:textColor="#107687"
+                    android:text="更多>"
+                    android:textColor="@color/white"
                     android:textSize="14sp"/>
             </RelativeLayout>
 
-            <LinearLayout
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/white"/>
+
+            <ListView
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:background="@color/half_white"
-                android:orientation="vertical">
+                android:background="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:clipToPadding="false"
+                android:divider="@android:color/white"
+                android:dividerHeight="1px"
+                android:drawSelectorOnTop="true"
+                android:listSelector="@android:color/transparent"
+                android:footerDividersEnabled="false"
+                android:scrollbars="none" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="农气产品"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_product_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
-                        android:drawablePadding="10dp"
-                        android:text="更多>"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/white"/>
-
-                <ListView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:cacheColorHint="@android:color/transparent"
-                    android:clipToPadding="false"
-                    android:divider="@android:color/white"
-                    android:dividerHeight="1px"
-                    android:drawSelectorOnTop="true"
-                    android:footerDividersEnabled="false"
-                    android:listSelector="@android:color/transparent"
-                    android:scrollbars="none"/>
-
-            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-</com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+</RelativeLayout>

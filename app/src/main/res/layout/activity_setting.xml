@@ -18,32 +18,32 @@
             android:orientation="vertical">
 
 
-            <RelativeLayout
-                android:id="@+id/rl_user_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="50dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:background="@color/white">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_user_type"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:minHeight="50dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:background="@color/white">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="修改用户类型"
-                    android:textSize="14sp"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:text="修改用户类型"-->
+                    <!--android:textSize="14sp"/>-->
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/icon_more"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawablePadding="5dp"-->
+                    <!--android:layout_marginRight="15dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:drawableRight="@drawable/icon_more"/>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/rl_user_pwd"

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.activity.BaseActivity;
 import com.cbt.main.activity.ReleaseActivity;
+import com.cbt.main.activity.ReleaseNongActivity;
 
 import butterknife.BindView;
 
@@ -56,7 +57,7 @@ public class ReleaseDialog extends BaseActivity {
         mBtnItem3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ReleaseDialog.this, ReleaseActivity.class);
+                Intent intent = new Intent(ReleaseDialog.this, ReleaseNongActivity.class);
                 intent.putExtra("title", "农情上报");
                 startActivity(intent);
                 finish();
