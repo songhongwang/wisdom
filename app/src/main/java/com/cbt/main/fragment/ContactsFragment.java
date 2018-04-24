@@ -118,7 +118,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onTouchingLetterChanged(String s) {
                 //该字母首次出现的位置
-                int position = mFriendListAdapter.getPositionForSection(s.charAt(0));
+                int position = mFriendListAdapter.getPositionForSection(s.toLowerCase().charAt(0));
                 if (position != -1) {
                     mListView.setSelection(position);
                 }
