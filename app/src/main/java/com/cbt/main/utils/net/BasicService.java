@@ -4,6 +4,7 @@ import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.ClientFarm;
 import com.cbt.main.model.Dictionaries;
+import com.cbt.main.model.Friend;
 import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.IndexProductModel;
@@ -210,4 +211,11 @@ public interface BasicService {
                                  @Query("content") String content,
                                  @Body RequestBody imgs );
 
+    // 关注列表
+    @GET("guanzhuyonghulist")
+    Call<List<Friend>> getAttentionList(@Query("page") int page);
+
+    // 获取用户
+    @GET("findOtherUser")
+    Call<Object> getUser(@Query("otheruserid") String otheruserid);
 }

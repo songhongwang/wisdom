@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cbt.main.R;
+import com.cbt.main.activity.ContactsActivity;
 import com.cbt.main.activity.ConversationListActivity;
 import com.cbt.main.activity.MyAttentionActivity;
 import com.cbt.main.activity.MyFabuActivity;
@@ -106,7 +107,8 @@ public class MoreFragment extends BaseFragment {
         mRootView.findViewById(R.id.rl_guanzhu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RongIM.getInstance().startSubConversationList(getActivity(), Conversation.ConversationType.PRIVATE);
+                Intent intent = new Intent(getActivity(), ContactsActivity.class);
+                startActivity(intent);
             }
         });
         getData();
