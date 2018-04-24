@@ -192,7 +192,6 @@ public class MomentsFragment extends BaseFragment {
                 public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
                     List<AgriculturalModel> dataList = response.body();
 
-
                     mIsLoading = false;
                     mPage++;
                     if (dataList.size() > 0) {
@@ -204,6 +203,10 @@ public class MomentsFragment extends BaseFragment {
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
+                    }
+
+                    if (mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
                     }
                 }
 

@@ -107,10 +107,13 @@ public class TopicFragment extends BaseFragment {
 
     private void getData() {
         mIsLoading = true;
+        if(getArguments() == null){
+            return;
+        }
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuixin)
         {
-            ApiClient.getInstance().getBasicService(getContext()).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();

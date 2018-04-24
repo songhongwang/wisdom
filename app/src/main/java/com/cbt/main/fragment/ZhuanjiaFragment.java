@@ -43,7 +43,9 @@ public class ZhuanjiaFragment extends BaseFragment {
 
     public static ZhuanjiaFragment getInstance(MomentMode mode){
         ZhuanjiaFragment fragment = new ZhuanjiaFragment();
-
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mode", mode);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -101,6 +103,9 @@ public class ZhuanjiaFragment extends BaseFragment {
 
     private void getData() {
         mIsLoading = true;
+        if(getArguments() == null){
+            return;
+        }
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuire)
         {
