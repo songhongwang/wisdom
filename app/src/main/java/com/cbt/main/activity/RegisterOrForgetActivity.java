@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cbt.main.R;
 import com.cbt.main.model.BaseModel;
+import com.cbt.main.utils.PhoneNumberUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.CommonCallBack;
@@ -151,7 +152,8 @@ public class RegisterOrForgetActivity extends BaseActivity {
         String pwd = mEtPwd.getText().toString().trim();
         String pwd2 = mEtPwd2.getText().toString().trim();
 
-        if(phone.length() < 11){
+
+        if(!PhoneNumberUtil.isChinaPhoneLegal(phone)){
             ToastUtils.show(this, "手机号不正确");
             return;
         }

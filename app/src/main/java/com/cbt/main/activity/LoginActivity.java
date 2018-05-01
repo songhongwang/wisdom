@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.User;
+import com.cbt.main.utils.PhoneNumberUtil;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
@@ -80,6 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 11) {
 
+                   checkInput(s.toString());
                 }
             }
 
@@ -91,6 +93,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
+    private boolean checkInput(String phone){
+        boolean chinaPhoneLegal = PhoneNumberUtil.isChinaPhoneLegal(phone);
+        if(!chinaPhoneLegal){
+            ToastUtils.show(LoginActivity.this, "手机号码不合法");
+        }
+        return chinaPhoneLegal;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -98,6 +108,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.de_login_sign:
                 phoneString = mPhoneEdit.getText().toString().trim();
                 passwordString = mPasswordEdit.getText().toString().trim();
+
+                boolean b = checkInput(phoneString);
+                if(!b){
+                    return;
+                }
 
                 if (TextUtils.isEmpty(phoneString)) {
                     mPhoneEdit.setShakeAnimation();
