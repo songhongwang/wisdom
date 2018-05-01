@@ -378,13 +378,6 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 List<Friend> friends = response.body();
-                for(int i =0;i < 30;i++){
-                    Friend f = new Friend();
-                    f.setUid("" + i);
-                    f.setUsername((char)(96+i) + "");
-                    friends.add(f);
-                }
-
 
                 updateFriendsList(friends);
             }

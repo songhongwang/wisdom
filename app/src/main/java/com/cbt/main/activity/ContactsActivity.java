@@ -46,7 +46,7 @@ public class ContactsActivity extends BaseActivity {
     public void initUI() {
         mTvTitle.setText("关注列表");
         mIvFinish.setVisibility(View.GONE);
-
+        mIvBack.setVisibility(View.VISIBLE);
         final ContactsFragment contactsFragment = new ContactsFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

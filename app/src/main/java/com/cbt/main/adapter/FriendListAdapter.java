@@ -64,7 +64,7 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        final Friend mContent = list.get(position);
+        final Friend friend = list.get(position);
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.friend_item, parent, false);
@@ -82,7 +82,7 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
         //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
         if (position == getPositionForSection(section)) {
             viewHolder.tvLetter.setVisibility(View.VISIBLE);
-            String letterFirst = mContent.getLetters();
+            String letterFirst = friend.getLetters();
             if(!TextUtils.isEmpty(letterFirst)){
                 letterFirst = String.valueOf(letterFirst.toUpperCase().charAt(0));
             }
@@ -101,6 +101,8 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
             viewHolder.tvUserId.setVisibility(View.VISIBLE);
             viewHolder.tvUserId.setText(list.get(position).getUid());
         }
+
+        viewHolder.tvTitle.setText(friend.getUsername());
         return convertView;
     }
 
