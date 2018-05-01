@@ -136,6 +136,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                user.setTelphone(phoneString);
 //                user.setPassword(passwordString);
                 User user = response.body();
+                if(user == null){
+                    ToastUtils.show(LoginActivity.this, "用户不存在");
+                    return;
+                }
                 SharedPreferencUtil.saveLogin(LoginActivity.this, user);
                 if (user.getState().equals("0"))
                 {
