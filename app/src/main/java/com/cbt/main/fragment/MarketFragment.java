@@ -38,6 +38,7 @@ public class MarketFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mTvTitle.setText("市场信息");
         mIvComplete.setVisibility(View.VISIBLE);
         mIvComplete.setImageResource(R.drawable.nav_icon_release);
         mIvComplete.setOnClickListener(new View.OnClickListener() {

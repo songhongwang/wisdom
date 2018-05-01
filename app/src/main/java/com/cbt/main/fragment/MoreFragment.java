@@ -46,6 +46,7 @@ public class MoreFragment extends BaseFragment {
     }
 
     public void initUI() {
+        mTvTitle.setText("更多");
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setImageResource(R.drawable.nav_icon_message);
         mIvBack.setOnClickListener(new View.OnClickListener() {

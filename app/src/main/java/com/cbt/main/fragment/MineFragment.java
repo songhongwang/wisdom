@@ -67,6 +67,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mTvTitle.setText("我的农庄");
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
         mViewPager.setOffscreenPageLimit(1);
         MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),0);
