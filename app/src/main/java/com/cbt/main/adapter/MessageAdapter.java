@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,9 +100,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         void refresh(final int pos) {
             mData = mDataList.get(pos);
-            Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
-                    .transform(mCropCircleTransformation)
-                    .into(iAvatar);
+            if(!TextUtils.isEmpty(mData.getAvatar())){
+                Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
+                        .transform(mCropCircleTransformation)
+                        .into(iAvatar);
+            }else{
+                iAvatar.setImageResource(R.drawable.de_default_portrait);
+            }
 
             tNickname.setText(mData.getNickname());
             tTime.setText(mData.getCreateTime());

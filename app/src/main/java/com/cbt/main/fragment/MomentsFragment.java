@@ -153,7 +153,7 @@ public class MomentsFragment extends BaseFragment {
 
 
                     mIsLoading = false;
-                    mPage ++;
+
 
                     if(dataList.size() > 0){
                         if(mPage == 0){
@@ -165,7 +165,7 @@ public class MomentsFragment extends BaseFragment {
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -186,14 +186,14 @@ public class MomentsFragment extends BaseFragment {
                 }
             });
         }
-        else         if (ismydo == 2) {
+        else if (ismydo == 2) {
             ApiClient.getInstance().getBasicService(GlobalApplication.mApp).scMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
                 @Override
                 public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
                     List<AgriculturalModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage++;
+
                     if (dataList.size() > 0) {
                         if (mPage == 0) {
                             goodList.clear();
@@ -203,6 +203,11 @@ public class MomentsFragment extends BaseFragment {
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
+
+                        mPage ++;
+                        mHasMore =true;
+                    }else{
+                        mHasMore = false;
                     }
 
                     if (mVLoading != null) {
@@ -230,7 +235,6 @@ public class MomentsFragment extends BaseFragment {
 
 
                    mIsLoading = false;
-                   mPage ++;
 
                    if(dataList.size() > 0){
                        if(mPage == 0){
@@ -242,7 +246,7 @@ public class MomentsFragment extends BaseFragment {
                        adapter.set(goodList);
                        adapter.notifyDataSetChanged();
 
-
+                       mPage ++;
                        mHasMore =true;
                    }else{
                        mHasMore = false;

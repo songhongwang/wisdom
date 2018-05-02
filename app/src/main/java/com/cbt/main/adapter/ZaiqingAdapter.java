@@ -1,10 +1,12 @@
 package com.cbt.main.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.UserActivity;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.ReplyModel;
@@ -54,13 +57,15 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
         }
     }
     public void set(List<Data> dataList) {
-        mDataList.clear();
         if (dataList != null) {
             mDataList.addAll(dataList);
         }
         notifyDataSetChanged();
     }
 
+    public List<Data> getDataList() {
+        return mDataList;
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
@@ -81,18 +86,18 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
             llReplyList = (LinearLayout) itemView.findViewById(R.id.ll_reply_listzai);
             tvReplyCount = (TextView) itemView.findViewById(R.id.tv_reply_countzai);
             lPictures.setCallback(mCallback);
-            if (ismydo == 1)
-            {
-                iAvatar.setVisibility(View.INVISIBLE);
-                tNickname.setVisibility(View.INVISIBLE);
-            }
         }
 
         void refresh(final int pos) {
             mData = mDataList.get(pos);
-            Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
-                    .transform(mCropCircleTransformation)
-                    .into(iAvatar);
+            if(!TextUtils.isEmpty(mData.getAvatar())){
+                Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
+                        .transform(mCropCircleTransformation)
+                        .into(iAvatar);
+            }else{
+                iAvatar.setImageResource(R.drawable.de_default_portrait);
+            }
+
 
             tNickname.setText(mData.getNickname());
             tTime.setText(mData.getCreateTime());
@@ -101,7 +106,9 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
             iAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RongIM.getInstance().startPrivateChat(mContext, "18600211553", "vigorous");
+                    Intent intent = new Intent(mContext, UserActivity.class);
+                    intent.putExtra("model", mData);
+                    mContext.startActivity(intent);
                 }
             });
             tvReply.setOnClickListener(new View.OnClickListener() {

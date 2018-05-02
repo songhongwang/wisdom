@@ -149,14 +149,19 @@ public class ZaiqingFragment extends BaseFragment {
                     mPage++;
 
                     if (dataList.size() > 0) {
-                        List<Data> goodList = new ArrayList<>();
-                        for (int i = 0; i < dataList.size(); i++) {
-                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        List<Data> realDataList = adapter.getDataList();
+                        if(mPage == 0){
+                            realDataList.clear();
                         }
-                        adapter.set(goodList);
+
+                        for (int i = 0; i < dataList.size(); i++) {
+                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+
+                        adapter.set(realDataList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage++;
                         mHasMore = true;
                     } else {
                         mHasMore = false;
@@ -185,17 +190,21 @@ public class ZaiqingFragment extends BaseFragment {
                     List<ZaiqingModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage++;
+
 
                     if (dataList.size() > 0) {
-                        List<Data> goodList = new ArrayList<>();
-                        for (int i = 0; i < dataList.size(); i++) {
-                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        List<Data> realDataList = adapter.getDataList();
+                        if(mPage == 0){
+                            realDataList.clear();
                         }
-                        adapter.set(goodList);
+
+                        for (int i = 0; i < dataList.size(); i++) {
+                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(realDataList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage++;
                         mHasMore = true;
                     } else {
                         mHasMore = false;
@@ -224,17 +233,20 @@ public class ZaiqingFragment extends BaseFragment {
                     List<ZaiqingModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage++;
 
                     if (dataList.size() > 0) {
-                        List<Data> goodList = new ArrayList<>();
-                        for (int i = 0; i < dataList.size(); i++) {
-                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        List<Data> realDataList = adapter.getDataList();
+                        if(mPage == 0){
+                            realDataList.clear();
                         }
-                        adapter.set(goodList);
+
+                        for (int i = 0; i < dataList.size(); i++) {
+                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(realDataList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage++;
                         mHasMore = true;
                     } else {
                         mHasMore = false;
