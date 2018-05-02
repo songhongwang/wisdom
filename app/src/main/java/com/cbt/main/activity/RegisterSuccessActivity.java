@@ -42,12 +42,13 @@ public class RegisterSuccessActivity extends BaseActivity{
 
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.fragment_moments);
+        setContentView(R.layout.activity_register_success);
 
     }
 
     @Override
     public void initUI() {
+        mTvTitle.setText("注册成功");
         mIvFinish.setVisibility(View.GONE);
         mIvBack.setVisibility(View.VISIBLE);
 
