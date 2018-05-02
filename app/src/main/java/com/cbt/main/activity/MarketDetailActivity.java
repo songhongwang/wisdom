@@ -112,7 +112,7 @@ public class MarketDetailActivity extends BaseActivity2 {
                 MarketinformationDetailView dataList = response.body();
 
                 mIsLoading = false;
-                mPage ++;
+
 
                 if(dataList != null){
                     mTvContentTitle.setText(dataList.getItitle());
@@ -122,6 +122,9 @@ public class MarketDetailActivity extends BaseActivity2 {
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
                     if (dataList.getRlist().size() > 0)
                     {
+                        if(mPage == 0){
+                            datas.clear();
+                        }
                         datas.addAll(dataList.getRlist());
                         mMarketDetailActAdapter.resetData(datas);
                         mMarketDetailActAdapter.notifyDataSetChanged();
@@ -131,9 +134,13 @@ public class MarketDetailActivity extends BaseActivity2 {
                     {
                         mHasMore = false;
                     }
+
+                    mPage ++;
                 }else{
                     mHasMore = false;
                 }
+
+
             }
 
             @Override
@@ -151,6 +158,8 @@ public class MarketDetailActivity extends BaseActivity2 {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
 
+                mPage = 0;
+                getData();
             }
 
             @Override

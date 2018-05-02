@@ -56,6 +56,7 @@ public class ExpertFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        mTvTitle.setText("专家咨询");
         EventBus.getDefault().register(this);
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setImageResource(R.drawable.nav_icon_message);

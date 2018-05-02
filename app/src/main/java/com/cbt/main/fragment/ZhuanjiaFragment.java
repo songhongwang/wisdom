@@ -20,6 +20,9 @@ import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public class ZhuanjiaFragment extends BaseFragment {
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     public static ZhuanjiaFragment getInstance(MomentMode mode){
         ZhuanjiaFragment fragment = new ZhuanjiaFragment();
@@ -82,6 +86,19 @@ public class ZhuanjiaFragment extends BaseFragment {
             }
 
 
+        });
+        mTwinklingRefreshLayout = (TwinklingRefreshLayout) mRootView.findViewById(R.id.twinkRefreshlayout);
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        mTwinklingRefreshLayout.setHeaderView(headerView);
+        mTwinklingRefreshLayout.setEnableLoadmore(false);
+        mTwinklingRefreshLayout.setOverScrollBottomShow(false);
+        mTwinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                refreshLayout.finishRefreshing();
+                getData();
+            }
         });
 
         getData();

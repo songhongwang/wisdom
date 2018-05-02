@@ -11,19 +11,18 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
-        android:background="#ebebeb"
+        android:textColor="@color/black"
         android:paddingBottom="5dip"
         android:paddingLeft="12dip"
         android:paddingTop="5dip"
         android:text="A"
-        android:textColor="#999999" />
-
+        android:background="@color/background_common" />
 
     <LinearLayout
         android:id="@+id/frienditem"
         android:layout_width="fill_parent"
         android:layout_height="52dp"
-        android:background="@color/background_common"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingRight="12dp">
 

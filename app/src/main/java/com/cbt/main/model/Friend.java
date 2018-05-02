@@ -50,7 +50,7 @@ public class Friend implements Serializable{
     public String getLetters() {
         String firstSpell ="a";
         if(!TextUtils.isEmpty(firstSpell)){
-            firstSpell= ChineseToEnglish2.getFirstSpell(username);
+            firstSpell= ChineseToEnglish2.getFirstSpell(username).toLowerCase();
         }
         return firstSpell;
     }

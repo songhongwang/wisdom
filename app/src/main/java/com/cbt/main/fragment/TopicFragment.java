@@ -119,7 +119,6 @@ public class TopicFragment extends BaseFragment {
                     List<MarketinformationView> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
                         if(mPage ==0){
@@ -131,7 +130,7 @@ public class TopicFragment extends BaseFragment {
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -153,16 +152,18 @@ public class TopicFragment extends BaseFragment {
                     List<MarketinformationView> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
+                        if(mPage ==0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(MarketinformationView.convert(dataList.get(i)));
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -184,16 +185,18 @@ public class TopicFragment extends BaseFragment {
                     List<MarketinformationView> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
+                        if(mPage ==0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(MarketinformationView.convert(dataList.get(i)));
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
