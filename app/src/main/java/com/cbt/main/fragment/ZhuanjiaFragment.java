@@ -103,6 +103,7 @@ public class ZhuanjiaFragment extends BaseFragment {
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
                 super.onRefresh(refreshLayout);
                 refreshLayout.finishRefreshing();
+                mPage = 0;
                 getData();
             }
         });
@@ -163,7 +164,7 @@ public class ZhuanjiaFragment extends BaseFragment {
                 }
             });
         }
-        else if (mode == MomentMode.zj_zuire)
+        else if (mode == MomentMode.zj_zuixin)
         {
             ApiClient.getInstance().getBasicService(getContext()).getExpertnew(mPage).enqueue(new Callback<List<WentiModel>>() {
                 @Override
