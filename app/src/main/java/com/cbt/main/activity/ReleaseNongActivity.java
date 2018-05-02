@@ -17,6 +17,7 @@ import com.cbt.main.adapter.ReleaseActAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.TypeModel;
+import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.picker.JsonBean;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.rong.eventbus.EventBus;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
 import me.nereo.imagechoose.ShowActivity;
 import okhttp3.MediaType;
@@ -370,6 +372,7 @@ private void onPinzhongDialog(){
                 requestBody).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                EventBus.getDefault().post(new EventPublishSuccess());
                 ToastUtils.show(ReleaseNongActivity.this, "发布成功");
                 finish();
             }
