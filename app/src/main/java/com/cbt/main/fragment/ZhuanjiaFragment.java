@@ -16,6 +16,7 @@ import com.cbt.main.model.Data;
 import com.cbt.main.model.MomentMode;
 import com.cbt.main.model.WentiModel;
 import com.cbt.main.model.ZaiqingModel;
+import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
@@ -24,9 +25,13 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.eventbus.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,6 +69,7 @@ public class ZhuanjiaFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        EventBus.getDefault().register(this);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         vRecycler.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(5).setSpaceColor(0xFFECECEC));
@@ -132,17 +138,18 @@ public class ZhuanjiaFragment extends BaseFragment {
                     List<WentiModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
-
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(WentiModel.convert(dataList.get(i)));
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -164,16 +171,18 @@ public class ZhuanjiaFragment extends BaseFragment {
                     List<WentiModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(WentiModel.convert(dataList.get(i)));
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -195,9 +204,11 @@ public class ZhuanjiaFragment extends BaseFragment {
                     List<WentiModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage ++;
 
                     if(dataList.size() > 0){
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
                         for(int i = 0; i< dataList.size(); i ++){
                             goodList.add(WentiModel.convert(dataList.get(i)));
                         }
@@ -205,6 +216,7 @@ public class ZhuanjiaFragment extends BaseFragment {
                         adapter.notifyDataSetChanged();
 
 
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -221,4 +233,16 @@ public class ZhuanjiaFragment extends BaseFragment {
 
     }
 // test reset
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(EventPublishSuccess publishSuccess) {
+        mPage = 0;
+        getData();
+    }
+
+
 }

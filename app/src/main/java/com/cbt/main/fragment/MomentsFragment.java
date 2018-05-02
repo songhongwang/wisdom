@@ -17,6 +17,7 @@ import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.MomentMode;
+import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
@@ -26,10 +27,14 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.eventbus.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,6 +76,7 @@ public class MomentsFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        EventBus.getDefault().register(this);
         mVLoading = mRootView.findViewById(R.id.rl_loading);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -151,7 +157,7 @@ public class MomentsFragment extends BaseFragment {
 
 
                     mIsLoading = false;
-                    mPage ++;
+
 
                     if(dataList.size() > 0){
                         if(mPage == 0){
@@ -163,7 +169,7 @@ public class MomentsFragment extends BaseFragment {
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
-
+                        mPage ++;
                         mHasMore =true;
                     }else{
                         mHasMore = false;
@@ -184,14 +190,14 @@ public class MomentsFragment extends BaseFragment {
                 }
             });
         }
-        else         if (ismydo == 2) {
+        else if (ismydo == 2) {
             ApiClient.getInstance().getBasicService(GlobalApplication.mApp).scMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
                 @Override
                 public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
                     List<AgriculturalModel> dataList = response.body();
 
                     mIsLoading = false;
-                    mPage++;
+
                     if (dataList.size() > 0) {
                         if (mPage == 0) {
                             goodList.clear();
@@ -201,6 +207,11 @@ public class MomentsFragment extends BaseFragment {
                         }
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
+
+                        mPage ++;
+                        mHasMore =true;
+                    }else{
+                        mHasMore = false;
                     }
 
                     if (mVLoading != null) {
@@ -228,7 +239,6 @@ public class MomentsFragment extends BaseFragment {
 
 
                    mIsLoading = false;
-                   mPage ++;
 
                    if(dataList.size() > 0){
                        if(mPage == 0){
@@ -240,7 +250,7 @@ public class MomentsFragment extends BaseFragment {
                        adapter.set(goodList);
                        adapter.notifyDataSetChanged();
 
-
+                       mPage ++;
                        mHasMore =true;
                    }else{
                        mHasMore = false;
@@ -263,4 +273,15 @@ public class MomentsFragment extends BaseFragment {
         }
     }
 // test reset
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(EventPublishSuccess publishSuccess) {
+        mPage = 0;
+        getData();
+    }
 }

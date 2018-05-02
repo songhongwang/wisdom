@@ -19,6 +19,7 @@ import java.util.List;
 public class MineFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
     private int ismydo= 0;
+    List<Fragment> mFragments = new ArrayList<>();
     public MineFragmentAdapter(FragmentManager fm,int ismy) {
         super(fm);
         ismydo = ismy;
@@ -29,6 +30,9 @@ public class MineFragmentAdapter extends FragmentStatePagerAdapter {
     private void initTitlesData() {
         mDataList.add("        灾情        ");
         mDataList.add("        农情        ");
+
+        mFragments.add(ZaiqingFragment.getInstance( MomentMode.zai_qing ,ismydo));
+        mFragments.add(MomentsFragment.getInstance(MomentMode.my_attention,ismydo));
     }
 
     @Override
@@ -38,15 +42,7 @@ public class MineFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-		if (position == 0)
-        {
-            return ZaiqingFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing,ismydo);
-        }
-        else
-        {
-            return MomentsFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing,ismydo);
-        }
-
+		 return mFragments.get(position);
         //return MomentsFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing);
     }
 

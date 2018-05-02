@@ -70,7 +70,7 @@ public class MineFragment extends BaseFragment {
         mTvTitle.setText("我的农庄");
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
         mViewPager.setOffscreenPageLimit(1);
-        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),0);
+        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),1);
         mViewPager.setAdapter(adapter);
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t2);

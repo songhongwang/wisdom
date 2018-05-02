@@ -3,6 +3,7 @@ package com.cbt.main.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ import retrofit2.Response;
  */
 
 public class UserActivity extends BaseActivity {
-//    Data mData;
+    Data mData;
     TextView mTvName, mTvDes;
     ImageView mIvAvatar;
     String mUid;
@@ -39,16 +40,25 @@ public class UserActivity extends BaseActivity {
 
     @Override
     public void initUI() {
-//        mData = (Data) getIntent().getSerializableExtra("model");
+        mData = (Data) getIntent().getSerializableExtra("model");
         mIvFinish.setVisibility(View.GONE);
         mIvAvatar = (ImageView) findViewById(R.id.iv_avatar);
         mTvName = (TextView) findViewById(R.id.tv_user_name);
         mTvDes = (TextView) findViewById(R.id.tv_user_des);
 
-//        Picasso.with(this).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
-//                .transform(new CropCircleTransformation())
-//                .into(mIvAvatar);
-//        mTvName.setText(mData.getNickname());
+        if(!TextUtils.isEmpty(mData.getAvatar())){
+            Picasso.with(this).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
+                    .transform(new CropCircleTransformation())
+                    .into(mIvAvatar);
+        }else{
+            mIvAvatar.setImageResource(R.drawable.de_default_portrait);
+        }
+
+        if(!TextUtils.isEmpty(mData.getAvatar())){
+            mTvName.setText(mData.getNickname());
+        }else{
+            mTvName.setText("匿名");
+        }
 
         findViewById(R.id.rl_ta_nongqing).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +77,8 @@ public class UserActivity extends BaseActivity {
         findViewById(R.id.btn_send_msg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                RongIM.getInstance().startPrivateChat(UserActivity.this, mData.getIid(), mData.getNickname());
+                RongIM.getInstance().startPrivateChat(UserActivity.this, mData.getIid(), TextUtils.isEmpty(mData.getNickname()) ? "匿名":mData.getNickname());
+
             }
         });
         findViewById(R.id.btn_attention).setOnClickListener(new View.OnClickListener() {

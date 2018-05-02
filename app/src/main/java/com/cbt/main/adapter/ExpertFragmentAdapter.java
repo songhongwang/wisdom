@@ -19,6 +19,8 @@ import java.util.List;
 
 public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
+    List<Fragment> mFragments = new ArrayList<>();
+
     public ExpertFragmentAdapter(FragmentManager fm) {
         super(fm);
         initTitlesData();
@@ -29,15 +31,14 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
         mDataList.add("        最热        ");
         mDataList.add("        最新        ");
         mDataList.add("        我的        ");
+
+
+        mFragments.add(getFrame(0));
+        mFragments.add(getFrame(1));
+        mFragments.add(getFrame(2));
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mDataList.get(position);
-    }
-
-    @Override
-    public Fragment getItem(int position) {
+    private Fragment getFrame(int position){
         ZhuanjiaFragment fragment = new ZhuanjiaFragment();
         Bundle bundle = new Bundle();
         if (position == 0)
@@ -54,6 +55,16 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
         }
         fragment.setArguments(bundle);
         return  fragment;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mDataList.get(position);
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+       return mFragments.get(position);
     }
 
     @Override
