@@ -95,7 +95,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
                         .transform(mCropCircleTransformation)
                         .into(iAvatar);
             }else{
-                iAvatar.setImageResource(R.drawable.de_default_portrait);
+                iAvatar.setImageResource(R.drawable.login_default_icon);
             }
 
 

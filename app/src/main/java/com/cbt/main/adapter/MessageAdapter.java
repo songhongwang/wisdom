@@ -101,11 +101,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
         void refresh(final int pos) {
             mData = mDataList.get(pos);
             if(!TextUtils.isEmpty(mData.getAvatar())){
-                Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
+                Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.login_default_icon)
                         .transform(mCropCircleTransformation)
                         .into(iAvatar);
             }else{
-                iAvatar.setImageResource(R.drawable.de_default_portrait);
+                iAvatar.setImageResource(R.drawable.login_default_icon);
             }
 
             tNickname.setText(mData.getNickname());
