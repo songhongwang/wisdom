@@ -129,13 +129,14 @@ public class MarketDetailActivity extends BaseActivity2 {
                         mMarketDetailActAdapter.resetData(datas);
                         mMarketDetailActAdapter.notifyDataSetChanged();
                         mHasMore =true;
+                        mPage ++;
                     }
                     else
                     {
                         mHasMore = false;
                     }
 
-                    mPage ++;
+
                 }else{
                     mHasMore = false;
                 }

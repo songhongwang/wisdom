@@ -134,5 +134,13 @@
     </style>
 
     <!--天气折线相关-->
+    <style name="progressbar_circle_loading">
+        <item name="android:indeterminateDrawable">@drawable/bg_progressbar_loading</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:minWidth">60dp</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:maxWidth">100dp</item>
+    </style>
 </resources>
+
 

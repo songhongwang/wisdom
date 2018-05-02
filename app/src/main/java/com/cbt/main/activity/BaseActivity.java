@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.dialog.LoadingDialog;
 import com.cbt.main.model.event.EventLogout;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +35,8 @@ public abstract class BaseActivity extends FragmentActivity {
     ImageView mIvBack;
     @Nullable@BindView(R.id.iv_complete)
     ImageView mIvFinish;
+
+    public LoadingDialog mLoadingDialog ;
 
     private Activity mActivity;
     @Override
@@ -60,6 +63,7 @@ public abstract class BaseActivity extends FragmentActivity {
                 }
             });
         }
+        mLoadingDialog = new LoadingDialog(this, R.style.custom_dialog2);
 
         initUI();
     }
