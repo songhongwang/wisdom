@@ -27,8 +27,8 @@
 
                 <ImageView
                     android:id="@+id/iv_crops"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
@@ -151,7 +151,7 @@
                     android:gravity="center_vertical"
                     android:background="#ffbe41"
                     android:textColor="@color/white"
-                    android:drawableLeft="@drawable/abc_btn_radio_to_on_mtrl_000"
+                    android:drawableLeft="@drawable/abc_btn_radio_to_on_mtrl_015"
                     android:text="男"
                     android:textSize="14sp"/>
                 <TextView
@@ -197,8 +197,7 @@
                     android:layout_marginRight="15dp"
                     android:drawablePadding="5dp"
                     android:layout_centerVertical="true"
-                    android:drawableRight="@drawable/icon_more"
-                    android:text="hello"/>
+                    android:drawableRight="@drawable/icon_more"/>
 
             </RelativeLayout>
 

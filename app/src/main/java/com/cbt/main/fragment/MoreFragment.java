@@ -2,6 +2,7 @@ package com.cbt.main.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class MoreFragment extends BaseFragment {
         });
         mIvComplete.setVisibility(View.GONE);
 
-        User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
+        final User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
         if(login != null){
             ((TextView)mRootView.findViewById(R.id.tv_user_name)).setText(login.getUname());
             ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText(login.getUsname());
@@ -74,6 +75,7 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MyProfileActivity.class);
+                intent.putExtra("user", login);
                 startActivity(intent);
             }
         });

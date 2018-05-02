@@ -1,11 +1,13 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vigorous on 17/12/25.
  *
  */
 
-public class User {
+public class User implements Serializable{
     private String acount;
     private String arcount;
     private String birthday;
