@@ -52,6 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
          mContext = context;
         ismydo = ismy;
         replyDialog = new ReplyDialog(mContext, R.style.TransparentDialog);
+        replyDialog.setHuifutype(1);
     }
 
     public MessageAdapter setPictureClickCallback(MessagePicturesLayout.Callback callback) {

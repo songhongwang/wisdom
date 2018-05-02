@@ -210,10 +210,17 @@ public class IndexFragment extends BaseFragment {
                 mTvQiYa.setText("气压" + mIndexModel.qiya);
                 mTvFengSu.setText("风向/风力\n" + mIndexModel.fengxiang + "/" + mIndexModel.fengsu);
 
-                mTvFaBu.setText(mIndexModel.ybshijian);
+                mTvFaBu.setText(mIndexModel.nongli);
 
                 mTvTodayWeather.setText(mIndexModel.ybtianqi);
-                mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
+                if (mIndexModel.ybzuigaowendu != null)
+                {
+                    mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
+                }
+                else
+                {
+                    mTvTempr.setText(mIndexModel.ybzuidiwendu);
+                }
                 mTvFeng.setText(mIndexModel.ybfengxiang + mIndexModel.ybfengsu);
                 mTwinklingRefreshLayout.finishRefreshing();
             }

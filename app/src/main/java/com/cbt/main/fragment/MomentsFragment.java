@@ -103,9 +103,7 @@ public class MomentsFragment extends BaseFragment {
         adapter.setOnReplySuccessListener(new ReplyDialog.OnReplySuccessListener() {
         @Override
         public void onSuccess() {
-            if(mPage > 0){
-                mPage = mPage -1;
-            }
+            mPage = 0;
             getData();
         }
     });

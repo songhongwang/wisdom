@@ -45,6 +45,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
          mContext = context;
         ismydo = ismy;
         replyDialog = new ReplyDialog(mContext, R.style.TransparentDialog);
+        replyDialog.setHuifutype(0);
     }
 
     public ZaiqingAdapter setPictureClickCallback(MessagePicturesLayout.Callback callback) {
