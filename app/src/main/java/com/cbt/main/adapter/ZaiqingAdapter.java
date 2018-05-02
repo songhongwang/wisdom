@@ -69,7 +69,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent, tvReply, tvReplyCount;
+        TextView tNickname, tTime, tContent, tvReply, tvReplyCount,tv_zan, tv_shoucang;
         LinearLayout llReplyList;
         MessagePicturesLayout lPictures;
 
@@ -77,6 +77,8 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
 
         ViewHolder(View itemView) {
             super(itemView);
+            tv_zan = (TextView) itemView.findViewById(R.id.tv_zan);
+            tv_shoucang = (TextView) itemView.findViewById(R.id.tv_shoucang);
             iAvatar = (ImageView) itemView.findViewById(R.id.i_avatarzai);
             tNickname = (TextView) itemView.findViewById(R.id.t_nicknamezai);
             tTime = (TextView) itemView.findViewById(R.id.t_timezai);
@@ -115,8 +117,19 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     replyDialog.setIid(mData.getIid());
-                    ToastUtils.show(mContext, mData.getIid());
                     replyDialog.show();
+                }
+            });
+            tv_zan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtils.show(mContext, "给你点个赞");
+                }
+            });
+            tv_shoucang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtils.show(mContext, "收藏一下");
                 }
             });
 
