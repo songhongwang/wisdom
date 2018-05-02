@@ -37,6 +37,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
     TextView mTvGetCode;
     @BindView(R.id.btn_register)
     Button mBtnRegister;
+    boolean hadGettingCode = false;
 
     String mTitleStr;
     final CountDownTimer countDownTimer = new CountDownTimer(60 * 1000, 1000) {
@@ -80,6 +81,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
         mTvGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hadGettingCode = true;
                 String phone = mEtPhone.getText().toString().trim();
                 if(phone.length() < 11){
                     ToastUtils.show(RegisterOrForgetActivity.this, "手机号错误");
@@ -152,9 +154,13 @@ public class RegisterOrForgetActivity extends BaseActivity {
         String pwd = mEtPwd.getText().toString().trim();
         String pwd2 = mEtPwd2.getText().toString().trim();
 
-
         if(!PhoneNumberUtil.isChinaPhoneLegal(phone)){
             ToastUtils.show(this, "手机号不正确");
+            return;
+        }
+
+        if(!hadGettingCode){
+            ToastUtils.show(this, "获取验证码");
             return;
         }
 
@@ -162,8 +168,8 @@ public class RegisterOrForgetActivity extends BaseActivity {
             ToastUtils.show(this, "验证码不正确");
             return;
         }
-        if(pwd.length() < 6 || pwd2.length() < 6){
-            ToastUtils.show(this, "密码不正确");
+        if(pwd.length() == 0 || pwd2.length() == 0){
+            ToastUtils.show(this, "输入密码");
             return;
         }
         if(!pwd.equals(pwd2)){
