@@ -135,17 +135,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                User user = new User();
 //                user.setTelphone(phoneString);
 //                user.setPassword(passwordString);
-                User user = response.body();
-                SharedPreferencUtil.saveLogin(LoginActivity.this, user);
-                if (user.getState().equals("0"))
+                try
                 {
-                    goToWanshan();
+                    User user = response.body();
+                    SharedPreferencUtil.saveLogin(LoginActivity.this, user);
+                    if (user.getState().equals("0"))
+                    {
+                        goToWanshan();
+                    }
+                    else
+                    {
+                        goToMain();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    goToMain();
+                    ToastUtils.show(LoginActivity.this, "登录失败");
                 }
-
             }
 
             @Override

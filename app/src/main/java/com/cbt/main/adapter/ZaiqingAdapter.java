@@ -42,6 +42,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
          mContext = context;
         ismydo = ismy;
         replyDialog = new ReplyDialog(mContext, R.style.TransparentDialog);
+        replyDialog.setHuifutype(0);
     }
 
     public ZaiqingAdapter setPictureClickCallback(MessagePicturesLayout.Callback callback) {
@@ -108,7 +109,7 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     replyDialog.setIid(mData.getIid());
-                    ToastUtils.show(mContext, mData.getIid());
+                   // ToastUtils.show(mContext, mData.getIid());
                     replyDialog.show();
                 }
             });

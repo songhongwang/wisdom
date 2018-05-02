@@ -128,10 +128,17 @@ public class IndexFragment extends BaseFragment {
                 mTvQiYa.setText(mIndexModel.qiya);
                 mTvFengSu.setText(mIndexModel.fengxiang);
 
-                mTvFaBu.setText(mIndexModel.ybshijian);
+                mTvFaBu.setText(mIndexModel.nongli);
 
                 mTvTodayWeather.setText(mIndexModel.ybtianqi);
-                mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
+                if (mIndexModel.ybzuigaowendu != null)
+                {
+                    mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
+                }
+                else
+                {
+                    mTvTempr.setText(mIndexModel.ybzuidiwendu);
+                }
                 mTvFeng.setText(mIndexModel.ybfengxiang + mIndexModel.ybfengsu);
 
             }

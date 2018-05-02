@@ -78,7 +78,7 @@ public class WeatherForcastActivity extends BaseActivity {
         ApiClient.getInstance().getBasicService(this).getWeatherForcast(province, city, country).enqueue(new Callback<Weather7DaysForcast>() {
             @Override
             public void onResponse(Call<Weather7DaysForcast> call, Response<Weather7DaysForcast> response) {
-                ToastUtils.show(WeatherForcastActivity.this, response.body().getTodaytianqi());
+                //ToastUtils.show(WeatherForcastActivity.this, response.body().getTodaytianqi());
 
                 List<WeatherModel> goodList = new ArrayList<>();
                 List<WeatherModel2> d7list = response.body().getD7list();
