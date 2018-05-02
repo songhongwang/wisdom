@@ -23,6 +23,7 @@ import com.cbt.main.dialog.ReleaseDialog;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.ReplyModel;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
@@ -74,7 +75,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent, tvReply, tvReplyCount;
+        TextView tNickname, tTime, tContent, tvReply, tvReplyCount,tv_zan, tv_shoucang;
         LinearLayout llReplyList;
         MessagePicturesLayout lPictures;
 
@@ -82,6 +83,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         ViewHolder(View itemView) {
             super(itemView);
+            tv_zan = (TextView) itemView.findViewById(R.id.tv_zan);
+            tv_shoucang = (TextView) itemView.findViewById(R.id.tv_shoucang);
             iAvatar = (ImageView) itemView.findViewById(R.id.i_avatar);
             tNickname = (TextView) itemView.findViewById(R.id.t_nickname);
             tTime = (TextView) itemView.findViewById(R.id.t_time);
@@ -129,6 +132,19 @@ public class MessageAdapter extends RecyclerView.Adapter {
             });
 
             llReplyList.removeAllViews();
+
+            tv_zan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtils.show(mContext, "给你点个赞");
+                }
+            });
+            tv_shoucang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ToastUtils.show(mContext, "收藏一下");
+                }
+            });
 
             if(mData.getReplyList() != null && mData.getReplyList().size() > 0){
                 llReplyList.setVisibility(View.VISIBLE);

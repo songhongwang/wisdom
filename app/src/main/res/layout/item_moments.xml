@@ -85,6 +85,32 @@
         android:text="0"
         android:textSize="12sp"/>
 
+    <TextView
+        android:id="@+id/tv_zan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/v_content_line"
+        android:layout_toLeftOf="@id/tv_reply_count"
+        android:layout_marginTop="5dip"
+        android:padding="5dp"
+        android:textColor="@color/green"
+        android:text=" 点赞     | "
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_shoucang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/v_content_line"
+        android:layout_toLeftOf="@id/tv_zan"
+        android:layout_marginTop="5dip"
+        android:padding="5dp"
+        android:textColor="@color/green"
+        android:text=" 收藏     | "
+        android:textSize="12sp"/>
+
     <LinearLayout
         android:id="@+id/ll_reply_list"
         android:layout_width="match_parent"
