@@ -87,13 +87,12 @@ public class ExpertConsultActivity extends BaseActivity2 {
 
         String iid = getIntent().getStringExtra("iid");
         iidf = iid;
-        ApiClient.getInstance().getBasicService(this).getmyproblem(0,iid).enqueue(new Callback<MyproblemView>() {
+        ApiClient.getInstance().getBasicService(this).getmyproblem(mPage,iid).enqueue(new Callback<MyproblemView>() {
             @Override
             public void onResponse(Call<MyproblemView> call, Response<MyproblemView> response) {
                 MyproblemView dataList = response.body();
 
                 mIsLoading = false;
-                mPage ++;
 
                 if(dataList != null){
                     mTvContentTitle.setText(dataList.getContent());
@@ -103,10 +102,15 @@ public class ExpertConsultActivity extends BaseActivity2 {
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
                     if (dataList.getList().size() > 0)
                     {
+                        if(mPage == 0){
+                            datas.clear();
+                        }
+
                         datas.addAll(dataList.getList());
                         mMarketDetailActAdapter.resetData(datas);
                         mMarketDetailActAdapter.notifyDataSetChanged();
                         mHasMore =true;
+                        mPage ++;
                     }
                     else
                     {
@@ -130,7 +134,10 @@ public class ExpertConsultActivity extends BaseActivity2 {
         ApiClient.getInstance().getBasicService(this).replyanswer(iid, msg).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-
+                if(mPage > 0){
+                    mPage --;
+                }
+                getData();
             }
 
             @Override

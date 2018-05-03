@@ -29,19 +29,22 @@ public class IndexProductAdapter extends AppBaseAdapter {
     public View getCView(final int position, View view, ViewGroup viewGroup) {
         View itemView = mInflater.inflate(R.layout.item_index_product, null, false);
 
-        IndexProductModel model = (IndexProductModel) mDataList.get(position);
+        final IndexProductModel model = (IndexProductModel) mDataList.get(position);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ToastUtils.show(mContext, "产品详情");
                 if(position == 0){
                     Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra("model", model);
                     mContext.startActivity(intent);
                 }else if(position == 1) {
                     Intent intent = new Intent(mContext, ExpertConsultActivity.class);
+                    intent.putExtra("model", model);
                     mContext.startActivity(intent);
                 }else{
                     Intent intent = new Intent(mContext, MarketDetailActivity.class);
+                    intent.putExtra("model", model);
                     mContext.startActivity(intent);
                 }
             }

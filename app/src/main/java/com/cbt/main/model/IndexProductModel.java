@@ -1,10 +1,12 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vigorous on 18/4/1.
  */
 
-public class IndexProductModel {
+public class IndexProductModel implements Serializable{
     private String pid;
     private String pdfpath;
     private String productname;

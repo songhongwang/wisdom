@@ -13,6 +13,8 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.IndexProductModel;
+import com.cbt.main.utils.net.Constants;
 
 /**
  * Created by vigorous on 18/4/10.
@@ -46,7 +48,9 @@ public class WebActivity extends BaseActivity {
 
         mWebSettings = mWebview.getSettings();
 
-        mWebview.loadUrl("http://www.baidu.com/");
+        IndexProductModel indexProductModel = (IndexProductModel) getIntent().getSerializableExtra("model");
+
+        mWebview.loadUrl(Constants.getBaseUrl() + indexProductModel.getPdfpath());
 
 
         //设置不用系统浏览器打开,直接显示在当前Webview
@@ -79,6 +83,7 @@ public class WebActivity extends BaseActivity {
                 } else if (newProgress == 100) {
                     String progress = newProgress + "%";
                     loading.setText(progress);
+                    loading.setVisibility(View.GONE);
                 }
             }
         });
