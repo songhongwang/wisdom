@@ -85,6 +85,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
     private void startFriendDetailsPage(Friend friend) {
         Intent intent = new Intent(getActivity(), UserActivity.class);
         Data data = new Data();
+        data.setIid(friend.getUid());
         data.setUid(friend.getUid());
         data.setNickname(friend.getUsername());
         data.setAvatar(friend.getIcon());

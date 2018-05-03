@@ -65,7 +65,7 @@ public class PerfactAccountActivity extends BaseActivity{
 
     @Override
     public void initUI() {
-
+        mTvTitle.setText("农庄信息");
         mIvFinish.setImageResource(R.drawable.icon_complete);
         mIvFinish.setVisibility(View.VISIBLE);
         mIvFinish.setOnClickListener(new View.OnClickListener() {
