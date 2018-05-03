@@ -104,7 +104,7 @@ public class ZhuanjiaAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("uid", mData.getUid());
+                    intent.putExtra("model", mData);
                     mContext.startActivity(intent);
                 }
             });

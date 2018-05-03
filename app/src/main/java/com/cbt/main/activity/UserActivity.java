@@ -46,6 +46,9 @@ public class UserActivity extends BaseActivity {
         mTvName = (TextView) findViewById(R.id.tv_user_name);
         mTvDes = (TextView) findViewById(R.id.tv_user_des);
 
+        if(mData == null){
+            return;
+        }
         if(!TextUtils.isEmpty(mData.getAvatar())){
             Picasso.with(this).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
                     .transform(new CropCircleTransformation())

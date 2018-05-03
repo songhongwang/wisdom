@@ -20,6 +20,7 @@ import com.cbt.main.adapter.FriendListAdapter;
 import com.cbt.main.engin.pinyin.CharacterParser;
 import com.cbt.main.engin.pinyin.PinyinComparator;
 import com.cbt.main.engin.pinyin.SideBar;
+import com.cbt.main.model.Data;
 import com.cbt.main.model.Friend;
 import com.cbt.main.utils.net.ApiClient;
 
@@ -83,8 +84,12 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
 
     private void startFriendDetailsPage(Friend friend) {
         Intent intent = new Intent(getActivity(), UserActivity.class);
-        intent.putExtra("type", CLICK_CONTACT_FRAGMENT_FRIEND);
-        intent.putExtra("friend", (Serializable) friend);
+        Data data = new Data();
+        data.setUid(friend.getUid());
+        data.setNickname(friend.getUsername());
+        data.setAvatar(friend.getIcon());
+
+        intent.putExtra("model", data);
         startActivity(intent);
     }
 

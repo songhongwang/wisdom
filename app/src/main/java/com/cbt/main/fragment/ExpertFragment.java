@@ -79,7 +79,7 @@ public class ExpertFragment extends BaseFragment {
             }
         });
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t3);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(3);
         ExpertFragmentAdapter adapter = new ExpertFragmentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
