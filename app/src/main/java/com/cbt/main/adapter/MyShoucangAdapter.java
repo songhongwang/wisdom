@@ -20,6 +20,7 @@ import java.util.List;
 
 public class MyShoucangAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
+    List<Fragment> mFragments = new ArrayList<>();
     public MyShoucangAdapter(FragmentManager fm) {
         super(fm);
         initTitlesData();
@@ -31,6 +32,12 @@ public class MyShoucangAdapter extends FragmentStatePagerAdapter {
         mDataList.add("   农情   ");
         mDataList.add(" 专家咨询 ");
         mDataList.add(" 市场信息 ");
+
+        mFragments.add(createFragment(0));
+        mFragments.add(createFragment(1));
+        mFragments.add(createFragment(2));
+        mFragments.add(createFragment(3));
+
     }
 
     @Override
@@ -38,9 +45,9 @@ public class MyShoucangAdapter extends FragmentStatePagerAdapter {
         return mDataList.get(position);
     }
 
-    @Override
-    public Fragment getItem(int position) {
-		if (position == 0)
+
+    public Fragment createFragment(int position) {
+        if (position == 0)
         {
             return ZaiqingFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing,2);
         }
@@ -56,8 +63,11 @@ public class MyShoucangAdapter extends FragmentStatePagerAdapter {
         {
             return TopicFragment.getInstance(MomentMode.my_shoucang);
         }
+    }
 
-        //return MomentsFragment.getInstance(position == 0 ? MomentMode.zai_qing : MomentMode.nong_qing);
+    @Override
+    public Fragment getItem(int position) {
+		 return mFragments.get(position);
     }
 
     @Override

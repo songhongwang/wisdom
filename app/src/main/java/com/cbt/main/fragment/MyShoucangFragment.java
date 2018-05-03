@@ -52,7 +52,7 @@ public class MyShoucangFragment extends BaseFragment {
     @Override
     public void initUI() {
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(4);
         MyShoucangAdapter adapter = new MyShoucangAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
