@@ -20,6 +20,7 @@ import com.cbt.main.model.TypeModel;
 import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.view.NoScrollGridView;
 import com.cbt.main.view.picker.JsonBean;
 import com.cbt.main.view.picker.JsonFileReader;
 import com.google.gson.Gson;
@@ -53,7 +54,7 @@ public class ReleaseActivity extends BaseActivity{
     @BindView(R.id.et_content)
     EditText mEtContent;
     @BindView(R.id.mGridView)
-    GridView mGridView;
+    NoScrollGridView mGridView;
     @BindView(R.id.tv_location)
     TextView mTvLocation;
     @BindView(R.id.tv_str_leixing)
