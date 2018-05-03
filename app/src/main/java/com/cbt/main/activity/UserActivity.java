@@ -31,7 +31,6 @@ public class UserActivity extends BaseActivity {
     Data mData;
     TextView mTvName, mTvDes;
     ImageView mIvAvatar;
-    String mUid;
 
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +45,6 @@ public class UserActivity extends BaseActivity {
         mTvName = (TextView) findViewById(R.id.tv_user_name);
         mTvDes = (TextView) findViewById(R.id.tv_user_des);
 
-        if(mData == null){
-            return;
-        }
         if(!TextUtils.isEmpty(mData.getAvatar())){
             Picasso.with(this).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
                     .transform(new CropCircleTransformation())
@@ -94,15 +90,32 @@ public class UserActivity extends BaseActivity {
         getData();
     }
 
-    private void getData(){
-        ApiClient.getInstance().getBasicService(this).getUser(mUid).enqueue(new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
+    private void refreshUI(){
+        if(!TextUtils.isEmpty(mData.getAvatar())){
+            Picasso.with(this).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.default_image_error)
+                    .transform(new CropCircleTransformation())
+                    .into(mIvAvatar);
+        }else{
+            mIvAvatar.setImageResource(R.drawable.de_default_portrait);
+        }
 
+        if(!TextUtils.isEmpty(mData.getAvatar())){
+            mTvName.setText(mData.getNickname());
+        }else{
+            mTvName.setText("匿名");
+        }
+    }
+
+    private void getData(){
+        ApiClient.getInstance().getBasicService(this).getUser(mData.getIid()).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                mData = response.body();
+                refreshUI();
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<Data> call, Throwable t) {
 
             }
         });
