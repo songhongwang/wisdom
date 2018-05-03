@@ -60,7 +60,6 @@
         android:id="@+id/tv_operate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:background="@drawable/rc_send_toggle_selector"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
