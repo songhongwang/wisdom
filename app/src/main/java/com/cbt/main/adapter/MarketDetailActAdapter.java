@@ -13,6 +13,7 @@ import com.cbt.main.R;
 import com.cbt.main.activity.UserActivity;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.ReplayMyprolemView;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.Constants;
 import com.squareup.picasso.Picasso;
 
@@ -71,6 +72,13 @@ public class MarketDetailActAdapter extends AppBaseAdapter {
         }
         TextView rp_content = (TextView) itemView.findViewById(R.id.rp_content);
         rp_content.setText(mData.getContent());
+        TextView tv_operate = (TextView) itemView.findViewById(R.id.tv_operate);
+        tv_operate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.show(mContext, "采纳本条");
+            }
+        });
         return itemView;
     }
 }

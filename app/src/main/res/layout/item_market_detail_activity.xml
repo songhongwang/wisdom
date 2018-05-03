@@ -49,11 +49,23 @@
         android:layout_height="wrap_content"
 
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="45dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:layout_below="@id/ll_title"
-        android:text="哈哈哈"/>
+        android:text=""/>
 
 
+    <TextView
+        android:id="@+id/tv_operate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/rc_send_toggle_selector"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="采纳"/>
 </RelativeLayout>
