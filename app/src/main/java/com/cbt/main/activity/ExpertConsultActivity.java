@@ -78,6 +78,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
                 mEtInput.setText("");
             }
         });
+        lPictures.setCallback(this);
 
         getData();
     }
