@@ -218,5 +218,5 @@ public interface BasicService {
 
     // 获取用户
     @GET("findOtherUser")
-    Call<Data> getUser(@Query("otheruserid") String otheruserid);
+    Call<User> getUser(@Query("otheruserid") String otheruserid);
 }

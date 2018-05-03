@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.Friend;
+import com.cbt.main.model.User;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
 import com.squareup.picasso.Picasso;
@@ -77,7 +79,11 @@ public class UserActivity extends BaseActivity {
         findViewById(R.id.btn_send_msg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RongIM.getInstance().startPrivateChat(UserActivity.this, mData.getIid(), TextUtils.isEmpty(mData.getNickname()) ? "匿名":mData.getNickname());
+                if(!TextUtils.isEmpty(mData.getIid())){
+                    RongIM.getInstance().startPrivateChat(UserActivity.this, mData.getIid(), TextUtils.isEmpty(mData.getNickname()) ? "匿名":mData.getNickname());
+                }else{
+                    ToastUtils.show(UserActivity.this, "用户数据异常");
+                }
 
             }
         });
@@ -108,16 +114,22 @@ public class UserActivity extends BaseActivity {
     }
 
     private void getData(){
-        ApiClient.getInstance().getBasicService(this).getUser(mData.getIid()).enqueue(new Callback<Data>() {
+        ApiClient.getInstance().getBasicService(this).getUser(mData.getIid()).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
-                mData = response.body();
-                refreshUI();
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                if(user != null && !TextUtils.isEmpty(user.getUid())){
+                    mData.setUid(user.getUid());
+                    mData.setIid(user.getUid());
+                    mData.setAvatar(user.getIcon());
+                    mData.setNickname(user.getUname());
+                    refreshUI();
+                }
             }
 
             @Override
-            public void onFailure(Call<Data> call, Throwable t) {
-
+            public void onFailure(Call<User> call, Throwable t) {
+                ToastUtils.show(UserActivity.this, "网络异常");
             }
         });
     }
