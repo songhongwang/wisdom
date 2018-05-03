@@ -424,13 +424,13 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     @Override
     protected void onPause() {
         super.onPause();
-        mSceneSurfaceView.stop();
+//        mSceneSurfaceView.stop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mSceneSurfaceView.start();
+//        mSceneSurfaceView.start();
     }
 
     @Override

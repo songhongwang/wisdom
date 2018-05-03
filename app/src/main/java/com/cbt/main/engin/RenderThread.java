@@ -74,11 +74,19 @@ public class RenderThread extends Thread {
         if(mIsStop){
             return;
         }
+        if(surfaceHolder.getSurface() == null){
+            return;
+        }
         Canvas canvas = surfaceHolder.lockCanvas();
-        if (canvas != null) {
-            scene.draw(canvas);
+        try{
+            if (canvas != null) {
+                scene.draw(canvas);
+                surfaceHolder.unlockCanvasAndPost(canvas);
+            }
+        }catch (Exception e){
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
+
     }
 
 

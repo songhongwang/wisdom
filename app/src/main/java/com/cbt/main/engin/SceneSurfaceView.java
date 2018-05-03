@@ -54,8 +54,10 @@ public class SceneSurfaceView extends SurfaceView implements SurfaceHolder.Callb
             renderThread.setWidth(width);
             renderThread.setHeight(height);
             renderThread.start();
+            Log.d("weather_draw", "on_start");
         }else{
             renderThread.getRenderHandler().sendEmptyMessage(RenderThread.FLAG_DRAWING);
+            Log.d("weather_draw", "on_resume");
         }
         renderThread.setStop(false);
     }

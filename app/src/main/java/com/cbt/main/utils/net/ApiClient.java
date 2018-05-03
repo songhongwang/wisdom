@@ -56,6 +56,7 @@ public class ApiClient {
         return mBasicService;
     }
     public RongYunService getRongYunService() {
+        mOkHttpClient = HttpClientUtil.getDefaultHttpClient();
         if(mRongYunService == null){
             mRongYunService = init(RongYunService.class, Constants.getRongBaseUrl());
         }

@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login);
 
         User login = SharedPreferencUtil.getLogin(this);
-        if(login != null){
+        if(login != null && !TextUtils.isEmpty(login.getState())){
             if (login.getState().equals("0"))
             {
                 goToWanshan();
@@ -128,6 +128,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void loginServer(String phone, String pwd){
+//        User user = new User();
+//        user.setTelphone(phoneString);
+//        user.setPassword(passwordString);
+//        SharedPreferencUtil.saveLogin(LoginActivity.this, user);
+//        goToMain();
         ApiClient.getInstance().getBasicService(this).login(phone, pwd).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -150,7 +155,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 catch (Exception e)
                 {
-                    ToastUtils.show(LoginActivity.this, "登录失败");
+                    ToastUtils.show(LoginActivity.this, "用户名或密码错误");
                 }
             }
 

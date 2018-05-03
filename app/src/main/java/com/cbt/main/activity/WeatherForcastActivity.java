@@ -54,6 +54,7 @@ public class WeatherForcastActivity extends BaseActivity {
         if(mIndexModel == null){
             ToastUtils.show(this, "天气预报数据未准备好");
             finish();
+            return;
         }
         mTvQiYa.setText(mIndexModel.qiya);
         mTvFengSu.setText(mIndexModel.fengxiang);
