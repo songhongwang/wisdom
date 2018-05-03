@@ -70,16 +70,17 @@ public class SelectMapLocationActivity extends Activity implements GeoFenceListe
 
     private ImageView mIvBack;
     private ImageView mIvFinish;
+    private TextView mTvTitle;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        setTitle("高德地图");
-
 
         mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mTvTitle = (TextView) findViewById(R.id.tv_title);
+        mTvTitle.setText("农庄位置选择");
         mIvFinish = (ImageView) findViewById(R.id.iv_complete);
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setOnClickListener(new View.OnClickListener() {

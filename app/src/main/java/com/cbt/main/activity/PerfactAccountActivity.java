@@ -219,7 +219,10 @@ public class PerfactAccountActivity extends BaseActivity{
                 User login = SharedPreferencUtil.getLogin(PerfactAccountActivity.this);
                 login.setState("1");
                 SharedPreferencUtil.saveLogin(PerfactAccountActivity.this, login);
-                startActivity(new Intent(PerfactAccountActivity.this, MainActivity.class));
+                String from = getIntent().getStringExtra("from");
+                if(!"MoreFragment".equals(from)){ // 首次登录或注册成功后在没有打开MainActivity之前调用了此页面需要手动打开MainActivity
+                    startActivity(new Intent(PerfactAccountActivity.this, MainActivity.class));
+                }
                 finish();
             }
 

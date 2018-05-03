@@ -61,7 +61,7 @@ public class MoreFragment extends BaseFragment {
         final User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
         if(login != null){
             ((TextView)mRootView.findViewById(R.id.tv_user_name)).setText(login.getUname());
-            ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText(login.getUsname());
+            ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText("查看或编辑个人资料");
 
             ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
             if(!TextUtils.isEmpty(login.getIcon())){
@@ -90,6 +90,7 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PerfactAccountActivity.class);
+                intent.putExtra("from", "MoreFragment");
                 startActivity(intent);
             }
         });
