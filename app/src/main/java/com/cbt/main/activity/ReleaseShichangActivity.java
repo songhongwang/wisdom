@@ -19,6 +19,7 @@ import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.TypeModel;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.view.NoScrollGridView;
 import com.cbt.main.view.picker.JsonBean;
 import com.cbt.main.view.picker.JsonFileReader;
 import com.google.gson.Gson;
@@ -50,7 +51,7 @@ public class ReleaseShichangActivity extends BaseActivity{
     @BindView(R.id.et_content)
     EditText mEtContent;
     @BindView(R.id.mGridView)
-    GridView mGridView;
+    NoScrollGridView mGridView;
     @BindView(R.id.tv_location)
     TextView mTvLocation;
     @BindView(R.id.tv_str_leixing)
@@ -424,6 +425,8 @@ private void onPinzhongDialog(){
     }
 
     private void commit() {
+        mLoadingDialog.show();
+        mIvFinish.setEnabled(false);
         String content = mEtContent.getText().toString();
         String ititle = mEtTitle.getText().toString();
         final File img1 = new File(mDatas.get(0));
@@ -461,11 +464,19 @@ private void onPinzhongDialog(){
             public void onResponse(Call<Object> call, Response<Object> response) {
                 ToastUtils.show(ReleaseShichangActivity.this, "发布成功");
                 finish();
+                mIvFinish.setEnabled(true);
+                if(mLoadingDialog.isShowing()){
+                    mLoadingDialog.dismiss();
+                }
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 ToastUtils.show(ReleaseShichangActivity.this, "发布失败");
+                mIvFinish.setEnabled(true);
+                if(mLoadingDialog.isShowing()){
+                    mLoadingDialog.dismiss();
+                }
             }
         });
 

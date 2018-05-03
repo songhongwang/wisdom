@@ -46,6 +46,7 @@ public class MarketFragment extends BaseFragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ReleaseShichangActivity.class);
+                intent.putExtra("title", "发布信息");
                 startActivity(intent);
             }
         });
