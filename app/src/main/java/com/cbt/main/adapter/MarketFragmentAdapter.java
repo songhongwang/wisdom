@@ -19,6 +19,7 @@ import java.util.List;
 
 public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
     private List<String> mDataList = new ArrayList<>();
+    List<Fragment> mFragments = new ArrayList<>();
     public MarketFragmentAdapter(FragmentManager fm) {
         super(fm);
         initTitlesData();
@@ -28,6 +29,8 @@ public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
     private void initTitlesData() {
         mDataList.add("        最新消息        ");
         mDataList.add("        我的发布        ");
+        mFragments.add(craeteFragment(0));
+        mFragments.add(craeteFragment(1));
     }
 
     @Override
@@ -35,8 +38,7 @@ public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
         return mDataList.get(position);
     }
 
-    @Override
-    public Fragment getItem(int position) {
+    private Fragment craeteFragment(int position) {
         TopicFragment fragment =new TopicFragment();
         Bundle bundle = new Bundle();
         if (position == 0)
@@ -53,6 +55,11 @@ public class MarketFragmentAdapter extends FragmentStatePagerAdapter {
         }
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        return mFragments.get(position);
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.cbt.main.adapter.ReleaseActAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.TypeModel;
+import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.NoScrollGridView;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.rong.eventbus.EventBus;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
 import me.nereo.imagechoose.ShowActivity;
 import okhttp3.MediaType;
@@ -463,11 +465,13 @@ private void onPinzhongDialog(){
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 ToastUtils.show(ReleaseShichangActivity.this, "发布成功");
-                finish();
+                EventBus.getDefault().post(new EventPublishSuccess());
+
                 mIvFinish.setEnabled(true);
                 if(mLoadingDialog.isShowing()){
                     mLoadingDialog.dismiss();
                 }
+                finish();
             }
 
             @Override

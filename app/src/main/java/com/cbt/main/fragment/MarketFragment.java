@@ -51,7 +51,7 @@ public class MarketFragment extends BaseFragment {
             }
         });
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t4);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
         MarketFragmentAdapter adapter = new MarketFragmentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
