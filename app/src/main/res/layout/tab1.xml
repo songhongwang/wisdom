@@ -98,7 +98,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="253dp"
+            android:layout_height="260dp"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
@@ -165,6 +165,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
                     android:drawablePadding="10dp"
+                    android:padding="5dp"
                     android:text="未来七天预报 >"
                     android:textColor="#107687"
                     android:textSize="14sp"/>
@@ -200,6 +201,7 @@
                         android:layout_marginRight="5dp"
                         android:drawablePadding="10dp"
                         android:text="更多>"
+                        android:padding="5dp"
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
                 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.cbt.main.R;
+import com.cbt.main.activity.MoreProductActivity;
 import com.cbt.main.activity.ReleaseActivity;
 import com.cbt.main.activity.WeatherForcastActivity;
 import com.cbt.main.adapter.IndexProductAdapter;
@@ -89,7 +90,8 @@ public class IndexFragment extends BaseFragment {
         mRootView.findViewById(R.id.tv_product_more).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), MoreProductActivity.class);
+                startActivity(intent);
             }
         });
         mRootView.findViewById(R.id.tv_weather).setOnClickListener(new View.OnClickListener() {

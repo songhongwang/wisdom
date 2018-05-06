@@ -222,6 +222,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.RegisterSuccessActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MoreProductActivity"
+            android:screenOrientation="portrait"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cbt.main"
