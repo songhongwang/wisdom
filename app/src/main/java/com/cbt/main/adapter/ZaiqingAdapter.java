@@ -100,9 +100,12 @@ public class ZaiqingAdapter extends RecyclerView.Adapter {
             }else{
                 iAvatar.setImageResource(R.drawable.login_default_icon);
             }
+            if(TextUtils.isEmpty(mData.getNickname())){
+                tNickname.setText("匿名");
+            }else{
+                tNickname.setText(mData.getNickname());
+            }
 
-
-            tNickname.setText(mData.getNickname());
             tTime.setText(mData.getCreateTime());
             tContent.setText(mData.getContent());
             lPictures.set(mData.getPictureThumbList(), mData.getPictureList());

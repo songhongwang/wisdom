@@ -20,26 +20,42 @@
         android:textSize="15sp"/>
 
     <TextView
-        android:id="@+id/t_timezai"
+        android:id="@+id/t_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/t_nicknamezai"
         android:layout_marginTop="0.5dip"
         android:layout_toRightOf="@+id/i_avatarzai"
+        android:drawableLeft="@drawable/icon_normal_farmer"
+        android:text="普通农户"
         android:textColor="#777"
         android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/t_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t_type"
+        android:layout_marginTop="0.5dip"
+        android:drawableLeft="@drawable/farm_icon_growth"
+        android:layout_toRightOf="@+id/i_avatarzai"
+        android:text="中稻"
+        android:textColor="#777"
+        android:textSize="13sp"/>
+
+
 
     <LinearLayout
         android:id="@+id/ll_content_and_pictureszai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/i_avatarzai"
+        android:layout_below="@+id/t_des"
         android:orientation="vertical">
         <TextView
             android:id="@+id/t_contentzai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:layout_margin="10dip"
             android:textColor="#000"
             android:textSize="15sp"/>
 
@@ -50,12 +66,22 @@
             android:layout_marginTop="10dip"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/t_timezai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/ll_content_and_pictureszai"
+        android:layout_marginTop="0.5dip"
+        android:textColor="#777"
+        android:textSize="13sp"/>
 
     <View
         android:id="@+id/v_content_linezai"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_below="@id/ll_content_and_pictureszai"
+        android:layout_below="@id/t_timezai"
         android:layout_marginLeft="3dip"
         android:layout_marginRight="3dip"
         android:layout_marginTop="10dip"
