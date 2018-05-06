@@ -111,6 +111,10 @@ public class TopicFragment extends BaseFragment {
 //        Utils.fitsSystemWindows(isTranslucentStatus, mRootView.findViewById(R.id.v_fit));
     }
 
+    public void refresh(){
+        getData();
+    }
+
     private void getData() {
         mIsLoading = true;
         if(getArguments() == null){

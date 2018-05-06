@@ -26,7 +26,7 @@ public class MarketFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
-
+    MarketFragmentAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,11 +52,27 @@ public class MarketFragment extends BaseFragment {
         });
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t4);
         mViewPager.setOffscreenPageLimit(2);
-        MarketFragmentAdapter adapter = new MarketFragmentAdapter(getActivity().getSupportFragmentManager());
+        adapter = new MarketFragmentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t4);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                ((TopicFragment)adapter.getItem(position)).refresh();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         setTabsValue();
 
     }
