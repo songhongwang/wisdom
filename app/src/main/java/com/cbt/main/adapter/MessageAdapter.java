@@ -112,7 +112,12 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 iAvatar.setImageResource(R.drawable.login_default_icon);
             }
 
-            tNickname.setText(mData.getNickname());
+            if(TextUtils.isEmpty(mData.getNickname())){
+                tNickname.setText("匿名");
+            }else{
+                tNickname.setText(mData.getNickname());
+            }
+
             tTime.setText(mData.getCreateTime());
             tContent.setText(mData.getContent());
             lPictures.set(mData.getPictureThumbList(), mData.getPictureList());

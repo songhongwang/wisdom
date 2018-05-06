@@ -12,6 +12,7 @@ import com.cbt.main.R;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.Friend;
 import com.cbt.main.model.User;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
@@ -53,7 +54,7 @@ public class UserActivity extends BaseActivity {
                     .transform(new CropCircleTransformation())
                     .into(mIvAvatar);
         }else{
-            mIvAvatar.setImageResource(R.drawable.de_default_portrait);
+            mIvAvatar.setImageResource(R.drawable.login_default_icon);
         }
 
         if(!TextUtils.isEmpty(mData.getAvatar())){
@@ -93,6 +94,15 @@ public class UserActivity extends BaseActivity {
                 // 添加关注
             }
         });
+
+        User login = SharedPreferencUtil.getLogin(this);
+        if(mData.getIid().equals(login.getUid())){
+            ToastUtils.show(UserActivity.this, "给自己加油");
+            finish();
+            return;
+        }else{
+            findViewById(R.id.rl_ta_nongqing).setVisibility(View.GONE);
+        }
 
         getData();
     }
