@@ -67,4 +67,14 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:text="采纳"/>
+
+    <ImageView
+        android:id="@+id/iv_operate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/expert_icon_adopt"/>
 </RelativeLayout>

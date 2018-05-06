@@ -15,6 +15,7 @@ import com.cbt.main.adapter.MarketDetailActAdapter;
 import com.cbt.main.model.MyproblemView;
 import com.cbt.main.model.WentiModel;
 import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.Utils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
@@ -139,6 +140,8 @@ public class ExpertConsultActivity extends BaseActivity2 {
                     mPage --;
                 }
                 getData();
+                mListView.scrollTo(0,0);
+                Utils.hideInputMethod(ExpertConsultActivity.this, mEtInput);
             }
 
             @Override

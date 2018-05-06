@@ -9,7 +9,7 @@ public class ReplayMyprolemView implements Serializable {
 	private String content;
 
 	private String time;
-	private String isadopt;
+	private boolean isadopt;
 
 	private String userid;
 
@@ -42,14 +42,6 @@ public class ReplayMyprolemView implements Serializable {
 
 	public void setTime(String time) {
 		this.time = time;
-	}
-
-	public String getIsadopt() {
-		return isadopt;
-	}
-
-	public void setIsadopt(String isadopt) {
-		this.isadopt = isadopt;
 	}
 
 	public String getUserid() {
@@ -100,4 +92,11 @@ public class ReplayMyprolemView implements Serializable {
 		this.icon3 = icon3;
 	}
 
+	public boolean isIsadopt() {
+		return isadopt;
+	}
+
+	public void setIsadopt(boolean isadopt) {
+		this.isadopt = isadopt;
+	}
 }
