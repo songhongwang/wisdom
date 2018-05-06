@@ -165,7 +165,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
                     android:drawablePadding="10dp"
-                    android:text="一周天气 >"
+                    android:text="未来七天预报 >"
                     android:textColor="#107687"
                     android:textSize="14sp"/>
             </RelativeLayout>

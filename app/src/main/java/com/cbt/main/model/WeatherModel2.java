@@ -94,7 +94,7 @@ public class WeatherModel2 {
 
     public static WeatherModel convert(WeatherModel2 self, int index){
         Calendar calendar = Calendar.getInstance();
-        int dayOfMouth = calendar.get(Calendar.DAY_OF_MONTH) -1; // -1 代表昨天
+        int dayOfMouth = calendar.get(Calendar.DAY_OF_MONTH);
 
         WeatherModel good = new WeatherModel();
         good.setDate((dayOfMouth + index) + "日" + self.getYbday());

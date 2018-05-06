@@ -49,6 +49,7 @@ public class WeatherForcastActivity extends BaseActivity {
     @Override
     public void initUI() {
         mIvFinish.setVisibility(View.GONE);
+        mTvTitle.setText("未来七天预报");
 
         mIndexModel = (IndexModel) getIntent().getSerializableExtra("weather");
         if(mIndexModel == null){
