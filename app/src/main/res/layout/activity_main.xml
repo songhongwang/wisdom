@@ -96,19 +96,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:paddingLeft="30dp"
-            android:layout_height="wrap_content">
-        <com.cbt.main.view.DragPointView
-            android:id="@+id/msg_unread_count_more"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="top"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="30dp"
-            android:textSize="12sp"
-            android:lines="1"
-            android:ellipsize="end"
-            android:visibility="visible" />
-        </LinearLayout>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
