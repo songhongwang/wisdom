@@ -28,9 +28,9 @@ public class ExpertFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initTitlesData() {
-        mDataList.add("        最热        ");
-        mDataList.add("        最新        ");
-        mDataList.add("        我的        ");
+        mDataList.add("      最热      ");
+        mDataList.add("      最新      ");
+        mDataList.add("      我的      ");
 
 
         mFragments.add(getFrame(0));

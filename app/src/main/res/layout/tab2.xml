@@ -22,6 +22,51 @@
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
             android:background="@color/gray"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="75dp"
+                android:layout_height="wrap_content">
+                <com.cbt.main.view.DragPointView
+                    android:id="@+id/msg_unread_count_tab1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="top"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="12sp"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:visibility="visible" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="-20dp"
+                android:layout_height="wrap_content">
+                <com.cbt.main.view.DragPointView
+                    android:id="@+id/msg_unread_count_tab2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="top"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="12sp"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
