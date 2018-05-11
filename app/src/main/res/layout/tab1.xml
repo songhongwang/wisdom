@@ -71,17 +71,18 @@
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
 
-                <TextView
-                    android:id="@+id/tv_fengsu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/home_icon_wind"
-                    android:drawablePadding="10dp"
-                    android:text="风向/风力\n17%"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_fengsu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/home_icon_wind"
+                android:drawablePadding="10dp"
+                android:text="风向/风力\n17%"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/tv_fabu"
