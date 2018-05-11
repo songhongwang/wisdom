@@ -43,6 +43,7 @@ import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.RongYunTokenUtil;
+import com.cbt.main.view.DragPointView;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 
@@ -55,12 +56,14 @@ import java.util.Map;
 
 import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
+public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener,IUnReadMessageObserver {
     SceneSurfaceView mSceneSurfaceView;
     //声明ViewPager
     private ViewPager mViewPager;
@@ -82,6 +85,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     private ImageButton mImgExpert;
     private ImageButton mImgMarket;
     private ImageButton mImgMore;
+    private DragPointView mMsgUnRead;
 
     private Toolbar mToolbar;
     private ImageWatcher vImageWatcher; // 朋友圈滑动图片工具
@@ -256,6 +260,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         mImgExpert = (ImageButton) findViewById(R.id.id_tab_expert_img);
         mImgMarket = (ImageButton) findViewById(R.id.id_tab_market_img);
         mImgMore= (ImageButton) findViewById(R.id.id_tab_more_img);
+        mMsgUnRead= (DragPointView) findViewById(R.id.msg_unread_count_mine);
     }
     private void setTabsValue() {
         DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -419,6 +424,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                 });
             }
         });
+
+        final Conversation.ConversationType[] conversationTypes = {
+                Conversation.ConversationType.PRIVATE,
+                Conversation.ConversationType.GROUP, Conversation.ConversationType.SYSTEM,
+                Conversation.ConversationType.PUBLIC_SERVICE, Conversation.ConversationType.APP_PUBLIC_SERVICE
+        };
+
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(this, conversationTypes);
     }
 
     @Override
@@ -446,9 +459,21 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(this);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(EventLogout eventLogout) {
         finish();
+    }
+
+    @Override
+    public void onCountChanged(int i) {
+//        ToastUtils.show(MainActivity.this, "message count " + i);
+//        if(i > 0){
+//            mMsgUnRead.setText(""+i);
+//            mMsgUnRead.setVisibility(View.VISIBLE);
+//        }else{
+//            mMsgUnRead.setVisibility(View.GONE);
+//        }
     }
 }

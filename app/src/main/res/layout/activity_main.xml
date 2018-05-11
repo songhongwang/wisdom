@@ -29,6 +29,77 @@
         <include layout="@layout/bottom"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="56dp">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_height="wrap_content">
+            <com.cbt.main.view.DragPointView
+                android:id="@+id/msg_unread_count_mine"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="30dp"
+                android:textSize="12sp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="2"
+                android:visibility="visible" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_height="wrap_content">
+            <com.cbt.main.view.DragPointView
+                android:id="@+id/msg_unread_count_expert"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="30dp"
+                android:textSize="12sp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="3"
+                android:visibility="visible" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_height="wrap_content">
+        <com.cbt.main.view.DragPointView
+            android:id="@+id/msg_unread_count_more"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="30dp"
+            android:textSize="12sp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="10"
+            android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/id_viewpager"
         android:layout_width="match_parent"
