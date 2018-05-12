@@ -27,15 +27,18 @@ import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.net.Constants;
+import com.squareup.picasso.Picasso;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by vigorous on 16/1/4.
  * 更多页面
  */
 public class MoreFragment extends BaseFragment {
+    private CropCircleTransformation mCropCircleTransformation;
 
     @Nullable
     @Override
@@ -65,7 +68,11 @@ public class MoreFragment extends BaseFragment {
 
             ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
             if(!TextUtils.isEmpty(login.getIcon())){
-                Glide.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).into(ivAvatar);
+                mCropCircleTransformation = new CropCircleTransformation();
+
+                Picasso.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).placeholder(R.drawable.login_default_icon)
+                        .transform(mCropCircleTransformation)
+                        .into(ivAvatar);
             }
         }
 
