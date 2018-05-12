@@ -112,12 +112,18 @@ public class TopicFragment extends BaseFragment {
     }
 
     public void refresh(){
+        mPage = 0;
         getData();
     }
 
     private void getData() {
+        if(mIsLoading){
+            return;
+        }
+
         mIsLoading = true;
         if(getArguments() == null){
+            mIsLoading = false;
             return;
         }
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
@@ -127,8 +133,6 @@ public class TopicFragment extends BaseFragment {
                 @Override
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
-
-                    mIsLoading = false;
 
                     if(dataList.size() > 0){
                         if(mPage ==0){
@@ -145,6 +149,7 @@ public class TopicFragment extends BaseFragment {
                     }else{
                         mHasMore = false;
                     }
+                    mIsLoading = false;
                 }
 
                 @Override
@@ -161,8 +166,6 @@ public class TopicFragment extends BaseFragment {
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
 
-                    mIsLoading = false;
-
                     if(dataList.size() > 0){
                         if(mPage ==0){
                             goodList.clear();
@@ -178,6 +181,8 @@ public class TopicFragment extends BaseFragment {
                     }else{
                         mHasMore = false;
                     }
+                    mIsLoading = false;
+
                 }
 
                 @Override
@@ -194,7 +199,6 @@ public class TopicFragment extends BaseFragment {
                 public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
                     List<MarketinformationView> dataList = response.body();
 
-                    mIsLoading = false;
 
                     if(dataList.size() > 0){
                         if(mPage ==0){
@@ -211,6 +215,8 @@ public class TopicFragment extends BaseFragment {
                     }else{
                         mHasMore = false;
                     }
+                    mIsLoading = false;
+
                 }
 
                 @Override

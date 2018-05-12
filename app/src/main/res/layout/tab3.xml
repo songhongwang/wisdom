@@ -10,6 +10,7 @@
         android:id="@+id/ll_search_bar"
         android:layout_width="match_parent"
         android:layout_below="@id/toolbar"
+        android:visibility="gone"
         android:layout_height="40dp"
         android:paddingBottom="5dp"
         android:background="?attr/colorPrimary">
@@ -35,7 +36,7 @@
         android:id="@+id/rl_tabs"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/ll_search_bar"
+        android:layout_below="@id/toolbar"
         android:background="@color/white">
 
         <com.cbt.main.view.pagertab.PagerSlidingTabStrip
