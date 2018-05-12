@@ -30,17 +30,8 @@ public class ContactsActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
-        ButterKnife.bind(this);
-
-        initUI();
-    }
-
-    @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_contacts);
     }
 
     public void initUI() {

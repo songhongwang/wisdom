@@ -11,6 +11,7 @@ import com.cbt.main.model.MomentMode;
 
 /**
  * Created by vigorous on 18/4/12.
+ * 他人关注的农气 灾情 页面
  */
 
 public class MyAttentionActivity extends BaseActivity {
