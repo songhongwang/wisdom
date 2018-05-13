@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +47,9 @@ import com.cbt.main.utils.net.RongYunTokenUtil;
 import com.cbt.main.view.DragPointView;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
+import com.github.matteobattilana.weather.PrecipType;
+import com.github.matteobattilana.weather.WeatherView;
+import com.github.matteobattilana.weather.WeatherViewSensorEventListener;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -64,7 +68,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener,IUnReadMessageObserver {
-    SceneSurfaceView mSceneSurfaceView;
+    private SceneSurfaceView mSceneSurfaceView;
+    private WeatherViewSensorEventListener mWeatherViewSensorEventListener;
+    private WeatherView weather_view;
+    private RelativeLayout mRootContainer;
     //声明ViewPager
     private ViewPager mViewPager;
     //适配器
@@ -140,7 +147,17 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
     @Override
     public void initUI() {
+        mRootContainer = (RelativeLayout) findViewById(R.id.rl_root_container);
+        weather_view = (WeatherView) findViewById(R.id.weather_view);
+        mWeatherViewSensorEventListener = new WeatherViewSensorEventListener(this, weather_view);
+        weather_view.setWeatherData(PrecipType.RAIN);
+        weather_view.setEmissionRate(150f);
+        weather_view.setSpeed(1000);
+        weather_view.setAngle(2);
+        weather_view.setFadeOutPercent(10f);
 
+        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
+        mSceneSurfaceView.setVisibility(View.GONE);
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -438,12 +455,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     protected void onPause() {
         super.onPause();
 //        mSceneSurfaceView.stop();
+        mWeatherViewSensorEventListener.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 //        mSceneSurfaceView.start();
+        mWeatherViewSensorEventListener.onResume();
     }
 
     @Override
