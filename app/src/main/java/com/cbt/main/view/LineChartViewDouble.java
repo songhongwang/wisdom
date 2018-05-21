@@ -66,32 +66,32 @@ public class LineChartViewDouble extends View {
     /**
      * x轴集合
      */
-    private float mXAxis[] = new float[6];
+    private float mXAxis[] = new float[7];
 
     /**
      * 白天y轴集合
      */
-    private float mYAxisDay[] = new float[6];
+    private float mYAxisDay[] = new float[7];
 
     /**
      * 夜间y轴集合
      */
-    private float mYAxisNight[] = new float[6];
+    private float mYAxisNight[] = new float[7];
 
     /**
      * x,y轴集合数
      */
-    private static final int LENGTH = 6;
+    private static final int LENGTH = 7;
 
     /**
      * 白天温度集合
      */
-    private int mTempDay[] = new int[6];
+    private int mTempDay[] = new int[7];
 
     /**
      * 夜间温度集合
      */
-    private int mTempNight[] = new int[6];
+    private int mTempNight[] = new int[7];
 
     /**
      * 控件高
@@ -393,13 +393,14 @@ public class LineChartViewDouble extends View {
         // 控件宽
         int width = getWidth();
         // 每一份宽
-        float w = width / 12;
+        float w = width / 14;
         mXAxis[0] = w;
         mXAxis[1] = w * 3;
         mXAxis[2] = w * 5;
         mXAxis[3] = w * 7;
         mXAxis[4] = w * 9;
         mXAxis[5] = w * 11;
+        mXAxis[6] = w * 13;
     }
 
     /**

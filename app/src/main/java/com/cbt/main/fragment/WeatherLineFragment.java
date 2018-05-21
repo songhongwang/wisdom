@@ -389,7 +389,7 @@ public class WeatherLineFragment extends BaseFragment {
                     getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
                     getTemp(weather6.getHigh())});
         } else {
-            mCharView.setTempDay(new int[]{-1000,getTemp(weather1.getHigh()),
+            mCharView.setTempDay(new int[]{-1000,getTemp(weather.getHigh()),getTemp(weather1.getHigh()),
                     getTemp(weather2.getHigh()), getTemp(weather3.getHigh()),
                     getTemp(weather4.getHigh()), getTemp(weather5.getHigh()),
                     getTemp(weather6.getHigh())});
@@ -401,7 +401,7 @@ public class WeatherLineFragment extends BaseFragment {
                     getTemp(weather4.getLow()), getTemp(weather5.getLow()),
                     getTemp(weather6.getLow())});
         } else {
-            mCharView.setTempNight(new int[]{-1000, getTemp(weather1.getLow()),
+            mCharView.setTempNight(new int[]{-1000, getTemp(weather.getLow()),getTemp(weather1.getLow()),
                     getTemp(weather2.getLow()), getTemp(weather3.getLow()),
                     getTemp(weather4.getLow()), getTemp(weather5.getLow()),
                     getTemp(weather6.getLow())});
