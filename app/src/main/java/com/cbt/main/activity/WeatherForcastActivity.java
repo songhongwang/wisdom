@@ -84,6 +84,9 @@ public class WeatherForcastActivity extends BaseActivity {
 
                 List<WeatherModel> goodList = new ArrayList<>();
                 List<WeatherModel2> d7list = response.body().getD7list();
+                if(d7list == null){
+                    return;
+                }
                 for(int i = 0; i< d7list.size();i ++){
 
                     WeatherModel good = WeatherModel2.convert(d7list.get(i), i);

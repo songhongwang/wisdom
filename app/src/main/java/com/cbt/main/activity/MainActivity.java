@@ -1,10 +1,15 @@
 package com.cbt.main.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -27,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.cbt.main.R;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.engin.SceneSurfaceView;
 import com.cbt.main.model.event.OnBackPressedEvent;
@@ -159,6 +165,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
 //        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
         mSceneSurfaceView.setVisibility(View.VISIBLE);
+
+        checkAndRequestPermission();
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -511,6 +519,39 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             mSceneSurfaceView.setVisibility(View.VISIBLE);
             mSceneSurfaceView.start();
             mRootContainer.setBackgroundResource(R.color.translucent);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void checkAndRequestPermission() {
+        List<String> lackedPermission = new ArrayList<String>();
+        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+            lackedPermission.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+
+        if(lackedPermission.size()>0){
+            // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
+            String[] requestPermissions = new String[lackedPermission.size()];
+            lackedPermission.toArray(requestPermissions);
+            requestPermissions(requestPermissions, 1024);
+        }
+    }
+    private boolean hasAllPermissionsGranted(int[] grantResults) {
+        for (int grantResult : grantResults) {
+            if (grantResult == PackageManager.PERMISSION_DENIED) {
+                return false;
+            }
+        }
+        return true;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1024 && hasAllPermissionsGranted(grantResults)) {
+            GlobalApplication.mApp.updateLocation();
+        } else {
+            // 如果用户没有授权
+            ToastUtils.show(this, "请在手机设置中添加应用权限");
         }
     }
 }
