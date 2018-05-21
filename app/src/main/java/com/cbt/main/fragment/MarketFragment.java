@@ -27,6 +27,8 @@ public class MarketFragment extends BaseFragment {
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
     MarketFragmentAdapter adapter;
+    private View mVTip1, mVTip2;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +56,9 @@ public class MarketFragment extends BaseFragment {
         mViewPager.setOffscreenPageLimit(2);
         adapter = new MarketFragmentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
+
+        mVTip1 = mRootView.findViewById(R.id.msg_unread_count_tab1);
+        mVTip2=  mRootView.findViewById(R.id.msg_unread_count_tab2);
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t4);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
@@ -108,6 +113,8 @@ public class MarketFragment extends BaseFragment {
     }
     @Override
     protected void lazyLoad() {
-
+        // 接口控制显示小红点
+        mVTip1.setVisibility(View.GONE);
+        mVTip2.setVisibility(View.GONE);
     }
 }

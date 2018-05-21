@@ -48,6 +48,8 @@ public class ExpertFragment extends BaseFragment {
     private ListView mLvSearch;
     private ExpertSearchAdapter mExpertSearchAdapter;
 
+    private View mVTip1, mVTip2, mVTip3;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,6 +72,10 @@ public class ExpertFragment extends BaseFragment {
 
             }
         });
+
+        mVTip1 = mRootView.findViewById(R.id.msg_unread_count_tab1);
+        mVTip2=  mRootView.findViewById(R.id.msg_unread_count_tab2);
+        mVTip3=  mRootView.findViewById(R.id.msg_unread_count_tab3);
 
         mIvComplete.setVisibility(View.VISIBLE);
         mIvComplete.setImageResource(R.drawable.nav_icon_release);
@@ -168,7 +174,10 @@ public class ExpertFragment extends BaseFragment {
     }
     @Override
     protected void lazyLoad() {
-
+        // 接口控制显示小红点
+        mVTip1.setVisibility(View.GONE);
+        mVTip2.setVisibility(View.GONE);
+        mVTip3.setVisibility(View.GONE);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

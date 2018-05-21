@@ -43,6 +43,7 @@ public class MineFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
+    private View mVTip1, mVTip2;
 
     public static MineFragment getInstance(MomentMode mode){
         MineFragment fragment = new MineFragment();
@@ -68,6 +69,8 @@ public class MineFragment extends BaseFragment {
     @Override
     public void initUI() {
         mTvTitle.setText("我的农庄");
+        mVTip1 = mRootView.findViewById(R.id.msg_unread_count_tab1);
+        mVTip2=  mRootView.findViewById(R.id.msg_unread_count_tab2);
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
         mViewPager.setOffscreenPageLimit(1);
         MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),1);
@@ -160,5 +163,11 @@ public class MineFragment extends BaseFragment {
 //
 //            }
 //        });
+
+
+        // 这里通过接口控制是否显示小红点
+
+        mVTip1.setVisibility(View.GONE);
+        mVTip2.setVisibility(View.VISIBLE);
     }
 }
