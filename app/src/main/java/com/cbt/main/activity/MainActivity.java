@@ -150,14 +150,15 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         mRootContainer = (RelativeLayout) findViewById(R.id.rl_root_container);
         weather_view = (WeatherView) findViewById(R.id.weather_view);
         mWeatherViewSensorEventListener = new WeatherViewSensorEventListener(this, weather_view);
-        weather_view.setWeatherData(PrecipType.RAIN);
+        weather_view.setWeatherData(PrecipType.CLEAR);
         weather_view.setEmissionRate(150f);
         weather_view.setSpeed(1000);
         weather_view.setAngle(2);
         weather_view.setFadeOutPercent(10f);
+        weather_view.setVisibility(View.GONE);
 
-        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
-        mSceneSurfaceView.setVisibility(View.GONE);
+//        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
+        mSceneSurfaceView.setVisibility(View.VISIBLE);
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -455,14 +456,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     protected void onPause() {
         super.onPause();
 //        mSceneSurfaceView.stop();
-        mWeatherViewSensorEventListener.onPause();
+//        mWeatherViewSensorEventListener.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 //        mSceneSurfaceView.start();
-        mWeatherViewSensorEventListener.onResume();
+//        mWeatherViewSensorEventListener.onResume();
     }
 
     @Override
@@ -494,5 +495,22 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 //        }else{
 //            mMsgUnRead.setVisibility(View.GONE);
 //        }
+    }
+
+    // 控制天气背景动态效果
+    public void sunshineOrRain(String weather){
+        if(weather.contains("雨")){
+            weather_view.setVisibility(View.VISIBLE);
+            weather_view.setWeatherData(PrecipType.RAIN);
+            mSceneSurfaceView.stop();
+            mSceneSurfaceView.setVisibility(View.GONE);
+            mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
+        }else{
+            weather_view.setVisibility(View.GONE);
+            weather_view.setWeatherData(PrecipType.CLEAR);
+            mSceneSurfaceView.setVisibility(View.VISIBLE);
+            mSceneSurfaceView.start();
+            mRootContainer.setBackgroundResource(R.color.translucent);
+        }
     }
 }

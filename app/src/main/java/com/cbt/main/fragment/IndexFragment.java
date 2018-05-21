@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.cbt.main.R;
+import com.cbt.main.activity.MainActivity;
 import com.cbt.main.activity.MoreProductActivity;
 import com.cbt.main.activity.ReleaseActivity;
 import com.cbt.main.activity.WeatherForcastActivity;
@@ -142,7 +143,6 @@ public class IndexFragment extends BaseFragment {
                 getData();
             }
         });
-
         mTvTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,7 +201,6 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onResponse(Call<IndexModel> call, Response<IndexModel> response) {
                 mIndexModel = response.body();
-
                 if(TextUtils.isEmpty(mIndexModel.wendu) || mIndexModel == null){
                     ToastUtils.show(getActivity(), "数据异常，请稍后重试");
                     return;
@@ -215,6 +214,8 @@ public class IndexFragment extends BaseFragment {
                 mTvFaBu.setText(mIndexModel.nongli);
 
                 mTvTodayWeather.setText(mIndexModel.ybtianqi);
+                // 判断天气 变化背景动态
+                updateBg(mIndexModel.ybtianqi);
                 if (mIndexModel.ybzuigaowendu != null)
                 {
                     mTvTempr.setText(mIndexModel.ybzuidiwendu + " - " + mIndexModel.ybzuigaowendu);
@@ -253,7 +254,16 @@ public class IndexFragment extends BaseFragment {
         });
     }
 
-
+    private void updateBg(final String weather){
+        if(getActivity() instanceof MainActivity && (getActivity() != null)){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((MainActivity)getActivity()).sunshineOrRain(weather);
+                }
+            });
+        }
+    }
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
