@@ -104,9 +104,12 @@ public class IndexFragment extends BaseFragment {
             }
         });
 
-        if(!TextUtils.isEmpty(province) && !TextUtils.isEmpty(country)){
-            mTvTitle.setText(province + country);
-        }
+        mRootView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateTitleLocation();
+            }
+        }, 500);
 
         mTvBigWendu = (TextView) mRootView.findViewById(R.id.tv_big_wendu);
         mTvShiDu = (TextView) mRootView.findViewById(R.id.tv_shidu);
@@ -176,26 +179,44 @@ public class IndexFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
         if(mIndexModel == null){
-            getData();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getData();
+                }
+            }, 200);
+
         }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 getProductList();
             }
-        }, 400);
+        }, 600);
+    }
+
+    private void updateTitleLocation(){
+        city = GlobalApplication.mLocationData.city;
+        province = GlobalApplication.mLocationData.province;
+        country = GlobalApplication.mLocationData.addr;
+
+        if(!TextUtils.isEmpty(city) && !TextUtils.isEmpty(country) && mTvTitle != null){
+            mTvTitle.setText(city + country);
+        }
     }
 
     private void getData() {
-        if(TextUtils.isEmpty(province)){
-            city = GlobalApplication.mLocationData.city;
-            province = GlobalApplication.mLocationData.province;
-            country = GlobalApplication.mLocationData.addr;
+        city = GlobalApplication.mLocationData.city;
+        province = GlobalApplication.mLocationData.province;
+        country = GlobalApplication.mLocationData.addr;
 
-            if(!TextUtils.isEmpty(city) && !TextUtils.isEmpty(country) && mTvTitle != null){
-                mTvTitle.setText(city + country);
-            }
+        if(TextUtils.isEmpty(province)){
+            GlobalApplication.mApp.updateLocation();
+            ToastUtils.show(getContext(), "请在设置中添加位置权限");
+            return;
         }
+
+        updateTitleLocation();
 
         ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndex(province, city, country).enqueue(new Callback<IndexModel>() {
             @Override

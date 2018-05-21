@@ -34,8 +34,12 @@
                 >
 
                 <TextView
-                    android:id="@+id/wea_days_forecast_week1"
+                    android:id="@+id/wea_days_forecast_week0"
                     style="@style/wea_days_forecast_tv_trans"/>
+
+                <TextView
+                    android:id="@+id/wea_days_forecast_week1"
+                    style="@style/wea_days_forecast_tv"/>
 
                 <TextView
                     android:id="@+id/wea_days_forecast_week2"
@@ -64,8 +68,12 @@
                 >
 
                 <TextView
-                    android:id="@+id/wea_days_forecast_day1"
+                    android:id="@+id/wea_days_forecast_day0"
                     style="@style/wea_days_forecast_tv2_trans"/>
+
+                <TextView
+                    android:id="@+id/wea_days_forecast_day1"
+                    style="@style/wea_days_forecast_tv2"/>
 
                 <TextView
                     android:id="@+id/wea_days_forecast_day2"
@@ -93,8 +101,12 @@
                 >
 
                 <ImageView
-                    android:id="@+id/wea_days_forecast_weather_day_iv1"
+                    android:id="@+id/wea_days_forecast_weather_day_iv0"
                     style="@style/wea_days_forecast_iv_trans"/>
+
+                <ImageView
+                    android:id="@+id/wea_days_forecast_weather_day_iv1"
+                    style="@style/wea_days_forecast_iv"/>
 
                 <ImageView
                     android:id="@+id/wea_days_forecast_weather_day_iv2"
@@ -122,8 +134,12 @@
                 >
 
                 <TextView
-                    android:id="@+id/wea_days_forecast_weather_day_tv1"
+                    android:id="@+id/wea_days_forecast_weather_day_tv0"
                     style="@style/wea_days_forecast_tv_trans"/>
+
+                <TextView
+                    android:id="@+id/wea_days_forecast_weather_day_tv1"
+                    style="@style/wea_days_forecast_tv"/>
 
                 <TextView
                     android:id="@+id/wea_days_forecast_weather_day_tv2"
@@ -163,9 +179,13 @@
             >
 
             <TextView
-                android:id="@+id/wea_days_forecast_weather_night_tv1"
+                android:id="@+id/wea_days_forecast_weather_night_tv0"
                 style="@style/wea_days_forecast_tv_trans"
                 android:layout_marginTop="0dp"/>
+
+            <TextView
+                android:id="@+id/wea_days_forecast_weather_night_tv1"
+                style="@style/wea_days_forecast_tv"/>
 
             <TextView
                 android:id="@+id/wea_days_forecast_weather_night_tv2"
@@ -194,8 +214,12 @@
             >
 
             <ImageView
-                android:id="@+id/wea_days_forecast_weather_night_iv1"
+                android:id="@+id/wea_days_forecast_weather_night_iv0"
                 style="@style/wea_days_forecast_iv_trans"/>
+
+            <ImageView
+                android:id="@+id/wea_days_forecast_weather_night_iv1"
+                style="@style/wea_days_forecast_iv"/>
 
             <ImageView
                 android:id="@+id/wea_days_forecast_weather_night_iv2"
@@ -223,8 +247,12 @@
             >
 
             <TextView
-                android:id="@+id/wea_days_forecast_wind_direction_tv1"
+                android:id="@+id/wea_days_forecast_wind_direction_tv0"
                 style="@style/wea_days_forecast_tv_trans"/>
+
+            <TextView
+                android:id="@+id/wea_days_forecast_wind_direction_tv1"
+                style="@style/wea_days_forecast_tv"/>
 
             <TextView
                 android:id="@+id/wea_days_forecast_wind_direction_tv2"
@@ -252,8 +280,12 @@
             >
 
             <TextView
-                android:id="@+id/wea_days_forecast_wind_power_tv1"
+                android:id="@+id/wea_days_forecast_wind_power_tv0"
                 style="@style/wea_days_forecast_tv2_trans"/>
+
+            <TextView
+                android:id="@+id/wea_days_forecast_wind_power_tv1"
+                style="@style/wea_days_forecast_tv2"/>
 
             <TextView
                 android:id="@+id/wea_days_forecast_wind_power_tv2"
