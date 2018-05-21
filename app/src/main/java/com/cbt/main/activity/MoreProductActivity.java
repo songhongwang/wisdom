@@ -45,6 +45,8 @@ public class MoreProductActivity extends BaseActivity{
     ListView mLv;
     @BindView(R.id.refreshLayout)
     TwinklingRefreshLayout mTwinklingRefreshLayout;
+
+    int mPage;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_more_product);
@@ -76,11 +78,18 @@ public class MoreProductActivity extends BaseActivity{
 
 
     private void getProductList(){
-        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndexProduct(mPage).enqueue(new Callback<List<IndexProductModel>>() {
             @Override
             public void onResponse(Call<List<IndexProductModel>> call, Response<List<IndexProductModel>> response) {
 
                 List<IndexProductModel> dataList = response.body();
+                if(mPage == 0){
+                    mDataList.clear();
+                }
+                if(dataList.size() > 0){
+                    mPage ++;
+                }
+
                 mDataList.addAll(dataList);
                 mMoreProductAdapter.resetData(mDataList);
                 mMoreProductAdapter.notifyDataSetChanged();
