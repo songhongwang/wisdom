@@ -35,6 +35,7 @@ import com.cbt.main.R;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.engin.SceneSurfaceView;
+import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
@@ -98,7 +99,11 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
     private ImageButton mImgExpert;
     private ImageButton mImgMarket;
     private ImageButton mImgMore;
-    private DragPointView mMsgUnRead;
+
+    // 底部四个红点
+    private View mVTip2;
+    private View mVTip3;
+    private View mVTip4;
 
     private Toolbar mToolbar;
     private ImageWatcher vImageWatcher; // 朋友圈滑动图片工具
@@ -286,7 +291,11 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         mImgExpert = (ImageButton) findViewById(R.id.id_tab_expert_img);
         mImgMarket = (ImageButton) findViewById(R.id.id_tab_market_img);
         mImgMore= (ImageButton) findViewById(R.id.id_tab_more_img);
-        mMsgUnRead= (DragPointView) findViewById(R.id.msg_unread_count_mine);
+
+        mVTip2= findViewById(R.id.msg_unread_count_mine);
+        mVTip3= findViewById(R.id.msg_unread_count_expert);
+        mVTip4= findViewById(R.id.msg_unread_count_market);
+
     }
     private void setTabsValue() {
         DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -554,4 +563,21 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             ToastUtils.show(this, "请在手机设置中添加应用权限");
         }
     }
+
+
+    public void updateBottomTabTip(BottomTabTip bottomTabTip, boolean visiable){
+        switch (bottomTabTip){
+            case tab2:
+                mVTip2.setVisibility(visiable?View.VISIBLE:View.INVISIBLE);
+                break;
+            case tab3:
+                mVTip3.setVisibility(visiable?View.VISIBLE:View.INVISIBLE);
+                break;
+            case tab4:
+                mVTip4.setVisibility(visiable?View.VISIBLE:View.INVISIBLE);
+                break;
+        }
+    }
+
+
 }

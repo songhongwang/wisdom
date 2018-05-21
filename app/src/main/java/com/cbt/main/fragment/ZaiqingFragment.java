@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.MainActivity;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.ZaiqingAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.dialog.ReplyDialog;
+import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.MomentMode;
@@ -122,7 +124,16 @@ public class ZaiqingFragment extends BaseFragment {
             }
         });
 
+        showBottomTip();
     }
+
+    private void showBottomTip(){
+        if(getActivity() instanceof MainActivity){
+            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
+        }
+    }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
