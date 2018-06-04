@@ -13,6 +13,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
         android:layout_marginTop="10dp"
         android:text=""
         android:textColor="#000"
@@ -22,10 +23,21 @@
         android:id="@+id/tv_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
         android:layout_below="@id/tv_name"
         android:text=""
         android:textColor="#000"
         android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0.5dip"
+        android:text=""
+        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/tv_count"
@@ -33,16 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_alignParentRight="true"
-        android:text=""
-        android:textSize="13sp"/>
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/tv_count"
-        android:layout_marginTop="0.5dip"
         android:text=""
         android:textSize="13sp"/>
 

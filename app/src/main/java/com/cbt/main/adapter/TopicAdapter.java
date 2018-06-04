@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,11 @@ public class TopicAdapter extends RecyclerView.Adapter {
 
         void refresh(int pos) {
             mData = mDataList.get(pos);
-            tvName.setText(mData.getNickname());
+            if(TextUtils.isEmpty(mData.getNickname())){
+                tvName.setText("未填写标题");
+            }else{
+                tvName.setText(mData.getNickname());
+            }
             tvTime.setText(mData.getCreateTime());
             tv_des.setText(mData.getShenfen());
             tv_count.setText(mData.getRplaycount());
