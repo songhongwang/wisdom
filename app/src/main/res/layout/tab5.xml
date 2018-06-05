@@ -5,7 +5,7 @@
               android:background="#ffebebeb"
               android:orientation="vertical">
 
-    <include layout="@layout/top"/>
+    <include layout="@layout/top_has_margintop"/>
 
     <ScrollView
         android:layout_width="fill_parent"

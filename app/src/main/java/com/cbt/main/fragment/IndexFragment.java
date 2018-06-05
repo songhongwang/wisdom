@@ -182,6 +182,9 @@ public class IndexFragment extends BaseFragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    city = GlobalApplication.mLocationData.city;
+                    province = GlobalApplication.mLocationData.province;
+                    country = GlobalApplication.mLocationData.addr;
                     getData();
                 }
             }, 200);
@@ -196,19 +199,12 @@ public class IndexFragment extends BaseFragment {
     }
 
     private void updateTitleLocation(){
-        city = GlobalApplication.mLocationData.city;
-        province = GlobalApplication.mLocationData.province;
-        country = GlobalApplication.mLocationData.addr;
-
         if(!TextUtils.isEmpty(city) && !TextUtils.isEmpty(country) && mTvTitle != null){
             mTvTitle.setText(city + country);
         }
     }
 
     private void getData() {
-        city = GlobalApplication.mLocationData.city;
-        province = GlobalApplication.mLocationData.province;
-        country = GlobalApplication.mLocationData.addr;
 
         if(TextUtils.isEmpty(province)){
             GlobalApplication.mApp.updateLocation();

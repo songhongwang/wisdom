@@ -5,7 +5,7 @@
               android:background="#ffebebeb"
               android:orientation="vertical">
 
-    <include layout="@layout/top"/>
+    <include layout="@layout/top_has_margintop"/>
     <LinearLayout
         android:id="@+id/ll_search_bar"
         android:layout_width="match_parent"

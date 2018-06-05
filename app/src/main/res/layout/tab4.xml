@@ -5,7 +5,7 @@
               android:background="#ffebebeb"
               android:orientation="vertical">
 
-    <include layout="@layout/top"/>
+    <include layout="@layout/top_has_margintop"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

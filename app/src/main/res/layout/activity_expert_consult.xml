@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/layout_top"
-        layout="@layout/top_no_margintop"/>
+        layout="@layout/top"/>
 
     <ListView
         android:id="@+id/lv_disaster"
