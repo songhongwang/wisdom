@@ -30,11 +30,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ${liumengqiang} on 2017/9/12.
+ * author vigorous123
  */
 public class VersionCodeUpdate {
     private Context context;
-    private int mProgress;
 
     public VersionCodeUpdate(Context context) {
         this.context = context;
@@ -231,23 +230,6 @@ public class VersionCodeUpdate {
             Toast.makeText(context, "安装包不存在", Toast.LENGTH_SHORT).show();
             return;
         }
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
-//            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-//        } else {
-//            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        }
-//
-////        intent.setDataAndType(Uri.parse("file://" + apkFile.toString()), "application/vnd.android.package-archive");
-//        context.startActivity(intent);
-
-
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -261,22 +243,4 @@ public class VersionCodeUpdate {
         context.getApplicationContext().startActivity(intent);
     }
 
-
-//    public void installApplication(File file) {
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            Uri contentUri = FileProvider.getUriForFile(context.getApplicationContext(), BuildConfig.APPLICATION_ID + ".fileprovider", file);
-//            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-//        } else {
-//            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        }
-//
-//        context.getApplicationContext().startActivity(intent);
-//    }
-    public interface  UpdateCallback{
-        void newUpdate();//需要更新
-        void dontUpdate();//不需要更新
-    }
 }
