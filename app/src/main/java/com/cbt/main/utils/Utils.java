@@ -1,6 +1,8 @@
 package com.cbt.main.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -52,5 +54,21 @@ public class Utils {
             }
         } catch (Exception e) {
         }
+    }
+
+    /**
+     * 获取本地版本号
+     * @return
+     */
+    private int getVersionCode(Context context){
+        PackageManager packageManager = context.getPackageManager();
+        int versionCode = 0;
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            versionCode = packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
     }
 }

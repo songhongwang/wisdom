@@ -10,6 +10,7 @@ android {
             storePassword "123456"
             keyAlias "wisdom"
             keyPassword "123456"
+            v2SigningEnabled false
         }
     }
 

@@ -36,6 +36,7 @@ import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.engin.SceneSurfaceView;
 import com.cbt.main.model.BottomTabTip;
+import com.cbt.main.model.VersionCodeBean;
 import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
@@ -49,9 +50,9 @@ import com.cbt.main.moments.ImageWatcher;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
+import com.cbt.main.utils.VersionCodeUpdate;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.RongYunTokenUtil;
-import com.cbt.main.view.DragPointView;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.github.matteobattilana.weather.PrecipType;
@@ -154,6 +155,22 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                 initRongYunSdk();
              }
         }, 500);
+
+
+//        mImgIndex.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                String url = "http://www.eoemarket.com/download/702354_0";
+//
+//                VersionCodeBean bean = new VersionCodeBean();
+//                bean.setContent("xxx");
+//                bean.setUrl(url);
+//                bean.setVersionCode("2.0");
+//                bean.setVersionName("xx版本");
+//                VersionCodeUpdate versionCodeUpdate = new VersionCodeUpdate(MainActivity.this);
+//                versionCodeUpdate.infoToPersonUpdate(bean);
+//            }
+//        }, 1000);
     }
 
     @Override
@@ -537,6 +554,12 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             lackedPermission.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
+        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+            lackedPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED)) {
+            lackedPermission.add(Manifest.permission.WRITE_SETTINGS);
+        }
 
         if(lackedPermission.size()>0){
             // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
@@ -578,6 +601,5 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
                 break;
         }
     }
-
 
 }
