@@ -1,10 +1,15 @@
 package com.cbt.main.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.view.View;
@@ -14,11 +19,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.dialog.LoadingDialog;
 import com.cbt.main.model.event.EventLogout;
+import com.cbt.main.utils.ToastUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +78,36 @@ public abstract class BaseActivity extends FragmentActivity {
 
         initUI();
     }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void checkAndRequestPermission(List<String> permissionList) {
+        List<String> lackedPermission = new ArrayList<String>();
+
+        for(String permission: permissionList){
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                lackedPermission.add(permission);
+            }
+        }
+
+        if(lackedPermission.size()>0){
+            // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限
+            String[] requestPermissions = new String[lackedPermission.size()];
+            lackedPermission.toArray(requestPermissions);
+            requestPermissions(requestPermissions, 1024);
+        }
+    }
+    public boolean hasAllPermissionsGranted(int[] grantResults) {
+        for (int grantResult : grantResults) {
+            if (grantResult == PackageManager.PERMISSION_DENIED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
 
     public abstract void onCCreate(@Nullable Bundle savedInstanceState);
 

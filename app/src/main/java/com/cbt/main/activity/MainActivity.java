@@ -63,6 +63,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -174,7 +175,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 //        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
         mSceneSurfaceView.setVisibility(View.VISIBLE);
 
-        checkAndRequestPermission();
+        checkAndRequestPermission(Arrays.asList(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE));
     }
 
     private void initOther(boolean isTranslucentStatus) {
@@ -533,35 +534,35 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             mRootContainer.setBackgroundResource(R.color.translucent);
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkAndRequestPermission() {
-        List<String> lackedPermission = new ArrayList<String>();
-        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-            lackedPermission.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-            lackedPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED)) {
-//            lackedPermission.add(Manifest.permission.WRITE_SETTINGS);
+//
+//    @TargetApi(Build.VERSION_CODES.M)
+//    private void checkAndRequestPermission() {
+//        List<String> lackedPermission = new ArrayList<String>();
+//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+//            lackedPermission.add(Manifest.permission.ACCESS_FINE_LOCATION);
 //        }
-
-        if(lackedPermission.size()>0){
-            // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
-            String[] requestPermissions = new String[lackedPermission.size()];
-            lackedPermission.toArray(requestPermissions);
-            requestPermissions(requestPermissions, 1024);
-        }
-    }
-    private boolean hasAllPermissionsGranted(int[] grantResults) {
-        for (int grantResult : grantResults) {
-            if (grantResult == PackageManager.PERMISSION_DENIED) {
-                return false;
-            }
-        }
-        return true;
-    }
+//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+//            lackedPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        }
+////        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED)) {
+////            lackedPermission.add(Manifest.permission.WRITE_SETTINGS);
+////        }
+//
+//        if(lackedPermission.size()>0){
+//            // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
+//            String[] requestPermissions = new String[lackedPermission.size()];
+//            lackedPermission.toArray(requestPermissions);
+//            requestPermissions(requestPermissions, 1024);
+//        }
+//    }
+//    private boolean hasAllPermissionsGranted(int[] grantResults) {
+//        for (int grantResult : grantResults) {
+//            if (grantResult == PackageManager.PERMISSION_DENIED) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

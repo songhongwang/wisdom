@@ -1,5 +1,6 @@
 package me.nereo.imagechoose;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.widget.Button;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import me.nereo.multi_image_selector.R;
 
@@ -16,7 +18,7 @@ import me.nereo.multi_image_selector.R;
  * 多图选择
  * Created by Nereo on 2015/4/7.
  */
-public class MultiImageSelectorActivity extends FragmentActivity implements MultiImageSelectorFragment.Callback{
+public class MultiImageSelectorActivity extends BaseActivity implements MultiImageSelectorFragment.Callback{
 
     /** 最大图片选择次数，int类型，默认9 */
     public static final String EXTRA_SELECT_COUNT = "max_select_count";
@@ -94,6 +96,7 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
                 }
             }
         });
+        checkAndRequestPermission(Arrays.asList(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA));
     }
 
     @Override

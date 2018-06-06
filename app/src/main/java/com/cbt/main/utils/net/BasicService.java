@@ -132,15 +132,22 @@ public interface BasicService {
     @GET("farmlandfarm")
     Call<ClientFarm> farmlandfarm();
 
-    @GET("adduserdetail")
+    @POST("adduserdetail")
     Call<User> adduserdetail(@Query("provincename") String provincename,
                              @Query("cityname") String cityname,
                              @Query("countryname") String countryname,
-                             @Query("sex") String leixingid,
-                             @Query("birthday") String zuowuid,
-                             @Query("disname") String zaizhongid,
-                             @Body RequestBody imgs);
-    
+                             @Query("sex") String sex,
+                             @Query("birthday") String birthday,
+                             @Query("disname") String disname,
+                             @Body RequestBody icon);
+    @POST("adduserdetail")
+    Call<User> adduserdetail(@Query("provincename") String provincename,
+                             @Query("cityname") String cityname,
+                             @Query("countryname") String countryname,
+                             @Query("sex") String sex,
+                             @Query("birthday") String birthday,
+                             @Query("disname") String disname);
+
 // 朋友圈 回复
     @GET("replymyfarmfarming")
     Call<Object> replyFeed(@Query("iid") String iid,@Query("commentid") String commentId,@Query("content") String content );

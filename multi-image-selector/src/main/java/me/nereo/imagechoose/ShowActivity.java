@@ -1,9 +1,9 @@
 package me.nereo.imagechoose;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import me.nereo.imagechoose.view.ScaleImageView;
 import me.nereo.multi_image_selector.R;
 
 
-public class ShowActivity extends ActionBarActivity {
+public class ShowActivity extends Activity {
 
     private ScaleImageView mScaleImageView;
 

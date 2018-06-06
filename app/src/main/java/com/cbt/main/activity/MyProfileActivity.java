@@ -14,8 +14,11 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.cbt.main.R;
+import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
 import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.utils.net.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -26,6 +29,12 @@ import java.util.List;
 import butterknife.BindView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by vigorous on 18/4/12.
@@ -51,6 +60,7 @@ public class MyProfileActivity extends BaseActivity {
     View mVBirthday;
 
     TimePickerView pvTime;
+    private boolean mChangeAvatar;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_profile);
@@ -63,6 +73,10 @@ public class MyProfileActivity extends BaseActivity {
 
         mTvTitle.setText("修改用户信息");
         mIvFinish.setImageResource(R.drawable.icon_complete);
+
+        Picasso.with(this).load(Constants.getBaseUrl() + mUser.getIcon()).placeholder(R.drawable.login_default_icon)
+                .transform(mCropCircleTransformation)
+                .into(mIvAdatar);
 
         mIvAdatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,18 +178,60 @@ public class MyProfileActivity extends BaseActivity {
 
     private void updateUI(List<String> pathList) {
         if(pathList != null && pathList.size()>0){
+            mChangeAvatar = true;
             File imageFile = new File(pathList.get(0));
 
             Picasso.with(this).load(imageFile).placeholder(R.drawable.login_default_icon)
                     .transform(mCropCircleTransformation)
                     .into(mIvAdatar);
+            mUser.setIcon(imageFile.getAbsolutePath());
         }else{
             mIvAdatar.setImageResource(R.drawable.login_default_icon);
         }
     }
 
     private void commit(){
-//        ApiClient.getInstance().getBasicService(this).replyFeed()
-        ToastUtils.show(this, "调用修改用户信息接口");
+        String city = GlobalApplication.mLocationData.city;
+        String province = GlobalApplication.mLocationData.province;
+        String country = GlobalApplication.mLocationData.addr;
+
+        MultipartBody requestBody = null;
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM)
+                .addFormDataPart("icon","userAvatar", RequestBody.create(MediaType.parse("image/*"), new File(mUser.getIcon())));
+
+        requestBody = builder.build();
+
+        if(mChangeAvatar){
+            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUsname(),requestBody).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    ToastUtils.show(MyProfileActivity.this, "更新失败");
+
+                }
+            });
+        }else{
+            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUsname()).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    ToastUtils.show(MyProfileActivity.this, "更新失败");
+
+                }
+            });
+        }
+
+
     }
 }

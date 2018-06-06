@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.ListPopupWindow;
 import android.util.Log;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.nereo.multi_image_selector.BuildConfig;
 import me.nereo.multi_image_selector.R;
 import me.nereo.imagechoose.adapter.FolderAdapter;
 import me.nereo.imagechoose.adapter.ImageGridAdapter;
@@ -428,7 +430,17 @@ public class MultiImageSelectorFragment extends Fragment {
             // 设置系统相机拍照后的输出路径
             // 创建临时文件
             mTmpFile = FileUtils.createTmpFile(getActivity());
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mTmpFile));
+
+            Uri uri;
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){
+                uri = Uri.fromFile(mTmpFile);
+            }else{
+                uri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getPackageName()+ ".fileprovider", mTmpFile);
+
+//                uri = FileProvider.getUriForFile(getActivity(), ProviderUtil.getFileProviderName(activity), takeImageFile);
+            }
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
         }else{
             Toast.makeText(getActivity(), R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
