@@ -36,7 +36,7 @@ import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.engin.SceneSurfaceView;
 import com.cbt.main.model.BottomTabTip;
-import com.cbt.main.model.VersionCodeBean;
+import com.cbt.main.model.UpdateModel;
 import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.fragment.ExpertFragment;
 import com.cbt.main.fragment.MarketFragment;
@@ -156,21 +156,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
              }
         }, 500);
 
-
-//        mImgIndex.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                String url = "http://www.eoemarket.com/download/702354_0";
-//
-//                VersionCodeBean bean = new VersionCodeBean();
-//                bean.setContent("xxx");
-//                bean.setUrl(url);
-//                bean.setVersionCode("2.0");
-//                bean.setVersionName("xx版本");
-//                VersionCodeUpdate versionCodeUpdate = new VersionCodeUpdate(MainActivity.this);
-//                versionCodeUpdate.infoToPersonUpdate(bean);
-//            }
-//        }, 1000);
+        checkUpdate();
     }
 
     @Override
@@ -602,4 +588,25 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         }
     }
 
+    private void checkUpdate() {
+        ApiClient.getInstance().getBasicService(this).checkUpdate().enqueue(new Callback<UpdateModel>() {
+            @Override
+            public void onResponse(Call<UpdateModel> call, Response<UpdateModel> response) {
+                if(response != null && response.body() != null){
+                    UpdateModel updateModel = response.body();
+                    VersionCodeUpdate versionCodeUpdate = new VersionCodeUpdate(MainActivity.this);
+                    int versionCode = versionCodeUpdate.getVersionCode();
+                    if(updateModel.getVersioncode() > versionCode){
+                        versionCodeUpdate.showDialogUpdate(updateModel);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateModel> call, Throwable t) {
+
+            }
+        });
+
+    }
 }

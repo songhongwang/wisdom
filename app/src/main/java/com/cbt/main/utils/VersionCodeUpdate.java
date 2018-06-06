@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.cbt.main.BuildConfig;
 import com.cbt.main.R;
-import com.cbt.main.model.VersionCodeBean;
+import com.cbt.main.model.UpdateModel;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -41,18 +41,17 @@ public class VersionCodeUpdate {
 
     /**
      * 更新提示Dialog
-     * @param versionCodeBean
      */
-    public void infoToPersonUpdate(final VersionCodeBean versionCodeBean){
+    public void showDialogUpdate(final UpdateModel updateModel){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("版本提示：");
-        builder.setMessage("发现新版本：\n" + "版本号：" + versionCodeBean.getVersionCode() + "\n版本更新：内容" + versionCodeBean.getContent());
+        builder.setMessage("发现新版本：\n" + "版本号：" + updateModel.getVersioncode() + "\n版本更新：内容" + updateModel.getMessage());
         builder.setCancelable(false);
         builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                downLoaderApk(versionCodeBean);
+                downLoaderApk(updateModel);
                 //更新
             }
         });
@@ -70,7 +69,7 @@ public class VersionCodeUpdate {
      * 下载apk
      * @param versionCodeBean
      */
-    private void downLoaderApk(final VersionCodeBean versionCodeBean){
+    private void downLoaderApk(final UpdateModel versionCodeBean){
         //显示下载进度
         progressDialog();
         //下载apk
@@ -185,7 +184,7 @@ public class VersionCodeUpdate {
      * 获取本地版本号
      * @return
      */
-    private int getVersionCode(){
+    public int getVersionCode(){
         PackageManager packageManager = context.getPackageManager();
         int versionCode = 0;
         try {

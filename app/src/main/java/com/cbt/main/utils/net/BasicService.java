@@ -12,6 +12,7 @@ import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.model.MarketinformationDetailView;
 import com.cbt.main.model.MarketinformationView;
 import com.cbt.main.model.MyproblemView;
+import com.cbt.main.model.UpdateModel;
 import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.model.WentiModel;
@@ -219,4 +220,8 @@ public interface BasicService {
     // 获取用户
     @GET("findOtherUser")
     Call<User> getUser(@Query("otheruserid") String otheruserid);
+
+    // 检查更新版本
+    @GET("checkUpdate")
+    Call<UpdateModel> checkUpdate();
 }
