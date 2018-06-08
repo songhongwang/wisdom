@@ -216,6 +216,8 @@
     <color name="dark_gray_button_pressed">#808080</color>
     <!-- 深灰色:取消按钮按下 -->
     <color name="blue_green">#0CCDF6</color>
+    <color name="grey_20">#cc000000</color>
+    <color name="grey_80">#33000000</color>
     <!-- 蓝绿色:小睡 -->
     <color name="blue_green50">#800CCDF6</color>
     <!-- 蓝绿色:闹铃响起关闭按钮 50 -->

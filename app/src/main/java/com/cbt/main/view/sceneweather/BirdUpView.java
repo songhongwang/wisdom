@@ -1,6 +1,5 @@
 package com.cbt.main.view.sceneweather;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,13 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
 import com.cbt.main.R;
-import com.cbt.main.utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +18,8 @@ import java.util.List;
  *
  */
 
-public class BirdUpView extends View {
-    private Context mContext;
+public class BirdUpView extends BaseView {
     protected Matrix matrix = new Matrix();
-    private float width;
-    private float height;
 
     private static final int[] imgs = new int[]{R.drawable.finedayup_1, R.drawable.finedayup_2, R.drawable.finedayup_3, R.drawable.finedayup_4, R.drawable.finedayup_5, R.drawable.finedayup_6, R.drawable.finedayup_7, R.drawable.finedayup_8};
 
@@ -42,32 +33,15 @@ public class BirdUpView extends View {
     long lastTime;
     Paint paint = new Paint();
 
-    public BirdUpView(Context context) {
-        super(context);
-        initUI(context);
+    public BirdUpView(Context context, float width, float height) {
+        super(context, width, height);
     }
 
-    public BirdUpView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initUI(context);
-    }
-
-    public BirdUpView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initUI(context);
-    }
-
-    private void initUI(Context context) {
-        mContext = context;
-
-        width = ScreenUtil.getFullScreenWidth((Activity) mContext);
-        height = ScreenUtil.getFullScreenHeight((Activity) mContext);
-
+    @Override
+    public void initUI() {
         frames = new ArrayList<>();
         box = new RectF();
         targetBox = new RectF();
-        paint.setAntiAlias(true);
-
     }
 
     @Override
@@ -76,6 +50,7 @@ public class BirdUpView extends View {
         //逻辑处理
         //初始化
         if (!isInit) {
+            paint.setAntiAlias(true);
             initPositionX = width * 0.117F;
             initPositionY = height * 0.35F;
             matrix.reset();
@@ -88,7 +63,7 @@ public class BirdUpView extends View {
             lastTime = System.currentTimeMillis();
         }
         //移动
-        matrix.postTranslate(2, 0);
+        matrix.postTranslate(4, 0);
         //边界处理
         matrix.mapRect(targetBox, box);
         if (targetBox.left > width) {

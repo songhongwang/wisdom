@@ -55,6 +55,7 @@ import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.RongYunTokenUtil;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
+import com.cbt.main.view.sceneweather.WeatherSceneView;
 import com.github.matteobattilana.weather.PrecipType;
 import com.github.matteobattilana.weather.WeatherView;
 import com.github.matteobattilana.weather.WeatherViewSensorEventListener;
@@ -76,11 +77,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.cbt.main.R.id.v_cloudy;
+
 public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener,IUnReadMessageObserver {
-//    private SceneSurfaceView mSceneSurfaceView;
+    private WeatherSceneView mWeatherSceneView;
     private WeatherViewSensorEventListener mWeatherViewSensorEventListener;
     private WeatherView weather_view;
-    private RelativeLayout mRootContainer;
+    private View mVCloudy; // 阴天遮罩
     //声明ViewPager
     private ViewPager mViewPager;
     //适配器
@@ -162,8 +165,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
     @Override
     public void initUI() {
-        mRootContainer = (RelativeLayout) findViewById(R.id.rl_root_container);
-        weather_view = (WeatherView) findViewById(R.id.weather_view);
+        mVCloudy = findViewById(v_cloudy);
+        mWeatherSceneView = findViewById(R.id.mWeatherSceneView);
+        weather_view = findViewById(R.id.weather_view);
         mWeatherViewSensorEventListener = new WeatherViewSensorEventListener(this, weather_view);
         weather_view.setWeatherData(PrecipType.CLEAR);
         weather_view.setEmissionRate(150f);
@@ -172,8 +176,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         weather_view.setFadeOutPercent(10f);
         weather_view.setVisibility(View.GONE);
 
-//        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
-//        mSceneSurfaceView.setVisibility(View.VISIBLE);
+        mWeatherSceneView.setVisibility(View.VISIBLE);
 
         checkAndRequestPermission(Arrays.asList(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE));
     }
@@ -523,46 +526,16 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         if(weather.contains("雨")){
             weather_view.setVisibility(View.VISIBLE);
             weather_view.setWeatherData(PrecipType.RAIN);
-//            mSceneSurfaceView.stop();
-//            mSceneSurfaceView.setVisibility(View.GONE);
-            mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
+            mWeatherSceneView.setVisibility(View.GONE);
+            mVCloudy.setVisibility(View.VISIBLE); // 阴天遮罩开启
         }else{
             weather_view.setVisibility(View.GONE);
             weather_view.setWeatherData(PrecipType.CLEAR);
-//            mSceneSurfaceView.setVisibility(View.VISIBLE);
-//            mSceneSurfaceView.start();
-            mRootContainer.setBackgroundResource(R.color.translucent);
+            mWeatherSceneView.setVisibility(View.VISIBLE);
+            mVCloudy.setVisibility(View.GONE); // 阴天遮罩关闭
         }
     }
-//
-//    @TargetApi(Build.VERSION_CODES.M)
-//    private void checkAndRequestPermission() {
-//        List<String> lackedPermission = new ArrayList<String>();
-//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-//            lackedPermission.add(Manifest.permission.ACCESS_FINE_LOCATION);
-//        }
-//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-//            lackedPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        }
-////        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED)) {
-////            lackedPermission.add(Manifest.permission.WRITE_SETTINGS);
-////        }
-//
-//        if(lackedPermission.size()>0){
-//            // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
-//            String[] requestPermissions = new String[lackedPermission.size()];
-//            lackedPermission.toArray(requestPermissions);
-//            requestPermissions(requestPermissions, 1024);
-//        }
-//    }
-//    private boolean hasAllPermissionsGranted(int[] grantResults) {
-//        for (int grantResult : grantResults) {
-//            if (grantResult == PackageManager.PERMISSION_DENIED) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

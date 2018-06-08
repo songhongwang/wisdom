@@ -1,6 +1,5 @@
 package com.cbt.main.view.sceneweather;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,21 +7,15 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
 
 import com.cbt.main.R;
-import com.cbt.main.utils.ScreenUtil;
 
 /**
  * Created by vigorous on 18/6/7.
  *
  */
 
-public class SunShineView extends View {
-    private Context mContext;
-
+public class SunShineView extends BaseView {
     protected Matrix matrix = new Matrix();
     float initPositionX;
     float initPositionY;
@@ -33,40 +26,22 @@ public class SunShineView extends View {
     Paint paint = new Paint();
     int alpha;
     boolean alphaUp = true;
-    private float width;
-    private float height;
 
-    public SunShineView(Context context) {
-        super(context);
-        initUI(context);
+    public SunShineView(Context context, float width, float height) {
+        super(context, width, height);
     }
 
-    public SunShineView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initUI(context);
-    }
-
-    public SunShineView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initUI(context);
-    }
-
-    private void initUI(Context context) {
-        mContext = context;
-
-        width = ScreenUtil.getFullScreenWidth((Activity) mContext);
-        height = ScreenUtil.getFullScreenHeight((Activity) mContext);
-
+    @Override
+    public void initUI() {
         box = new RectF();
         targetBox = new RectF();
-        paint.setAntiAlias(true);
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (!isInit) {
+            paint.setAntiAlias(true);
             initPositionX = width * 0.275F;
             initPositionY = height * 0.365F;
             frame = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.sunshine);

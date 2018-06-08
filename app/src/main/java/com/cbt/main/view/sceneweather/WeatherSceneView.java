@@ -1,10 +1,13 @@
 package com.cbt.main.view.sceneweather;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.cbt.main.utils.ScreenUtil;
 
 /**
  * Created by vigorous on 18/6/8.
@@ -36,11 +39,14 @@ public class WeatherSceneView extends View {
 
 
     private void initUI(Context context) {
-        mSunShineView = new SunShineView(context);
-        mBirdUpView = new BirdUpView(context);
-        mBirdDownView = new BirdDownView(context);
-        mCloudLeftView = new CloudLeftView(context);
-        mCloudRightView = new CloudRightView(context);
+        float width = ScreenUtil.getFullScreenWidth((Activity) context);
+        float height = ScreenUtil.getFullScreenHeight((Activity) context);
+
+        mSunShineView = new SunShineView(context, width, height);
+        mBirdUpView = new BirdUpView(context, width, height);
+        mBirdDownView = new BirdDownView(context, width, height);
+        mCloudLeftView = new CloudLeftView(context, width, height);
+        mCloudRightView = new CloudRightView(context, width, height);
     }
 
     @Override

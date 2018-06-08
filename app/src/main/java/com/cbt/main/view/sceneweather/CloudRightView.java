@@ -1,6 +1,5 @@
 package com.cbt.main.view.sceneweather;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,26 +7,16 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import com.cbt.main.R;
-import com.cbt.main.utils.ScreenUtil;
-
-import java.util.ArrayList;
 
 /**
  * Created by vigorous on 18/6/8.
  */
 
-public class CloudRightView extends View {
-    private Context mContext;
+public class CloudRightView extends BaseView {
     protected Matrix matrix = new Matrix();
-    private float width;
-    private float height;
-
     float initPositionX;
     float initPositionY;
     boolean isInit;
@@ -36,30 +25,14 @@ public class CloudRightView extends View {
     RectF targetBox;
     Paint paint = new Paint();
 
-    public CloudRightView(Context context) {
-        super(context);
-        initUI(context);
+    public CloudRightView(Context context, float w, float h) {
+        super(context, w, h);
     }
 
-    public CloudRightView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initUI(context);
-    }
-
-    public CloudRightView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initUI(context);
-    }
-
-    private void initUI(Context context) {
-        mContext = context;
-
-        width = ScreenUtil.getFullScreenWidth((Activity) mContext);
-        height = ScreenUtil.getFullScreenHeight((Activity) mContext);
-
+    @Override
+    public void initUI() {
         box = new RectF();
         targetBox = new RectF();
-        paint.setAntiAlias(true);
     }
 
     @Override
@@ -67,6 +40,7 @@ public class CloudRightView extends View {
         super.onDraw(canvas);
         if (!isInit) {
             Log.d("weather", "cloud init");
+            paint.setAntiAlias(true);
             initPositionX = width * 0.758F;
             initPositionY = height * 0.69F;
             frame = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.fine_day_cloud1);
@@ -76,7 +50,6 @@ public class CloudRightView extends View {
             matrix.mapRect(targetBox, box);
             matrix.postTranslate(initPositionX - targetBox.width() / 2, initPositionY - targetBox.height() / 2);
             isInit = true;
-            return;
         }
         //移动
         matrix.postTranslate(0.5F, 0);
