@@ -77,7 +77,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements OnClickListener, IWatcherImage, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener,IUnReadMessageObserver {
-    private SceneSurfaceView mSceneSurfaceView;
+//    private SceneSurfaceView mSceneSurfaceView;
     private WeatherViewSensorEventListener mWeatherViewSensorEventListener;
     private WeatherView weather_view;
     private RelativeLayout mRootContainer;
@@ -173,7 +173,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         weather_view.setVisibility(View.GONE);
 
 //        mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
-        mSceneSurfaceView.setVisibility(View.VISIBLE);
+//        mSceneSurfaceView.setVisibility(View.VISIBLE);
 
         checkAndRequestPermission(Arrays.asList(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE));
     }
@@ -278,7 +278,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
 
     //初始化控件
     private void initViews() {
-        mSceneSurfaceView = (SceneSurfaceView) findViewById(R.id.mSceneSurfaceView);
+//        mSceneSurfaceView = (SceneSurfaceView) findViewById(R.id.mSceneSurfaceView);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs_main);
 
@@ -523,14 +523,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         if(weather.contains("雨")){
             weather_view.setVisibility(View.VISIBLE);
             weather_view.setWeatherData(PrecipType.RAIN);
-            mSceneSurfaceView.stop();
-            mSceneSurfaceView.setVisibility(View.GONE);
+//            mSceneSurfaceView.stop();
+//            mSceneSurfaceView.setVisibility(View.GONE);
             mRootContainer.setBackgroundResource(R.drawable.bg0_fine_day);
         }else{
             weather_view.setVisibility(View.GONE);
             weather_view.setWeatherData(PrecipType.CLEAR);
-            mSceneSurfaceView.setVisibility(View.VISIBLE);
-            mSceneSurfaceView.start();
+//            mSceneSurfaceView.setVisibility(View.VISIBLE);
+//            mSceneSurfaceView.start();
             mRootContainer.setBackgroundResource(R.color.translucent);
         }
     }

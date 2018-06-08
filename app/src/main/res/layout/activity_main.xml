@@ -7,10 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.cbt.main.engin.SceneSurfaceView
-        android:id="@+id/mSceneSurfaceView"
+    <com.cbt.main.view.sceneweather.WeatherSceneView
+        android:id="@+id/mWeatherSceneView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/bg0_fine_day"/>
 
     <com.github.matteobattilana.weather.WeatherView
         android:id="@+id/weather_view"
@@ -20,6 +21,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@color/blue_green50"/>
 
     <LinearLayout
