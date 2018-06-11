@@ -54,6 +54,7 @@ public class IndexFragment extends BaseFragment {
     private TextView mTvQiYa;
     private TextView mTvFengSu;
     private TextView mTvFaBu;
+    private TextView mTvYuJing;
     private TextView mTvTodayWeather;
     private TextView mTvTempr;
     private TextView mTvFeng;
@@ -118,6 +119,7 @@ public class IndexFragment extends BaseFragment {
         mTvQiYa = (TextView) mRootView.findViewById(R.id.tv_qiya);
         mTvFengSu = (TextView) mRootView.findViewById(R.id.tv_fengsu);
         mTvFaBu = (TextView) mRootView.findViewById(R.id.tv_fabu);
+        mTvYuJing = (TextView) mRootView.findViewById(R.id.tv_yujing);
         mTvTodayWeather = (TextView) mRootView.findViewById(R.id.tv_today_weather);
         mTvTempr= (TextView) mRootView.findViewById(R.id.tv_temper);
         mTvFeng= (TextView) mRootView.findViewById(R.id.tv_wind);
@@ -231,6 +233,12 @@ public class IndexFragment extends BaseFragment {
                 mTvFengSu.setText("风向/风力\n" + mIndexModel.fengxiang + "/" + mIndexModel.fengsu);
 
                 mTvFaBu.setText(mIndexModel.nongli);
+                if(TextUtils.isEmpty(mIndexModel.wartitle)){
+                    mTvYuJing.setVisibility(View.GONE);
+                }else{
+                    mTvYuJing.setVisibility(View.VISIBLE);
+                    mTvYuJing.setText(mIndexModel.wartitle);
+                }
 
                 mTvTodayWeather.setText(mIndexModel.ybtianqi);
                 // 判断天气 变化背景动态

@@ -2,6 +2,7 @@
 
 <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -56,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/home_icon_humidity"
                     android:drawablePadding="10dp"
-                    android:text="相对湿度17%"
+                    tools:text="相对湿度17%"
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
 
@@ -67,7 +68,7 @@
                     android:layout_marginLeft="10dp"
                     android:drawableLeft="@drawable/home_icon_pressure"
                     android:drawablePadding="10dp"
-                    android:text="气压1019hPa"
+                    tools:text="气压1019hPa"
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
 
@@ -80,7 +81,7 @@
                 android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/home_icon_wind"
                 android:drawablePadding="10dp"
-                android:text="风向/风力\n17%"
+                tools:text="风向/风力\n17%"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -92,7 +93,19 @@
                 android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/home_icon_calendar"
                 android:drawablePadding="10dp"
-                android:text="2017年12月10日(农历十月初十)"
+                tools:text="2017年12月10日(农历十月初十)"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_yujing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/home_icon_inf"
+                android:drawablePadding="10dp"
+                tools:text="预警信息"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
         </LinearLayout>
