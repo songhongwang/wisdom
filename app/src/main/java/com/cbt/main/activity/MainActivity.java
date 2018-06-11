@@ -239,7 +239,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
         };
         //不要忘记设置ViewPager的适配器
         mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(4);
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         setTabsValue();
 

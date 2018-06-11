@@ -66,6 +66,8 @@ public class IndexFragment extends BaseFragment {
     String province;
     String country;
 
+    private List<IndexProductModel> mProductList = new ArrayList<>(); // 产品列表数据
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -254,21 +256,23 @@ public class IndexFragment extends BaseFragment {
     }
 
     private void getProductList(){
-        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
-            @Override
-            public void onResponse(Call<List<IndexProductModel>> call, Response<List<IndexProductModel>> response) {
+        if(mProductList == null || mProductList.size() == 0){
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getIndexProduct(0).enqueue(new Callback<List<IndexProductModel>>() {
+                @Override
+                public void onResponse(Call<List<IndexProductModel>> call, Response<List<IndexProductModel>> response) {
+                    mProductList = response.body();
+                    mIndexProductAdapter = new IndexProductAdapter(mProductList, getActivity());
+                    mLv.setAdapter(mIndexProductAdapter);
+                }
 
-                List<IndexProductModel> dataList = response.body();
-                mIndexProductAdapter = new IndexProductAdapter(dataList, getActivity());
-                mLv.setAdapter(mIndexProductAdapter);
-
-            }
-
-            @Override
-            public void onFailure(Call<List<IndexProductModel>> call, Throwable t) {
-
-            }
-        });
+                @Override
+                public void onFailure(Call<List<IndexProductModel>> call, Throwable t) {
+                }
+            });
+        }else{
+            mIndexProductAdapter = new IndexProductAdapter(mProductList, getActivity());
+            mLv.setAdapter(mIndexProductAdapter);
+        }
     }
 
     private void updateBg(final String weather){
