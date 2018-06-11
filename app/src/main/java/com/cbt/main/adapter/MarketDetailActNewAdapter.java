@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.activity.UserActivity;
 import com.cbt.main.model.Data;
@@ -28,8 +27,8 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class MarketDetailActNewAdapter extends AppBaseAdapter {
     private CropCircleTransformation mCropCircleTransformation;
     public MarketDetailActNewAdapter(Context context, List<ReplayMyprolemView> dataList) {
-
         super(dataList, context);
+        mCropCircleTransformation = new CropCircleTransformation();
     }
 
     @Override

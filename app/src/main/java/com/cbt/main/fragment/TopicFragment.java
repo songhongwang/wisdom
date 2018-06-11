@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.MainActivity;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.TopicAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.model.BaseMsgModel;
+import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.MarketinformationView;
 import com.cbt.main.model.MomentMode;
@@ -136,7 +138,7 @@ public class TopicFragment extends BaseFragment {
                 @Override
                 public void onResponse(Call<BaseMsgModel<List<MarketinformationView>>> call, Response<BaseMsgModel<List<MarketinformationView>>> response) {
                     MsgCountModel mscount = response.body().getMscount();
-//                    ToastUtils.show(getContext(), mscount.getC1() +  " ---");
+                    updateBottomMsgCount(mscount);
 
                     List<MarketinformationView> dataList = response.body().getNongqinglist();
 
@@ -263,6 +265,13 @@ public class TopicFragment extends BaseFragment {
 //            });
 //        }
 
+    }
+
+
+    private void updateBottomMsgCount(MsgCountModel msgCountModel){
+        ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, msgCountModel.getC1() > 0);
+        ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, msgCountModel.getC2() > 0);
+        ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, msgCountModel.getC3() > 0);
     }
 
     @Override
