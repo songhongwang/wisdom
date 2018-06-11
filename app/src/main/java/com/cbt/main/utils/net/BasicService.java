@@ -2,6 +2,7 @@ package com.cbt.main.utils.net;
 
 import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.BaseModel;
+import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.ClientFarm;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.Dictionaries;
@@ -120,7 +121,7 @@ public interface BasicService {
     Call<List<WentiModel>> scExpertmine(@Query("page") int page);
 
     @GET("findmarketnew")
-    Call<List<MarketinformationView>> getmarketnew(@Query("page") int page);
+    Call<BaseMsgModel<List<MarketinformationView>>> getmarketnew(@Query("page") int page);
 
     @GET("findmarketmypublish")
     Call<List<MarketinformationView>> getmarketmypublish(@Query("page") int page);

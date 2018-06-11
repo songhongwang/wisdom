@@ -13,12 +13,15 @@ import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.TopicAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
+import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.MarketinformationView;
 import com.cbt.main.model.MomentMode;
+import com.cbt.main.model.MsgCountModel;
 import com.cbt.main.model.WentiModel;
 import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
+import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
@@ -129,10 +132,13 @@ public class TopicFragment extends BaseFragment {
         MomentMode mode = (MomentMode) getArguments().getSerializable("mode");
         if (mode == MomentMode.zj_zuixin)
         {
-            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketnew(mPage).enqueue(new Callback<List<MarketinformationView>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getmarketnew(mPage).enqueue(new Callback<BaseMsgModel<List<MarketinformationView>>>() {
                 @Override
-                public void onResponse(Call<List<MarketinformationView>> call, Response<List<MarketinformationView>> response) {
-                    List<MarketinformationView> dataList = response.body();
+                public void onResponse(Call<BaseMsgModel<List<MarketinformationView>>> call, Response<BaseMsgModel<List<MarketinformationView>>> response) {
+                    MsgCountModel mscount = response.body().getMscount();
+//                    ToastUtils.show(getContext(), mscount.getC1() +  " ---");
+
+                    List<MarketinformationView> dataList = response.body().getNongqinglist();
 
                     if(dataList.size() > 0){
                         if(mPage ==0){
@@ -153,9 +159,8 @@ public class TopicFragment extends BaseFragment {
                 }
 
                 @Override
-                public void onFailure(Call<List<MarketinformationView>> call, Throwable t) {
+                public void onFailure(Call<BaseMsgModel<List<MarketinformationView>>> call, Throwable t) {
 
-                    mIsLoading = false;
                 }
             });
         }
