@@ -129,6 +129,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void loginServer(String phone, String pwd){
 //        User user = new User();
+//        user.setUid("cd_18600211553");
+//        user.setUsname("中国人");
+//        user.setIcon("/baidu.png");
 //        user.setTelphone(phoneString);
 //        user.setPassword(passwordString);
 //        SharedPreferencUtil.saveLogin(LoginActivity.this, user);

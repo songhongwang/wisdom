@@ -41,7 +41,7 @@ public class ConversationListActivity extends BaseActivity {
     public void initUI() {
 
 
-        connectServer();
+//        connectServer();
     }
 
     private void connectServer(){

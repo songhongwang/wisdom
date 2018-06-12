@@ -2,7 +2,6 @@ package com.cbt.main.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,18 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.activity.ContactsActivity;
-import com.cbt.main.activity.ConversationListActivity;
-import com.cbt.main.activity.MyAttentionActivity;
 import com.cbt.main.activity.MyFabuActivity;
 import com.cbt.main.activity.MyProfileActivity;
 import com.cbt.main.activity.MyShoucangActivity;
 import com.cbt.main.activity.PerfactAccountActivity;
-import com.cbt.main.activity.SelectMapLocationActivity;
 import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;

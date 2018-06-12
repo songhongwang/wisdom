@@ -25,6 +25,10 @@ public interface RongYunService {
     @POST("user/getToken.json")
     Call<RtokenRsp> getToken(@Field("userId") String userId, @Field("name") String name, @Field("portraitUri") String portraitUri, @HeaderMap Map<String,String> headers);
 
+    @FormUrlEncoded
+    @POST("user/set_nickname")
+    Call<RtokenRsp> setNickName(@Field("nickname") String nickName, @HeaderMap Map<String,String> headers);
+
 
 
 }

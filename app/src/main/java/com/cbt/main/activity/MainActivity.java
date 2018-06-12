@@ -52,6 +52,7 @@ import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.utils.VersionCodeUpdate;
 import com.cbt.main.utils.net.ApiClient;
+import com.cbt.main.utils.net.Constants;
 import com.cbt.main.utils.net.RongYunTokenUtil;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
@@ -416,7 +417,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             return;
         }
 
-        ApiClient.getInstance().getRongYunService().getToken(user.getUid(), user.getUname(), user.getYinwenming(),headers).enqueue(new Callback<RtokenRsp>() {
+        ApiClient.getInstance().getRongYunService().getToken(user.getUid(), user.getUname(), Constants.getBaseUrl() + user.getIcon(),headers).enqueue(new Callback<RtokenRsp>() {
             @Override
             public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
                 if(response != null){
@@ -430,6 +431,18 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             @Override
             public void onFailure(Call<RtokenRsp> call, Throwable t) {
                 ToastUtils.show(MainActivity.this, "rong sdk token load fail");
+            }
+        });
+
+        ApiClient.getInstance().getRongYunService().setNickName(user.getUname(), headers).enqueue(new Callback<RtokenRsp>() {
+            @Override
+            public void onResponse(Call<RtokenRsp> call, Response<RtokenRsp> response) {
+                Log.d("rong_set_nick", "rong nick setup success");
+            }
+
+            @Override
+            public void onFailure(Call<RtokenRsp> call, Throwable t) {
+                Log.d("rong_set_nick_err", "rong nick setup fail");
             }
         });
     }
