@@ -82,6 +82,7 @@ public class UserActivity extends BaseActivity {
             public void onClick(View view) {
                 if(!TextUtils.isEmpty(mData.getIid())){
                     RongIM.getInstance().startPrivateChat(UserActivity.this, mData.getIid(), TextUtils.isEmpty(mData.getNickname()) ? "匿名":mData.getNickname());
+//                    RongIM.getInstance().startPrivateChat(UserActivity.this, "cd_18600211554", "汪汪哒");
                 }else{
                     ToastUtils.show(UserActivity.this, "用户数据异常");
                 }

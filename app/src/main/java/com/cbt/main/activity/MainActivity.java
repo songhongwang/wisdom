@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -74,6 +75,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -466,6 +468,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, IWatc
             @Override
             public void onSuccess(String userid) {
                 Log.d("LoginActivity", "--onSuccess" + userid);
+                User user = SharedPreferencUtil.getLogin(MainActivity.this);
+                RongIM.getInstance().setMessageAttachedUserInfo(true);
+                RongIM.getInstance().refreshUserInfoCache(new UserInfo(user.getUid(), user.getUname(), Uri.parse(Constants.getBaseUrl() + user.getIcon())));
 //                startActivity(new Intent(ChatActivity.this, MainActivity.class));
 //                finish();
             }

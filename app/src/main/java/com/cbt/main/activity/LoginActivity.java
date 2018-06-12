@@ -128,14 +128,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void loginServer(String phone, String pwd){
+//        测试融云sdk 聊天昵称
 //        User user = new User();
-//        user.setUid("cd_18600211553");
-//        user.setUsname("中国人");
+//        user.setUid("cd_18600211554");
+//        user.setUname("中国222");
 //        user.setIcon("/baidu.png");
-//        user.setTelphone(phoneString);
-//        user.setPassword(passwordString);
+//        user.setTelphone("18600211553");
+//        user.setPassword("123456");
+
 //        SharedPreferencUtil.saveLogin(LoginActivity.this, user);
 //        goToMain();
+
         ApiClient.getInstance().getBasicService(this).login(phone, pwd).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
