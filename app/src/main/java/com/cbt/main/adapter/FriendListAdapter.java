@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.model.Friend;
+import com.cbt.main.utils.net.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -70,7 +74,7 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
             convertView = LayoutInflater.from(context).inflate(R.layout.friend_item, parent, false);
             viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.friendname);
             viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.catalog);
-//            viewHolder.mImageView = (SelectableRoundedImageView) convertView.findViewById(R.id.frienduri);
+            viewHolder.mImageView =  convertView.findViewById(R.id.frienduri);
             viewHolder.tvUserId = (TextView) convertView.findViewById(R.id.friend_id);
             convertView.setTag(viewHolder);
         } else {
@@ -97,6 +101,14 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
 //        }
 //        String portraitUri = SealUserInfoManager.getInstance().getPortraitUri(list.get(position));
 //        ImageLoader.getInstance().displayImage(portraitUri, viewHolder.mImageView, App.getOptions());
+
+        if(!TextUtils.isEmpty(friend.getIcon())){
+            Picasso.with(context).load(Constants.getBaseUrl() + friend.getIcon()).placeholder(R.drawable.rc_default_portrait)
+                    .into(viewHolder.mImageView);
+        }else{
+            viewHolder.mImageView.setImageResource(R.drawable.rc_default_portrait);
+        }
+
         if (context.getSharedPreferences("config", Context.MODE_PRIVATE).getBoolean("isDebug", false)) {
             viewHolder.tvUserId.setVisibility(View.VISIBLE);
             viewHolder.tvUserId.setText(list.get(position).getUid());
@@ -142,7 +154,7 @@ public class FriendListAdapter extends BaseAdapter implements SectionIndexer {
         /**
          * 头像
          */
-//        SelectableRoundedImageView mImageView;
+        ImageView mImageView;
         /**
          * userid
          */
