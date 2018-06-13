@@ -18,6 +18,7 @@ import com.cbt.main.R;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
 import com.cbt.main.model.event.EventPublishSuccess;
+import com.cbt.main.model.event.EventUpdateUser;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
@@ -234,6 +235,7 @@ public class MyProfileActivity extends BaseActivity {
                     User usenew = response.body();
                     ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
                     SharedPreferencUtil.saveLogin(MyProfileActivity.this, usenew);
+                    EventBus.getDefault().post(new EventUpdateUser());
                 }
 
                 @Override

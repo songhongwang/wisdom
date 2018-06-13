@@ -21,12 +21,18 @@ import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
 import com.cbt.main.model.ZaiqingModel;
+import com.cbt.main.model.event.EventUpdateUser;
+import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
+import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import retrofit2.Call;
@@ -51,6 +57,7 @@ public class MoreFragment extends BaseFragment {
     }
 
     public void initUI() {
+        EventBus.getDefault().register(this);
         mTvTitle.setText("更多");
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setImageResource(R.drawable.nav_icon_message);
@@ -63,15 +70,7 @@ public class MoreFragment extends BaseFragment {
         mIvComplete.setVisibility(View.GONE);
 
         final User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
-        if(login != null){
-            ((TextView)mRootView.findViewById(R.id.tv_user_name)).setText(login.getUname());
-            ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText("查看或编辑个人资料");
-
-            ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
-            if(!TextUtils.isEmpty(login.getIcon())){
-                Glide.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).into(ivAvatar);
-            }
-        }
+         updateUserUI();
 
         tvzuowu = (TextView)mRootView.findViewById(R.id.tv_zuowustr);
 
@@ -124,6 +123,20 @@ public class MoreFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
+        updateUserUI();
+    }
+
+    private void updateUserUI(){
+        final User login = SharedPreferencUtil.getLogin(GlobalApplication.mApp);
+        if(login != null){
+            ((TextView)mRootView.findViewById(R.id.tv_user_name)).setText(login.getUname());
+            ((TextView)mRootView.findViewById(R.id.tv_user_des)).setText("查看或编辑个人资料");
+
+            ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
+            if(!TextUtils.isEmpty(login.getIcon())){
+                Glide.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).into(ivAvatar);
+            }
+        }
     }
 
     public void getData() {
@@ -142,5 +155,10 @@ public class MoreFragment extends BaseFragment {
 
             }
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventUpdateUser eventUpdateUser) {
+        updateUserUI();
     }
 }
