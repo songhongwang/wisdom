@@ -1,5 +1,6 @@
 package com.cbt.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
@@ -15,8 +17,14 @@ import com.cbt.main.utils.PhoneNumberUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.CommonCallBack;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import me.nereo.imagechoose.MultiImageSelectorActivity;
 import retrofit2.Call;
 
 /**
@@ -25,6 +33,9 @@ import retrofit2.Call;
  */
 @SuppressWarnings("deprecation")
 public class RegisterOrForgetActivity extends BaseActivity {
+    private int REQUEST_IMAGE = 3;
+    private CropCircleTransformation mCropCircleTransformation;
+
     @BindView(R.id.et_phone)
     EditText mEtPhone;
     @BindView(R.id.et_code)
@@ -37,6 +48,13 @@ public class RegisterOrForgetActivity extends BaseActivity {
     TextView mTvGetCode;
     @BindView(R.id.btn_register)
     Button mBtnRegister;
+    @BindView(R.id.iv_crops)
+    ImageView mIvAdatar;
+    @BindView(R.id.et_nick_name)
+    EditText mEtNiCheng;
+
+    private String imgfile;
+
     boolean hadGettingCode = false;
 
     String mTitleStr;
@@ -65,6 +83,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
 
     @Override
     public void initUI() {
+        mCropCircleTransformation = new CropCircleTransformation();
         mTitleStr = getIntent().getStringExtra("title");
         mTvTitle.setText(mTitleStr);
 
@@ -100,6 +119,19 @@ public class RegisterOrForgetActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 checkInput();
+            }
+        });
+        mIvAdatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterOrForgetActivity.this, MultiImageSelectorActivity.class);
+                // whether show camera
+                intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+                // max select image amount
+                intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 1);
+                // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+                intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
+                startActivityForResult(intent, REQUEST_IMAGE);
             }
         });
     }
@@ -149,10 +181,16 @@ public class RegisterOrForgetActivity extends BaseActivity {
 
 
     private void checkInput() {
+        String nickName = mEtNiCheng.getText().toString().trim();
         String phone = mEtPhone.getText().toString().trim();
         String code = mEtCode.getText().toString().trim();
         String pwd = mEtPwd.getText().toString().trim();
         String pwd2 = mEtPwd2.getText().toString().trim();
+
+        if(TextUtils.isEmpty(nickName)){
+            ToastUtils.show(this, "请输入昵称");
+            return;
+        }
 
         if(!PhoneNumberUtil.isChinaPhoneLegal(phone)){
             ToastUtils.show(this, "手机号不正确");
@@ -178,13 +216,13 @@ public class RegisterOrForgetActivity extends BaseActivity {
         }
 
         if(mTvTitle.getText().toString().trim().equals("注册")){
-            register(phone, pwd, code);
+            register(phone, pwd, code,nickName);
         }else {
-            forgetPwd(phone, pwd, code);
+            forgetPwd(phone, pwd, code, nickName);
         }
     }
 
-    private void register(String phone, String pwd, String code){
+    private void register(String phone, String pwd, String code, String nickName){
 
         ApiClient.getInstance().getBasicService(this).regist(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
             @Override
@@ -205,7 +243,7 @@ public class RegisterOrForgetActivity extends BaseActivity {
         });
     }
 
-    private void forgetPwd(String phone, String pwd, String code){
+    private void forgetPwd(String phone, String pwd, String code, String nickName){
         ApiClient.getInstance().getBasicService(this).forgotPwd(phone, pwd, code).enqueue(new CommonCallBack<Object>() {
             @Override
             public void onCResponse(Call<BaseModel<Object>> call, BaseModel<Object> response) {
@@ -223,6 +261,31 @@ public class RegisterOrForgetActivity extends BaseActivity {
                 ToastUtils.show(RegisterOrForgetActivity.this, errorMessage);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE){
+            if(resultCode == RESULT_OK){
+                List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+
+                updateUI(pathList);
+            }
+        }
+    }
+
+    private void updateUI(List<String> pathList) {
+        if(pathList != null && pathList.size()>0){
+            imgfile = pathList.get(0);
+            File imageFile = new File(pathList.get(0));
+
+            Picasso.with(this).load(imageFile).placeholder(R.drawable.login_default_icon)
+                    .transform(mCropCircleTransformation)
+                    .into(mIvAdatar);
+        }else{
+            mIvAdatar.setImageResource(R.drawable.login_default_icon);
+        }
     }
 
 }
