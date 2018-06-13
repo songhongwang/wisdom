@@ -10,22 +10,18 @@ import android.view.ViewGroup;
 
 import com.cbt.main.R;
 import com.cbt.main.activity.MainActivity;
-import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.adapter.ZaiqingAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.dialog.ReplyDialog;
+import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
-import com.cbt.main.model.IndexFeedModel;
-import com.cbt.main.model.MessageCount;
 import com.cbt.main.model.MomentMode;
-import com.cbt.main.model.ZaiqingBigModel;
+import com.cbt.main.model.MsgCountModel;
 import com.cbt.main.model.ZaiqingModel;
-import com.cbt.main.model.event.EventLogout;
 import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
-import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
@@ -150,25 +146,11 @@ public class ZaiqingFragment extends BaseFragment {
         getData();
     }
 
-    private void showBottomTip(MessageCount msc){
-        if(getActivity() instanceof MainActivity){
-            if (Integer.parseInt(msc.getC1()) > 0 || Integer.parseInt(msc.getC2()) > 0)
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
-            }
-            else
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, false);
-            }
-            if (Integer.parseInt(msc.getC3()) > 0)
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, true);
-            }
-            else
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, false);
-            }
-//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, true);
+    private void showBottomTip(MsgCountModel msgCountModel){
+        if(getActivity() instanceof MainActivity && getActivity() != null && msgCountModel != null){
+            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, msgCountModel.getC1() > 0 || msgCountModel.getC2() > 0);
+//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, msgCountModel.getC2() > 0);
+            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, msgCountModel.getC3() > 0);
 
         }
     }
@@ -264,12 +246,50 @@ public class ZaiqingFragment extends BaseFragment {
         }
         else {
 
-            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<ZaiqingBigModel>() {
+//            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<ZaiqingBigModel>() {
+//                @Override
+//                public void onResponse(Call<ZaiqingBigModel> call, Response<ZaiqingBigModel> response) {
+//                    ZaiqingBigModel modelzong = response.body();
+////                    showBottomTip(modelzong.getMscount());
+//                    List<ZaiqingModel> dataList =modelzong.getNongqinglist();
+//                    mIsLoading = false;
+//
+//                    if (dataList.size() > 0) {
+//                        if(mPage == 0){
+//                            goodList.clear();
+//                        }
+//                        for (int i = 0; i < dataList.size(); i++) {
+//                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+//                        }
+//                        adapter.set(goodList);
+//                        adapter.notifyDataSetChanged();
+//
+//                        mPage++;
+//                        mHasMore = true;
+//                    } else {
+//                        mHasMore = false;
+//                    }
+//                    if(mVLoading != null){
+//                        mVLoading.setVisibility(View.GONE);
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ZaiqingBigModel> call, Throwable t) {
+//                if(mVLoading != null) {
+//                    mVLoading.setVisibility(View.GONE);
+//                }
+//
+//                mIsLoading = false;
+//                }
+//            });
+
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<BaseMsgModel<List<ZaiqingModel>>>() {
                 @Override
-                public void onResponse(Call<ZaiqingBigModel> call, Response<ZaiqingBigModel> response) {
-                    ZaiqingBigModel modelzong = response.body();
-//                    showBottomTip(modelzong.getMscount());
-                    List<ZaiqingModel> dataList =modelzong.getNongqinglist();
+                public void onResponse(Call<BaseMsgModel<List<ZaiqingModel>>> call, Response<BaseMsgModel<List<ZaiqingModel>>> response) {
+                    showBottomTip(response.body().getMscount());
+                    List<ZaiqingModel> dataList =response.body().getNongqinglist();
                     mIsLoading = false;
 
                     if (dataList.size() > 0) {
@@ -294,7 +314,7 @@ public class ZaiqingFragment extends BaseFragment {
                 }
 
                 @Override
-                public void onFailure(Call<ZaiqingBigModel> call, Throwable t) {
+                public void onFailure(Call<BaseMsgModel<List<ZaiqingModel>>> call, Throwable t) {
                 if(mVLoading != null) {
                     mVLoading.setVisibility(View.GONE);
                 }

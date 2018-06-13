@@ -15,16 +15,13 @@ import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.AgriculturalModel;
+import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
-import com.cbt.main.model.IndexFeedModel;
-import com.cbt.main.model.MessageCount;
 import com.cbt.main.model.MomentMode;
-import com.cbt.main.model.NongqingModel;
-import com.cbt.main.model.ZaiqingBigModel;
+import com.cbt.main.model.MsgCountModel;
 import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
-import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.piaoquan.MessagePicturesLayout;
 import com.cbt.main.view.piaoquan.SpaceItemDecoration;
@@ -35,7 +32,6 @@ import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,25 +143,13 @@ public class MomentsFragment extends BaseFragment {
         getData();
     }
 
-    private void showBottomTip(MessageCount msc){
-        if(getActivity() instanceof MainActivity){
-            if (Integer.parseInt(msc.getC1()) > 0 || Integer.parseInt(msc.getC2()) > 0)
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
+    private void showBottomTip(MsgCountModel msgCountModel){
+        if(getActivity() instanceof MainActivity && getActivity() != null && msgCountModel != null){
+            if(getActivity() != null){
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, msgCountModel.getC1() > 0 || msgCountModel.getC2() > 0);
+//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, msgCountModel.getC2() > 0);
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, msgCountModel.getC3() > 0);
             }
-            else
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, false);
-            }
-            if (Integer.parseInt(msc.getC3()) > 0)
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, true);
-            }
-            else
-            {
-                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, false);
-            }
-//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, true);
 
         }
     }
@@ -260,13 +244,14 @@ public class MomentsFragment extends BaseFragment {
         }
         else
         {
-           ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<NongqingModel>() {
-               @Override
-               public void onResponse(Call<NongqingModel> call, Response<NongqingModel> response) {
-                   NongqingModel modelzong = response.body();
-//                   showBottomTip(modelzong.getMscount());
 
-                   List<AgriculturalModel> dataList =modelzong.getNongqinglist();
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<BaseMsgModel<List<AgriculturalModel>>>() {
+                @Override
+                public void onResponse(Call<BaseMsgModel<List<AgriculturalModel>>> call, Response<BaseMsgModel<List<AgriculturalModel>>> response) {
+
+                   showBottomTip(response.body().getMscount());
+
+                   List<AgriculturalModel> dataList =response.body().getNongqinglist();
                            mIsLoading = false;
 
                    if(dataList.size() > 0){
@@ -287,18 +272,17 @@ public class MomentsFragment extends BaseFragment {
                    if(mVLoading != null){
                        mVLoading.setVisibility(View.GONE);
                    }
+                }
 
-               }
-
-               @Override
-               public void onFailure(Call<NongqingModel> call, Throwable t) {
+                @Override
+                public void onFailure(Call<BaseMsgModel<List<AgriculturalModel>>> call, Throwable t) {
                    if(mVLoading != null) {
                        mVLoading.setVisibility(View.GONE);
                    }
 
                    mIsLoading = false;
-               }
-           });
+                }
+            });
         }
     }
 // test reset

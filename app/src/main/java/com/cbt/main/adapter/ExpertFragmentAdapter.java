@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.cbt.main.fragment.MomentsFragment;
 import com.cbt.main.fragment.ZhuanjiaFragment;
 import com.cbt.main.model.MomentMode;
 

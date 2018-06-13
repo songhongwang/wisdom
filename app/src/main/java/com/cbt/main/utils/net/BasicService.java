@@ -4,7 +4,6 @@ import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.ClientFarm;
-import com.cbt.main.model.Data;
 import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.Friend;
 import com.cbt.main.model.IndexFeedModel;
@@ -13,13 +12,10 @@ import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.model.MarketinformationDetailView;
 import com.cbt.main.model.MarketinformationView;
 import com.cbt.main.model.MyproblemView;
-import com.cbt.main.model.NongqingModel;
-import com.cbt.main.model.ShichangModel;
 import com.cbt.main.model.UpdateModel;
 import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.model.WentiModel;
-import com.cbt.main.model.ZaiqingBigModel;
 import com.cbt.main.model.ZaiqingModel;
 
 import java.util.List;
@@ -28,9 +24,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -88,7 +82,7 @@ public interface BasicService {
     Call<List<IndexFeedModel>> getIndexFeed(@Query("page") int page);
 
     @GET("findZaiqingForFm")
-    Call<ZaiqingBigModel> getZaiqingForFm(@Query("page") int page);
+    Call<BaseMsgModel<List<ZaiqingModel>>> getZaiqingForFm(@Query("page") int page);
 
     @GET("findMySendZaiqing")
     Call<List<ZaiqingModel>> myZaiqingForFm(@Query("page") int page);
@@ -97,7 +91,7 @@ public interface BasicService {
     Call<List<ZaiqingModel>> scZaiqingForFm(@Query("page") int page);
 
     @GET("findmyfarmfarming")
-    Call<NongqingModel> getMyfarmfarming(@Query("page") int page);
+    Call<BaseMsgModel<List<AgriculturalModel>>> getMyfarmfarming(@Query("page") int page);
 
     @GET("moremypublishAgricultural")
     Call<List<AgriculturalModel>> myMyfarmfarming(@Query("page") int page);

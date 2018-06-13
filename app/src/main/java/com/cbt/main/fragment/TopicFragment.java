@@ -270,9 +270,9 @@ public class TopicFragment extends BaseFragment {
 
 
     private void updateBottomMsgCount(MsgCountModel msgCountModel){
-        if(getActivity() != null){
-            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, msgCountModel.getC1() > 0);
-            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, msgCountModel.getC2() > 0);
+        if(getActivity() != null && getActivity() instanceof MainActivity && msgCountModel != null){
+            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, msgCountModel.getC1() > 0 || msgCountModel.getC2() > 0);
+//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, msgCountModel.getC2() > 0);
             ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, msgCountModel.getC3() > 0);
         }
     }
