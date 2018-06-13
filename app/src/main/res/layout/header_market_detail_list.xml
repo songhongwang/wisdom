@@ -31,19 +31,17 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="5dip"
             android:gravity="center"
-            android:layout_marginLeft="10dp"
             android:text="发布时间：2018-12-2"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/tv_replaycount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:gravity="right"
-            android:layout_marginTop="10dip"
-            android:text=""
+            android:layout_marginTop="5dip"
+            android:text="0条回复"
             android:textSize="12sp"/>
     </LinearLayout>
     <RelativeLayout
