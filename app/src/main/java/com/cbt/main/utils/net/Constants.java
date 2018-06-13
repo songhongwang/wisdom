@@ -9,6 +9,8 @@ public class Constants {
 //    private static String sBaseUrl = "http://192.168.31.152:9999/hnzhnq/
     private static String sRongBaseUrl = "http://api.cn.ronghub.com";
 
+    public static String sAppQR = "app/erweima.png";
+
     public static String getBaseUrl() {
         return sBaseUrl;
     }

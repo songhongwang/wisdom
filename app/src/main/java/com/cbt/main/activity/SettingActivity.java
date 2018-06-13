@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.EventLog;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.model.event.EventLogout;
 import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.appclear.ClearApp;
+import com.cbt.main.utils.net.Constants;
 
 import butterknife.BindView;
 import io.rong.eventbus.EventBus;
@@ -28,6 +31,8 @@ public class SettingActivity extends BaseActivity{
     TextView mTvCacheSize;
     @BindView(R.id.tv_quit)
     TextView mTvQuit;
+    @BindView(R.id.iv_qr_code)
+    ImageView mIvQr;
     ClearApp mClearApp;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +84,8 @@ public class SettingActivity extends BaseActivity{
                 startActivityForResult(intent2, 2);
             }
         });
+
+        Glide.with(this).load(Constants.getBaseUrl() + Constants.sAppQR).into(mIvQr);
     }
 
 

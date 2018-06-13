@@ -1,26 +1,15 @@
 package com.cbt.main.adapter;
 
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.cbt.main.R;
-
-import java.util.List;
 
 /**
  * Created by vigorous on 18/3/30.
- * 首页农气产品
+ * 首页农气产品 和专家adapter 一样
  */
 
-public class ExpertSearchAdapter extends AppBaseAdapter {
-    public ExpertSearchAdapter(List<String> dataList, Context context) {
-        super(dataList, context);
-    }
+public class ExpertSearchAdapter extends ZhuanjiaAdapter {
 
-    @Override
-    public View getCView(int position, View view, ViewGroup viewGroup) {
-        View itemView = mInflater.inflate(R.layout.item_expert_search, null, false);
-        return itemView;
+    public ExpertSearchAdapter(Context context) {
+        super(context);
     }
 }

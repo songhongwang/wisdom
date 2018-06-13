@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,13 +21,18 @@ import android.widget.TextView;
 
 import com.cbt.main.activity.ReleaseZixunActivity;
 import com.cbt.main.adapter.ExpertSearchAdapter;
+import com.cbt.main.adapter.ZhuanjiaAdapter;
 import com.cbt.main.dialog.ReleaseDialog;
+import com.cbt.main.model.Data;
+import com.cbt.main.model.WentiModel;
 import com.cbt.main.model.event.OnBackPressedEvent;
 import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.view.pagertab.PagerSlidingTabStrip;
 import com.cbt.main.R;
 import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.utils.Utils;
+import com.cbt.main.view.piaoquan.SpaceItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -36,6 +43,9 @@ import java.util.List;
 import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by caobotao on 16/1/4.
@@ -45,10 +55,16 @@ public class ExpertFragment extends BaseFragment {
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
 
-//    private ListView mLvSearch;
+    private RecyclerView mRecyclerViewSearch;
     private ExpertSearchAdapter mExpertSearchAdapter;
 
     private View mVTip1, mVTip2, mVTip3;
+
+    private boolean mIsLoading;
+    private int mPage;
+    private boolean mHasMore;
+    private List<Data> goodList = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -98,47 +114,48 @@ public class ExpertFragment extends BaseFragment {
 
 
 
-//        ((EditText)mRootView.findViewById(R.id.et_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        ((EditText)mRootView.findViewById(R.id.et_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId,
-//                                          KeyEvent event) {
-//                if ((actionId == 0 || actionId == 3) && event != null) {
-//                    ToastUtils.show(getActivity(), "搜索");
-////                    mLvSearch.setVisibility(View.VISIBLE);
-//                    return true;
-//                }
-//                return false;
-//
-//            }
-//
-//        });
-//        ((EditText)mRootView.findViewById(R.id.et_search)).addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if(TextUtils.isEmpty(charSequence.toString())){
-////                    if(mLvSearch.getVisibility() == View.VISIBLE){
-////                        mLvSearch.setVisibility(View.GONE);
-////                    }
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if ((actionId == 0 || actionId == 3) && event != null) {
+                    mRecyclerViewSearch.setVisibility(View.VISIBLE);
+                    getSearchData();
+                    return true;
+                }
+                return false;
 
-//        mLvSearch = (ListView) mRootView.findViewById(R.id.listView);
-        List<String> dataList = new ArrayList<>();
+            }
 
-        mExpertSearchAdapter = new ExpertSearchAdapter(dataList, getActivity());
-//        mLvSearch.setAdapter(mExpertSearchAdapter);
+        });
+        ((EditText)mRootView.findViewById(R.id.et_search)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(TextUtils.isEmpty(charSequence.toString())){
+                    if(mRecyclerViewSearch.getVisibility() == View.VISIBLE){
+                        mRecyclerViewSearch.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mRecyclerViewSearch = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
+        mRecyclerViewSearch.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerViewSearch.addItemDecoration(new SpaceItemDecoration(getActivity()).setSpace(5).setSpaceColor(0xFFECECEC));
+
+        mExpertSearchAdapter = new ExpertSearchAdapter(getActivity());
+        mRecyclerViewSearch.setAdapter(mExpertSearchAdapter);
 
 
     }
@@ -180,10 +197,47 @@ public class ExpertFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(OnBackPressedEvent onBackPressedEvent) {
-//        if(mLvSearch.getVisibility() == View.VISIBLE){
-//            mLvSearch.setVisibility(View.GONE);
-//        }else{
+        if(mRecyclerViewSearch.getVisibility() == View.VISIBLE){
+            mRecyclerViewSearch.setVisibility(View.GONE);
+        }else{
             getActivity().finish();
-//        }
+        }
+    }
+
+
+    private void getSearchData(){
+        // TODO: 18/6/13 此处url需要改为搜索
+        ApiClient.getInstance().getBasicService(getContext()).getExperthot(0).enqueue(new Callback<List<WentiModel>>() {
+            @Override
+            public void onResponse(Call<List<WentiModel>> call, Response<List<WentiModel>> response) {
+                List<WentiModel> dataList = response.body();
+
+                mIsLoading = false;
+
+                if(dataList.size() > 0){
+                    if(mPage == 0){
+                        goodList.clear();
+                    }
+                    for(int i = 0; i< dataList.size(); i ++){
+                        goodList.add(WentiModel.convert(dataList.get(i)));
+                    }
+
+                    mExpertSearchAdapter.set(goodList);
+                    mExpertSearchAdapter.notifyDataSetChanged();
+
+                    mPage ++;
+                    mHasMore =true;
+                }else{
+                    mHasMore = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WentiModel>> call, Throwable t) {
+
+                mIsLoading = false;
+            }
+        });
+
     }
 }
