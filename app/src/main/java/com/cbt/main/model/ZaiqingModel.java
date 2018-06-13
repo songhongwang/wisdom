@@ -1,8 +1,9 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ZaiqingModel {
+public class ZaiqingModel implements Serializable {
 
 	private String iid;
 //	用户头像
@@ -223,6 +224,7 @@ private int isshoucang;
 		data.setPictureList(self.getImglist());
 		data.setPictureThumbList(self.getImglist());
 		data.setIid(self.getIid());
+		data.setUid(self.getUserid());
 		data.setReplyList(self.getReplayList());
 		return data;
 	}

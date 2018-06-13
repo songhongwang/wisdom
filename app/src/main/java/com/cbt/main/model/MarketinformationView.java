@@ -118,7 +118,9 @@ public class MarketinformationView implements Serializable {
 		data.setNickname(self.getNongzitype());
 		data.setShenfen(self.getItitle());
 		data.setIid(self.getIid());
+		data.setUid(self.getUserid());
 		data.setRplaycount(self.getMessagecount()+"");
+		data.setContent(self.getGongyingtype());
 		return data;
 	}
 	 

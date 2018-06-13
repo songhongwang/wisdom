@@ -230,7 +230,7 @@ public class IndexFragment extends BaseFragment {
                 mTvBigWendu.setText(mIndexModel.wendu);
                 mTvShiDu.setText("相对湿度" + mIndexModel.shidu);
                 mTvQiYa.setText("气压" + mIndexModel.qiya);
-                mTvFengSu.setText("风向/风力\n" + mIndexModel.fengxiang + "/" + mIndexModel.fengsu);
+                mTvFengSu.setText("风向/风力 " + mIndexModel.fengxiang + "/" + mIndexModel.fengsu);
 
                 mTvFaBu.setText(mIndexModel.nongli);
                 if(TextUtils.isEmpty(mIndexModel.wartitle)){

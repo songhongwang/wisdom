@@ -296,7 +296,7 @@ public class PerfactAccountActivity extends BaseActivity{
 
             @Override
             public void onFailure(Call<ClientFarm> call, Throwable t) {
-                ToastUtils.show(PerfactAccountActivity.this, "123456");
+//                ToastUtils.show(PerfactAccountActivity.this, "123456");
             }
         });
     }

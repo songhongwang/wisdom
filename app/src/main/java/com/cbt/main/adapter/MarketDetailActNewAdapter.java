@@ -25,7 +25,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  */
 
 public class MarketDetailActNewAdapter extends AppBaseAdapter {
-    private CropCircleTransformation mCropCircleTransformation;
+    private  CropCircleTransformation mCropCircleTransformation;
     public MarketDetailActNewAdapter(Context context, List<ReplayMyprolemView> dataList) {
         super(dataList, context);
         mCropCircleTransformation = new CropCircleTransformation();
@@ -41,6 +41,10 @@ public class MarketDetailActNewAdapter extends AppBaseAdapter {
 //        if(!s.equals("holder")){
 //            Glide.with(mContext).load(s).into(iv);
 //        }
+        final TextView tv_operate = (TextView) itemView.findViewById(R.id.tv_operate);
+        final ImageView iv_operate = (ImageView) itemView.findViewById(R.id.iv_operate);
+        iv_operate.setVisibility(View.GONE);
+        tv_operate.setVisibility(View.GONE);
         ImageView iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
         if(!TextUtils.isEmpty(mData.getReplyicon())){
             Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getReplyicon()).placeholder(R.drawable.login_default_icon)
@@ -53,13 +57,8 @@ public class MarketDetailActNewAdapter extends AppBaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, UserActivity.class);
-                Data data = new Data();
-                data.setUid(mData.getReplayuserid());
-                data.setIid(mData.getReplayuserid());
-                data.setAvatar(mData.getReplyicon());
-                data.setNickname(mData.getReplayusername());
 
-                intent.putExtra("model", data);
+                intent.putExtra("otheruserid", mData.getReplayuserid());
                 mContext.startActivity(intent);
             }
         });

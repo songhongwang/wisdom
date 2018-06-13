@@ -31,7 +31,8 @@ import retrofit2.Response;
  */
 
 public class UserActivity extends BaseActivity {
-    Data mData;
+    Data mData= new Data();
+    String userid;
     TextView mTvName, mTvDes;
     ImageView mIvAvatar;
 
@@ -42,7 +43,7 @@ public class UserActivity extends BaseActivity {
 
     @Override
     public void initUI() {
-        mData = (Data) getIntent().getSerializableExtra("model");
+        userid = (String) getIntent().getSerializableExtra("otheruserid");
         mIvFinish.setVisibility(View.GONE);
         mIvAvatar = (ImageView) findViewById(R.id.iv_avatar);
         mTvName = (TextView) findViewById(R.id.tv_user_name);
@@ -57,7 +58,7 @@ public class UserActivity extends BaseActivity {
             mIvAvatar.setImageResource(R.drawable.login_default_icon);
         }
 
-        if(!TextUtils.isEmpty(mData.getAvatar())){
+        if(!TextUtils.isEmpty(mData.getNickname())){
             mTvName.setText(mData.getNickname());
         }else{
             mTvName.setText("匿名");
@@ -92,19 +93,28 @@ public class UserActivity extends BaseActivity {
         findViewById(R.id.btn_attention).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 添加关注
+                ApiClient.getInstance().getBasicService(UserActivity.this).followComm(userid,"", 4).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(UserActivity.this, "已关注");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
         User login = SharedPreferencUtil.getLogin(this);
-        if(mData.getIid().equals(login.getUid())){
-            ToastUtils.show(UserActivity.this, "给自己加油");
+        if(userid.equals(login.getUid())){
+            //ToastUtils.show(UserActivity.this, "这个是你自己！");
             finish();
             return;
         }else{
-            findViewById(R.id.rl_ta_nongqing).setVisibility(View.GONE);
+            //findViewById(R.id.rl_ta_nongqing).setVisibility(View.GONE);
         }
-
         getData();
     }
 
@@ -125,7 +135,7 @@ public class UserActivity extends BaseActivity {
     }
 
     private void getData(){
-        ApiClient.getInstance().getBasicService(this).getUser(mData.getIid()).enqueue(new Callback<User>() {
+        ApiClient.getInstance().getBasicService(this).getUser(userid).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();

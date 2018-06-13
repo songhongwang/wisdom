@@ -34,16 +34,18 @@ public class IndexProductAdapter extends AppBaseAdapter {
             @Override
             public void onClick(View view) {
                 ToastUtils.show(mContext, "产品详情");
-                if(position == 0){
+                if(model.getIsreadall().equals("0")){
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra("model", model);
                     mContext.startActivity(intent);
-                }else if(position == 1) {
+                }else if(model.getIsreadall().equals("2")) {
                     Intent intent = new Intent(mContext, ExpertConsultActivity.class);
+                    intent.putExtra("iid", model.getPid());
                     intent.putExtra("model", model);
                     mContext.startActivity(intent);
                 }else{
                     Intent intent = new Intent(mContext, MarketDetailActivity.class);
+                    intent.putExtra("iid", model.getPid());
                     intent.putExtra("model", model);
                     mContext.startActivity(intent);
                 }

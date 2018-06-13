@@ -13,10 +13,13 @@ import com.cbt.main.model.IndexProductModel;
 import com.cbt.main.model.MarketinformationDetailView;
 import com.cbt.main.model.MarketinformationView;
 import com.cbt.main.model.MyproblemView;
+import com.cbt.main.model.NongqingModel;
+import com.cbt.main.model.ShichangModel;
 import com.cbt.main.model.UpdateModel;
 import com.cbt.main.model.User;
 import com.cbt.main.model.Weather7DaysForcast;
 import com.cbt.main.model.WentiModel;
+import com.cbt.main.model.ZaiqingBigModel;
 import com.cbt.main.model.ZaiqingModel;
 
 import java.util.List;
@@ -85,7 +88,7 @@ public interface BasicService {
     Call<List<IndexFeedModel>> getIndexFeed(@Query("page") int page);
 
     @GET("findZaiqingForFm")
-    Call<List<ZaiqingModel>> getZaiqingForFm(@Query("page") int page);
+    Call<ZaiqingBigModel> getZaiqingForFm(@Query("page") int page);
 
     @GET("findMySendZaiqing")
     Call<List<ZaiqingModel>> myZaiqingForFm(@Query("page") int page);
@@ -94,7 +97,7 @@ public interface BasicService {
     Call<List<ZaiqingModel>> scZaiqingForFm(@Query("page") int page);
 
     @GET("findmyfarmfarming")
-    Call<List<AgriculturalModel>> getMyfarmfarming(@Query("page") int page);
+    Call<NongqingModel> getMyfarmfarming(@Query("page") int page);
 
     @GET("moremypublishAgricultural")
     Call<List<AgriculturalModel>> myMyfarmfarming(@Query("page") int page);
@@ -133,6 +136,10 @@ public interface BasicService {
     @GET("farmlandfarm")
     Call<ClientFarm> farmlandfarm();
 
+
+    @GET("finduserzuowu")
+    Call<List<String>> finduserzuowu();
+
     @POST("adduserdetail")
     Call<User> adduserdetail(@Query("provincename") String provincename,
                              @Query("cityname") String cityname,
@@ -148,6 +155,18 @@ public interface BasicService {
                              @Query("sex") String sex,
                              @Query("birthday") String birthday,
                              @Query("disname") String disname);
+
+    @GET("followComm")
+    Call<Object> followComm(@Query("followid") String followid,@Query("followname") String followname,@Query("followtype") int followtype);
+
+    @GET("delfollowComm")
+    Call<Object> delfollowComm(@Query("followid") String followid,@Query("followname") String followname,@Query("followtype") int followtype);
+
+    @GET("dianzan")
+    Call<Object> dianzan(@Query("commid") String commid,@Query("type") int type);
+
+    @GET("caina")
+    Call<Object> caina(@Query("rqid") String rqid);
 
 // 朋友圈 回复
     @GET("replymyfarmfarming")

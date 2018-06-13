@@ -13,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
+import com.cbt.main.model.event.EventPublishSuccess;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
@@ -27,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import io.rong.eventbus.EventBus;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import me.nereo.imagechoose.MultiImageSelectorActivity;
 import okhttp3.MediaType;
@@ -58,7 +62,7 @@ public class MyProfileActivity extends BaseActivity {
     TextView mTvShengri;
     @BindView(R.id.rl_shengri)
     View mVBirthday;
-
+    private String imgfile;
     TimePickerView pvTime;
     private boolean mChangeAvatar;
     @Override
@@ -91,6 +95,13 @@ public class MyProfileActivity extends BaseActivity {
                 startActivityForResult(intent, REQUEST_IMAGE);
             }
         });
+        if(!TextUtils.isEmpty(mUser.getIcon())){
+            Glide.with(MyProfileActivity.this).load(Constants.getBaseUrl() + mUser.getIcon()).into(mIvAdatar);
+        }
+        if(!TextUtils.isEmpty(mUser.getBirthday())){
+            mTvShengri.setText(mUser.getBirthday());
+        }
+
         mTvNan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +123,7 @@ public class MyProfileActivity extends BaseActivity {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
                 String birthday = simpleDateFormat.format(date);
                 mTvShengri.setText(birthday);
+                mUser.setBirthday(birthday);
             }
         });
         boolean[] type = new boolean[]{true, true, true, false, false, false};//显示类型 默认全部显示
@@ -141,7 +153,7 @@ public class MyProfileActivity extends BaseActivity {
             return;
         }
         if(!TextUtils.isEmpty(mUser.getUname())){
-            mEtNiCheng.setText(mUser.getUsname());
+            mEtNiCheng.setText(mUser.getUname());
             Editable etext = mEtNiCheng.getText();
             Selection.setSelection(etext, etext.length());
         }
@@ -178,6 +190,7 @@ public class MyProfileActivity extends BaseActivity {
 
     private void updateUI(List<String> pathList) {
         if(pathList != null && pathList.size()>0){
+            imgfile = pathList.get(0);
             mChangeAvatar = true;
             File imageFile = new File(pathList.get(0));
 
@@ -190,24 +203,37 @@ public class MyProfileActivity extends BaseActivity {
         }
     }
 
-    private void commit(){
+    private void commit() {
         String city = GlobalApplication.mLocationData.city;
         String province = GlobalApplication.mLocationData.province;
         String country = GlobalApplication.mLocationData.addr;
-
+        if (mEtNiCheng.getText().equals(""))
+        {
+            ToastUtils.show(MyProfileActivity.this, "昵称不能为空！");
+        }
+        else
+        {
+            mUser.setUsname(mEtNiCheng.getText().toString());
+            mUser.setUname(mEtNiCheng.getText().toString());
+        }
         MultipartBody requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM)
-                .addFormDataPart("icon","userAvatar", RequestBody.create(MediaType.parse("image/*"), new File(mUser.getIcon())));
-
+        if(mChangeAvatar) {
+            builder.setType(MultipartBody.FORM)
+                    .addFormDataPart("icon", "userAvatar", RequestBody.create(MediaType.parse("image/*"), new File(mUser.getIcon())));
+        }
+        else {
+            builder.setType(MultipartBody.FORM).addFormDataPart("icon", "");
+        }
         requestBody = builder.build();
 
-        if(mChangeAvatar){
-            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUsname(),requestBody).enqueue(new Callback<User>() {
+
+            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUname(),requestBody).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
+                    User usenew = response.body();
                     ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
-
+                    SharedPreferencUtil.saveLogin(MyProfileActivity.this, usenew);
                 }
 
                 @Override
@@ -216,21 +242,21 @@ public class MyProfileActivity extends BaseActivity {
 
                 }
             });
-        }else{
-            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUsname()).enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
-
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    ToastUtils.show(MyProfileActivity.this, "更新失败");
-
-                }
-            });
-        }
+//        }else{
+//            ApiClient.getInstance().getBasicService(this).adduserdetail(province, city,country, mUser.getSex(), mUser.getBirthday(), mUser.getUname()).enqueue(new Callback<User>() {
+//                @Override
+//                public void onResponse(Call<User> call, Response<User> response) {
+//                    ToastUtils.show(MyProfileActivity.this, "用户信息更新成功");
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<User> call, Throwable t) {
+//                    ToastUtils.show(MyProfileActivity.this, "更新失败");
+//
+//                }
+//            });
+//        }
 
 
     }

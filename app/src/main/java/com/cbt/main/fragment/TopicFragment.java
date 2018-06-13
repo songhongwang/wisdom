@@ -163,6 +163,7 @@ public class TopicFragment extends BaseFragment {
                 @Override
                 public void onFailure(Call<BaseMsgModel<List<MarketinformationView>>> call, Throwable t) {
 
+                    mIsLoading = false;
                 }
             });
         }

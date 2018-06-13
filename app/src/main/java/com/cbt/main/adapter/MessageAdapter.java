@@ -125,7 +125,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("model", mData);
+                    intent.putExtra("otheruserid", mData.getUid());
                     mContext.startActivity(intent);
                 }
             });
@@ -142,13 +142,33 @@ public class MessageAdapter extends RecyclerView.Adapter {
             tv_zan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.show(mContext, "给你点个赞");
+                    ApiClient.getInstance().getBasicService(mContext).dianzan(mData.getIid(), 3).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            ToastUtils.show(mContext, "已点赞");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+
+                        }
+                    });
                 }
             });
             tv_shoucang.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.show(mContext, "收藏一下");
+                    ApiClient.getInstance().getBasicService(mContext).followComm(mData.getIid(),"", 1).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            ToastUtils.show(mContext, "已收藏");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+
+                        }
+                    });
                 }
             });
 
@@ -157,8 +177,12 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 for(final ReplyModel replyModel :mData.getReplyList()){
                     TextView textView = new TextView(mContext);
                     textView.setPadding(5,5,5,5);
-
-                    String tip = replyModel.getReplayusername() + ":" + replyModel.getContent();
+                    String tip = replyModel.getReplayusername();
+                    if (replyModel.getCommentname() != null && !replyModel.getCommentname().equals(""))
+                    {
+                        tip += "回复"+replyModel.getCommentname();
+                    }
+                    tip += ":" + replyModel.getContent();
                     SpannableString spannableString = new SpannableString(tip);
                     int end = tip.indexOf(":");
                     spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#51a067")), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

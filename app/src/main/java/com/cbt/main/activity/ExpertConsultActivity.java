@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.cbt.main.R;
 import com.cbt.main.adapter.MarketDetailActAdapter;
 import com.cbt.main.model.MyproblemView;
+import com.cbt.main.model.User;
 import com.cbt.main.model.WentiModel;
+import com.cbt.main.utils.SharedPreferencUtil;
 import com.cbt.main.utils.ToastUtils;
 import com.cbt.main.utils.Utils;
 import com.cbt.main.utils.net.ApiClient;
@@ -35,14 +37,14 @@ public class ExpertConsultActivity extends BaseActivity2 {
     private MarketDetailActAdapter mMarketDetailActAdapter;
 
     MessagePicturesLayout lPictures;
-    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend,tv_replaycount;
-
+    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
     ListView mListView;
     EditText mEtInput;
     private boolean mIsLoading;
     private int mPage;
     private boolean mHasMore = true;
-    List datas  = new ArrayList();
+    private   MyproblemView dataList;
+            List datas  = new ArrayList();
     private String iidf;
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +81,40 @@ public class ExpertConsultActivity extends BaseActivity2 {
                 mEtInput.setText("");
             }
         });
+        tv_zan = (TextView) headerView.findViewById(R.id.tv_zan);
+        tv_shoucang = (TextView) headerView.findViewById(R.id.tv_shoucang);
+        tv_zan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiClient.getInstance().getBasicService(ExpertConsultActivity.this).dianzan(dataList.getIid(), 4).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(ExpertConsultActivity.this, "已点赞");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        tv_shoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiClient.getInstance().getBasicService(ExpertConsultActivity.this).followComm(dataList.getIid(),"", 6).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(ExpertConsultActivity.this, "已收藏");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         lPictures.setCallback(this);
 
         getData();
@@ -92,7 +128,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
         ApiClient.getInstance().getBasicService(this).getmyproblem(mPage,iid).enqueue(new Callback<MyproblemView>() {
             @Override
             public void onResponse(Call<MyproblemView> call, Response<MyproblemView> response) {
-                MyproblemView dataList = response.body();
+                dataList = response.body();
 
                 mIsLoading = false;
 
@@ -102,6 +138,15 @@ public class ExpertConsultActivity extends BaseActivity2 {
                     mTvTime.setText("发布时间："+dataList.getTime());
                     tv_replaycount.setText(dataList.getMessagecount());
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
+                    User login = SharedPreferencUtil.getLogin(ExpertConsultActivity.this);
+                    if (dataList.getZt().equals("") && dataList.getUid().equals(login.getUid()))
+                    {
+                        mMarketDetailActAdapter.setMHadAdopt(false);
+                    }
+                    else
+                    {
+                        mMarketDetailActAdapter.setMHadAdopt(true);
+                    }
                     if (dataList.getList().size() > 0)
                     {
                         if(mPage == 0){
@@ -109,6 +154,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
                         }
 
                         datas.addAll(dataList.getList());
+
                         mMarketDetailActAdapter.resetData(datas);
                         mMarketDetailActAdapter.notifyDataSetChanged();
                         mHasMore =true;

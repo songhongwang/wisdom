@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cbt.main.R;
 import com.cbt.main.activity.ContactsActivity;
 import com.cbt.main.activity.MyFabuActivity;
@@ -19,20 +20,26 @@ import com.cbt.main.activity.PerfactAccountActivity;
 import com.cbt.main.activity.SettingActivity;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.model.User;
+import com.cbt.main.model.ZaiqingModel;
 import com.cbt.main.utils.SharedPreferencUtil;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
-import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by vigorous on 16/1/4.
  * 更多页面
  */
 public class MoreFragment extends BaseFragment {
-    private CropCircleTransformation mCropCircleTransformation;
+
+    private TextView tvzuowu;
 
     @Nullable
     @Override
@@ -62,15 +69,11 @@ public class MoreFragment extends BaseFragment {
 
             ImageView ivAvatar = (ImageView) mRootView.findViewById(R.id.iv_crops);
             if(!TextUtils.isEmpty(login.getIcon())){
-                mCropCircleTransformation = new CropCircleTransformation();
-
-                Picasso.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).placeholder(R.drawable.login_default_icon)
-                        .transform(mCropCircleTransformation)
-                        .into(ivAvatar);
+                Glide.with(getActivity()).load(Constants.getBaseUrl() + login.getIcon()).into(ivAvatar);
             }
         }
 
-
+        tvzuowu = (TextView)mRootView.findViewById(R.id.tv_zuowustr);
 
         mRootView.findViewById(R.id.rl_profile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +127,20 @@ public class MoreFragment extends BaseFragment {
     }
 
     public void getData() {
+        ApiClient.getInstance().getBasicService(GlobalApplication.mApp).finduserzuowu().enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> dataList = response.body();
+                if (dataList.size() > 0)
+                {
+                    tvzuowu.setText(dataList.get(0));
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+
+            }
+        });
     }
 }

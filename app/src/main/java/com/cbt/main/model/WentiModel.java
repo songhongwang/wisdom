@@ -234,6 +234,7 @@ public class WentiModel implements Serializable {
 		data.setPictureList(self.getImglist());
 		data.setPictureThumbList(self.getImglist());
 		data.setIid(self.getIid());
+		data.setUid(self.getUserid());
 		data.setShenfen(self.getState() == 2 ? "普通农民" : "");
 		data.setRplaycount(self.getMessagecount()+"");
 		return data;

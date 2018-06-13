@@ -90,7 +90,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
         data.setNickname(friend.getUsername());
         data.setAvatar(friend.getIcon());
 
-        intent.putExtra("model", data);
+        intent.putExtra("otheruserid", data.getUid());
         startActivity(intent);
     }
 
@@ -380,7 +380,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
 
 
     private void getData(){
-        ApiClient.getInstance().getBasicService(getActivity()).getAttentionList(1).enqueue(new Callback<List<Friend>>() {
+        ApiClient.getInstance().getBasicService(getActivity()).getAttentionList(0).enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 List<Friend> friends = response.body();

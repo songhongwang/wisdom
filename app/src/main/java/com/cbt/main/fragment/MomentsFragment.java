@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cbt.main.R;
+import com.cbt.main.activity.MainActivity;
 import com.cbt.main.adapter.MessageAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.callback.IWatcherImage;
 import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.AgriculturalModel;
+import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
+import com.cbt.main.model.MessageCount;
 import com.cbt.main.model.MomentMode;
+import com.cbt.main.model.NongqingModel;
+import com.cbt.main.model.ZaiqingBigModel;
 import com.cbt.main.model.event.EventPublishSuccess;
 import com.cbt.main.utils.OnRcvScrollListener;
 import com.cbt.main.utils.ToastUtils;
@@ -142,6 +147,29 @@ public class MomentsFragment extends BaseFragment {
         getData();
     }
 
+    private void showBottomTip(MessageCount msc){
+        if(getActivity() instanceof MainActivity){
+            if (Integer.parseInt(msc.getC1()) > 0 || Integer.parseInt(msc.getC2()) > 0)
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
+            }
+            else
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, false);
+            }
+            if (Integer.parseInt(msc.getC3()) > 0)
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, true);
+            }
+            else
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, false);
+            }
+//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, true);
+
+        }
+    }
+
     private void getData() {
         if(mVLoading != null){
             mVLoading.setVisibility(View.VISIBLE);
@@ -232,13 +260,14 @@ public class MomentsFragment extends BaseFragment {
         }
         else
         {
-           ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<List<AgriculturalModel>>() {
+           ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getMyfarmfarming(mPage).enqueue(new Callback<NongqingModel>() {
                @Override
-               public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
-                   List<AgriculturalModel> dataList = response.body();
+               public void onResponse(Call<NongqingModel> call, Response<NongqingModel> response) {
+                   NongqingModel modelzong = response.body();
+//                   showBottomTip(modelzong.getMscount());
 
-
-                   mIsLoading = false;
+                   List<AgriculturalModel> dataList =modelzong.getNongqinglist();
+                           mIsLoading = false;
 
                    if(dataList.size() > 0){
                        if(mPage == 0){
@@ -262,7 +291,7 @@ public class MomentsFragment extends BaseFragment {
                }
 
                @Override
-               public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
+               public void onFailure(Call<NongqingModel> call, Throwable t) {
                    if(mVLoading != null) {
                        mVLoading.setVisibility(View.GONE);
                    }

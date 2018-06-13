@@ -104,11 +104,11 @@ public class ZhuanjiaAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UserActivity.class);
-                    intent.putExtra("model", mData);
+                    intent.putExtra("otheruserid", mData.getUid());
                     mContext.startActivity(intent);
                 }
             });
-            tvReplyCount.setText(mData.getRplaycount());
+            tvReplyCount.setText(" | "+mData.getRplaycount()+"条");
             tvType.setText(mData.getShenfen());
 
         }

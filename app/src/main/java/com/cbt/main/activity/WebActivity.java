@@ -47,11 +47,20 @@ public class WebActivity extends BaseActivity {
         loading = (TextView) findViewById(R.id.text_Loading);
 
         mWebSettings = mWebview.getSettings();
-
+        mWebSettings.setJavaScriptEnabled(true);
+        mWebSettings.setSupportZoom(true);
+        mWebSettings.setDomStorageEnabled(true);
+        mWebSettings.setAllowFileAccess(true);
+        mWebSettings.setUseWideViewPort(true);
+        mWebSettings.setBuiltInZoomControls(true);
+        mWebview.requestFocus();
+        mWebSettings.setLoadWithOverviewMode(true);
+        mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         IndexProductModel indexProductModel = (IndexProductModel) getIntent().getSerializableExtra("model");
+       // mTvTitle.setText(indexProductModel.getProductname());
+        mWebview.loadUrl(Constants.getBaseUrl() + "gotopdfproduct?pdfname="+indexProductModel.getPdfpath());
 
-        mWebview.loadUrl(Constants.getBaseUrl() + indexProductModel.getPdfpath());
-
+//        mWebview.loadUrl("http://www.baidu.com/");
 
         //设置不用系统浏览器打开,直接显示在当前Webview
         mWebview.setWebViewClient(new WebViewClient() {
@@ -69,8 +78,8 @@ public class WebActivity extends BaseActivity {
             //获取网站标题
             @Override
             public void onReceivedTitle(WebView view, String title) {
-                System.out.println("标题在这里");
-                mTvTitle.setText(title);
+
+
             }
 
 

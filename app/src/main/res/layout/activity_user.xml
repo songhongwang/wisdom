@@ -41,15 +41,7 @@
             android:layout_toRightOf="@id/iv_avatar"
             android:drawableLeft="@drawable/icon_normal_farmer"
             android:text="普通农户"/>
-        <TextView
-            android:id="@+id/tv_user_hot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/material_grey_800"
-            android:layout_below="@id/tv_user_type"
-            android:layout_toRightOf="@id/iv_avatar"
-            android:text="活跃度:0"/>
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -108,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="他发布的灾情"
+            android:text="他发布的农情"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 

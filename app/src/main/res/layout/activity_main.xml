@@ -7,15 +7,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg0_fine_day"/>
+    <!--<ImageView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/bg0_fine_day"/>-->
 
     <com.cbt.main.view.sceneweather.WeatherSceneView
         android:id="@+id/mWeatherSceneView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg0_fine_day" />
 
     <com.github.matteobattilana.weather.WeatherView
         android:id="@+id/weather_view"

@@ -65,7 +65,7 @@ public class MarketFragment extends BaseFragment {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                ((TopicFragment)adapter.getItem(position)).refresh();
+//                ((TopicFragment)adapter.getItem(position)).refresh();
             }
 
             @Override

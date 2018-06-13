@@ -8,43 +8,55 @@
     android:minHeight="60dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
-
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textColor="#000"
-        android:textSize="15sp"/>
-
-    <TextView
-        android:id="@+id/tv_des"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="80dp"
-        android:layout_below="@id/tv_name"
-        android:text=""
-        android:textColor="#000"
-        android:textSize="15sp"/>
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0.5dip"
         android:text=""
-        android:textSize="13sp"/>
+        android:textColor="#00CD00"
+        android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/tv_gongqiu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/tv_name"
+        android:text=""
+        android:textColor="#4876FF"
+        android:textSize="14sp"/>
+
 
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/tv_time"
+        android:text=""
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+
         android:text=""
         android:textSize="13sp"/>
 

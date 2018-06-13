@@ -32,7 +32,7 @@ public class MarketDetailActivity extends BaseActivity2 {
     private MarketDetailActNewAdapter mMarketDetailActAdapter;
 
     MessagePicturesLayout lPictures;
-    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend;
+    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
 
     ListView mListView;
     EditText mEtInput;
@@ -40,6 +40,7 @@ public class MarketDetailActivity extends BaseActivity2 {
     private int mPage;
     private boolean mHasMore = true;
     private String iidf;
+    private  MarketinformationDetailView dataList;
     List datas  = new ArrayList();
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class MarketDetailActivity extends BaseActivity2 {
         mTvContent = (TextView) headerView.findViewById(R.id.t_content);
         mTvAuthor = (TextView) headerView.findViewById(R.id.tv_author);
         mTvTime= (TextView) headerView.findViewById(R.id.tv_time);
-
+        tv_replaycount= (TextView) headerView.findViewById(R.id.tv_replaycount);
         mTvSend = (TextView) findViewById(R.id.tv_send);
         mTvSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +78,40 @@ public class MarketDetailActivity extends BaseActivity2 {
                 mEtInput.setText("");
             }
         });
+        tv_zan = (TextView) headerView.findViewById(R.id.tv_zan);
+        tv_shoucang = (TextView) headerView.findViewById(R.id.tv_shoucang);
+        tv_zan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiClient.getInstance().getBasicService(MarketDetailActivity.this).dianzan(dataList.getIid(), 5).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(MarketDetailActivity.this, "已点赞");
+                    }
 
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        tv_shoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiClient.getInstance().getBasicService(MarketDetailActivity.this).followComm(dataList.getIid(),"", 5).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(MarketDetailActivity.this, "已收藏");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         getData();
     }
 //
@@ -109,7 +143,7 @@ public class MarketDetailActivity extends BaseActivity2 {
         ApiClient.getInstance().getBasicService(this).getshichangxiangqing(0,iid).enqueue(new Callback<MarketinformationDetailView>() {
             @Override
             public void onResponse(Call<MarketinformationDetailView> call, Response<MarketinformationDetailView> response) {
-                MarketinformationDetailView dataList = response.body();
+                dataList = response.body();
 
                 mIsLoading = false;
 
@@ -119,6 +153,7 @@ public class MarketDetailActivity extends BaseActivity2 {
                     mTvContent.setText(dataList.getContent());
                     mTvAuthor.setText(dataList.getFaburen());
                     mTvTime.setText(dataList.getFabushijian());
+                    tv_replaycount.setText(dataList.getRlist().size()+"条回复");
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
                     if (dataList.getRlist().size() > 0)
                     {

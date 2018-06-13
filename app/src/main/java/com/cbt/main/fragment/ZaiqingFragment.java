@@ -18,7 +18,9 @@ import com.cbt.main.dialog.ReplyDialog;
 import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.IndexFeedModel;
+import com.cbt.main.model.MessageCount;
 import com.cbt.main.model.MomentMode;
+import com.cbt.main.model.ZaiqingBigModel;
 import com.cbt.main.model.ZaiqingModel;
 import com.cbt.main.model.event.EventLogout;
 import com.cbt.main.model.event.EventPublishSuccess;
@@ -51,6 +53,7 @@ public class ZaiqingFragment extends BaseFragment {
 
     private RecyclerView vRecycler;
     private ZaiqingAdapter adapter;
+    List<Data> goodList = new ArrayList<>();
     private int mPage;
     private boolean mIsLoading;
     private boolean mHasMore = true;
@@ -123,15 +126,9 @@ public class ZaiqingFragment extends BaseFragment {
                 getData();
             }
         });
-
-        showBottomTip();
     }
 
-    private void showBottomTip(){
-        if(getActivity() instanceof MainActivity){
-            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
-        }
-    }
+
 
 
 
@@ -144,9 +141,36 @@ public class ZaiqingFragment extends BaseFragment {
         }
     }
 
+    public void refresh(){
+        getData();
+    }
+
     @Override
     protected void lazyLoad() {
         getData();
+    }
+
+    private void showBottomTip(MessageCount msc){
+        if(getActivity() instanceof MainActivity){
+            if (Integer.parseInt(msc.getC1()) > 0 || Integer.parseInt(msc.getC2()) > 0)
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, true);
+            }
+            else
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab2, false);
+            }
+            if (Integer.parseInt(msc.getC3()) > 0)
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, true);
+            }
+            else
+            {
+                ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab4, false);
+            }
+//            ((MainActivity)getActivity()).updateBottomTabTip(BottomTabTip.tab3, true);
+
+        }
     }
 
     private void getData() {
@@ -165,16 +189,15 @@ public class ZaiqingFragment extends BaseFragment {
                     mIsLoading = false;
 
                     if (dataList.size() > 0) {
-                        List<Data> realDataList = adapter.getDataList();
                         if(mPage == 0){
-                            realDataList.clear();
+                            goodList.clear();
                         }
 
                         for (int i = 0; i < dataList.size(); i++) {
-                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
                         }
 
-                        adapter.set(realDataList);
+                        adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
                         mPage++;
@@ -209,15 +232,13 @@ public class ZaiqingFragment extends BaseFragment {
 
 
                     if (dataList.size() > 0) {
-                        List<Data> realDataList = adapter.getDataList();
-                        if(mPage == 0){
-                            realDataList.clear();
+                        if (mPage == 0) {
+                            goodList.clear();
                         }
-
                         for (int i = 0; i < dataList.size(); i++) {
-                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
                         }
-                        adapter.set(realDataList);
+                        adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
                         mPage++;
@@ -243,23 +264,22 @@ public class ZaiqingFragment extends BaseFragment {
         }
         else {
 
-            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<List<ZaiqingModel>>() {
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).getZaiqingForFm(mPage).enqueue(new Callback<ZaiqingBigModel>() {
                 @Override
-                public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
-                    List<ZaiqingModel> dataList = response.body();
-
+                public void onResponse(Call<ZaiqingBigModel> call, Response<ZaiqingBigModel> response) {
+                    ZaiqingBigModel modelzong = response.body();
+//                    showBottomTip(modelzong.getMscount());
+                    List<ZaiqingModel> dataList =modelzong.getNongqinglist();
                     mIsLoading = false;
 
                     if (dataList.size() > 0) {
-                        List<Data> realDataList = adapter.getDataList();
                         if(mPage == 0){
-                            realDataList.clear();
+                            goodList.clear();
                         }
-
                         for (int i = 0; i < dataList.size(); i++) {
-                            realDataList.add(ZaiqingModel.convert(dataList.get(i)));
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
                         }
-                        adapter.set(realDataList);
+                        adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 
                         mPage++;
@@ -274,7 +294,7 @@ public class ZaiqingFragment extends BaseFragment {
                 }
 
                 @Override
-                public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                public void onFailure(Call<ZaiqingBigModel> call, Throwable t) {
                 if(mVLoading != null) {
                     mVLoading.setVisibility(View.GONE);
                 }

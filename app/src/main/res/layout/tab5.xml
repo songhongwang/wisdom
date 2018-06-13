@@ -76,6 +76,7 @@
                     android:src="@drawable/more_icon_plant"/>
 
                 <TextView
+                    android:id="@+id/tv_zuowustr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

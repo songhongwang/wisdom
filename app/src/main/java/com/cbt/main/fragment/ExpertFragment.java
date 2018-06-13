@@ -45,7 +45,7 @@ public class ExpertFragment extends BaseFragment {
     private ViewPager mViewPager;
     private PagerSlidingTabStrip mPagerSlidingTabStrip;
 
-    private ListView mLvSearch;
+//    private ListView mLvSearch;
     private ExpertSearchAdapter mExpertSearchAdapter;
 
     private View mVTip1, mVTip2, mVTip3;
@@ -75,7 +75,7 @@ public class ExpertFragment extends BaseFragment {
 
         mVTip1 = mRootView.findViewById(R.id.msg_unread_count_tab1);
         mVTip2=  mRootView.findViewById(R.id.msg_unread_count_tab2);
-        mVTip3=  mRootView.findViewById(R.id.msg_unread_count_tab3);
+//        mVTip3=  mRootView.findViewById(R.id.msg_unread_count_tab3);
 
         mIvComplete.setVisibility(View.VISIBLE);
         mIvComplete.setImageResource(R.drawable.nav_icon_release);
@@ -98,47 +98,47 @@ public class ExpertFragment extends BaseFragment {
 
 
 
-        ((EditText)mRootView.findViewById(R.id.et_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//        ((EditText)mRootView.findViewById(R.id.et_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if ((actionId == 0 || actionId == 3) && event != null) {
-                    ToastUtils.show(getActivity(), "搜索");
-                    mLvSearch.setVisibility(View.VISIBLE);
-                    return true;
-                }
-                return false;
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId,
+//                                          KeyEvent event) {
+//                if ((actionId == 0 || actionId == 3) && event != null) {
+//                    ToastUtils.show(getActivity(), "搜索");
+////                    mLvSearch.setVisibility(View.VISIBLE);
+//                    return true;
+//                }
+//                return false;
+//
+//            }
+//
+//        });
+//        ((EditText)mRootView.findViewById(R.id.et_search)).addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                if(TextUtils.isEmpty(charSequence.toString())){
+////                    if(mLvSearch.getVisibility() == View.VISIBLE){
+////                        mLvSearch.setVisibility(View.GONE);
+////                    }
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
 
-            }
-
-        });
-        ((EditText)mRootView.findViewById(R.id.et_search)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(TextUtils.isEmpty(charSequence.toString())){
-                    if(mLvSearch.getVisibility() == View.VISIBLE){
-                        mLvSearch.setVisibility(View.GONE);
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        mLvSearch = (ListView) mRootView.findViewById(R.id.listView);
+//        mLvSearch = (ListView) mRootView.findViewById(R.id.listView);
         List<String> dataList = new ArrayList<>();
 
         mExpertSearchAdapter = new ExpertSearchAdapter(dataList, getActivity());
-        mLvSearch.setAdapter(mExpertSearchAdapter);
+//        mLvSearch.setAdapter(mExpertSearchAdapter);
 
 
     }
@@ -175,17 +175,15 @@ public class ExpertFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
         // 接口控制显示小红点
-        mVTip1.setVisibility(View.GONE);
-        mVTip2.setVisibility(View.GONE);
-        mVTip3.setVisibility(View.GONE);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(OnBackPressedEvent onBackPressedEvent) {
-        if(mLvSearch.getVisibility() == View.VISIBLE){
-            mLvSearch.setVisibility(View.GONE);
-        }else{
+//        if(mLvSearch.getVisibility() == View.VISIBLE){
+//            mLvSearch.setVisibility(View.GONE);
+//        }else{
             getActivity().finish();
-        }
+//        }
     }
 }

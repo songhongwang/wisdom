@@ -16,7 +16,8 @@
         android:text="优质大米出售"
         android:textColor="#000"
         android:textSize="15sp"/>
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/lv_contenttime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,28 +26,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
+            android:layout_alignParentLeft="true"
             android:text="发布人：张三"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dip"
-            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:text="发布时间：2018-12-2"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/tv_replaycount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:gravity="right"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="10dip"
             android:text=""
             android:textSize="12sp"/>
-    </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_shoucang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dip"
+            android:textColor="@color/green"
+            android:text="收藏  "
+            android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/tv_zan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dip"
+            android:textColor="@color/green"
+            android:layout_toLeftOf="@id/tv_shoucang"
+            android:text="点赞 | "
+            android:textSize="12sp"/>
 
+
+    </RelativeLayout>
     <com.cbt.main.view.piaoquan.MessagePicturesLayout
         android:id="@+id/l_pictures"
         android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import com.cbt.main.adapter.ExpertFragmentAdapter;
 import com.cbt.main.adapter.MineFragmentAdapter;
 import com.cbt.main.app.GlobalApplication;
 import com.cbt.main.dialog.ReleaseDialog;
+import com.cbt.main.model.BottomTabTip;
 import com.cbt.main.model.IndexFeedModel;
 import com.cbt.main.model.IndexModel;
 import com.cbt.main.model.MomentMode;
@@ -73,7 +74,7 @@ public class MineFragment extends BaseFragment {
         mVTip2=  mRootView.findViewById(R.id.msg_unread_count_tab2);
         mViewPager = (ViewPager) mRootView.findViewById(R.id.id_viewpager_moments_t2);
         mViewPager.setOffscreenPageLimit(1);
-        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),1);
+        MineFragmentAdapter adapter = new MineFragmentAdapter(getActivity().getSupportFragmentManager(),3);
         mViewPager.setAdapter(adapter);
 
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) mRootView.findViewById(R.id.tabs_t2);
@@ -100,7 +101,18 @@ public class MineFragment extends BaseFragment {
             }
         });
 
-        getData();
+//        getData();
+    }
+
+    public void updateBottomTabTip(BottomTabTip bottomTabTip, boolean visiable){
+        switch (bottomTabTip){
+            case tab21:
+                mVTip1.setVisibility(visiable?View.VISIBLE:View.INVISIBLE);
+                break;
+            case tab22:
+                mVTip2.setVisibility(visiable?View.VISIBLE:View.INVISIBLE);
+                break;
+        }
     }
 
     private void startConversationList() {
@@ -147,7 +159,9 @@ public class MineFragment extends BaseFragment {
     }
     @Override
     protected void lazyLoad() {
-
+        // 接口控制显示小红点
+        mVTip1.setVisibility(View.GONE);
+        mVTip2.setVisibility(View.GONE);
     }
 
     private void getData() {
@@ -168,6 +182,6 @@ public class MineFragment extends BaseFragment {
         // 这里通过接口控制是否显示小红点
 
         mVTip1.setVisibility(View.GONE);
-        mVTip2.setVisibility(View.VISIBLE);
+        mVTip2.setVisibility(View.GONE);
     }
 }

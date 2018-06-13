@@ -49,13 +49,14 @@ public class TopicAdapter extends RecyclerView.Adapter {
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvTime,tv_des,tv_count;
+        TextView tvName, tvTime,tv_des,tv_count,tv_gongqiu;
 
         Data mData;
 
         ViewHolder(View itemView) {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_gongqiu = (TextView) itemView.findViewById(R.id.tv_gongqiu);
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tv_des = (TextView) itemView.findViewById(R.id.tv_des);
             tv_count = (TextView) itemView.findViewById(R.id.tv_count);
@@ -64,14 +65,11 @@ public class TopicAdapter extends RecyclerView.Adapter {
 
         void refresh(int pos) {
             mData = mDataList.get(pos);
-            if(TextUtils.isEmpty(mData.getNickname())){
-                tvName.setText("未填写标题");
-            }else{
-                tvName.setText(mData.getNickname());
-            }
+            tvName.setText("["+mData.getNickname()+"]");
             tvTime.setText(mData.getCreateTime());
             tv_des.setText(mData.getShenfen());
-            tv_count.setText(mData.getRplaycount());
+            tv_count.setText(mData.getRplaycount()+"条回复 | ");
+            tv_gongqiu.setText("["+mData.getContent()+"]");
         }
     }
 

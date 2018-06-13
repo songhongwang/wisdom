@@ -1,9 +1,10 @@
 package com.cbt.main.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class AgriculturalModel {
+public class AgriculturalModel implements Serializable {
 	
 	private String iid;
 			
@@ -297,6 +298,7 @@ private int isshoucang;
 		data.setPictureList(self.getImglist());
 		data.setPictureThumbList(self.getImglist());
 		data.setIid(self.getIid());
+		data.setUid(self.getUserid());
 		data.setReplyList(self.getReplaylist());
 		return data;
 	}

@@ -15,6 +15,7 @@ import com.cbt.main.activity.UserActivity;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.ReplayMyprolemView;
 import com.cbt.main.utils.ToastUtils;
+import com.cbt.main.utils.net.ApiClient;
 import com.cbt.main.utils.net.Constants;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +24,9 @@ import java.util.List;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import me.nereo.imagechoose.bean.Image;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by vigorous on 17/12/27.
@@ -36,17 +40,14 @@ public class MarketDetailActAdapter extends AppBaseAdapter {
         mCropCircleTransformation = new CropCircleTransformation();
     }
 
+    public void setMHadAdopt(boolean iscainatiao)
+    {
+        mHadAdopt = iscainatiao;
+    }
+
     @Override
     public void resetData(List list) {
         super.resetData(list);
-        for(int i=0;i<mDataList.size();i++){
-            ReplayMyprolemView item = (ReplayMyprolemView) mDataList.get(i);
-            if(item.isIsadopt()){
-                mHadAdopt = true;
-                break;
-            }
-            mHadAdopt = false;
-        }
     }
 
     @Override
@@ -71,13 +72,13 @@ public class MarketDetailActAdapter extends AppBaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, UserActivity.class);
-                intent.putExtra("model", mData);
+                intent.putExtra("otheruserid", mData.getUserid());
                 mContext.startActivity(intent);
             }
         });
 
         TextView tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-        if(TextUtils.isEmpty(mData.getUsername())){
+        if(!TextUtils.isEmpty(mData.getUsername())){
             tv_name.setText(mData.getUsername());
         }else{
             tv_name.setText("匿名");
@@ -93,22 +94,34 @@ public class MarketDetailActAdapter extends AppBaseAdapter {
         tv_operate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.show(mContext, "采纳本条");
-                iv_operate.setVisibility(View.VISIBLE);
-                tv_operate.setVisibility(View.GONE);
-                mData.setIsadopt(true);
+                ApiClient.getInstance().getBasicService(mContext).caina(mData.getRid()).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        ToastUtils.show(mContext, "已采纳");
+                        iv_operate.setVisibility(View.VISIBLE);
+                        tv_operate.setVisibility(View.GONE);
+                        mData.setIsadopt(true);
+//
+                        for(int i=0;i<mDataList.size();i++){
+                            ReplayMyprolemView item = (ReplayMyprolemView) mDataList.get(i);
+                            if(item.getRid().equals(mData.getRid())){
+                                item.setIsadopt(true);
+                                mHadAdopt = true;
+                            }else{
+                                item.setIsadopt(false);
+                            }
+                        }
 
-                for(int i=0;i<mDataList.size();i++){
-                    ReplayMyprolemView item = (ReplayMyprolemView) mDataList.get(i);
-                    if(item.getRid().equals(mData.getRid())){
-                        item.setIsadopt(true);
-                        mHadAdopt = true;
-                    }else{
-                        item.setIsadopt(false);
+                        notifyDataSetChanged();
                     }
-                }
 
-                notifyDataSetChanged();
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                    }
+                });
+
+
             }
         });
 
