@@ -2,6 +2,7 @@ package com.cbt.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -76,7 +77,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent, tvReply, tvReplyCount,tv_zan, tv_shoucang;
+        TextView tNickname, tTime, tContent, tvReply, tvReplyCount,tv_zan, tv_shoucang,t_type,t_des,tv_reply,tv_reply_count;
+        View v_content_line;
         LinearLayout llReplyList;
         MessagePicturesLayout lPictures;
 
@@ -94,16 +96,46 @@ public class MessageAdapter extends RecyclerView.Adapter {
             tvReply = (TextView) itemView.findViewById(R.id.tv_reply);
             llReplyList = (LinearLayout) itemView.findViewById(R.id.ll_reply_list);
             tvReplyCount = (TextView) itemView.findViewById(R.id.tv_reply_count);
+
+            t_type = (TextView) itemView.findViewById(R.id.t_type);
+            t_des = (TextView) itemView.findViewById(R.id.t_des);
+            v_content_line = (View) itemView.findViewById(R.id.v_content_line);
+
             lPictures.setCallback(mCallback);
-            if (ismydo == 1)
+            if (ismydo == 2)
             {
-                iAvatar.setVisibility(View.INVISIBLE);
-                tNickname.setVisibility(View.INVISIBLE);
+                tv_zan.setVisibility(View.GONE);
+                tv_shoucang.setText(" 取消收藏     | ");
+            }
+            else if (ismydo == 1 || ismydo == 8)
+            {
+                iAvatar.setVisibility(View.GONE);
+                tNickname.setVisibility(View.GONE);
+                t_type.setVisibility(View.GONE);
+                t_des.setVisibility(View.GONE);
+                v_content_line.setVisibility(View.GONE);
+                tvReplyCount.setVisibility(View.GONE);
+                tvReply.setVisibility(View.GONE);
+                tv_zan.setVisibility(View.GONE);
+                tv_shoucang.setVisibility(View.GONE);
+            }
+            else
+            {
+                iAvatar.setVisibility(View.VISIBLE);
+                tNickname.setVisibility(View.VISIBLE);
+                t_type.setVisibility(View.VISIBLE);
+                t_des.setVisibility(View.VISIBLE);
+                v_content_line.setVisibility(View.VISIBLE);
+                tvReplyCount.setVisibility(View.VISIBLE);
+                tvReply.setVisibility(View.VISIBLE);
+                tv_zan.setVisibility(View.VISIBLE);
+                tv_shoucang.setVisibility(View.VISIBLE);
             }
         }
 
         void refresh(final int pos) {
             mData = mDataList.get(pos);
+
             if(!TextUtils.isEmpty(mData.getAvatar())){
                 Picasso.with(itemView.getContext()).load(Constants.getBaseUrl() + mData.getAvatar()).placeholder(R.drawable.login_default_icon)
                         .transform(mCropCircleTransformation)
@@ -138,39 +170,81 @@ public class MessageAdapter extends RecyclerView.Adapter {
             });
 
             llReplyList.removeAllViews();
+            if (mData.getIszan() != null && mData.getIszan().equals("1"))
+            {
+                tv_zan.setText(" 已点赞     | ");
+                tv_zan.setTextColor(Color.BLACK);
+                tv_zan.setClickable(false);
+            }
+            else
+            {
+                tv_zan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ApiClient.getInstance().getBasicService(mContext).dianzan(mData.getIid(), 3).enqueue(new Callback<Object>() {
+                            @Override
+                            public void onResponse(Call<Object> call, Response<Object> response) {
+                                ToastUtils.show(mContext, "已点赞");
+                                tv_zan.setText(" 已点赞     | ");
+                                tv_zan.setTextColor(Color.BLACK);
+                                tv_zan.setClickable(false);
+                            }
 
-            tv_zan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ApiClient.getInstance().getBasicService(mContext).dianzan(mData.getIid(), 3).enqueue(new Callback<Object>() {
-                        @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
-                            ToastUtils.show(mContext, "已点赞");
+                            @Override
+                            public void onFailure(Call<Object> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
+            }
+            if (mData.getIsccang() != null && mData.getIsccang().equals("1") && ismydo != 2)
+            {
+                tv_shoucang.setText(" 已收藏     | ");
+                tv_shoucang.setTextColor(Color.BLACK);
+                tv_shoucang.setClickable(false);
+            }
+            else
+            {
+                tv_shoucang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (tv_shoucang.getText().toString().contains("取消"))
+                        {
+                            ApiClient.getInstance().getBasicService(mContext).delfollowComm(mData.getIid(),"", 1).enqueue(new Callback<Object>() {
+                                @Override
+                                public void onResponse(Call<Object> call, Response<Object> response) {
+                                    ToastUtils.show(mContext, "已取消收藏");
+                                    tv_shoucang.setText(" 收藏     | ");
+                                }
+
+                                @Override
+                                public void onFailure(Call<Object> call, Throwable t) {
+
+                                }
+                            });
                         }
+                        else
+                        {
+                            ApiClient.getInstance().getBasicService(mContext).followComm(mData.getIid(),"", 1).enqueue(new Callback<Object>() {
+                                @Override
+                                public void onResponse(Call<Object> call, Response<Object> response) {
+                                    ToastUtils.show(mContext, "已收藏");
+                                    tv_shoucang.setText(" 已收藏     | ");
+                                    tv_shoucang.setTextColor(Color.BLACK);
+                                    tv_shoucang.setClickable(false);
+                                }
 
-                        @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<Object> call, Throwable t) {
 
+                                }
+                            });
                         }
-                    });
-                }
-            });
-            tv_shoucang.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ApiClient.getInstance().getBasicService(mContext).followComm(mData.getIid(),"", 1).enqueue(new Callback<Object>() {
-                        @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
-                            ToastUtils.show(mContext, "已收藏");
-                        }
+                    }
+                });
+            }
 
-                        @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
-
-                        }
-                    });
-                }
-            });
 
             if(mData.getReplyList() != null && mData.getReplyList().size() > 0){
                 llReplyList.setVisibility(View.VISIBLE);

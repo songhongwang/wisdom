@@ -78,7 +78,7 @@ public class ZaiqingFragment extends BaseFragment {
     @Override
     public void initUI() {
         EventBus.getDefault().register(this);
-
+        ismydo = (int) getArguments().getSerializable("ismy");
         mVLoading = mRootView.findViewById(R.id.rl_loading);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
         vRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -220,6 +220,49 @@ public class ZaiqingFragment extends BaseFragment {
                         for (int i = 0; i < dataList.size(); i++) {
                             goodList.add(ZaiqingModel.convert(dataList.get(i)));
                         }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+                        mPage++;
+                        mHasMore = true;
+                    } else {
+                        mHasMore = false;
+                    }
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ZaiqingModel>> call, Throwable t) {
+                    if(mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                    mIsLoading = false;
+                }
+            });
+        }
+        else if (ismydo == 8)
+        {
+            String otheruserid = (String) getArguments().getSerializable("otheruserid");
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).bierenZaiqingForFm(mPage,otheruserid).enqueue(new Callback<List<ZaiqingModel>>() {
+                @Override
+                public void onResponse(Call<List<ZaiqingModel>> call, Response<List<ZaiqingModel>> response) {
+                    List<ZaiqingModel> dataList = response.body();
+
+                    mIsLoading = false;
+
+                    if (dataList.size() > 0) {
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
+
+                        for (int i = 0; i < dataList.size(); i++) {
+                            goodList.add(ZaiqingModel.convert(dataList.get(i)));
+                        }
+
                         adapter.set(goodList);
                         adapter.notifyDataSetChanged();
 

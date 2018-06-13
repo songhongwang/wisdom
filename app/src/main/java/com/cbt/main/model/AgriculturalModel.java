@@ -75,7 +75,15 @@ public class AgriculturalModel implements Serializable {
 	private String gname;
     
     private List<ReplyModel> replaylist;
-    
+	private int iszan;
+
+	public int getIszan() {
+		return iszan;
+	}
+
+	public void setIszan(int iszan) {
+		this.iszan = iszan;
+	}
 private int isshoucang;
 	
 	public int getIsshoucang() {
@@ -300,6 +308,8 @@ private int isshoucang;
 		data.setIid(self.getIid());
 		data.setUid(self.getUserid());
 		data.setReplyList(self.getReplaylist());
+		data.setIsccang(self.getIsshoucang()+"");
+		data.setIszan(self.getIszan()+"");
 		return data;
 	}
 }

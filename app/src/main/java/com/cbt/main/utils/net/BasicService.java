@@ -4,6 +4,7 @@ import com.cbt.main.model.AgriculturalModel;
 import com.cbt.main.model.BaseModel;
 import com.cbt.main.model.BaseMsgModel;
 import com.cbt.main.model.ClientFarm;
+import com.cbt.main.model.ClientView;
 import com.cbt.main.model.Dictionaries;
 import com.cbt.main.model.Friend;
 import com.cbt.main.model.IndexFeedModel;
@@ -84,6 +85,9 @@ public interface BasicService {
     @GET("findZaiqingForFm")
     Call<BaseMsgModel<List<ZaiqingModel>>> getZaiqingForFm(@Query("page") int page);
 
+    @GET("bierenpublishDisaster")
+    Call<List<ZaiqingModel>> bierenZaiqingForFm(@Query("page") int page,@Query("seid") String seid);
+
     @GET("findMySendZaiqing")
     Call<List<ZaiqingModel>> myZaiqingForFm(@Query("page") int page);
 
@@ -96,8 +100,15 @@ public interface BasicService {
     @GET("moremypublishAgricultural")
     Call<List<AgriculturalModel>> myMyfarmfarming(@Query("page") int page);
 
+    @GET("bierenpublishAgricultural")
+    Call<List<AgriculturalModel>> bierenMyfarmfarming(@Query("page") int page,@Query("seid") String seid);
+
     @GET("moremycollectfarming")
     Call<List<AgriculturalModel>> scMyfarmfarming(@Query("page") int page);
+
+    @GET("findexperthotsolr")
+    Call<List<WentiModel>> findexperthotsolr( @Query("content") String content,@Query("page") int page);
+
 
     @GET("findexperthot")
     Call<List<WentiModel>> getExperthot(@Query("page") int page);
@@ -240,7 +251,7 @@ public interface BasicService {
 
     // 获取用户
     @GET("findOtherUser")
-    Call<User> getUser(@Query("otheruserid") String otheruserid);
+    Call<ClientView> getUser(@Query("otheruserid") String otheruserid);
 
     // 检查更新版本
     @GET("checkUpdate")

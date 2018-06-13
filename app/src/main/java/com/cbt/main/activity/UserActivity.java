@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cbt.main.R;
+import com.cbt.main.model.ClientView;
 import com.cbt.main.model.Data;
 import com.cbt.main.model.Friend;
 import com.cbt.main.model.User;
@@ -35,6 +37,7 @@ public class UserActivity extends BaseActivity {
     String userid;
     TextView mTvName, mTvDes;
     ImageView mIvAvatar;
+    Button btn_attention;
 
     @Override
     public void onCCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class UserActivity extends BaseActivity {
         userid = (String) getIntent().getSerializableExtra("otheruserid");
         mIvFinish.setVisibility(View.GONE);
         mIvAvatar = (ImageView) findViewById(R.id.iv_avatar);
+        btn_attention = (Button) findViewById(R.id.btn_attention);
         mTvName = (TextView) findViewById(R.id.tv_user_name);
         mTvDes = (TextView) findViewById(R.id.tv_user_des);
 
@@ -68,6 +72,8 @@ public class UserActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserActivity.this, MyAttentionActivity.class);
+                intent.putExtra("otheruserid", userid);
+                intent.putExtra("qufen", "nongqing");
                 startActivity(intent);
             }
         });
@@ -75,6 +81,8 @@ public class UserActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserActivity.this, MyAttentionActivity.class);
+                intent.putExtra("otheruserid", userid);
+                intent.putExtra("qufen", "zaiqing");
                 startActivity(intent);
             }
         });
@@ -93,17 +101,37 @@ public class UserActivity extends BaseActivity {
         findViewById(R.id.btn_attention).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiClient.getInstance().getBasicService(UserActivity.this).followComm(userid,"", 4).enqueue(new Callback<Object>() {
-                    @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
-                        ToastUtils.show(UserActivity.this, "已关注");
-                    }
+                if (btn_attention.getText().equals("取消关注"))
+                {
+                    ApiClient.getInstance().getBasicService(UserActivity.this).delfollowComm(userid,"", 4).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            ToastUtils.show(UserActivity.this, "已取消关注");
+                            btn_attention.setText("加关注");
+                        }
 
-                    @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+                }
+                else
+                {
+                    ApiClient.getInstance().getBasicService(UserActivity.this).followComm(userid,"", 4).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            ToastUtils.show(UserActivity.this, "已关注");
+                            btn_attention.setText("取消关注");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+
+                        }
+                    });
+                }
+
             }
         });
 
@@ -127,29 +155,39 @@ public class UserActivity extends BaseActivity {
             mIvAvatar.setImageResource(R.drawable.de_default_portrait);
         }
 
-        if(!TextUtils.isEmpty(mData.getAvatar())){
+        if(!TextUtils.isEmpty(mData.getNickname())){
             mTvName.setText(mData.getNickname());
         }else{
             mTvName.setText("匿名");
         }
+
+
     }
 
     private void getData(){
-        ApiClient.getInstance().getBasicService(this).getUser(userid).enqueue(new Callback<User>() {
+        ApiClient.getInstance().getBasicService(this).getUser(userid).enqueue(new Callback<ClientView>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
+            public void onResponse(Call<ClientView> call, Response<ClientView> response) {
+                ClientView user = response.body();
                 if(user != null && !TextUtils.isEmpty(user.getUid())){
+                    if (user.isIsfocus() == false)
+                    {
+                        btn_attention.setText("加关注");
+                    }
+                    else
+                    {
+                        btn_attention.setText("取消关注");
+                    }
                     mData.setUid(user.getUid());
                     mData.setIid(user.getUid());
-                    mData.setAvatar(user.getIcon());
+                    mData.setAvatar(user.getUsericon());
                     mData.setNickname(user.getUname());
                     refreshUI();
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<ClientView> call, Throwable t) {
                 ToastUtils.show(UserActivity.this, "网络异常");
             }
         });

@@ -207,7 +207,7 @@ public class ExpertFragment extends BaseFragment {
 
     private void getSearchData(){
         // TODO: 18/6/13 此处url需要改为搜索
-        ApiClient.getInstance().getBasicService(getContext()).getExperthot(0).enqueue(new Callback<List<WentiModel>>() {
+        ApiClient.getInstance().getBasicService(getContext()).findexperthotsolr(((EditText)mRootView.findViewById(R.id.et_search)).getText().toString(),0).enqueue(new Callback<List<WentiModel>>() {
             @Override
             public void onResponse(Call<List<WentiModel>> call, Response<List<WentiModel>> response) {
                 List<WentiModel> dataList = response.body();

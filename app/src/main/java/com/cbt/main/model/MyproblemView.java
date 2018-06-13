@@ -50,7 +50,25 @@ public class MyproblemView {
 	public void setImglist(List<String> imglist) {
 		this.imglist = imglist;
 	}
-	
+	private String iszan;
+
+	private String isccang;
+
+	public String getIszan() {
+		return iszan;
+	}
+
+	public void setIszan(String iszan) {
+		this.iszan = iszan;
+	}
+
+	public String getIsccang() {
+		return isccang;
+	}
+
+	public void setIsccang(String isccang) {
+		this.isccang = isccang;
+	}
 	private String time;
 	//留言数量
 	private String messagecount;

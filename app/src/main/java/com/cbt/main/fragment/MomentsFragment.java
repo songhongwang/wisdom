@@ -77,6 +77,7 @@ public class MomentsFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        ismydo = (int) getArguments().getSerializable("ismy");
         EventBus.getDefault().register(this);
         mVLoading = mRootView.findViewById(R.id.rl_loading);
         vRecycler = (RecyclerView) mRootView.findViewById(R.id.v_recycler);
@@ -240,7 +241,49 @@ public class MomentsFragment extends BaseFragment {
                     mIsLoading = false;
                 }
             });
+        }
+        else if (ismydo == 8)
+        {
+            String otheruserid = (String) getArguments().getSerializable("otheruserid");
+            ApiClient.getInstance().getBasicService(GlobalApplication.mApp).bierenMyfarmfarming(mPage,otheruserid).enqueue(new Callback<List<AgriculturalModel>>() {
+                @Override
+                public void onResponse(Call<List<AgriculturalModel>> call, Response<List<AgriculturalModel>> response) {
+                    List<AgriculturalModel> dataList = response.body();
 
+
+                    mIsLoading = false;
+
+
+                    if(dataList.size() > 0){
+                        if(mPage == 0){
+                            goodList.clear();
+                        }
+                        for(int i = 0; i< dataList.size(); i ++){
+                            goodList.add(AgriculturalModel.convert(dataList.get(i)));
+                        }
+                        adapter.set(goodList);
+                        adapter.notifyDataSetChanged();
+
+                        mPage ++;
+                        mHasMore =true;
+                    }else{
+                        mHasMore = false;
+                    }
+                    if(mVLoading != null){
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<AgriculturalModel>> call, Throwable t) {
+                    if(mVLoading != null) {
+                        mVLoading.setVisibility(View.GONE);
+                    }
+
+                    mIsLoading = false;
+                }
+            });
         }
         else
         {

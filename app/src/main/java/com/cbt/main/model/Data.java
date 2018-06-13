@@ -36,6 +36,26 @@ public class Data implements Serializable{
     private List<String> pictureThumbList;
     private List<ReplyModel> replyList;
 
+    private String iszan;
+
+    private String isccang;
+
+    public String getIszan() {
+        return iszan;
+    }
+
+    public void setIszan(String iszan) {
+        this.iszan = iszan;
+    }
+
+    public String getIsccang() {
+        return isccang;
+    }
+
+    public void setIsccang(String isccang) {
+        this.isccang = isccang;
+    }
+
 //    public static List<Data> get() {
 //        List<Data> dataList = new ArrayList<>();
 //        Data data1 = new Data();

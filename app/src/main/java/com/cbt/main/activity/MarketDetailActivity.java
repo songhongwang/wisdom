@@ -1,5 +1,6 @@
 package com.cbt.main.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -32,7 +33,7 @@ public class MarketDetailActivity extends BaseActivity2 {
     private MarketDetailActNewAdapter mMarketDetailActAdapter;
 
     MessagePicturesLayout lPictures;
-    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
+    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
 
     ListView mListView;
     EditText mEtInput;
@@ -67,7 +68,7 @@ public class MarketDetailActivity extends BaseActivity2 {
         mTvContentTitle = (TextView) headerView.findViewById(R.id.t_content_title);
         mTvContent = (TextView) headerView.findViewById(R.id.t_content);
         mTvAuthor = (TextView) headerView.findViewById(R.id.tv_author);
-        mTvTime= (TextView) headerView.findViewById(R.id.tv_time);
+//        mTvTime= (TextView) headerView.findViewById(R.id.tv_time);
         tv_replaycount= (TextView) headerView.findViewById(R.id.tv_replaycount);
         mTvSend = (TextView) findViewById(R.id.tv_send);
         mTvSend.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,7 @@ public class MarketDetailActivity extends BaseActivity2 {
         });
         tv_zan = (TextView) headerView.findViewById(R.id.tv_zan);
         tv_shoucang = (TextView) headerView.findViewById(R.id.tv_shoucang);
+
         tv_zan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +89,9 @@ public class MarketDetailActivity extends BaseActivity2 {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         ToastUtils.show(MarketDetailActivity.this, "已点赞");
+                        tv_zan.setText("已点赞 | ");
+                        tv_zan.setTextColor(Color.BLACK);
+                        tv_zan.setClickable(false);
                     }
 
                     @Override
@@ -103,6 +108,9 @@ public class MarketDetailActivity extends BaseActivity2 {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         ToastUtils.show(MarketDetailActivity.this, "已收藏");
+                        tv_shoucang.setText("已收藏  ");
+                        tv_shoucang.setTextColor(Color.BLACK);
+                        tv_shoucang.setClickable(false);
                     }
 
                     @Override
@@ -149,11 +157,23 @@ public class MarketDetailActivity extends BaseActivity2 {
 
 
                 if(dataList != null){
+                    if (dataList.getIszan() != null && dataList.getIszan().equals("1"))
+                    {
+                        tv_zan.setText("已点赞 | ");
+                        tv_zan.setTextColor(Color.BLACK);
+                        tv_zan.setClickable(false);
+                    }
+                    if (dataList.getIsshoucang() == 1)
+                    {
+                        tv_shoucang.setText("已收藏  ");
+                        tv_shoucang.setTextColor(Color.BLACK);
+                        tv_shoucang.setClickable(false);
+                    }
                     mTvContentTitle.setText(dataList.getItitle());
                     mTvContent.setText(dataList.getContent());
                     mTvAuthor.setText(dataList.getFaburen());
-                    mTvTime.setText(dataList.getFabushijian());
-                    tv_replaycount.setText(dataList.getRlist().size()+"条回复");
+//                    mTvTime.setText();
+                    tv_replaycount.setText(dataList.getFabushijian()+" | "+dataList.getRlist().size()+"条回复");
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
                     if (dataList.getRlist().size() > 0)
                     {

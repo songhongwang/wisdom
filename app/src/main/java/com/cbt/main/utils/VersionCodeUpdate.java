@@ -45,7 +45,7 @@ public class VersionCodeUpdate {
     public void showDialogUpdate(final UpdateModel updateModel){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("版本提示：");
-        builder.setMessage("发现新版本：\n" + "版本号：" + updateModel.getVersioncode() + "\n版本更新：内容" + updateModel.getMessage());
+        builder.setMessage("发现新版本\n" + "版本号：" + updateModel.getVersionname() + "\n版本更新：" + updateModel.getMessage());
         builder.setCancelable(false);
         builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
             @Override

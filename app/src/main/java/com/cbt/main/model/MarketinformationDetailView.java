@@ -29,7 +29,25 @@ public class MarketinformationDetailView implements Serializable {
 	private String img8;
 	private String img9;
 	private List<String> imglist;
+	private String iszan;
 
+	private String isccang;
+
+	public String getIszan() {
+		return iszan;
+	}
+
+	public void setIszan(String iszan) {
+		this.iszan = iszan;
+	}
+
+	public String getIsccang() {
+		return isccang;
+	}
+
+	public void setIsccang(String isccang) {
+		this.isccang = isccang;
+	}
 	public List<String> getImglist() {
 		return imglist;
 	}

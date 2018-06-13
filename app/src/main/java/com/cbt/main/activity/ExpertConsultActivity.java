@@ -2,6 +2,7 @@ package com.cbt.main.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -37,7 +38,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
     private MarketDetailActAdapter mMarketDetailActAdapter;
 
     MessagePicturesLayout lPictures;
-    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvTime, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
+    TextView mTvContentTitle, mTvContent,mTvAuthor, mTvSend,tv_replaycount,tv_zan, tv_shoucang;
     ListView mListView;
     EditText mEtInput;
     private boolean mIsLoading;
@@ -70,7 +71,7 @@ public class ExpertConsultActivity extends BaseActivity2 {
         lPictures = (MessagePicturesLayout) headerView.findViewById(R.id.l_pictures);
         mTvContentTitle = (TextView) headerView.findViewById(R.id.t_content_title);
         mTvAuthor = (TextView) headerView.findViewById(R.id.tv_author);
-        mTvTime= (TextView) headerView.findViewById(R.id.tv_time);
+//        mTvTime= (TextView) headerView.findViewById(R.id.tv_time);
         tv_replaycount = (TextView) headerView.findViewById(R.id.tv_replaycount);
         mTvSend = (TextView) findViewById(R.id.tv_send);
         mTvSend.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +91,9 @@ public class ExpertConsultActivity extends BaseActivity2 {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         ToastUtils.show(ExpertConsultActivity.this, "已点赞");
+                        tv_zan.setText("已点赞 | ");
+                        tv_zan.setTextColor(Color.BLACK);
+                        tv_zan.setClickable(false);
                     }
 
                     @Override
@@ -106,6 +110,9 @@ public class ExpertConsultActivity extends BaseActivity2 {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         ToastUtils.show(ExpertConsultActivity.this, "已收藏");
+                        tv_shoucang.setText("已收藏  ");
+                        tv_shoucang.setTextColor(Color.BLACK);
+                        tv_shoucang.setClickable(false);
                     }
 
                     @Override
@@ -133,10 +140,22 @@ public class ExpertConsultActivity extends BaseActivity2 {
                 mIsLoading = false;
 
                 if(dataList != null){
+                    if (dataList.getIszan() != null && dataList.getIszan().equals("1"))
+                    {
+                        tv_zan.setText("已点赞 | ");
+                        tv_zan.setTextColor(Color.BLACK);
+                        tv_zan.setClickable(false);
+                    }
+                    if (dataList.getIsshoucang() == 1)
+                    {
+                        tv_shoucang.setText("已收藏  ");
+                        tv_shoucang.setTextColor(Color.BLACK);
+                        tv_shoucang.setClickable(false);
+                    }
                     mTvContentTitle.setText(dataList.getContent());
                     mTvAuthor.setText("发布人："+dataList.getUname());
-                    mTvTime.setText("发布时间："+dataList.getTime());
-                    tv_replaycount.setText(dataList.getMessagecount());
+//                    mTvTime.setText();
+                    tv_replaycount.setText("发布时间："+dataList.getTime()+" | "+dataList.getMessagecount());
                     lPictures.set(dataList.getImglist(), dataList.getImglist());
                     User login = SharedPreferencUtil.getLogin(ExpertConsultActivity.this);
                     if (dataList.getZt().equals("") && dataList.getUid().equals(login.getUid()))

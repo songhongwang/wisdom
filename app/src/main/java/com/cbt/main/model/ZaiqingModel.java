@@ -69,7 +69,15 @@ public String getUserid() {
 
 	//  生长期名称 
 	private String disthree;
-	
+	private int iszan;
+
+	public int getIszan() {
+		return iszan;
+	}
+
+	public void setIszan(int iszan) {
+		this.iszan = iszan;
+	}
 private int isshoucang;
 	
 	public int getIsshoucang() {
@@ -226,6 +234,8 @@ private int isshoucang;
 		data.setIid(self.getIid());
 		data.setUid(self.getUserid());
 		data.setReplyList(self.getReplayList());
+		data.setIsccang(self.getIsshoucang()+"");
+		data.setIszan(self.getIszan()+"");
 		return data;
 	}
 }
